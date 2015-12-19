@@ -1,5 +1,6 @@
 Red Armory
 --
+[![Downloads](https://img.shields.io/github/downloads/takuya-takeuchi/RedArmory/latest/total.svg?style=flat-square)](https://github.com/takuya-takeuchi/RedArmory/releases/latest)
 [![License](https://img.shields.io/github/license/Grabacr07/KanColleViewer.svg?style=flat-square)](https://github.com/takuya-takeuchi/RedArmory/blob/master/LICENSE.txt)
 
 ![Main Window of application](/web/images/main.png "Main Window of application")
@@ -43,7 +44,7 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 
 ## Development Environmental (開発環境)
 
-* C# + Windows Presentation Framework
+* C# + Windows Presentation Foundation
 * Windows 7 Ultimate Service Pack 1 64bit
 * Visual Studio 2015 Professional Update 1
 

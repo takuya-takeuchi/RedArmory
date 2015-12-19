@@ -39,9 +39,6 @@ namespace RedArmory.Models
             var dest = @"f:\RedArmony\Test";
             System.IO.Directory.CreateDirectory(dest);
             this.Directory = dest;
-#else
-            
-            this.UpdateDiskSpace();
 #endif
             //var bitNamiRedmineStackConfiguration = ConfigurationService.Instance.GetBitNamiRedmineStackConfiguration(stack.DisplayVersion);
             //bitNamiRedmineStackConfiguration.

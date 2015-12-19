@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ApplicationConfiguration" type="ApplicationConfiguration"/>
+  <xs:complexType name="ApplicationConfiguration">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="BitNamiRedmineStackConfiguration" type="BitNamiRedmineStackConfiguration"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BitNamiRedmineStackConfiguration">
+    <xs:attribute name="Version" type="xs:string" use="required" />
+    <xs:attribute name="DefaultDestionation" type="xs:string" use="optional" />
+    <xs:attribute name="DefaultSource" type="xs:string" use="optional" />
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Msg_BackupComplete" xml:space="preserve">
+    <value>バックアップが完了しました。</value>
+  </data>
+  <data name="Msg_BackupFailed" xml:space="preserve">
+    <value>バックアップに失敗しました。</value>
+  </data>
+  <data name="Msg_RestoreComplete" xml:space="preserve">
+    <value>復元が完了しました。</value>
+  </data>
+  <data name="Msg_RestoreFailed" xml:space="preserve">
+    <value>復元に失敗しました。</value>
+  </data>
+  <data name="Tooltip_SelectBackupFolder" xml:space="preserve">
+    <value>バックアップの保存先フォルダを選択します</value>
+  </data>
+  <data name="Tooltip_SelectRestoreFolder" xml:space="preserve">
+    <value>復元したいフォルダを選択します</value>
+  </data>
+  <data name="Tooltip_StartBackup" xml:space="preserve">
+    <value>バックアップを開始します。</value>
+  </data>
+  <data name="Tooltip_StartRestore" xml:space="preserve">
+    <value>復元を開始します。</value>
+  </data>
+  <data name="Word_AboutThisApplication" xml:space="preserve">
+    <value>このソフトについて</value>
+  </data>
+  <data name="Word_AttachedFile" xml:space="preserve">
+    <value>添付ファイル</value>
+  </data>
+  <data name="Word_AvailableSpace" xml:space="preserve">
+    <value>空き領域 (MB)</value>
+  </data>
+  <data name="Word_Acknowledgements" xml:space="preserve">
+    <value>謝辞</value>
+  </data>
+  <data name="Word_Database" xml:space="preserve">
+    <value>データベース</value>
+  </data>
+  <data name="Word_Destination" xml:space="preserve">
+    <value>バックアップ先</value>
+  </data>
+  <data name="Word_FreeSpace" xml:space="preserve">
+    <value>空き領域</value>
+  </data>
+  <data name="Word_Thanks" xml:space="preserve">
+    <value>このソフトを実現するために使用させていただいた、下記の素晴らしいライブラリとプロダクトに感謝します。</value>
+  </data>
+  <data name="Word_NotIncludeAttachedFile" xml:space="preserve">
+    <value>選択したフォルダ内に添付ファイルが含まれていません。</value>
+  </data>
+  <data name="Word_NotIncludeDatabase" xml:space="preserve">
+    <value>選択したフォルダ内にデータベースが含まれていません。</value>
+  </data>
+  <data name="Word_NotIncludePlugin" xml:space="preserve">
+    <value>選択したフォルダ内にプラグインが含まれていません。</value>
+  </data>
+  <data name="Word_NotIncludeTheme" xml:space="preserve">
+    <value>選択したフォルダ内にテーマが含まれていません。</value>
+  </data>
+  <data name="Word_Options" xml:space="preserve">
+    <value>オプション</value>
+  </data>
+  <data name="Word_Plugin" xml:space="preserve">
+    <value>プラグイン</value>
+  </data>
+  <data name="Word_ServiceAutomatic" xml:space="preserve">
+    <value>自動</value>
+  </data>
+  <data name="Word_ServiceDelayedStart" xml:space="preserve">
+    <value>自動 (遅延開始)</value>
+  </data>
+  <data name="Word_ServiceDisabled" xml:space="preserve">
+    <value>無効</value>
+  </data>
+  <data name="Word_ServiceManual" xml:space="preserve">
+    <value>手動</value>
+  </data>
+  <data name="Word_Source" xml:space="preserve">
+    <value>復元元</value>
+  </data>
+  <data name="Word_StartBackup" xml:space="preserve">
+    <value>バックアップを開始します。</value>
+  </data>
+  <data name="Word_StartRestore" xml:space="preserve">
+    <value>復元を開始します。</value>
+  </data>
+  <data name="Word_Theme" xml:space="preserve">
+    <value>テーマ</value>
+  </data>
+  <data name="Word_Unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="Word_UsedSpace" xml:space="preserve">
+    <value>使用領域 (MB)</value>
+  </data>
+  <data name="Word_VersionInfo" xml:space="preserve">
+    <value>バージョン情報</value>
+  </data>
+  <data name="Word_UnknownSpace" xml:space="preserve">
+    <value>不明領域 (%)</value>
+  </data>
+  <data name="Lang_English" xml:space="preserve">
+    <value>英語</value>
+  </data>
+  <data name="Lang_Japanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="Msg_BitNamiRedmineStackIsNotPresent" xml:space="preserve">
+    <value>BitNami Redmine Stack がシステムに存在しません。</value>
+  </data>
+  <data name="Word_Language" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="Word_ServiceStartupType" xml:space="preserve">
+    <value>スタートアップの種類</value>
+  </data>
+  <data name="Word_Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="Word_Description" xml:space="preserve">
+    <value>紹介</value>
+  </data>
+  <data name="Word_Licence" xml:space="preserve">
+    <value>ライセンス</value>
+  </data>
+  <data name="Word_Url" xml:space="preserve">
+    <value>Url</value>
+  </data>
+  <data name="Word_SelectSourceDirectoryTitle" xml:space="preserve">
+    <value>復元元のフォルダを選択してください</value>
+  </data>
+  <data name="Word_SelectTargetDirectoryTitle" xml:space="preserve">
+    <value>バックアップ先のフォルダを選択してください</value>
+  </data>
+</root>

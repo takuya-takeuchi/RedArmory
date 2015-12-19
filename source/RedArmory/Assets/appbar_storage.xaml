@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="appbar_storage" Width="76.0106" Height="76.0106" Margin="0,15.317,46.494,0" VerticalAlignment="Top" HorizontalAlignment="Right">
+	<Path Width="38.006" Height="30.4368" Canvas.Left="19.0023" Canvas.Top="22.7869" Fill="#FF000000" Stretch="Fill" Data="M8.0830002,52 L8.0830002,60.495003 16.577999,60.495003 16.577999,52 z M0,48 L79.916,48 79.916,64 0,64 z M8.0830002,28.167 L8.0830002,36.662003 16.577999,36.662003 16.577999,28.167 z M0,24.167 L79.916,24.167 79.916,40.167 0,40.167 z M8.0830002,3.9999998 L8.0830002,12.495001 16.577999,12.495001 16.577999,3.9999998 z M0,0 L79.916,0 79.916,15.999999 0,15.999999 z"/>
+</Canvas>

@@ -1,0 +1,165 @@
+﻿<Application x:Class="RedArmory.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:RedArmory.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+             xmlns:services="clr-namespace:RedArmory.Models.Services"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:viewModels="clr-namespace:RedArmory.ViewModels"
+             StartupUri="MainWindow.xaml"
+             d1p1:Ignorable="d">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!--  MahApps  -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+
+                <!--  Material Design  -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Red.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Red.xaml" />
+
+                <!--  Material Design: MahApps Compatibility  -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Fonts.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.MahApps;component/Themes/MaterialDesignTheme.MahApps.Flyout.xaml" />-->
+
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--  MahApps Brushes  -->
+            <SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource Primary900}" />
+            <!--  AccentColorBrush というキーの名称は変更しないこと!!  -->
+            <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource Primary700}" />
+            <SolidColorBrush x:Key="AccentColorBrush2" Color="{DynamicResource Primary500}" />
+            <SolidColorBrush x:Key="AccentColorBrush3" Color="{DynamicResource Primary400}" />
+            <SolidColorBrush x:Key="AccentColorBrush4" Color="{DynamicResource Primary300}" />
+            <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{DynamicResource Accent400}" />
+            <SolidColorBrush x:Key="WindowTitleColorBrush" Color="{DynamicResource Primary900}" />
+            <SolidColorBrush x:Key="AccentSelectedColorBrush" Color="{DynamicResource Primary700Foreground}" />
+            <LinearGradientBrush x:Key="ProgressBrush" StartPoint="1.002,0.5" EndPoint="0.001,0.5">
+                <GradientStop Offset="0" Color="{DynamicResource Primary700}" />
+                <GradientStop Offset="1" Color="{DynamicResource Primary300}" />
+            </LinearGradientBrush>
+            <SolidColorBrush x:Key="CheckmarkFill" Color="{DynamicResource Primary500}" />
+            <SolidColorBrush x:Key="RightArrowFill" Color="{DynamicResource Primary500}" />
+            <SolidColorBrush x:Key="IdealForegroundColorBrush" Color="{DynamicResource Primary500Foreground}" />
+            <SolidColorBrush x:Key="IdealForegroundDisabledBrush"
+                             Opacity="0.4"
+                             Color="{DynamicResource Primary500}" />
+            <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="{DynamicResource Accent400Foreground}" />
+
+            <!--<SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{DynamicResource Accent400Foreground}" />
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{DynamicResource Accent400Foreground}" />
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{DynamicResource Accent400Foreground}" />
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{DynamicResource Accent400Foreground}" />
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{DynamicResource Accent400Foreground}" />
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{DynamicResource Accent400Foreground}" />-->
+
+            <Style x:Key="Heading1" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+            </Style>
+
+            <Style x:Key="Heading2" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+            </Style>
+
+            <!--  Original Brushes  -->
+            <Color x:Key="SubHeaderBackground">DarkGray</Color>
+            <SolidColorBrush x:Key="SubHeaderBackgroundBrush" Color="{StaticResource SubHeaderBackground}" />
+            <Color x:Key="Background">LightGray</Color>
+            <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Background}" />
+            <Color x:Key="AppBarBackground">White</Color>
+            <SolidColorBrush x:Key="AppBarBackgroundBrush" Color="{StaticResource AppBarBackground}" />
+            <!--  Yellow A700  -->
+            <Color x:Key="WarningColor">#FFFFD600</Color>
+            <SolidColorBrush x:Key="WarningColorBrush" Color="{StaticResource WarningColor}" />
+            <!--  Light Blue 900  -->
+            <Color x:Key="FacebookColor">#01579B</Color>
+            <SolidColorBrush x:Key="FacebookColorBrush" Color="{StaticResource FacebookColor}" />
+            <!--  Light Blue 500  -->
+            <Color x:Key="TwitterColor">#03A9F4</Color>
+            <SolidColorBrush x:Key="TwitterColorBrush" Color="{StaticResource TwitterColor}" />
+            <Color x:Key="GitHubColor">Black</Color>
+            <SolidColorBrush x:Key="GitHubColorBrush" Color="{StaticResource GitHubColor}" />
+            <Color x:Key="HomeColor">Black</Color>
+            <SolidColorBrush x:Key="HomeColorBrush" Color="{StaticResource HomeColor}" />
+
+            <!--  Size  -->
+            <system:Double x:Key="ListBoxItemHeight">36</system:Double>
+            <system:Double x:Key="IconSize">16</system:Double>
+            <system:Double x:Key="IconPathSize">34</system:Double>
+            <system:Double x:Key="HeaderBarHeight">50</system:Double>
+            <system:Double x:Key="FooterBarHeight">50</system:Double>
+            <system:Double x:Key="SocialIconSize">24</system:Double>
+            <system:Double x:Key="SocialIconPathSize">50</system:Double>
+            <system:Double x:Key="TitleFontSize">18</system:Double>
+            <system:Double x:Key="ItemHeadingFontSize">16</system:Double>
+            <system:Double x:Key="ItemHeading2FontSize">14</system:Double>
+
+            <!--  Converter  -->
+            <converters:BooleanToVisibilityConverter x:Key="HiddenIfFalse"
+                                                     IsHidden="True"
+                                                     TriggerValue="False" />
+            <converters:BooleanToVisibilityConverter x:Key="HiddenIfTrue"
+                                                     IsHidden="True"
+                                                     TriggerValue="True" />
+            <converters:BooleanToVisibilityConverter x:Key="CollapsedIfFalse"
+                                                     IsHidden="False"
+                                                     TriggerValue="False" />
+            <converters:BooleanToVisibilityConverter x:Key="CollapsedIfTrue"
+                                                     IsHidden="False"
+                                                     TriggerValue="True" />
+            <converters:ServiceStartupTypeToStringConverter x:Key="ServiceStartupTypeToStringConverter" />
+            <converters:BooleanReverseConverter x:Key="BooleanReverseConverter" />
+            <converters:CultureNameToLocalizedStringConverter x:Key="CultureNameToLocalizedStringConverter" />
+
+            <!--  Chart  -->
+            <Style x:Key="MinimalChartStyle" TargetType="metroChart:ChartBase">
+                <Setter Property="Width" Value="300" />
+                <Setter Property="Height" Value="300" />
+            </Style>
+            <metroChart:ResourceDictionaryCollection x:Key="ChartCustomColors">
+                <ResourceDictionary>
+                    <!--  Indigo 900  -->
+                    <SolidColorBrush x:Key="Brush1" Color="#1A237E" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <!--  Red 900  -->
+                    <SolidColorBrush x:Key="Brush2" Color="#B71C1C" />
+                </ResourceDictionary>
+            </metroChart:ResourceDictionaryCollection>
+
+            <!--  DataTemplate  -->
+            <DataTemplate x:Key="BitNamiRedmineStackListBoxDataTemplate" DataType="services:BitNamiRedmineStack">
+                <Grid Height="{StaticResource ListBoxItemHeight}" Margin="0 0 10 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="2"
+                               Margin="16 0 6 0"
+                               VerticalAlignment="Center"
+                               Foreground="{StaticResource SecondaryAccentForegroundBrush}"
+                               Text="{Binding Stack.DisplayVersion,
+                                              StringFormat=BitNami Redmine Stack {0}}"
+                               TextTrimming="CharacterEllipsis" />
+                </Grid>
+            </DataTemplate>
+
+            <viewModels:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,6 +1,7 @@
 Red Armory
 --
 [![Downloads](https://img.shields.io/github/downloads/takuya-takeuchi/RedArmory/latest/total.svg?style=flat-square)](https://github.com/takuya-takeuchi/RedArmory/releases/latest)
+[![Build status](https://ci.appveyor.com/api/projects/status/d340i8loqua7s20u?svg=true)](https://ci.appveyor.com/project/takuya-takeuchi/redarmory)
 [![License](https://img.shields.io/github/license/Grabacr07/KanColleViewer.svg?style=flat-square)](https://github.com/takuya-takeuchi/RedArmory/blob/master/LICENSE.txt)
 
 ![Main Window of application](/web/images/main.png "Main Window of application")

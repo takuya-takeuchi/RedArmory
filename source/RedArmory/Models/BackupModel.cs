@@ -122,6 +122,8 @@ namespace RedArmory.Models
                     this.Directory = dlg.FileName;
                     this._Configuration.DefaultDestionation = this.Directory;
                     this.UpdateDiskSpace();
+
+                    this.RaiseCanExecuteBackupRestoreChanged();
                 }
             }
         }
@@ -174,27 +176,9 @@ namespace RedArmory.Models
             }
         }
 
-        private void UpdateStatus()
-        {
-        }
-
         #endregion
 
         #endregion
-
-        public class DiskInfo
-        {
-            public string Category
-            {
-                get; set;
-            }
-
-            public long Number
-            {
-                get; set;
-            }
-        }
 
     }
-
 }

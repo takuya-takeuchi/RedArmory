@@ -233,16 +233,12 @@ namespace RedArmory.Models
 
         #region ヘルパーメソッド
 
-        private void RaiseCanExecuteBackupRestoreChanged()
+        protected void RaiseCanExecuteBackupRestoreChanged()
         {
             if (this.Command != null)
             {
                 this.Command.RaiseCanExecuteChanged();
             }
-        }
-
-        protected void UpdateStatus()
-        {
         }
 
         #endregion

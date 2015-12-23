@@ -134,6 +134,7 @@
     <Compile Include="Models\AcknowledgmentModel.cs" />
     <Compile Include="Models\BackupRestoreModel.cs" />
     <Compile Include="Models\ConfigurationService.cs" />
+    <Compile Include="Models\DiskInfo.cs" />
     <Compile Include="Models\ProgressState.cs" />
     <Compile Include="Models\ResourceService.cs" />
     <Compile Include="Models\RestoreModel.cs" />

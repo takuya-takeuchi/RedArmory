@@ -1,16 +1,20 @@
 Red Armory
 --
-[![Downloads](https://img.shields.io/github/downloads/takuya-takeuchi/RedArmory/latest/total.svg?style=flat-square)](https://github.com/takuya-takeuchi/RedArmory/releases/latest)
-[![License](https://img.shields.io/github/license/Grabacr07/KanColleViewer.svg?style=flat-square)](https://github.com/takuya-takeuchi/RedArmory/blob/master/LICENSE.txt)
+[![Github All Releases](https://img.shields.io/github/downloads/takuya-takeuchi/RedArmory/total.svg)]()
+[![Build status](https://ci.appveyor.com/api/projects/status/d340i8loqua7s20u?svg=true)](https://ci.appveyor.com/project/takuya-takeuchi/redarmory)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
 ![Main Window of application](/web/images/main.png "Main Window of application")
 
+###### English 
 Red Armory is simple tool to easily backup and restore database, plugins, themes and attached files of Bitnami Redmine Stack which be distributed by Bitnami.
 
+###### Japanese 
 Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデータベース、プラグイン、テーマ、添付ファイルのバックアップ、復元を簡単に実行するためのツールです。
 
 ## Main Fuatures (主な機能)
 
+###### English 
 * Backup and Restore MySql database
   * Need not to input database password
 * Backup and Restore plugins, themes and attached files.
@@ -20,8 +24,9 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
   * For now, only Japanese and English  
 
 
+###### Japanese 
 * MySql データベースのバックアップ、復元
-   * パスワードの自動入力
+  * パスワードの自動入力
 * プラグイン、テーマ、添付ファイルのバックアップ、復元
 * Windows サービスのスタートアップの種類変更
 * システム内の複数の Bitnami Redmine Stack のサポート
@@ -30,16 +35,18 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 
 ## System requirements (システム要件)
 
+###### English 
 * Windows 7, 8, 8.1 and 10
 * .NET Framework 4.5.2
 * Bitnami Redmine Stack 2.5 or Later
-   * Maybe Red Armory supports Bitnami Redmine Stack 2 or Later. But I did not test.
+  * Maybe Red Armory supports Bitnami Redmine Stack 2 or Later. But I did not test.
 
 
+###### Japanese 
 * Windows 7, 8, 8.1 または 10
 * .NET Framework 4.5.2
 * Bitnami Redmine Stack 2.5以降
-   * Bitnami Redmine Stack 2以降も対応していると思いますが、テストしていません。
+  * Bitnami Redmine Stack 2以降も対応していると思いますが、テストしていません。
 
 
 ## Development Environmental (開発環境)
@@ -51,8 +58,11 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 
 ## License (ライセンス)
 
+###### English 
 * The MIT License (MIT)
 
+
+###### Japanese 
 * MIT ライセンスの下で公開する、オープンソース、フリーソフトウェアです。
 
 
@@ -106,7 +116,7 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 > 
 > **Principal Use:** Logging application log
 
-#### [YamlSerializer for .NET](http://nlog-project.org/)
+#### [YamlSerializer for .NET](https://yamlserializer.codeplex.com/)
 
 > **License:** The MIT License (MIT)
 > 

@@ -116,7 +116,7 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 > 
 > **Principal Use:** Logging application log
 
-#### [YamlSerializer for .NET](http://nlog-project.org/)
+#### [YamlSerializer for .NET](https://yamlserializer.codeplex.com/)
 
 > **License:** The MIT License (MIT)
 > 

@@ -97,11 +97,11 @@ namespace RedArmory.Properties {
         }
         
         /// <summary>
-        ///   BitNami Redmine Stack is not present. に類似しているローカライズされた文字列を検索します。
+        ///   Bitnami Redmine Stack is not present. に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Msg_BitNamiRedmineStackIsNotPresent {
+        public static string Msg_BitnamiRedmineStackIsNotPresent {
             get {
-                return ResourceManager.GetString("Msg_BitNamiRedmineStackIsNotPresent", resourceCulture);
+                return ResourceManager.GetString("Msg_BitnamiRedmineStackIsNotPresent", resourceCulture);
             }
         }
         

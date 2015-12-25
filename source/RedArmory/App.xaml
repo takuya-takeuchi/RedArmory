@@ -141,7 +141,7 @@
             </metroChart:ResourceDictionaryCollection>
 
             <!--  DataTemplate  -->
-            <DataTemplate x:Key="BitNamiRedmineStackListBoxDataTemplate" DataType="services:BitNamiRedmineStack">
+            <DataTemplate x:Key="BitnamiRedmineStackListBoxDataTemplate" DataType="services:BitnamiRedmineStack">
                 <Grid Height="{StaticResource ListBoxItemHeight}" Margin="0 0 10 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -154,7 +154,7 @@
                                VerticalAlignment="Center"
                                Foreground="{StaticResource SecondaryAccentForegroundBrush}"
                                Text="{Binding Stack.DisplayVersion,
-                                              StringFormat=BitNami Redmine Stack {0}}"
+                                              StringFormat=Bitnami Redmine Stack {0}}"
                                TextTrimming="CharacterEllipsis" />
                 </Grid>
             </DataTemplate>

@@ -47,7 +47,7 @@ namespace RedArmory.Models
 
         #region メソッド
 
-        public BitNamiRedmineStackConfiguration GetBitNamiRedmineStackConfiguration(string version)
+        public BitnamiRedmineStackConfiguration GetBitnamiRedmineStackConfiguration(string version)
         {
             if (this.Configuration == null)
             {
@@ -55,20 +55,20 @@ namespace RedArmory.Models
             }
 
             var configuration = this.Configuration;
-            var array = configuration.BitNamiRedmineStackConfiguration ?? new BitNamiRedmineStackConfiguration[0];
+            var array = configuration.BitnamiRedmineStackConfiguration ?? new BitnamiRedmineStackConfiguration[0];
             var stackConfiguration = array.FirstOrDefault(c => c.Version.Equals(version));
             if (stackConfiguration != null)
             {
                 return stackConfiguration;
             }
 
-            stackConfiguration = new BitNamiRedmineStackConfiguration();
+            stackConfiguration = new BitnamiRedmineStackConfiguration();
             stackConfiguration.Version = version;
 
-            var list = new List<BitNamiRedmineStackConfiguration>(array);
+            var list = new List<BitnamiRedmineStackConfiguration>(array);
             list.Add(stackConfiguration);
 
-            configuration.BitNamiRedmineStackConfiguration = list.ToArray();
+            configuration.BitnamiRedmineStackConfiguration = list.ToArray();
             return stackConfiguration;
         }
 

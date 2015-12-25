@@ -26,7 +26,7 @@
                 <ListBox Name="_OperatingSystemListBox"
                          Width="250"
                          Background="{StaticResource SecondaryAccentBrush}"
-                         ItemTemplate="{StaticResource BitNamiRedmineStackListBoxDataTemplate}"
+                         ItemTemplate="{StaticResource BitnamiRedmineStackListBoxDataTemplate}"
                          ItemsSource="{Binding Stacks}"
                          SelectedIndex="0"
                          SelectedItem="{Binding SelectedStack}" />
@@ -108,7 +108,7 @@
             <Label HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Content="{Binding Source={x:Static models:ResourceService.Instance},
-                                     Path=Resources.Msg_BitNamiRedmineStackIsNotPresent,
+                                     Path=Resources.Msg_BitnamiRedmineStackIsNotPresent,
                                      Mode=OneWay}"
                    Foreground="{StaticResource IdealForegroundColorBrush}" />
         </UserControl>

@@ -16,7 +16,7 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void Backup()
         {
-            var stacks = RedArmory.Models.Services.BitNamiRedmineService.Instance.GetBitNamiRedmineStacks().ToArray();
+            var stacks = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(stacks.Length != 0);
 
             foreach (var stack in stacks)
@@ -42,7 +42,7 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void Restore()
         {
-            var stacks = RedArmory.Models.Services.BitNamiRedmineService.Instance.GetBitNamiRedmineStacks().ToArray();
+            var stacks = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(stacks.Length != 0);
 
             var path = @"F:\RedArmory\20151213_03084403";

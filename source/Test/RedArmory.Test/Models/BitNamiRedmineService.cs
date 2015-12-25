@@ -6,13 +6,13 @@ namespace RedArmory.Test.Models
 {
 
     [TestClass]
-    public class BitNamiRedmineService
+    public class BitnamiRedmineService
     {
 
         [TestMethod]
-        public void GetBitNamiRedmineStacks()
+        public void GetBitnamiRedmineStacks()
         {
-            var stacks = RedArmory.Models.Services.BitNamiRedmineService.Instance.GetBitNamiRedmineStacks().ToArray();
+            var stacks = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(stacks.Length != 0);
 
             foreach (var stack in stacks)
@@ -25,7 +25,7 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void StartService()
         {
-            var stacks = RedArmory.Models.Services.BitNamiRedmineService.Instance.GetBitNamiRedmineStacks().ToArray();
+            var stacks = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(stacks.Length != 0);
 
             foreach (var stack in stacks)
@@ -33,14 +33,14 @@ namespace RedArmory.Test.Models
                 var configuration = new ServiceConfiguration();
                 configuration.Redmine = true;
 
-                RedArmory.Models.Services.BitNamiRedmineService.Instance.StartService(stack, configuration);
+                RedArmory.Models.Services.BitnamiRedmineService.Instance.StartService(stack, configuration);
             }
         }
 
         [TestMethod]
         public void StopService()
         {
-            var stacks = RedArmory.Models.Services.BitNamiRedmineService.Instance.GetBitNamiRedmineStacks().ToArray();
+            var stacks = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(stacks.Length != 0);
 
             foreach (var stack in stacks)
@@ -48,7 +48,7 @@ namespace RedArmory.Test.Models
                 var configuration = new ServiceConfiguration();
                 configuration.Redmine = true;
 
-                RedArmory.Models.Services.BitNamiRedmineService.Instance.StopService(stack, configuration);
+                RedArmory.Models.Services.BitnamiRedmineService.Instance.StopService(stack, configuration);
             }
         }
 

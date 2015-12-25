@@ -46,7 +46,7 @@ namespace RedArmory.Models.Services
 
         #region メソッド
 
-        public void Backup(BitNamiRedmineStack stack, BackupConfiguration configuration, string path, IProgress<BackupRestoreProgressReport> progress)
+        public void Backup(BitnamiRedmineStack stack, BackupConfiguration configuration, string path, IProgress<BackupRestoreProgressReport> progress)
         {
             if (configuration == null)
             {
@@ -140,7 +140,7 @@ namespace RedArmory.Models.Services
             }
         }
 
-        public BackupConfiguration CheckRestoreFolder(BitNamiRedmineStack stack, string path)
+        public BackupConfiguration CheckRestoreFolder(BitnamiRedmineStack stack, string path)
         {
             var configuration = new BackupConfiguration();
 
@@ -206,7 +206,7 @@ namespace RedArmory.Models.Services
             return configuration;
         }
 
-        public void Restore(BitNamiRedmineStack stack, BackupConfiguration configuration, string path, IProgress<BackupRestoreProgressReport> progress)
+        public void Restore(BitnamiRedmineStack stack, BackupConfiguration configuration, string path, IProgress<BackupRestoreProgressReport> progress)
         {
             if (!Directory.Exists(path))
             {

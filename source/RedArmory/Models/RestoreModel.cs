@@ -12,16 +12,16 @@ namespace RedArmory.Models
 
         #region フィールド
 
-        private readonly BitNamiRedmineStackConfiguration _Configuration;
+        private readonly BitnamiRedmineStackConfiguration _Configuration;
 
         #endregion
 
         #region コンストラクタ
 
-        public RestoreModel(BitNamiRedmineStack stack)
+        public RestoreModel(BitnamiRedmineStack stack)
             : base(stack)
         {
-            this._Configuration = ConfigurationService.Instance.GetBitNamiRedmineStackConfiguration(stack.DisplayVersion);
+            this._Configuration = ConfigurationService.Instance.GetBitnamiRedmineStackConfiguration(stack.DisplayVersion);
             this.Directory = this._Configuration.DefaultSource;
 
             this.UpdateState();

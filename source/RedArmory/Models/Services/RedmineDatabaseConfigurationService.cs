@@ -44,7 +44,7 @@ namespace RedArmory.Models.Services
 
         #region メソッド
 
-        public IEnumerable<DatabaseConfiguration> GetDatabaseConfiguration(BitNamiRedmineStack info)
+        public IEnumerable<DatabaseConfiguration> GetDatabaseConfiguration(BitnamiRedmineStack info)
         {
             if (info == null)
             {

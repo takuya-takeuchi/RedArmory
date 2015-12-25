@@ -1,12 +1,12 @@
 namespace RedArmory.Models.Services
 {
 
-    public sealed class BitNamiRedmineStack
+    public sealed class BitnamiRedmineStack
     {
 
         #region コンストラクタ
 
-        public BitNamiRedmineStack(string installLocation, string displayVersion)
+        public BitnamiRedmineStack(string installLocation, string displayVersion)
         {
             this.InstallLocation = installLocation;
             this.DisplayVersion = displayVersion;

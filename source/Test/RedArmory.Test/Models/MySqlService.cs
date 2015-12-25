@@ -13,7 +13,7 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void Backup()
         {
-            var values = RedArmory.Models.Services.BitNamiRedmineService.Instance.GetBitNamiRedmineStacks().ToArray();
+            var values = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(values.Length != 0);
 
             const string basePath = @"F:\";
@@ -34,7 +34,7 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void Restore()
         {
-            var values = RedArmory.Models.Services.BitNamiRedmineService.Instance.GetBitNamiRedmineStacks().ToArray();
+            var values = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(values.Length != 0);
 
             const string basePath = @"F:\";

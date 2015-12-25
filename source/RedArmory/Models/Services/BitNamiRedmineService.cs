@@ -8,7 +8,7 @@ using RedArmory.Models.Helpers;
 namespace RedArmory.Models.Services
 {
 
-    internal sealed class BitNamiRedmineService
+    internal sealed class BitnamiRedmineService
     {
 
         #region イベント
@@ -29,11 +29,11 @@ namespace RedArmory.Models.Services
 
         #region コンストラクタ
 
-        static BitNamiRedmineService()
+        static BitnamiRedmineService()
         {
         }
 
-        private BitNamiRedmineService()
+        private BitnamiRedmineService()
         {
         }
 
@@ -41,13 +41,13 @@ namespace RedArmory.Models.Services
 
         #region プロパティ
 
-        private static BitNamiRedmineService _Instance;
+        private static BitnamiRedmineService _Instance;
 
-        public static BitNamiRedmineService Instance
+        public static BitnamiRedmineService Instance
         {
             get
             {
-                return _Instance ?? (_Instance = new BitNamiRedmineService());
+                return _Instance ?? (_Instance = new BitnamiRedmineService());
             }
         }
 
@@ -55,7 +55,7 @@ namespace RedArmory.Models.Services
 
         #region メソッド
 
-        public IEnumerable<BitNamiRedmineStack> GetBitNamiRedmineStacks()
+        public IEnumerable<BitnamiRedmineStack> GetBitnamiRedmineStacks()
         {
             //const string registryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
             const string registryKey = @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall";
@@ -89,13 +89,13 @@ namespace RedArmory.Models.Services
                         var installLocation = subkey.GetValue("InstallLocation") as string;
                         var displayVersion = subkey.GetValue("DisplayVersion") as string;
 
-                        yield return new BitNamiRedmineStack(installLocation, displayVersion);
+                        yield return new BitnamiRedmineStack(installLocation, displayVersion);
                     }
                 }
             }
         }
 
-        public IEnumerable<ServiceStatus> GetServiceDisplayNames(BitNamiRedmineStack stack, ServiceConfiguration configuration)
+        public IEnumerable<ServiceStatus> GetServiceDisplayNames(BitnamiRedmineStack stack, ServiceConfiguration configuration)
         {
             var services = new[]
             {
@@ -233,7 +233,7 @@ namespace RedArmory.Models.Services
             }
         }
 
-        public bool StartService(BitNamiRedmineStack stack, ServiceConfiguration configuration)
+        public bool StartService(BitnamiRedmineStack stack, ServiceConfiguration configuration)
         {
             if (stack == null)
             {
@@ -284,7 +284,7 @@ namespace RedArmory.Models.Services
             return true;
         }
 
-        public bool StopService(BitNamiRedmineStack stack, ServiceConfiguration configuration)
+        public bool StopService(BitnamiRedmineStack stack, ServiceConfiguration configuration)
         {
             if (stack == null)
             {

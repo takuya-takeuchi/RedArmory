@@ -45,7 +45,7 @@ namespace RedArmory.Models.Services
 
         #region メソッド
 
-        public void Backup(BitNamiRedmineStack stack, DatabaseConfiguration configuration, string path)
+        public void Backup(BitnamiRedmineStack stack, DatabaseConfiguration configuration, string path)
         {
             if (configuration == null)
             {
@@ -97,7 +97,7 @@ namespace RedArmory.Models.Services
             }
         }
 
-        public void Restore(BitNamiRedmineStack stack, DatabaseConfiguration configuration, string path)
+        public void Restore(BitnamiRedmineStack stack, DatabaseConfiguration configuration, string path)
         {
             if (configuration == null)
 
@@ -150,7 +150,7 @@ namespace RedArmory.Models.Services
 
         #region ヘルパーメソッド
 
-        private static string CreateMySqlDumpLocation(BitNamiRedmineStack stack)
+        private static string CreateMySqlDumpLocation(BitnamiRedmineStack stack)
         {
             return Path.Combine(stack.InstallLocation, MySqlDumpPath);
         }

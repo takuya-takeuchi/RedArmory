@@ -31,7 +31,7 @@ namespace RedArmory.ViewModels
 
         public SettingViewModel()
         {
-            var bitNamiRedmineStacks = BitNamiRedmineService.Instance.GetBitNamiRedmineStacks();
+            var bitNamiRedmineStacks = BitnamiRedmineService.Instance.GetBitnamiRedmineStacks();
 
             this.Stacks = new ObservableCollection<Setting>(bitNamiRedmineStacks.Select(stack => new Setting(stack)));
             this.IsEmptyStacks = !this.Stacks.Any();

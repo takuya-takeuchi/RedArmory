@@ -12,7 +12,7 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void GetDatabaseConfiguration()
         {
-            var values = RedArmory.Models.Services.BitNamiRedmineService.Instance.GetBitNamiRedmineStacks().ToArray();
+            var values = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(values.Length != 0);
 
             foreach (var serviceInfo in values)

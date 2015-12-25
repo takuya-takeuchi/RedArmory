@@ -6,13 +6,13 @@ using RedArmory.Models;
 namespace RedArmory.ViewModels
 {
 
-    public abstract class BitNamiStackCommonViewModel<T> : ViewModelBase
+    public abstract class BitnamiStackCommonViewModel<T> : ViewModelBase
         where T : BackupRestoreModel
     {
 
         #region コンストラクタ
 
-        protected BitNamiStackCommonViewModel()
+        protected BitnamiStackCommonViewModel()
         {
         }
 

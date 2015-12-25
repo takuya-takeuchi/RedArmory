@@ -23,11 +23,11 @@ namespace RedArmory.Models.Configurations {
     [XmlRoot(Namespace="", IsNullable=false)]
     public partial class ApplicationConfiguration {
         
-        private BitNamiRedmineStackConfiguration[] bitNamiRedmineStackConfigurationField;
+        private BitnamiRedmineStackConfiguration[] bitNamiRedmineStackConfigurationField;
         
         /// <remarks/>
-        [XmlElement("BitNamiRedmineStackConfiguration")]
-        public BitNamiRedmineStackConfiguration[] BitNamiRedmineStackConfiguration {
+        [XmlElement("BitnamiRedmineStackConfiguration")]
+        public BitnamiRedmineStackConfiguration[] BitnamiRedmineStackConfiguration {
             get {
                 return this.bitNamiRedmineStackConfigurationField;
             }
@@ -42,7 +42,7 @@ namespace RedArmory.Models.Configurations {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class BitNamiRedmineStackConfiguration {
+    public partial class BitnamiRedmineStackConfiguration {
         
         private string versionField;
         

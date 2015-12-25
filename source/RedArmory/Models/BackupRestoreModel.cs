@@ -11,13 +11,13 @@ namespace RedArmory.Models
 
         #region フィールド
 
-        private readonly BitNamiRedmineStack _Stack;
+        private readonly BitnamiRedmineStack _Stack;
 
         #endregion
 
         #region コンストラクタ
 
-        protected BackupRestoreModel(BitNamiRedmineStack stack)
+        protected BackupRestoreModel(BitnamiRedmineStack stack)
         {
             if (stack == null)
             {
@@ -40,7 +40,7 @@ namespace RedArmory.Models
             System.IO.Directory.CreateDirectory(dest);
             this.Directory = dest;
 #endif
-            //var bitNamiRedmineStackConfiguration = ConfigurationService.Instance.GetBitNamiRedmineStackConfiguration(stack.DisplayVersion);
+            //var bitNamiRedmineStackConfiguration = ConfigurationService.Instance.GetBitnamiRedmineStackConfiguration(stack.DisplayVersion);
             //bitNamiRedmineStackConfiguration.
         }
 
@@ -75,7 +75,7 @@ namespace RedArmory.Models
             }
         }
 
-        public BitNamiRedmineStack Stack
+        public BitnamiRedmineStack Stack
         {
             get
             {

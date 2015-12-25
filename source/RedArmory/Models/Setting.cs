@@ -14,13 +14,13 @@ namespace RedArmory.Models
 
         #region フィールド
 
-        private readonly BitNamiRedmineStack _Stack;
+        private readonly BitnamiRedmineStack _Stack;
 
         #endregion
 
         #region コンストラクタ
 
-        public Setting(BitNamiRedmineStack stack)
+        public Setting(BitnamiRedmineStack stack)
         {
             if (stack == null)
             {
@@ -37,7 +37,7 @@ namespace RedArmory.Models
                 Subversion = true
             };
 
-            var serviceStatuses = BitNamiRedmineService.Instance.GetServiceDisplayNames(stack, configuration);
+            var serviceStatuses = BitnamiRedmineService.Instance.GetServiceDisplayNames(stack, configuration);
             this.ServiceStatuses = new ObservableCollection<ServiceStatus>(serviceStatuses);
         }
 
@@ -60,7 +60,7 @@ namespace RedArmory.Models
             }
         }
 
-        public BitNamiRedmineStack Stack
+        public BitnamiRedmineStack Stack
         {
             get
             {

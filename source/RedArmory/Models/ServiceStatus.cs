@@ -45,7 +45,7 @@ namespace RedArmory.Models
 
                 if (needUpdate)
                 {
-                    BitNamiRedmineService.Instance.SetStartupType(this._ServiceName, value);
+                    BitnamiRedmineService.Instance.SetStartupType(this._ServiceName, value);
                 }
             }
         }

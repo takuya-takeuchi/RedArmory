@@ -6,14 +6,14 @@ using RedArmory.Models.Services;
 namespace RedArmory.ViewModels
 {
 
-    public sealed class RestoreViewModel : BitNamiStackCommonViewModel<RestoreModel>
+    public sealed class RestoreViewModel : BitnamiStackCommonViewModel<RestoreModel>
     {
 
         #region コンストラクタ
 
         public RestoreViewModel()
         {
-            var bitNamiRedmineStacks = BitNamiRedmineService.Instance.GetBitNamiRedmineStacks();
+            var bitNamiRedmineStacks = BitnamiRedmineService.Instance.GetBitnamiRedmineStacks();
 
             this.Stacks = new ObservableCollection<RestoreModel>(bitNamiRedmineStacks.Select(stack => new RestoreModel(stack)));
         }

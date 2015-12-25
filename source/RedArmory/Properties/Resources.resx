@@ -225,8 +225,8 @@
   <data name="Lang_Japanese" xml:space="preserve">
     <value>Japanese</value>
   </data>
-  <data name="Msg_BitNamiRedmineStackIsNotPresent" xml:space="preserve">
-    <value>BitNami Redmine Stack is not present.</value>
+  <data name="Msg_BitnamiRedmineStackIsNotPresent" xml:space="preserve">
+    <value>Bitnami Redmine Stack is not present.</value>
   </data>
   <data name="Word_Language" xml:space="preserve">
     <value>Language</value>

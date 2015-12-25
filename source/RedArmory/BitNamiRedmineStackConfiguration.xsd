@@ -3,10 +3,10 @@
   <xs:element name="ApplicationConfiguration" type="ApplicationConfiguration"/>
   <xs:complexType name="ApplicationConfiguration">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="BitNamiRedmineStackConfiguration" type="BitNamiRedmineStackConfiguration"/>
+      <xs:element maxOccurs="unbounded" name="BitnamiRedmineStackConfiguration" type="BitnamiRedmineStackConfiguration"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="BitNamiRedmineStackConfiguration">
+  <xs:complexType name="BitnamiRedmineStackConfiguration">
     <xs:attribute name="Version" type="xs:string" use="required" />
     <xs:attribute name="DefaultDestionation" type="xs:string" use="optional" />
     <xs:attribute name="DefaultSource" type="xs:string" use="optional" />

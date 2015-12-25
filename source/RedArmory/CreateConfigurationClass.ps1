@@ -1,5 +1,5 @@
 ﻿$cd = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
-$target = "BitNamiRedmineStackConfiguration.xsd"
+$target = "BitnamiRedmineStackConfiguration.xsd"
 $output = "Models.Configurations\"
 
 $proc = New-Object System.Diagnostics.Process

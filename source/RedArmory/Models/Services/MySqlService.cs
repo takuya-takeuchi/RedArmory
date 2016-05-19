@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using MySql.Data.MySqlClient;
 
 namespace RedArmory.Models.Services
 {
@@ -100,15 +101,8 @@ namespace RedArmory.Models.Services
         public void Restore(BitnamiRedmineStack stack, DatabaseConfiguration configuration, string path)
         {
             if (configuration == null)
-
             {
                 throw new ArgumentNullException("configuration");
-            }
-
-            var apppath = CreateMySqlDumpLocation(stack);
-            if (!File.Exists(apppath))
-            {
-                throw new FileNotFoundException("mysqldump.exe が存在しません。", apppath);
             }
 
             if (!File.Exists(path))
@@ -116,29 +110,12 @@ namespace RedArmory.Models.Services
                 throw new FileNotFoundException("インポートする sql ファイルが存在しません。", path);
             }
 
-            const string format =
-                "--user={0} --password={1} --port={2} --databases {3}";
-            var arguments = string.Format(
-                    format,
-                    configuration.Encoding,
-                    configuration.Username,
-                    configuration.Password,
-                    configuration.Port);
-
-            var psInfo = new ProcessStartInfo();
-            psInfo.FileName = apppath;
-            psInfo.Arguments = arguments;
-            psInfo.CreateNoWindow = true;
-            psInfo.UseShellExecute = false;
-            psInfo.RedirectStandardInput = true;
-
-            using (var process = Process.Start(psInfo))
+            var connectionString = CreateConnectionString(configuration);
+            using (var con = new MySqlConnection(connectionString))
             {
                 var text = File.ReadAllText(path);
-                process.StandardInput.WriteAsync(text);
-                //process.StandardInput.Close();
-
-                process.WaitForExit();
+                var script = new MySqlScript(con, text);
+                var result = script.Execute();
             }
         }
 
@@ -149,6 +126,11 @@ namespace RedArmory.Models.Services
         #endregion
 
         #region ヘルパーメソッド
+
+        private static string CreateConnectionString(DatabaseConfiguration configuration)
+        {
+            return $"userid={configuration.Username};password={configuration.Password};server=localhost;database={configuration.Name};Port={configuration.Port}";
+        }
 
         private static string CreateMySqlDumpLocation(BitnamiRedmineStack stack)
         {

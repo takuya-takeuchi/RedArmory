@@ -32,6 +32,12 @@ namespace RedArmory.Models.Services.Dialog
             set;
         }
 
+        public BackupRestoreProgressReport Report
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region メソッド
@@ -61,9 +67,9 @@ namespace RedArmory.Models.Services.Dialog
 
         public async Task ShowMessage(string message, string title)
         {
-            var viewModel = new MessageDialogViewModel
+            var viewModel = new ProgressDialogViewModel
             {
-                Message = message,
+                Report = this.Report,
                 Title = title
             };
 

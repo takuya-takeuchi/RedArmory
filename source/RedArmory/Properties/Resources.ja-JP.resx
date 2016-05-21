@@ -273,4 +273,19 @@
   <data name="Msg_DeleteHistory" xml:space="preserve">
     <value>履歴を削除しますか?</value>
   </data>
+  <data name="Word_ProgressState_Complete" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="Word_ProgressState_Failed" xml:space="preserve">
+    <value>失敗</value>
+  </data>
+  <data name="Word_ProgressState_InProgress" xml:space="preserve">
+    <value>処理中</value>
+  </data>
+  <data name="Word_ProgressState_NotRequire" xml:space="preserve">
+    <value>スキップ</value>
+  </data>
+  <data name="Word_ProgressState_NotStart" xml:space="preserve">
+    <value>待機中</value>
+  </data>
 </root>

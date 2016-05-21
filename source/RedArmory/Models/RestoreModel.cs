@@ -150,7 +150,17 @@ namespace RedArmory.Models
                 };
 
                 var progressDialogService = new ProgressDialogService();
-                progressDialogService.Action = () => BackupService.Instance.Restore(this.Stack, configuration, path, new Progress<BackupRestoreProgressReport>());
+                var report = new BackupRestoreProgressReport();
+                progressDialogService.Action = () => BackupService.Instance.Restore(this.Stack, configuration, path, new Progress<BackupRestoreProgressReport>(
+                    progressReport =>
+                    {
+                        report.Database = progressReport.Database;
+                        report.Plugin = progressReport.Plugin;
+                        report.Theme = progressReport.Theme;
+                        report.AttachedFile = progressReport.AttachedFile;
+                    }));
+
+                progressDialogService.Report = report;
                 await progressDialogService.ShowMessage(null, null);
 
                 message = Resources.Msg_RestoreComplete;

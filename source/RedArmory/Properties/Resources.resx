@@ -273,4 +273,19 @@
   <data name="Msg_DeleteHistory" xml:space="preserve">
     <value>Are you sure you want to delete the selected history item?</value>
   </data>
+  <data name="Word_ProgressState_Complete" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="Word_ProgressState_Failed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="Word_ProgressState_InProgress" xml:space="preserve">
+    <value>In Progress</value>
+  </data>
+  <data name="Word_ProgressState_NotRequire" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="Word_ProgressState_NotStart" xml:space="preserve">
+    <value>Not Start</value>
+  </data>
 </root>

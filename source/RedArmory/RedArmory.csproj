@@ -127,6 +127,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AssemblyProperty.cs" />
+    <Compile Include="Converters\ProgressStateToBrushConverter.cs" />
+    <Compile Include="Converters\ProgressStateToStringConverter.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\BooleanReverseConverter.cs" />
     <Compile Include="Converters\CultureNameToLocalizedStringConverter.cs" />

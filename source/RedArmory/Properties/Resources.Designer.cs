@@ -376,6 +376,51 @@ namespace RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Complete に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_ProgressState_Complete {
+            get {
+                return ResourceManager.GetString("Word_ProgressState_Complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Failed に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_ProgressState_Failed {
+            get {
+                return ResourceManager.GetString("Word_ProgressState_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   In Progress に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_ProgressState_InProgress {
+            get {
+                return ResourceManager.GetString("Word_ProgressState_InProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Skip に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_ProgressState_NotRequire {
+            get {
+                return ResourceManager.GetString("Word_ProgressState_NotRequire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Not Start に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_ProgressState_NotStart {
+            get {
+                return ResourceManager.GetString("Word_ProgressState_NotStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Select folder you want to restore に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_SelectSourceDirectoryTitle {

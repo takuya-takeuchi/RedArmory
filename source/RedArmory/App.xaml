@@ -124,6 +124,8 @@
             <converters:BooleanReverseConverter x:Key="BooleanReverseConverter" />
             <converters:CultureNameToLocalizedStringConverter x:Key="CultureNameToLocalizedStringConverter" />
             <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
+            <converters:ProgressStateToStringConverter x:Key="ProgressStateToStringConverter" />
+            <converters:ProgressStateToBrushConverter x:Key="ProgressStateToBrushConverter" />
 
             <!--  Chart  -->
             <Style x:Key="MinimalChartStyle" TargetType="metroChart:ChartBase">

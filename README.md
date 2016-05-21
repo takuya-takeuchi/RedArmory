@@ -39,14 +39,12 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 * Windows 7, 8, 8.1 and 10
 * .NET Framework 4.5.2
 * Bitnami Redmine Stack 2.5 or Later
-  * Maybe Red Armory supports Bitnami Redmine Stack 2 or Later. But I did not test.
 
 
 ###### Japanese 
 * Windows 7, 8, 8.1 または 10
 * .NET Framework 4.5.2
 * Bitnami Redmine Stack 2.5以降
-  * Bitnami Redmine Stack 2以降も対応していると思いますが、テストしていません。
 
 
 ## Development Environmental (開発環境)
@@ -60,10 +58,14 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 
 ###### English 
 * The MIT License (MIT)
+* This software is allowed to publish under the MIT License due to FOSS License Exception of MySQL.
+* Please refer http://www.mysql.com/about/legal/licensing/foss-exception/ if you want to know.
 
 
 ###### Japanese 
 * MIT ライセンスの下で公開する、オープンソース、フリーソフトウェアです。
+* 本ソフトはMySql.Dataをリンクしていますが、FOSSライセンス例外に従い、MIT ライセンスの下で公開することができます。
+* FOSSライセンス例外については、http://www.mysql.com/about/legal/licensing/foss-exception/
 
 
 ## Dependencies Libraries and Products (依存ライブラリとプロダクト)
@@ -107,6 +109,14 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 > **Author:** Laurent Bugnion
 > 
 > **Principal Use:** Support to develop WPF application by using MVVM Software Architecture
+
+#### [MySql.Data](http://www.mysql.com/)
+
+> **License:** GNU GENERAL PUBLIC LICENSE Version 2
+> 
+> **Author:** Oracle Corporation
+> 
+> **Principal Use:** Restore database data to MySql database of Bitnami Redmine Stack
 
 #### [NLog](http://nlog-project.org/)
 

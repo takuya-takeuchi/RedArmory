@@ -13,6 +13,8 @@ namespace RedArmory.Models
 
         #region フィールド
 
+        protected readonly IApplicationSettingService _ApplicationSettingService;
+
         protected readonly IBackupService _BackupService;
 
         protected readonly ILoggerService _LoggerService;
@@ -23,8 +25,11 @@ namespace RedArmory.Models
 
         #region コンストラクタ
 
-        protected BackupRestoreModel(IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
+        protected BackupRestoreModel(IApplicationSettingService applicationSettingService, IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
         {
+            if (applicationSettingService == null)
+                throw new ArgumentNullException(nameof(applicationSettingService));
+
             if (backupService == null)
                 throw new ArgumentNullException(nameof(backupService));
 
@@ -34,6 +39,7 @@ namespace RedArmory.Models
             if (stack == null)
                 throw new ArgumentNullException(nameof(stack));
 
+            this._ApplicationSettingService = applicationSettingService;
             this._BackupService = backupService;
             this._LoggerService = loggerService;
             this._Stack = stack;
@@ -245,7 +251,7 @@ namespace RedArmory.Models
 
         protected ApplicationSetting GetApplicationSetting(out RedmineSetting redmineSetting)
         {
-            var applicationSetting = ApplicationSettingService.Instance.GetApplicationSetting();
+            var applicationSetting = this._ApplicationSettingService.GetApplicationSetting();
              redmineSetting = applicationSetting.RedmineSettings.
                 FirstOrDefault(setting => this.Stack.DisplayVersion.Equals(setting.DisplayVersion));
             if (redmineSetting == null)
@@ -271,7 +277,7 @@ namespace RedArmory.Models
 
         protected void UpdateRedmineSetting(ApplicationSetting applicationSetting)
         {
-            ApplicationSettingService.Instance.UpdateApplicationSetting(applicationSetting);
+            this._ApplicationSettingService.UpdateApplicationSetting(applicationSetting);
         }
 
         #region ヘルパーメソッド

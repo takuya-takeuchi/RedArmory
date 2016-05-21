@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.Serialization;
@@ -8,7 +7,7 @@ using System.Xml;
 namespace RedArmory.Models.Services
 {
 
-    public sealed class ApplicationSettingService
+    public sealed class ApplicationSettingService : IApplicationSettingService
     {
 
         #region フィールド
@@ -19,12 +18,19 @@ namespace RedArmory.Models.Services
 
         private ApplicationSetting _ApplicationSetting;
 
+        private readonly ILoggerService _LoggerService;
+
         #endregion
 
         #region コンストラクタ
 
-        public ApplicationSettingService()
+        public ApplicationSettingService(ILoggerService loggerService)
         {
+            if (loggerService == null)
+                throw new ArgumentNullException(nameof(loggerService));
+
+            this._LoggerService = loggerService;
+
             var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             this._ApplicationSettingDirectory = Path.Combine(path, AssemblyProperty.Product);
             this._ApplicationSettingPath = Path.Combine(this._ApplicationSettingDirectory, "Setting.xml");
@@ -34,17 +40,7 @@ namespace RedArmory.Models.Services
 
         #endregion
 
-        #region プロパティ
-
-        private static ApplicationSettingService _Instance;
-
-        public static ApplicationSettingService Instance
-        {
-            get
-            {
-                return _Instance ?? (_Instance = new ApplicationSettingService());
-            }
-        }
+        #region IApplicationSettingService メンバー
 
         private readonly ObservableCollection<BackupHistorySetting> _BackupHistories;
 
@@ -55,10 +51,6 @@ namespace RedArmory.Models.Services
                 return this._BackupHistories;
             }
         }
-
-        #endregion
-
-        #region メソッド
 
         public ApplicationSetting GetApplicationSetting()
         {

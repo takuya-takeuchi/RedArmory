@@ -25,8 +25,6 @@ namespace RedArmory.Models.Services
 
         private const string SubversionPath = @"subversion\scripts\winserv.exe";
 
-        private readonly IBitnamiRedmineService _BitnamiRedmineService;
-
         private readonly ILoggerService _LoggerService;
 
         #endregion

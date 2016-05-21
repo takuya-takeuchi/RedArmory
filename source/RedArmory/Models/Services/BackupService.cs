@@ -18,21 +18,27 @@ namespace RedArmory.Models.Services
 
         private readonly IDatabaseService _DatabaseService;
 
+        private readonly IRedmineDatabaseConfigurationService _DatabaseConfigurationService;
+
         private readonly ILoggerService _LoggerService;
 
         #endregion
 
         #region コンストラクタ
 
-        public BackupService(IDatabaseService databaseService, ILoggerService loggerService)
+        public BackupService(IDatabaseService databaseService, IRedmineDatabaseConfigurationService databaseConfigurationService, ILoggerService loggerService)
         {
             if (databaseService == null)
                 throw new ArgumentNullException(nameof(databaseService));
+
+            if (databaseConfigurationService == null)
+                throw new ArgumentNullException(nameof(databaseConfigurationService));
 
             if (loggerService == null)
                 throw new ArgumentNullException(nameof(loggerService));
 
             this._DatabaseService = databaseService;
+            this._DatabaseConfigurationService = databaseConfigurationService;
             this._LoggerService = loggerService;
         }
 
@@ -114,7 +120,7 @@ namespace RedArmory.Models.Services
                 report.Database = ProgressState.InProgress;
                 progress.Report(report);
 
-                var databaseConfigurations = RedmineDatabaseConfigurationService.Instance.GetDatabaseConfiguration(stack).ToArray();
+                var databaseConfigurations = this._DatabaseConfigurationService.GetDatabaseConfiguration(stack).ToArray();
                 foreach (var databaseConfiguration in databaseConfigurations)
                 {
                     var sqlFileName = $"{databaseConfiguration.Mode}.sql";
@@ -202,7 +208,7 @@ namespace RedArmory.Models.Services
             var configuration = new BackupConfiguration();
 
             // データベース
-            var databaseConfigurations = RedmineDatabaseConfigurationService.Instance.GetDatabaseConfiguration(stack).ToArray();
+            var databaseConfigurations = this._DatabaseConfigurationService.GetDatabaseConfiguration(stack).ToArray();
             foreach (var databaseConfiguration in databaseConfigurations)
             {
                 var sqlFileName = string.Format("{0}.sql", databaseConfiguration.Mode);
@@ -276,7 +282,7 @@ namespace RedArmory.Models.Services
                 report.Database = ProgressState.InProgress;
                 progress.Report(report);
 
-                var databaseConfigurations = RedmineDatabaseConfigurationService.Instance.GetDatabaseConfiguration(stack).ToArray();
+                var databaseConfigurations = this._DatabaseConfigurationService.GetDatabaseConfiguration(stack).ToArray();
                 foreach (var databaseConfiguration in databaseConfigurations)
                 {
                     var sqlFileName = string.Format("{0}.sql", databaseConfiguration.Mode);

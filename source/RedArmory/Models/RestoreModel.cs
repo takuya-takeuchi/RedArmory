@@ -20,8 +20,8 @@ namespace RedArmory.Models
 
         #region コンストラクタ
 
-        public RestoreModel(IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
-            : base(backupService, loggerService, stack)
+        public RestoreModel(IApplicationSettingService applicationSettingService, IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
+            : base(applicationSettingService, backupService, loggerService, stack)
         {
             this.PropertyChanged += (sender, args) =>
             {
@@ -36,7 +36,7 @@ namespace RedArmory.Models
             RedmineSetting redmineSetting;
             this.GetApplicationSetting(out redmineSetting);
 
-            var collectionView = CollectionViewSource.GetDefaultView(ApplicationSettingService.Instance.BackupHistories);
+            var collectionView = CollectionViewSource.GetDefaultView(this._ApplicationSettingService.BackupHistories);
 
             var version = this.Stack.DisplayVersion.ToVersion();
             collectionView.Filter = x =>
@@ -109,10 +109,10 @@ namespace RedArmory.Models
                 return;
             }
 
-            var item = ApplicationSettingService.Instance.BackupHistories.FirstOrDefault(
+            var item = this._ApplicationSettingService.BackupHistories.FirstOrDefault(
                 setting => setting.OutputDirectory.Equals(historySetting.OutputDirectory));
             if (item != null)
-                ApplicationSettingService.Instance.BackupHistories.Remove(item);
+                this._ApplicationSettingService.BackupHistories.Remove(item);
 
             RedmineSetting redmineSetting;
             var applicationSetting = this.GetApplicationSetting(out redmineSetting);

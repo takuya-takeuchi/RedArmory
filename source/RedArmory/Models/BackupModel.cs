@@ -14,8 +14,8 @@ namespace RedArmory.Models
 
         #region コンストラクタ
 
-        public BackupModel(IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
-            : base(backupService, loggerService, stack)
+        public BackupModel(IApplicationSettingService applicationSettingService, IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
+            : base(applicationSettingService, backupService, loggerService, stack)
         {
             this.PropertyChanged += (sender, args) =>
             {
@@ -202,10 +202,10 @@ namespace RedArmory.Models
                 DateTime = DateTime.UtcNow,
                 OutputDirectory = path
             };
-            ApplicationSettingService.Instance.BackupHistories.Add(history);
+            this._ApplicationSettingService.BackupHistories.Add(history);
             applicationSetting.BackupHistories.Add(history);
 
-            ApplicationSettingService.Instance.UpdateApplicationSetting(applicationSetting);
+            this._ApplicationSettingService.UpdateApplicationSetting(applicationSetting);
 
             await new OKDialogService().ShowMessage(message, null);
         }

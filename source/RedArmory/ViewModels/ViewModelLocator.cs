@@ -43,10 +43,12 @@ namespace RedArmory.ViewModels
             ////}
 
             SimpleIoc.Default.Register<ILoggerService, LoggerService>();
+            SimpleIoc.Default.Register<IApplicationSettingService, ApplicationSettingService>();
+            SimpleIoc.Default.Register<IRedmineDatabaseConfigurationService, RedmineDatabaseConfigurationService>();
             SimpleIoc.Default.Register<IDatabaseService, MySqlService>();
             SimpleIoc.Default.Register<IBackupService, BackupService>();
             SimpleIoc.Default.Register<IBitnamiRedmineService, BitnamiRedmineService>();
-            
+
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AboutViewModel>();
             SimpleIoc.Default.Register<BackupViewModel>();

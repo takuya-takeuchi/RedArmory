@@ -6,50 +6,50 @@ using System.Yaml.Serialization;
 
 namespace RedArmory.Models.Services
 {
-    internal sealed class RedmineDatabaseConfigurationService
-    {
 
+    internal sealed class RedmineDatabaseConfigurationService : IRedmineDatabaseConfigurationService
+    {
 
         #region イベント
         #endregion
 
         #region フィールド
+
+        private readonly ILoggerService _LoggerService;
+
         #endregion
 
         #region コンストラクタ
 
-        static RedmineDatabaseConfigurationService()
+        public RedmineDatabaseConfigurationService(ILoggerService loggerService)
         {
-        }
+            if (loggerService == null)
+                throw new ArgumentNullException(nameof(loggerService));
 
-        private RedmineDatabaseConfigurationService()
-        {
-        }
-
-        #endregion
-
-        #region プロパティ
-
-        private static RedmineDatabaseConfigurationService _Instance;
-
-        public static RedmineDatabaseConfigurationService Instance
-        {
-            get
-            {
-                return _Instance ?? (_Instance = new RedmineDatabaseConfigurationService());
-            }
+            this._LoggerService = loggerService;
         }
 
         #endregion
 
         #region メソッド
 
+        #region オーバーライド
+        #endregion
+
+        #region イベントハンドラ
+        #endregion
+
+        #region ヘルパーメソッド
+        #endregion
+
+        #endregion
+
+        #region IRedmineDatabaseConfigurationService メンバー
+
         public IEnumerable<DatabaseConfiguration> GetDatabaseConfiguration(BitnamiRedmineStack info)
         {
             if (info == null)
-            {
-                throw new ArgumentNullException("info");
-            }
+                throw new ArgumentNullException(nameof(info));
 
             const string databaseYmlPath = @"apps\redmine\htdocs\config\database.yml";
             var path = Path.Combine(info.InstallLocation, databaseYmlPath);
@@ -58,7 +58,7 @@ namespace RedArmory.Models.Services
                 throw new FileNotFoundException("database.yml が存在しません。", path);
             }
 
-            object[] deserialized = null;
+            object[] deserialized;
 
             var serializer = new YamlSerializer();
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -76,13 +76,14 @@ namespace RedArmory.Models.Services
 
                 // ポート番号は 1 つしか存在しない
                 var port = 0;
-                foreach (var values in (from kvp in dictionary let mode = kvp.Key as string
+                foreach (var values in (from kvp in dictionary
+                                        let mode = kvp.Key as string
                                         where mode != null
                                         select kvp.Value).OfType<Dictionary<object, object>>().Where(values => values.ContainsKey("port")))
                 {
                     port = (int)values["port"];
                 }
-                
+
 
                 foreach (var kvp in dictionary)
                 {
@@ -107,15 +108,6 @@ namespace RedArmory.Models.Services
                 }
             }
         }
-
-        #region オーバーライド
-        #endregion
-
-        #region イベントハンドラ
-        #endregion
-
-        #region ヘルパーメソッド
-        #endregion
 
         #endregion
 

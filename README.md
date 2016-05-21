@@ -12,7 +12,7 @@ Red Armory is simple tool to easily backup and restore database, plugins, themes
 ###### Japanese 
 Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデータベース、プラグイン、テーマ、添付ファイルのバックアップ、復元を簡単に実行するためのツールです。
 
-## Main Fuatures (主な機能)
+## Main Features (主な機能)
 
 ###### English 
 * Backup and Restore MySql database

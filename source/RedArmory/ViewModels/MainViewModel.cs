@@ -72,12 +72,10 @@ namespace RedArmory.ViewModels
 
         private static void CurrentOnExit(object sender, ExitEventArgs exitEventArgs)
         {
-            ConfigurationService.Instance.SaveConfiguration();
         }
 
         private static void CurrentOnLoadCompleted(object sender, NavigationEventArgs navigationEventArgs)
         {
-            ConfigurationService.Instance.LoadConfiguratuion();
         }
 
         #endregion

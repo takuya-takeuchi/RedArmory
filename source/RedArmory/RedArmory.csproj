@@ -137,12 +137,10 @@
     <Compile Include="Models\BackupModel.cs" />
     <Compile Include="Models\BackupRestoreProgress.cs" />
     <Compile Include="Models\BackupRestoreProgressReport.cs" />
-    <Compile Include="Models\Configurations\BitnamiRedmineStackConfiguration.cs" />
     <Compile Include="Converters\ServiceStartupTypeToStringConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Models\AcknowledgmentModel.cs" />
     <Compile Include="Models\BackupRestoreModel.cs" />
-    <Compile Include="Models\ConfigurationService.cs" />
     <Compile Include="Models\DiskInfo.cs" />
     <Compile Include="Models\ProgressState.cs" />
     <Compile Include="Models\ResourceService.cs" />
@@ -409,7 +407,6 @@
     <None Include="BitnamiRedmineStackConfiguration.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="CreateConfigurationClass.ps1" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

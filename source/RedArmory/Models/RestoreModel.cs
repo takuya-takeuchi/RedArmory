@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using GalaSoft.MvvmLight.Command;
 using RedArmory.Extensions;
-using RedArmory.Models.Configurations;
 using RedArmory.Models.Services;
 using RedArmory.Models.Services.Dialog;
 using RedArmory.Properties;
@@ -18,9 +16,6 @@ namespace RedArmory.Models
     {
 
         #region フィールド
-
-        private readonly BitnamiRedmineStackConfiguration _Configuration;
-
         #endregion
 
         #region コンストラクタ
@@ -37,9 +32,6 @@ namespace RedArmory.Models
                         break;
                 }
             };
-
-            this._Configuration = ConfigurationService.Instance.GetBitnamiRedmineStackConfiguration(stack.DisplayVersion);
-            this.Directory = this._Configuration.DefaultSource;
 
             RedmineSetting redmineSetting;
             this.GetApplicationSetting(out redmineSetting);
@@ -194,7 +186,6 @@ namespace RedArmory.Models
                 if (dlg.ShowDialog() == Microsoft.WindowsAPICodePack.Dialogs.CommonFileDialogResult.Ok)
                 {
                     this.Directory = dlg.FileName;
-                    this._Configuration.DefaultSource = this.Directory;
                 }
             }
         }

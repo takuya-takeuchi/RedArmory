@@ -245,6 +245,7 @@ namespace RedArmory.Models
                     DisplayVersion = this.Stack.DisplayVersion,
                     Backup =
                     {
+                        BaseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
                         DirectoryName = "%SHORTDATE% (%VERSION%)",
                         Database = true,
                         Files = true,

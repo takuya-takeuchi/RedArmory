@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
-using RedArmory.Models.Configurations;
 using RedArmory.Models.Services;
 using RedArmory.Models.Services.Dialog;
 using RedArmory.Properties;
@@ -14,9 +13,6 @@ namespace RedArmory.Models
     {
 
         #region フィールド
-
-        private readonly BitnamiRedmineStackConfiguration _Configuration;
-
         #endregion
 
         #region コンストラクタ
@@ -34,11 +30,6 @@ namespace RedArmory.Models
                 }
             };
 
-            this._Configuration = ConfigurationService.Instance.GetBitnamiRedmineStackConfiguration(stack.DisplayVersion);
-            this.Directory = this._Configuration.DefaultDestionation;
-
-            this.UpdateDiskSpace();
-
             // Apply Setting
             RedmineSetting redmineSetting;
             this.GetApplicationSetting(out redmineSetting);
@@ -48,6 +39,8 @@ namespace RedArmory.Models
             this.Files = redmineSetting.Backup.Files;
             this.Plugins = redmineSetting.Backup.Plugins;
             this.Themes = redmineSetting.Backup.Themes;
+
+            this.UpdateDiskSpace();
         }
 
         #endregion
@@ -229,7 +222,6 @@ namespace RedArmory.Models
                 if (dlg.ShowDialog() == Microsoft.WindowsAPICodePack.Dialogs.CommonFileDialogResult.Ok)
                 {
                     this.Directory = dlg.FileName;
-                    this._Configuration.DefaultDestionation = this.Directory;
                     this.UpdateDiskSpace();
 
                     this.RaiseCanExecuteBackupRestoreChanged();

@@ -106,6 +106,15 @@ namespace RedArmory.Properties {
         }
         
         /// <summary>
+        ///   The output directory is not empty. Do you want to continue? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_DirectoryIsNotEmpty {
+            get {
+                return ResourceManager.GetString("Msg_DirectoryIsNotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Restore is complete. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Msg_RestoreComplete {
@@ -120,6 +129,33 @@ namespace RedArmory.Properties {
         public static string Msg_RestoreFailed {
             get {
                 return ResourceManager.GetString("Msg_RestoreFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   %LONGDATE% : yyyyMMdd hhmmss に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_FolderNameLongDate {
+            get {
+                return ResourceManager.GetString("Tooltip_FolderNameLongDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   %SHORTDATE% : yyyyMMdd に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_FolderNameShortDate {
+            get {
+                return ResourceManager.GetString("Tooltip_FolderNameShortDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   %VERSION% : Version of Redmine に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_FolderNameVersion {
+            get {
+                return ResourceManager.GetString("Tooltip_FolderNameVersion", resourceCulture);
             }
         }
         
@@ -228,6 +264,15 @@ namespace RedArmory.Properties {
         public static string Word_Destination {
             get {
                 return ResourceManager.GetString("Word_Destination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Folder Name に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_FolderName {
+            get {
+                return ResourceManager.GetString("Word_FolderName", resourceCulture);
             }
         }
         

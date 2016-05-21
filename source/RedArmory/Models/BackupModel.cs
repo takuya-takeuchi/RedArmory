@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 using RedArmory.Models.Configurations;
 using RedArmory.Models.Services;
 using RedArmory.Models.Services.Dialog;
@@ -27,11 +28,48 @@ namespace RedArmory.Models
             this.Directory = this._Configuration.DefaultDestionation;
 
             this.UpdateDiskSpace();
+
+            this.PropertyChanged += (sender, args) =>
+            {
+                switch (args.PropertyName)
+                {
+                    case "Directory":
+                        this.UpdateOutputDirectory();
+                        break;
+                }
+            };
+
+            // Apply Setting
+            RedmineSetting redmineSetting;
+            this.GetApplicationSetting(out redmineSetting);
+            this.Directory = redmineSetting.Backup.BaseDirectory;
+            this.DirectoryName = redmineSetting.Backup.DirectoryName;
+            this.Database = redmineSetting.Backup.Database;
+            this.Files = redmineSetting.Backup.Files;
+            this.Plugins = redmineSetting.Backup.Plugins;
+            this.Themes = redmineSetting.Backup.Themes;
         }
 
         #endregion
 
         #region プロパティ
+
+        private string _DirectoryName;
+
+        public string DirectoryName
+        {
+            get
+            {
+                return this._DirectoryName;
+            }
+            set
+            {
+                this._DirectoryName = value;
+                this.RaisePropertyChanged();
+
+                this.UpdateOutputDirectory();
+            }
+        }
 
         private ObservableCollection<DiskInfo> _DriveSpaces;
 
@@ -44,6 +82,21 @@ namespace RedArmory.Models
             set
             {
                 this._DriveSpaces = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        private string _OutputDirectory;
+
+        public string OutputDirectory
+        {
+            get
+            {
+                return this._OutputDirectory;
+            }
+            private set
+            {
+                this._OutputDirectory = value;
                 this.RaisePropertyChanged();
             }
         }
@@ -73,10 +126,36 @@ namespace RedArmory.Models
         {
             string message;
 
+            var path = this.OutputDirectory;
+            DirectoryInfo directory;
+
+            // 出力先ディレクトリのディレクトリ名の検証
             try
             {
-                var path = this.Directory;
+                directory = System.IO.Directory.CreateDirectory(path);
+            }
+            catch (Exception)
+            {
+                message = Resources.Msg_BackupFailed;
+                await new OKDialogService().ShowMessage(message, null);
+                return;
+            }
 
+            // 空かどうか検証
+            if (!IsOutputDirectoryEmpty(directory.FullName))
+            {
+                message = Resources.Msg_DirectoryIsNotEmpty;
+                var yesNoDialogService = new YesNoDialogService();
+                await yesNoDialogService.ShowMessage(message, null);
+
+                if (yesNoDialogService.Result == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
+
+            try
+            {
                 var configuration = new BackupConfiguration
                 {
                     Database = this.Database,
@@ -90,14 +169,24 @@ namespace RedArmory.Models
                 await progressDialogService.ShowMessage(null, null);
 
                 message = Resources.Msg_BackupComplete;
+
+                // Update Setting
+                RedmineSetting redmineSetting;
+                var applicationSetting = this.GetApplicationSetting(out redmineSetting);
+                redmineSetting.Backup.Database = configuration.Database;
+                redmineSetting.Backup.Files = configuration.Files;
+                redmineSetting.Backup.Plugins = configuration.Plugins;
+                redmineSetting.Backup.Themes = configuration.Themes;
+                redmineSetting.Backup.BaseDirectory = this.Directory;
+                redmineSetting.Backup.DirectoryName = this.DirectoryName;
+                ApplicationSettingService.Instance.UpdateApplicationSetting(applicationSetting);
             }
             catch (Exception)
             {
                 message = Resources.Msg_BackupFailed;
             }
 
-            var dialogService = new OKDialogService();
-            await dialogService.ShowMessage(message, null);
+            await new OKDialogService().ShowMessage(message, null);
         }
 
         protected override void ExecuteSelectDirectory()
@@ -129,6 +218,20 @@ namespace RedArmory.Models
         }
 
         #region ヘルパーメソッド
+
+        private bool IsOutputDirectoryEmpty(string path)
+        {
+            try
+            {
+                var entries = System.IO.Directory.GetFileSystemEntries(path);
+                return entries.Length == 0;
+            }
+            catch
+            {
+                // アクセス権がないなどの場合は空でないとする
+                return false;
+            }
+        }
 
         private void UpdateDiskSpace()
         {
@@ -174,6 +277,45 @@ namespace RedArmory.Models
 
                 this.DriveSpaces = spaces;
             }
+        }
+
+        private void UpdateOutputDirectory()
+        {
+            var keywords = new[]
+            {
+                "%VERSION%",
+                "%LONGDATE%",
+                "%SHORTDATE%",
+            };
+
+            var name = this.DirectoryName ?? "";
+            var datetime = DateTime.Now;
+
+            foreach (var keyword in keywords)
+            {
+                do
+                {
+                    if (name.IndexOf(keyword, StringComparison.InvariantCulture) == -1)
+                    {
+                        break;
+                    }
+
+                    switch (keyword)
+                    {
+                        case "%VERSION%":
+                            name = name.Replace(keyword, this.Stack.DisplayVersion);
+                            break;
+                        case "%LONGDATE%":
+                            name = name.Replace(keyword, datetime.ToString("yyyyMMdd hhmmss"));
+                            break;
+                        case "%SHORTDATE%":
+                            name = name.Replace(keyword, datetime.ToString("yyyyMMdd"));
+                            break;
+                    }
+                } while (true);
+            }
+
+            this.OutputDirectory = Path.Combine(this.Directory ?? "", name);
         }
 
         #endregion

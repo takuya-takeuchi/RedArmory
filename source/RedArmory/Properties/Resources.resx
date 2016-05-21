@@ -252,4 +252,19 @@
   <data name="Word_SelectTargetDirectoryTitle" xml:space="preserve">
     <value>Select where you want to save your backup</value>
   </data>
+  <data name="Word_FolderName" xml:space="preserve">
+    <value>Folder Name</value>
+  </data>
+  <data name="Msg_DirectoryIsNotEmpty" xml:space="preserve">
+    <value>The output directory is not empty. Do you want to continue?</value>
+  </data>
+  <data name="Tooltip_FolderNameLongDate" xml:space="preserve">
+    <value>%LONGDATE% : yyyyMMdd hhmmss</value>
+  </data>
+  <data name="Tooltip_FolderNameShortDate" xml:space="preserve">
+    <value>%SHORTDATE% : yyyyMMdd</value>
+  </data>
+  <data name="Tooltip_FolderNameVersion" xml:space="preserve">
+    <value>%VERSION% : Version of Redmine</value>
+  </data>
 </root>

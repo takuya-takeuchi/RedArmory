@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using RedArmory.Models.Services;
@@ -230,6 +231,36 @@ namespace RedArmory.Models
         protected abstract void Execute();
 
         protected abstract void ExecuteSelectDirectory();
+
+        protected ApplicationSetting GetApplicationSetting(out RedmineSetting redmineSetting)
+        {
+            var applicationSetting = ApplicationSettingService.Instance.GetApplicationSetting();
+             redmineSetting = applicationSetting.RedmineSettings.
+                FirstOrDefault(setting => this.Stack.DisplayVersion.Equals(setting.DisplayVersion));
+            if (redmineSetting == null)
+            {
+                redmineSetting = new RedmineSetting
+                {
+                    DisplayVersion = this.Stack.DisplayVersion,
+                    Backup =
+                    {
+                        DirectoryName = "%SHORTDATE% (%VERSION%)",
+                        Database = true,
+                        Files = true,
+                        Plugins = true,
+                        Themes = true
+                    }
+                };
+                applicationSetting.RedmineSettings.Add(redmineSetting);
+            }
+
+            return applicationSetting;
+        }
+
+        protected void UpdateRedmineSetting(ApplicationSetting applicationSetting)
+        {
+            ApplicationSettingService.Instance.UpdateApplicationSetting(applicationSetting);
+        }
 
         #region ヘルパーメソッド
 

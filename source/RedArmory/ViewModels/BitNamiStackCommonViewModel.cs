@@ -47,9 +47,9 @@ namespace RedArmory.ViewModels
             }
         }
 
-        private BackupRestoreModel _SelectedStack;
+        private T _SelectedStack;
 
-        public BackupRestoreModel SelectedStack
+        public T SelectedStack
         {
             get
             {

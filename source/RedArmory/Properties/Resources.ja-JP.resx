@@ -252,4 +252,19 @@
   <data name="Word_SelectTargetDirectoryTitle" xml:space="preserve">
     <value>バックアップ先のフォルダを選択してください</value>
   </data>
+  <data name="Word_FolderName" xml:space="preserve">
+    <value>フォルダ名</value>
+  </data>
+  <data name="Msg_DirectoryIsNotEmpty" xml:space="preserve">
+    <value>バックアップ先が空ではありません。処理を継続しますか?</value>
+  </data>
+  <data name="Tooltip_FolderNameVersion" xml:space="preserve">
+    <value>%VERSION% : Redmineのバージョン</value>
+  </data>
+  <data name="Tooltip_FolderNameLongDate" xml:space="preserve">
+    <value>%LONGDATE% : yyyyMMdd hhmmss</value>
+  </data>
+  <data name="Tooltip_FolderNameShortDate" xml:space="preserve">
+    <value>%SHORTDATE% : yyyyMMdd</value>
+  </data>
 </root>

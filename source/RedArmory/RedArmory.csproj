@@ -99,6 +99,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
     <Reference Include="System.Management.Instrumentation" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -143,8 +144,11 @@
     <Compile Include="Models\ResourceService.cs" />
     <Compile Include="Models\RestoreModel.cs" />
     <Compile Include="Models\ServiceStatus.cs" />
+    <Compile Include="Models\Services\ApplicationSetting.cs" />
+    <Compile Include="Models\Services\ApplicationSettingService.cs" />
     <Compile Include="Models\Services\BackupConfiguration.cs" />
     <Compile Include="Models\Services\BackupService.cs" />
+    <Compile Include="Models\Services\BackupSetting.cs" />
     <Compile Include="Models\Services\BitnamiRedmineService.cs" />
     <Compile Include="Models\Services\DatabaseConfiguration.cs" />
     <Compile Include="Models\Services\Dialog\OKDialogService.cs" />
@@ -154,6 +158,8 @@
     <Compile Include="Models\Services\MySqlService.cs" />
     <Compile Include="Models\Services\RedmineDatabaseConfigurationService.cs" />
     <Compile Include="Models\Services\BitnamiRedmineStack.cs" />
+    <Compile Include="Models\Services\RedmineSetting.cs" />
+    <Compile Include="Models\Services\RestoreSetting.cs" />
     <Compile Include="Models\Services\ServiceConfiguration.cs" />
     <Compile Include="Models\Services\ServiceStartupType.cs" />
     <Compile Include="Models\Setting.cs" />

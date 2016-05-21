@@ -5,10 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
              xmlns:models="clr-namespace:RedArmory.Models"
-             DataContext="{Binding Source={StaticResource Locator},
-                                   Path=Backups}"
              d:DesignHeight="800"
              d:DesignWidth="1200"
+             DataContext="{Binding Source={StaticResource Locator},
+                                   Path=Backups}"
              mc:Ignorable="d">
     <UserControl.Resources>
         <DataTemplate x:Key="StackDataTemplate" DataType="{x:Type models:BackupRestoreModel}">
@@ -99,8 +99,9 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <!--  #region Destination  -->
+                        <!--#region Destination-->
                         <Label Grid.Row="0"
                                Grid.Column="0"
                                Margin="5,5,5,5"
@@ -161,9 +162,48 @@
                                 </metroChart:DoughnutChart.Series>
                             </metroChart:DoughnutChart>
                         </Grid>
-                        <!--  #endregion  -->
-                        <!--  #region Options  -->
+                        <!--#endregion-->
+                        <!--#region Format-->
                         <Label Grid.Row="1"
+                               Grid.Column="0"
+                               Margin="5,5,5,5"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                                 Path=Resources.Word_FolderName,
+                                                 Mode=OneWay}"
+                               FontSize="{StaticResource ItemHeadingFontSize}"
+                               FontWeight="Bold" />
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="1"
+                                    Orientation="Vertical">
+                            <TextBox MinWidth="300"
+                                     Margin="5,5,5,5"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Center"
+                                     Text="{Binding SelectedStack.DirectoryName,
+                                                    UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox.ToolTip>
+                                    <TextBlock>
+                                        <Run Text="{Binding Source={x:Static models:ResourceService.Instance},
+                                                 Path=Resources.Tooltip_FolderNameVersion,
+                                                 Mode=OneWay}"/>
+                                        <LineBreak />
+                                        <Run Text="{Binding Source={x:Static models:ResourceService.Instance},
+                                                 Path=Resources.Tooltip_FolderNameLongDate,
+                                                 Mode=OneWay}"/>
+                                        <LineBreak />
+                                        <Run Text="{Binding Source={x:Static models:ResourceService.Instance},
+                                                 Path=Resources.Tooltip_FolderNameShortDate,
+                                                 Mode=OneWay}"/>
+                                    </TextBlock>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <TextBlock Text="{Binding SelectedStack.OutputDirectory}" />
+                        </StackPanel>
+                        <!--#endregion-->
+                        <!--#region Options-->
+                        <Label Grid.Row="2"
                                Grid.Column="0"
                                Margin="5,5,5,5"
                                HorizontalAlignment="Left"
@@ -173,7 +213,7 @@
                                                  Mode=OneWay}"
                                FontSize="{StaticResource ItemHeadingFontSize}"
                                FontWeight="Bold" />
-                        <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid Grid.Row="2" Grid.Column="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -285,7 +325,7 @@
                                        Content="ON" />
                             </StackPanel>
                         </Grid>
-                        <!--  #endregion  -->
+                        <!--#endregion-->
                     </Grid>
                 </ScrollViewer>
                 <Border Grid.Row="2"

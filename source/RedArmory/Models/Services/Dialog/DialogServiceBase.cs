@@ -32,6 +32,12 @@ namespace RedArmory.Models.Services.Dialog
             set;
         }
 
+        public MessageBoxResult Result
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         #region メソッド
@@ -72,17 +78,18 @@ namespace RedArmory.Models.Services.Dialog
                 DataContext = viewModel
             };
 
-            await DialogHost.Show(view, "RootDialog", (sender, args) =>
+            var result = await DialogHost.Show(view, "RootDialog", (sender, args) =>
             {
                 // ProressDialog 表示後、フォーカスが外れているのを防ぐため
                 view.Focus();
             }, this.DialogClosing);
+
+            this.Result = (MessageBoxResult) result;
         }
 
         public Task ShowMessage(string message, string title, string buttonText, Action afterHideCallback)
         {
             return null;
-
         }
 
         public Task<bool> ShowMessage(string message, string title, string buttonConfirmText, string buttonCancelText, Action<bool> afterHideCallback)

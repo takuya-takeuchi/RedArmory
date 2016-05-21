@@ -1,52 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace RedArmory.Models.Services
 {
 
     [DataContract]
-    public sealed class BackupSetting : IExtensibleDataObject
+    public sealed class BackupHistorySetting : IExtensibleDataObject
     {
 
         #region プロパティ
 
         [DataMember]
-        public string BaseDirectory
+        public string DisplayVersion
         {
             get;
             set;
         }
 
         [DataMember]
-        public string DirectoryName
+        public DateTime DateTime
         {
             get;
             set;
         }
 
         [DataMember]
-        public bool Database
-        {
-            get;
-            set;
-        }
-
-        [DataMember]
-        public bool Files
-        {
-            get;
-            set;
-        }
-
-        [DataMember]
-        public bool Plugins
-        {
-            get;
-            set;
-        }
-
-        [DataMember]
-        public bool Themes
+        public string OutputDirectory
         {
             get;
             set;
@@ -65,4 +44,5 @@ namespace RedArmory.Models.Services
         #endregion
 
     }
+
 }

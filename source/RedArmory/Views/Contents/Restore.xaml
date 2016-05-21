@@ -4,10 +4,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:RedArmory.Models"
-             DataContext="{Binding Source={StaticResource Locator},
-                                   Path=Restore}"
+             xmlns:services="clr-namespace:RedArmory.Models.Services"
              d:DesignHeight="800"
              d:DesignWidth="1200"
+             DataContext="{Binding Source={StaticResource Locator},
+                                   Path=Restore}"
+             x:Name="_Root"
              mc:Ignorable="d">
     <UserControl.Resources>
         <DataTemplate x:Key="StackDataTemplate" DataType="{x:Type models:BackupRestoreModel}">
@@ -99,7 +101,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <!--  #region Source  -->
+                        <!--#region Source-->
                         <Label Grid.Row="0"
                                Grid.Column="0"
                                Margin="5,5,5,5"
@@ -116,12 +118,61 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <StackPanel Orientation="Horizontal">
-                                <TextBox MinWidth="300"
-                                         Margin="5,5,5,5"
-                                         HorizontalAlignment="Left"
-                                         VerticalAlignment="Center"
-                                         IsReadOnly="True"
-                                         Text="{Binding SelectedStack.Directory}" />
+                                <ComboBox MinWidth="500"
+                                          Name="_ComboBox"
+                                          Margin="5,5,5,5"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"
+                                          IsEditable="True"
+                                          ItemsSource="{Binding SelectedStack.BackupHistories}"
+                                          Text="{Binding SelectedStack.Directory,
+                                                         UpdateSourceTrigger=PropertyChanged}"
+                                          TextSearch.TextPath="OutputDirectory">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate DataType="services:BackupHistorySetting">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition />
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Row="0"
+                                                           Grid.Column="0"
+                                                           HorizontalAlignment="Left"
+                                                           Text="{Binding DateTime,
+                                                                          Converter={StaticResource DateTimeToStringConverter}}" />
+                                                <TextBlock Grid.Row="0"
+                                                           Grid.Column="1"
+                                                           HorizontalAlignment="Left"
+                                                           Text="{Binding DisplayVersion}" />
+                                                <Button Grid.Row="0"
+                                                        Grid.RowSpan="2"
+                                                        Grid.Column="2"
+                                                        Command="{Binding ElementName=_Root, Path=DataContext.SelectedStack.DeleteHistoryCommand}"
+                                                        CommandParameter="{Binding}"
+                                                        Style="{StaticResource MaterialDesignFloatingActionButton}">
+                                                    <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
+                                                        <Path Width="{StaticResource IconPathSize}"
+                                                              Height="{StaticResource IconPathSize}"
+                                                              Data="M18.355,0.5 L37.521,0.5 37.521,1.1892067 38,0.7102068 41.892792,4.6030003 55.834,4.6030003 55.834,11.937 0.5,11.937 0.5,4.6030003 13.939207,4.6030003 17.832001,0.7102068 18.355,1.2332057 z M4.667,16.437 L52.001,16.437 52.001,30.936 52.001,63.77 52.001,63.770999 51.99059,64.181678 C51.776326,68.408638 48.281205,71.77 44.001,71.77 L12.667,71.77 C8.3867931,71.77 4.8916749,68.408638 4.6774096,64.181678 L4.6670253,63.770999 4.667,63.77 4.667,30.936 z"
+                                                              Fill="{StaticResource IdealForegroundColorBrush}"
+                                                              Stretch="Fill" />
+                                                    </Viewbox>
+                                                </Button>
+                                                <TextBlock Grid.Row="1"
+                                                           Grid.Column="0"
+                                                           Grid.ColumnSpan="2"
+                                                           HorizontalAlignment="Left"
+                                                           FontWeight="Bold"
+                                                           Text="{Binding OutputDirectory}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                                 <Button Height="30"
                                         VerticalAlignment="Center"
                                         Command="{Binding SelectedStack.SelectDirectoryCommand}"
@@ -140,8 +191,8 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
-                        <!--  #endregion  -->
-                        <!--  #region Options  -->
+                        <!--#endregion-->
+                        <!--#region Options-->
                         <Label Grid.Row="1"
                                Grid.Column="0"
                                Margin="5,5,5,5"
@@ -320,7 +371,7 @@
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
-                        <!--  #endregion  -->
+                        <!--#endregion-->
                     </Grid>
                 </ScrollViewer>
                 <Border Grid.Row="2"

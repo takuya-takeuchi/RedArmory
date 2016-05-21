@@ -267,4 +267,10 @@
   <data name="Tooltip_FolderNameShortDate" xml:space="preserve">
     <value>%SHORTDATE% : yyyyMMdd</value>
   </data>
+  <data name="Format_BackupDate" xml:space="preserve">
+    <value>yyyy/MM/dd hh:mm:ss</value>
+  </data>
+  <data name="Msg_DeleteHistory" xml:space="preserve">
+    <value>履歴を削除しますか?</value>
+  </data>
 </root>

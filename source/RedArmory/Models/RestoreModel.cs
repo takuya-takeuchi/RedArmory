@@ -1,4 +1,11 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows;
+using System.Windows.Data;
+using GalaSoft.MvvmLight.Command;
+using RedArmory.Extensions;
 using RedArmory.Models.Configurations;
 using RedArmory.Models.Services;
 using RedArmory.Models.Services.Dialog;
@@ -21,15 +28,62 @@ namespace RedArmory.Models
         public RestoreModel(BitnamiRedmineStack stack)
             : base(stack)
         {
+            this.PropertyChanged += (sender, args) =>
+            {
+                switch (args.PropertyName)
+                {
+                    case "Directory":
+                        this.UpdateState();
+                        break;
+                }
+            };
+
             this._Configuration = ConfigurationService.Instance.GetBitnamiRedmineStackConfiguration(stack.DisplayVersion);
             this.Directory = this._Configuration.DefaultSource;
 
-            this.UpdateState();
+            RedmineSetting redmineSetting;
+            this.GetApplicationSetting(out redmineSetting);
+            
+            var collectionView = CollectionViewSource.GetDefaultView(ApplicationSettingService.Instance.BackupHistories);
+
+            var version = this.Stack.DisplayVersion.ToVersion();
+            collectionView.Filter = x =>
+            {
+                var setting = (BackupHistorySetting)x;
+                return setting.DisplayVersion.ToVersion() <= version;
+            };
+            collectionView.SortDescriptions.Add(new SortDescription("DateTime", ListSortDirection.Descending));
+
+            this.BackupHistories = collectionView;
+
+            this.DeleteHistoryCommand = new RelayCommand<BackupHistorySetting>(this.DeleteHistoryExecute);
         }
 
         #endregion
 
         #region プロパティ
+
+        private ICollectionView _BackupHistories;
+
+        public ICollectionView BackupHistories
+        {
+            get
+            {
+                return this._BackupHistories;
+            }
+            private set
+            {
+                this._BackupHistories = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public RelayCommand<BackupHistorySetting> DeleteHistoryCommand
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         #region メソッド
@@ -49,6 +103,34 @@ namespace RedArmory.Models
         protected override bool CanExecuteSelectDirectory()
         {
             return true;
+        }
+
+        private async void DeleteHistoryExecute(BackupHistorySetting historySetting)
+        {
+            if (historySetting == null)
+                return;
+
+            var yesNoDialogService = new YesNoDialogService();
+            await yesNoDialogService.ShowMessage(Resources.Msg_DeleteHistory, null);
+            if (yesNoDialogService.Result == MessageBoxResult.No)
+            {
+                return;
+            }
+
+            var item = ApplicationSettingService.Instance.BackupHistories.FirstOrDefault(
+                setting => setting.OutputDirectory.Equals(historySetting.OutputDirectory));
+            if (item != null)
+                ApplicationSettingService.Instance.BackupHistories.Remove(item);
+
+            RedmineSetting redmineSetting;
+            var applicationSetting = this.GetApplicationSetting(out redmineSetting);
+
+            item = applicationSetting.BackupHistories.FirstOrDefault(
+                setting => setting.OutputDirectory.Equals(historySetting.OutputDirectory));
+            if (item != null)
+                applicationSetting.BackupHistories.Remove(item);
+
+            this.UpdateRedmineSetting(applicationSetting);
         }
 
         protected override async void Execute()
@@ -103,8 +185,6 @@ namespace RedArmory.Models
                 {
                     this.Directory = dlg.FileName;
                     this._Configuration.DefaultSource = this.Directory;
-
-                    this.UpdateState();
                 }
             }
         }

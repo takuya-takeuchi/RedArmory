@@ -267,4 +267,10 @@
   <data name="Tooltip_FolderNameVersion" xml:space="preserve">
     <value>%VERSION% : Version of Redmine</value>
   </data>
+  <data name="Format_BackupDate" xml:space="preserve">
+    <value>dd/MM/yyyy hh:mm:ss</value>
+  </data>
+  <data name="Msg_DeleteHistory" xml:space="preserve">
+    <value>Are you sure you want to delete the selected history item?</value>
+  </data>
 </root>

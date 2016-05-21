@@ -24,11 +24,6 @@ namespace RedArmory.Models
         public BackupModel(BitnamiRedmineStack stack)
             : base(stack)
         {
-            this._Configuration = ConfigurationService.Instance.GetBitnamiRedmineStackConfiguration(stack.DisplayVersion);
-            this.Directory = this._Configuration.DefaultDestionation;
-
-            this.UpdateDiskSpace();
-
             this.PropertyChanged += (sender, args) =>
             {
                 switch (args.PropertyName)
@@ -38,6 +33,11 @@ namespace RedArmory.Models
                         break;
                 }
             };
+
+            this._Configuration = ConfigurationService.Instance.GetBitnamiRedmineStackConfiguration(stack.DisplayVersion);
+            this.Directory = this._Configuration.DefaultDestionation;
+
+            this.UpdateDiskSpace();
 
             // Apply Setting
             RedmineSetting redmineSetting;
@@ -179,6 +179,16 @@ namespace RedArmory.Models
                 redmineSetting.Backup.Themes = configuration.Themes;
                 redmineSetting.Backup.BaseDirectory = this.Directory;
                 redmineSetting.Backup.DirectoryName = this.DirectoryName;
+
+                var history = new BackupHistorySetting
+                {
+                    DisplayVersion = this.Stack.DisplayVersion,
+                    DateTime = DateTime.UtcNow,
+                    OutputDirectory = path
+                };
+                ApplicationSettingService.Instance.BackupHistories.Add(history);
+                applicationSetting.BackupHistories.Add(history);
+
                 ApplicationSettingService.Instance.UpdateApplicationSetting(applicationSetting);
             }
             catch (Exception)

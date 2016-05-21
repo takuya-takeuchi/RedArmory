@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
@@ -27,6 +28,8 @@ namespace RedArmory.Models.Services
             var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             this._ApplicationSettingDirectory = Path.Combine(path, AssemblyProperty.Product);
             this._ApplicationSettingPath = Path.Combine(this._ApplicationSettingDirectory, "Setting.xml");
+
+            this._BackupHistories = new ObservableCollection<BackupHistorySetting>();
         }
 
         #endregion
@@ -40,6 +43,16 @@ namespace RedArmory.Models.Services
             get
             {
                 return _Instance ?? (_Instance = new ApplicationSettingService());
+            }
+        }
+
+        private readonly ObservableCollection<BackupHistorySetting> _BackupHistories;
+
+        public ObservableCollection<BackupHistorySetting> BackupHistories
+        {
+            get
+            {
+                return this._BackupHistories;
             }
         }
 
@@ -65,10 +78,12 @@ namespace RedArmory.Models.Services
             }
             else
             {
-                this._ApplicationSetting = new ApplicationSetting
-                {
-                    RedmineSettings = new List<RedmineSetting>()
-                };
+                this._ApplicationSetting = new ApplicationSetting();
+            }
+
+            foreach (var backupHistorySetting in this._ApplicationSetting.BackupHistories)
+            {
+                this._BackupHistories.Add(backupHistorySetting);
             }
 
             return this._ApplicationSetting;

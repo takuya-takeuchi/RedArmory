@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Name="appbar_delete"
+        Width="76.011"
+        Height="76.011"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top">
+    <Path Canvas.Left="23.1926"
+          Canvas.Top="19.0023"
+          Width="29.6254"
+          Height="38.006"
+          Data="M18.355,0.5 L37.521,0.5 37.521,1.1892067 38,0.7102068 41.892792,4.6030003 55.834,4.6030003 55.834,11.937 0.5,11.937 0.5,4.6030003 13.939207,4.6030003 17.832001,0.7102068 18.355,1.2332057 z M4.667,16.437 L52.001,16.437 52.001,30.936 52.001,63.77 52.001,63.770999 51.99059,64.181678 C51.776326,68.408638 48.281205,71.77 44.001,71.77 L12.667,71.77 C8.3867931,71.77 4.8916749,68.408638 4.6774096,64.181678 L4.6670253,63.770999 4.667,63.77 4.667,30.936 z"
+          Fill="#FF000000"
+          Stretch="Fill" />
+</Canvas>

@@ -61,6 +61,15 @@ namespace RedArmory.Properties {
         }
         
         /// <summary>
+        ///   dd/MM/yyyy hh:mm:ss に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Format_BackupDate {
+            get {
+                return ResourceManager.GetString("Format_BackupDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   English に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Lang_English {
@@ -102,6 +111,15 @@ namespace RedArmory.Properties {
         public static string Msg_BitnamiRedmineStackIsNotPresent {
             get {
                 return ResourceManager.GetString("Msg_BitnamiRedmineStackIsNotPresent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Are you sure you want to delete the selected history item? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_DeleteHistory {
+            get {
+                return ResourceManager.GetString("Msg_DeleteHistory", resourceCulture);
             }
         }
         

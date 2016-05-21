@@ -127,8 +127,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AssemblyProperty.cs" />
+    <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\BooleanReverseConverter.cs" />
     <Compile Include="Converters\CultureNameToLocalizedStringConverter.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Interop\SafeNativeMethods.cs" />
     <Compile Include="Models\BackupModel.cs" />
     <Compile Include="Models\BackupRestoreProgress.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="Models\Services\ApplicationSetting.cs" />
     <Compile Include="Models\Services\ApplicationSettingService.cs" />
     <Compile Include="Models\Services\BackupConfiguration.cs" />
+    <Compile Include="Models\Services\BackupHistorySetting.cs" />
     <Compile Include="Models\Services\BackupService.cs" />
     <Compile Include="Models\Services\BackupSetting.cs" />
     <Compile Include="Models\Services\BitnamiRedmineService.cs" />
@@ -217,6 +220,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Assets\appbar_changeHistory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\appbar_delete.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

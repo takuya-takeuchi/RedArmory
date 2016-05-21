@@ -8,8 +8,8 @@
              xmlns:services="clr-namespace:RedArmory.Models.Services"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:viewModels="clr-namespace:RedArmory.ViewModels"
-             StartupUri="MainWindow.xaml"
-             d1p1:Ignorable="d">
+             d1p1:Ignorable="d"
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -123,6 +123,7 @@
             <converters:ServiceStartupTypeToStringConverter x:Key="ServiceStartupTypeToStringConverter" />
             <converters:BooleanReverseConverter x:Key="BooleanReverseConverter" />
             <converters:CultureNameToLocalizedStringConverter x:Key="CultureNameToLocalizedStringConverter" />
+            <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
 
             <!--  Chart  -->
             <Style x:Key="MinimalChartStyle" TargetType="metroChart:ChartBase">

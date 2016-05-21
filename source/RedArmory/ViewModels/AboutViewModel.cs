@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using RedArmory.Models;
+using RedArmory.Models.Services;
 
 namespace RedArmory.ViewModels
 {
@@ -9,10 +10,18 @@ namespace RedArmory.ViewModels
     public sealed class AboutViewModel : ViewModelBase
     {
 
+        #region フィールド
+
+        private readonly ILoggerService _LoggerService;
+
+        #endregion
+
         #region コンストラクタ
 
-        public AboutViewModel()
+        public AboutViewModel(ILoggerService loggerService)
         {
+            this._LoggerService = loggerService;
+
             this.Copyright = AssemblyProperty.Copyright;
             this.Product = AssemblyProperty.Product;
             this.Version = AssemblyProperty.Version;
@@ -93,6 +102,7 @@ namespace RedArmory.ViewModels
         #endregion
 
         #region プロパティ
+
         public RelayCommand TwitterCommand
         {
             get;

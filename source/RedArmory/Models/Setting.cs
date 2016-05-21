@@ -20,12 +20,13 @@ namespace RedArmory.Models
 
         #region コンストラクタ
 
-        public Setting(BitnamiRedmineStack stack)
+        public Setting(IBitnamiRedmineService bitnamiRedmineService, BitnamiRedmineStack stack)
         {
+            if (bitnamiRedmineService == null)
+                throw new ArgumentNullException(nameof(bitnamiRedmineService));
+
             if (stack == null)
-            {
-                throw new ArgumentNullException("stack");
-            }
+                throw new ArgumentNullException(nameof(stack));
 
             this._Stack = stack;
 
@@ -37,7 +38,7 @@ namespace RedArmory.Models
                 Subversion = true
             };
 
-            var serviceStatuses = BitnamiRedmineService.Instance.GetServiceDisplayNames(stack, configuration);
+            var serviceStatuses = bitnamiRedmineService.GetServiceDisplayNames(stack, configuration);
             this.ServiceStatuses = new ObservableCollection<ServiceStatus>(serviceStatuses);
         }
 

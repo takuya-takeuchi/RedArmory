@@ -12,13 +12,10 @@ namespace RedArmory.Models
     public sealed class BackupModel : BackupRestoreModel
     {
 
-        #region フィールド
-        #endregion
-
         #region コンストラクタ
 
-        public BackupModel(BitnamiRedmineStack stack)
-            : base(stack)
+        public BackupModel(IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
+            : base(backupService, loggerService, stack)
         {
             this.PropertyChanged += (sender, args) =>
             {
@@ -147,19 +144,19 @@ namespace RedArmory.Models
                 }
             }
 
+            var configuration = new BackupConfiguration
+            {
+                Database = this.Database,
+                Files = this.Files,
+                Plugins = this.Plugins,
+                Themes = this.Themes
+            };
+
             try
             {
-                var configuration = new BackupConfiguration
-                {
-                    Database = this.Database,
-                    Files = this.Files,
-                    Plugins = this.Plugins,
-                    Themes = this.Themes
-                };
-
                 var progressDialogService = new ProgressDialogService();
                 var report = new BackupRestoreProgressReport();
-                progressDialogService.Action = () => BackupService.Instance.Backup(this.Stack, configuration, path, new Progress<BackupRestoreProgressReport>(
+                progressDialogService.Action = () => this._BackupService.Backup(this.Stack, configuration, path, new Progress<BackupRestoreProgressReport>(
                     progressReport =>
                     {
                         report.Database = progressReport.Database;
@@ -170,34 +167,45 @@ namespace RedArmory.Models
 
                 progressDialogService.Report = report;
                 await progressDialogService.ShowMessage(null, null);
-
-                message = Resources.Msg_BackupComplete;
-
-                // Update Setting
-                RedmineSetting redmineSetting;
-                var applicationSetting = this.GetApplicationSetting(out redmineSetting);
-                redmineSetting.Backup.Database = configuration.Database;
-                redmineSetting.Backup.Files = configuration.Files;
-                redmineSetting.Backup.Plugins = configuration.Plugins;
-                redmineSetting.Backup.Themes = configuration.Themes;
-                redmineSetting.Backup.BaseDirectory = this.Directory;
-                redmineSetting.Backup.DirectoryName = this.DirectoryName;
-
-                var history = new BackupHistorySetting
-                {
-                    DisplayVersion = this.Stack.DisplayVersion,
-                    DateTime = DateTime.UtcNow,
-                    OutputDirectory = path
-                };
-                ApplicationSettingService.Instance.BackupHistories.Add(history);
-                applicationSetting.BackupHistories.Add(history);
-
-                ApplicationSettingService.Instance.UpdateApplicationSetting(applicationSetting);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 message = Resources.Msg_BackupFailed;
+                await new OKDialogService().ShowMessage(message, null);
+
+                this._LoggerService.Error(message);
+
+                message = $"Exception is thown. Reason is {ex.Message}";
+                this._LoggerService.Error(message);
+
+                message = $"StackTrace is {ex.StackTrace}";
+                this._LoggerService.Error(message);
+
+                return;
             }
+
+            message = Resources.Msg_BackupComplete;
+
+            // Update Setting
+            RedmineSetting redmineSetting;
+            var applicationSetting = this.GetApplicationSetting(out redmineSetting);
+            redmineSetting.Backup.Database = configuration.Database;
+            redmineSetting.Backup.Files = configuration.Files;
+            redmineSetting.Backup.Plugins = configuration.Plugins;
+            redmineSetting.Backup.Themes = configuration.Themes;
+            redmineSetting.Backup.BaseDirectory = this.Directory;
+            redmineSetting.Backup.DirectoryName = this.DirectoryName;
+
+            var history = new BackupHistorySetting
+            {
+                DisplayVersion = this.Stack.DisplayVersion,
+                DateTime = DateTime.UtcNow,
+                OutputDirectory = path
+            };
+            ApplicationSettingService.Instance.BackupHistories.Add(history);
+            applicationSetting.BackupHistories.Add(history);
+
+            ApplicationSettingService.Instance.UpdateApplicationSetting(applicationSetting);
 
             await new OKDialogService().ShowMessage(message, null);
         }

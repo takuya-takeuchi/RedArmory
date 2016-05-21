@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using GalaSoft.MvvmLight.Ioc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RedArmory.Models;
 using RedArmory.Models.Services;
@@ -16,9 +17,12 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void Backup()
         {
-            var stacks = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
+            var bitnamiRedmineService = SimpleIoc.Default.GetInstance<IBitnamiRedmineService>();
+
+            var stacks = bitnamiRedmineService.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(stacks.Length != 0);
 
+            var backupService = SimpleIoc.Default.GetInstance<IBackupService>();
             foreach (var stack in stacks)
             {
                 var targetDirectory = @"F:\RedArmory";
@@ -34,7 +38,7 @@ namespace RedArmory.Test.Models
                 configuration.Themes = true;
                 configuration.Files = true;
                 configuration.Plugins = true;
-                RedArmory.Models.Services.BackupService.Instance.Backup(stack, configuration, path ,new Progress<BackupRestoreProgressReport>());
+                backupService.Backup(stack, configuration, path ,new Progress<BackupRestoreProgressReport>());
             }
         }
 
@@ -42,9 +46,12 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void Restore()
         {
-            var stacks = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
+            var bitnamiRedmineService = SimpleIoc.Default.GetInstance<IBitnamiRedmineService>();
+
+            var stacks = bitnamiRedmineService.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(stacks.Length != 0);
 
+            var backupService = SimpleIoc.Default.GetInstance<IBackupService>();
             var path = @"F:\RedArmory\20151213_03084403";
             foreach (var stack in stacks)
             {
@@ -52,8 +59,17 @@ namespace RedArmory.Test.Models
                 configuration.Themes = true;
                 configuration.Files = true;
                 configuration.Plugins = true;
-                RedArmory.Models.Services.BackupService.Instance.Restore(stack, configuration, path, new Progress<BackupRestoreProgressReport>());
+                backupService.Restore(stack, configuration, path, new Progress<BackupRestoreProgressReport>());
             }
+        }
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            SimpleIoc.Default.Register<ILoggerService, LoggerService>();
+            SimpleIoc.Default.Register<IDatabaseService, MySqlService>();
+            SimpleIoc.Default.Register<IBackupService, BackupService>();
+            SimpleIoc.Default.Register<IBitnamiRedmineService, BitnamiRedmineService>();
         }
 
     }

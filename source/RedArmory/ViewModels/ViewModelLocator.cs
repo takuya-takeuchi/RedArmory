@@ -14,6 +14,7 @@
 
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using RedArmory.Models.Services;
 
 namespace RedArmory.ViewModels
 {
@@ -41,6 +42,11 @@ namespace RedArmory.ViewModels
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+            SimpleIoc.Default.Register<ILoggerService, LoggerService>();
+            SimpleIoc.Default.Register<IDatabaseService, MySqlService>();
+            SimpleIoc.Default.Register<IBackupService, BackupService>();
+            SimpleIoc.Default.Register<IBitnamiRedmineService, BitnamiRedmineService>();
+            
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AboutViewModel>();
             SimpleIoc.Default.Register<BackupViewModel>();

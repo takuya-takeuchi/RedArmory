@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using RedArmory.Models;
 using RedArmory.Models.Services;
@@ -11,11 +12,21 @@ namespace RedArmory.ViewModels
 
         #region コンストラクタ
 
-        public BackupViewModel()
+        public BackupViewModel(IBitnamiRedmineService bitnamiRedmineService, IBackupService backupService, ILoggerService loggerService)
+            : base(loggerService)
         {
-            var bitNamiRedmineStacks = BitnamiRedmineService.Instance.GetBitnamiRedmineStacks();
+            if (bitnamiRedmineService == null)
+                throw new ArgumentNullException(nameof(bitnamiRedmineService));
 
-            this.Stacks = new ObservableCollection<BackupModel>(bitNamiRedmineStacks.Select(stack => new BackupModel(stack)));
+            if (backupService == null)
+                throw new ArgumentNullException(nameof(backupService));
+
+            if (loggerService == null)
+                throw new ArgumentNullException(nameof(loggerService));
+
+            var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
+
+            this.Stacks = new ObservableCollection<BackupModel>(bitNamiRedmineStacks.Select(stack => new BackupModel(backupService, loggerService, stack)));
         }
 
         #endregion

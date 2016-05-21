@@ -1,6 +1,8 @@
 ﻿using System.IO;
 using System.Linq;
+using GalaSoft.MvvmLight.Ioc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RedArmory.Models.Services;
 
 namespace RedArmory.Test.Models
 {
@@ -13,7 +15,10 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void Backup()
         {
-            var values = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
+            var databaseService = SimpleIoc.Default.GetInstance<IDatabaseService>();
+            var bitnamiRedmineService = SimpleIoc.Default.GetInstance<IBitnamiRedmineService>();
+
+            var values = bitnamiRedmineService.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(values.Length != 0);
 
             const string basePath = @"F:\";
@@ -24,8 +29,8 @@ namespace RedArmory.Test.Models
 
                 foreach (var configuration in configurations)
                 {
-                    var path = Path.Combine(basePath, string.Format("{0}-{1}.sql",configuration.Mode,configuration.Name));
-                    RedArmory.Models.Services.MySqlService.Instance.Backup(stack, configuration, path);
+                    var path = Path.Combine(basePath, $"{configuration.Mode}-{configuration.Name}.sql");
+                    databaseService.Backup(stack, configuration, path);
                 }
             }
         }
@@ -34,7 +39,10 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void Restore()
         {
-            var values = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
+            var databaseService = SimpleIoc.Default.GetInstance<IDatabaseService>();
+            var bitnamiRedmineService = SimpleIoc.Default.GetInstance<IBitnamiRedmineService>();
+
+            var values = bitnamiRedmineService.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(values.Length != 0);
 
             const string basePath = @"F:\";
@@ -45,10 +53,19 @@ namespace RedArmory.Test.Models
 
                 foreach (var configuration in configurations)
                 {
-                    var path = Path.Combine(basePath, string.Format("{0}-{1}.sql",configuration.Mode,configuration.Name));
-                    RedArmory.Models.Services.MySqlService.Instance.Restore(stack, configuration, path);
+                    var path = Path.Combine(basePath, $"{configuration.Mode}-{configuration.Name}.sql");
+                    databaseService.Restore(stack, configuration, path);
                 }
             }
+        }
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            SimpleIoc.Default.Register<ILoggerService, LoggerService>();
+            SimpleIoc.Default.Register<IDatabaseService, MySqlService>();
+            SimpleIoc.Default.Register<IBackupService, BackupService>();
+            SimpleIoc.Default.Register<IBitnamiRedmineService, BitnamiRedmineService>();
         }
 
     }

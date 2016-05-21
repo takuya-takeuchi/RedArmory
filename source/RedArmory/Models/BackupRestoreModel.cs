@@ -13,19 +13,29 @@ namespace RedArmory.Models
 
         #region フィールド
 
+        protected readonly IBackupService _BackupService;
+
+        protected readonly ILoggerService _LoggerService;
+
         private readonly BitnamiRedmineStack _Stack;
 
         #endregion
 
         #region コンストラクタ
 
-        protected BackupRestoreModel(BitnamiRedmineStack stack)
+        protected BackupRestoreModel(IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
         {
-            if (stack == null)
-            {
-                throw new ArgumentNullException("stack");
-            }
+            if (backupService == null)
+                throw new ArgumentNullException(nameof(backupService));
 
+            if (loggerService == null)
+                throw new ArgumentNullException(nameof(loggerService));
+
+            if (stack == null)
+                throw new ArgumentNullException(nameof(stack));
+
+            this._BackupService = backupService;
+            this._LoggerService = loggerService;
             this._Stack = stack;
 
             this.Database = true;

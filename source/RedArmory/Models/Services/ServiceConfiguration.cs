@@ -1,7 +1,7 @@
 namespace RedArmory.Models.Services
 {
 
-    internal sealed class ServiceConfiguration
+    public sealed class ServiceConfiguration
     {
 
         #region プロパティ

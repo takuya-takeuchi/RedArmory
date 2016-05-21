@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using RedArmory.Models;
+using RedArmory.Models.Services;
 
 namespace RedArmory.ViewModels
 {
@@ -10,10 +11,17 @@ namespace RedArmory.ViewModels
         where T : BackupRestoreModel
     {
 
+        #region フィールド
+
+        protected readonly ILoggerService _LoggerService;
+
+        #endregion
+
         #region コンストラクタ
 
-        protected BitnamiStackCommonViewModel()
+        protected BitnamiStackCommonViewModel(ILoggerService loggerService)
         {
+            this._LoggerService = loggerService;
         }
 
         #endregion

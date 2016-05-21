@@ -5,7 +5,7 @@ using System.Linq;
 namespace RedArmory.Models.Services
 {
 
-    internal sealed class BackupService
+    internal sealed class BackupService : IBackupService
     {
 
         #region フィールド
@@ -16,47 +16,95 @@ namespace RedArmory.Models.Services
 
         private static readonly string ThemeseDirectoryName = "themes";
 
+        private readonly IDatabaseService _DatabaseService;
+
+        private readonly ILoggerService _LoggerService;
+
         #endregion
 
         #region コンストラクタ
 
-        static BackupService()
+        public BackupService(IDatabaseService databaseService, ILoggerService loggerService)
         {
-        }
+            if (databaseService == null)
+                throw new ArgumentNullException(nameof(databaseService));
 
-        private BackupService()
-        {
-        }
+            if (loggerService == null)
+                throw new ArgumentNullException(nameof(loggerService));
 
-        #endregion
-
-        #region プロパティ
-
-        private static BackupService _Instance;
-
-        public static BackupService Instance
-        {
-            get
-            {
-                return _Instance ?? (_Instance = new BackupService());
-            }
+            this._DatabaseService = databaseService;
+            this._LoggerService = loggerService;
         }
 
         #endregion
 
         #region メソッド
 
+        #region ヘルパーメソッド
+
+        private void CopyDirectory(string sourceDir, string targetDir)
+        {
+            if (!Directory.Exists(targetDir))
+            {
+                Directory.CreateDirectory(targetDir);
+                File.SetAttributes(targetDir, File.GetAttributes(sourceDir));
+            }
+
+            // 末尾のパス区切り文字を全部削除
+            targetDir = targetDir.TrimEnd(Path.DirectorySeparatorChar);
+
+            // 末尾に 1 つだけパス区切り文字を追加
+            targetDir = targetDir + Path.DirectorySeparatorChar;
+
+            // コピー元のディレクトリにあるファイルをコピー
+            Exception exception = null;
+            string sourceFileName = null;
+            string destFileName = null;
+
+            var files = Directory.GetFiles(sourceDir);
+            foreach (var file in files)
+            {
+                var dest = $"{targetDir}{Path.GetFileName(file)}";
+
+                try
+                {
+                    File.Copy(file, dest, true);
+                }
+                catch (Exception ex)
+                {
+                    exception = ex;
+                    sourceFileName = file;
+                    destFileName = dest;
+                }
+            }
+
+            if (exception != null)
+            {
+                var message = $"Failed to copy '{sourceFileName}' to '{destFileName}'";
+                this._LoggerService.Error(message);
+            }
+
+            // コピー元のディレクトリにあるディレクトリについて、再帰的に呼び出す
+            var dirs = Directory.GetDirectories(sourceDir);
+            foreach (var dir in dirs)
+            {
+                CopyDirectory(dir, targetDir + Path.GetFileName(dir));
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region IBackupService メンバー
+
         public void Backup(BitnamiRedmineStack stack, BackupConfiguration configuration, string path, IProgress<BackupRestoreProgressReport> progress)
         {
             if (configuration == null)
-            {
-                throw new ArgumentNullException("configuration");
-            }
+                throw new ArgumentNullException(nameof(configuration));
 
             if (!Directory.Exists(path))
-            {
-                throw new DirectoryNotFoundException(string.Format("{0} は存在しません。", path));
-            }
+                throw new DirectoryNotFoundException($"{path} は存在しません。");
 
             var report = new BackupRestoreProgressReport();
 
@@ -69,10 +117,10 @@ namespace RedArmory.Models.Services
                 var databaseConfigurations = RedmineDatabaseConfigurationService.Instance.GetDatabaseConfiguration(stack).ToArray();
                 foreach (var databaseConfiguration in databaseConfigurations)
                 {
-                    var sqlFileName = string.Format("{0}.sql", databaseConfiguration.Mode);
+                    var sqlFileName = $"{databaseConfiguration.Mode}.sql";
                     var filepath = Path.Combine(path, sqlFileName);
 
-                    MySqlService.Instance.Backup(stack, databaseConfiguration, filepath);
+                    this._DatabaseService.Backup(stack, databaseConfiguration, filepath);
                 }
 
                 report.Database = ProgressState.Complete;
@@ -81,6 +129,8 @@ namespace RedArmory.Models.Services
             else
             {
                 report.Database = ProgressState.NotRequire;
+
+                this._LoggerService.Info("Database is skipped");
             }
 
             // プラグイン、テーマ、添付ファイルのバックアップ
@@ -88,6 +138,7 @@ namespace RedArmory.Models.Services
             {
                 new
                 {
+                    Name = "Plugin",
                     Condition = configuration.Plugins,
                     Source = BackupConfiguration.PluginsPath,
                     Target = PluginsDirectoryName,
@@ -99,6 +150,7 @@ namespace RedArmory.Models.Services
                 },
                 new
                 {
+                    Name = "Themes",
                     Condition = configuration.Themes,
                     Source = BackupConfiguration.ThemesePath,
                     Target = ThemeseDirectoryName,
@@ -110,6 +162,7 @@ namespace RedArmory.Models.Services
                 },
                 new
                 {
+                    Name = "AttachedFile",
                     Condition = configuration.Files,
                     Source = BackupConfiguration.FilesPath,
                     Target = FilesDirectoryName,
@@ -126,6 +179,8 @@ namespace RedArmory.Models.Services
                 if (!rule.Condition)
                 {
                     rule.ReportAction(ProgressState.NotRequire);
+
+                    this._LoggerService.Info($"{rule.Name} is skipped");
                     continue;
                 }
 
@@ -134,7 +189,9 @@ namespace RedArmory.Models.Services
 
                 rule.ReportAction(ProgressState.InProgress);
 
+                this._LoggerService.Info($"Start copy {rule.Name}");
                 CopyDirectory(sourceDir, targetDir);
+                this._LoggerService.Info($"End copy {rule.Name}");
 
                 rule.ReportAction(ProgressState.Complete);
             }
@@ -209,9 +266,7 @@ namespace RedArmory.Models.Services
         public void Restore(BitnamiRedmineStack stack, BackupConfiguration configuration, string path, IProgress<BackupRestoreProgressReport> progress)
         {
             if (!Directory.Exists(path))
-            {
-                throw new DirectoryNotFoundException(string.Format("{0} は存在しません。", path));
-            }
+                throw new DirectoryNotFoundException($"{path} は存在しません。");
 
             var report = new BackupRestoreProgressReport();
 
@@ -231,7 +286,7 @@ namespace RedArmory.Models.Services
                         continue;
                     }
 
-                    MySqlService.Instance.Restore(stack, databaseConfiguration, sqlFilePath);
+                    this._DatabaseService.Restore(stack, databaseConfiguration, sqlFilePath);
                 }
 
                 report.Database = ProgressState.Complete;
@@ -304,52 +359,6 @@ namespace RedArmory.Models.Services
                 rule.CheckAction(ProgressState.Complete);
             }
         }
-
-        #region オーバーライド
-        #endregion
-
-        #region イベントハンドラ
-        #endregion
-
-        #region ヘルパーメソッド
-
-        private static void CopyDirectory(string sourceDir, string targetDir)
-        {
-            if (!Directory.Exists(targetDir))
-            {
-                Directory.CreateDirectory(targetDir);
-                File.SetAttributes(targetDir, File.GetAttributes(sourceDir));
-            }
-
-            // 末尾のパス区切り文字を全部削除
-            targetDir = targetDir.TrimEnd(Path.DirectorySeparatorChar);
-
-            // 末尾に 1 つだけパス区切り文字を追加
-            targetDir = targetDir + Path.DirectorySeparatorChar;
-
-            // コピー元のディレクトリにあるファイルをコピー
-            var files = Directory.GetFiles(sourceDir);
-            foreach (var file in files)
-            {
-                try
-                {
-                    File.Copy(file, targetDir + Path.GetFileName(file), true);
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
-
-            // コピー元のディレクトリにあるディレクトリについて、再帰的に呼び出す
-            var dirs = Directory.GetDirectories(sourceDir);
-            foreach (var dir in dirs)
-            {
-                CopyDirectory(dir, targetDir + Path.GetFileName(dir));
-            }
-        }
-
-        #endregion
 
         #endregion
 

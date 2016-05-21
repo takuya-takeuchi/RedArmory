@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using GalaSoft.MvvmLight;
@@ -12,6 +13,8 @@ namespace RedArmory.ViewModels
 
         #region フィールド
 
+        private readonly ILoggerService _LoggerService;
+
         public static ServiceStartupType[] ServiceStartupTypes;
 
         #endregion
@@ -22,18 +25,25 @@ namespace RedArmory.ViewModels
         {
             ServiceStartupTypes = new[]
             {
-                ServiceStartupType.Automatic, 
-                ServiceStartupType.DelayStart, 
-                ServiceStartupType.Manual, 
+                ServiceStartupType.Automatic,
+                ServiceStartupType.DelayStart,
+                ServiceStartupType.Manual,
                 ServiceStartupType.Disabled
             };
         }
 
-        public SettingViewModel()
+        public SettingViewModel(IBitnamiRedmineService bitnamiRedmineService, ILoggerService loggerService)
         {
-            var bitNamiRedmineStacks = BitnamiRedmineService.Instance.GetBitnamiRedmineStacks();
+            if (bitnamiRedmineService == null)
+                throw new ArgumentNullException(nameof(bitnamiRedmineService));
 
-            this.Stacks = new ObservableCollection<Setting>(bitNamiRedmineStacks.Select(stack => new Setting(stack)));
+            if (loggerService == null)
+                throw new ArgumentNullException(nameof(loggerService));
+
+            this._LoggerService = loggerService;
+            var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
+
+            this.Stacks = new ObservableCollection<Setting>(bitNamiRedmineStacks.Select(stack => new Setting(bitnamiRedmineService, stack)));
             this.IsEmptyStacks = !this.Stacks.Any();
         }
 

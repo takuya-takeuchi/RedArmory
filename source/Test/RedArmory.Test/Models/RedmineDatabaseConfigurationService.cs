@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using GalaSoft.MvvmLight.Ioc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RedArmory.Models.Services;
 
 namespace RedArmory.Test.Models
 {
@@ -12,7 +14,9 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void GetDatabaseConfiguration()
         {
-            var values = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
+            var bitnamiRedmineService = SimpleIoc.Default.GetInstance<IBitnamiRedmineService>();
+
+            var values = bitnamiRedmineService.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(values.Length != 0);
 
             foreach (var serviceInfo in values)
@@ -30,6 +34,15 @@ namespace RedArmory.Test.Models
                     Assert.IsTrue(configuration.Port > 0);
                 }
             }
+        }
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            SimpleIoc.Default.Register<ILoggerService, LoggerService>();
+            SimpleIoc.Default.Register<IDatabaseService, MySqlService>();
+            SimpleIoc.Default.Register<IBackupService, BackupService>();
+            SimpleIoc.Default.Register<IBitnamiRedmineService, BitnamiRedmineService>();
         }
 
     }

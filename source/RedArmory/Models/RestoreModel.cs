@@ -20,8 +20,8 @@ namespace RedArmory.Models
 
         #region コンストラクタ
 
-        public RestoreModel(BitnamiRedmineStack stack)
-            : base(stack)
+        public RestoreModel(IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
+            : base(backupService, loggerService, stack)
         {
             this.PropertyChanged += (sender, args) =>
             {
@@ -35,7 +35,7 @@ namespace RedArmory.Models
 
             RedmineSetting redmineSetting;
             this.GetApplicationSetting(out redmineSetting);
-            
+
             var collectionView = CollectionViewSource.GetDefaultView(ApplicationSettingService.Instance.BackupHistories);
 
             var version = this.Stack.DisplayVersion.ToVersion();
@@ -129,21 +129,21 @@ namespace RedArmory.Models
         {
             string message;
 
+            var path = this.Directory;
+
+            var configuration = new BackupConfiguration
+            {
+                Database = this.HasDatabase && this.Database,
+                Files = this.HasFile && this.Files,
+                Plugins = this.HasPlugin && this.Plugins,
+                Themes = this.HasTheme && this.Themes
+            };
+
             try
             {
-                var path = this.Directory;
-
-                var configuration = new BackupConfiguration
-                {
-                    Database = this.HasDatabase && this.Database,
-                    Files = this.HasFile && this.Files,
-                    Plugins = this.HasPlugin && this.Plugins,
-                    Themes = this.HasTheme && this.Themes
-                };
-
                 var progressDialogService = new ProgressDialogService();
                 var report = new BackupRestoreProgressReport();
-                progressDialogService.Action = () => BackupService.Instance.Restore(this.Stack, configuration, path, new Progress<BackupRestoreProgressReport>(
+                progressDialogService.Action = () => this._BackupService.Restore(this.Stack, configuration, path, new Progress<BackupRestoreProgressReport>(
                     progressReport =>
                     {
                         report.Database = progressReport.Database;
@@ -157,9 +157,20 @@ namespace RedArmory.Models
 
                 message = Resources.Msg_RestoreComplete;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                message = Resources.Msg_RestoreFailed;
+                message = Resources.Msg_BackupFailed;
+                await new OKDialogService().ShowMessage(message, null);
+
+                this._LoggerService.Error(message);
+
+                message = $"Exception is thown. Reason is {ex.Message}";
+                this._LoggerService.Error(message);
+
+                message = $"StackTrace is {ex.StackTrace}";
+                this._LoggerService.Error(message);
+
+                return;
             }
 
             var dialogService = new OKDialogService();
@@ -195,7 +206,7 @@ namespace RedArmory.Models
         private void UpdateState()
         {
             var configuration = string.IsNullOrWhiteSpace(this.Directory) ?
-                new BackupConfiguration() : BackupService.Instance.CheckRestoreFolder(this.Stack, this.Directory);
+                new BackupConfiguration() : this._BackupService.CheckRestoreFolder(this.Stack, this.Directory);
 
             this.HasDatabase = configuration.Database;
             this.HasTheme = configuration.Themes;

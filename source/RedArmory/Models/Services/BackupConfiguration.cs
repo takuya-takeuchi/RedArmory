@@ -1,7 +1,7 @@
 ﻿namespace RedArmory.Models.Services
 {
 
-    internal sealed class BackupConfiguration
+    public sealed class BackupConfiguration
     {
 
         #region フィールド

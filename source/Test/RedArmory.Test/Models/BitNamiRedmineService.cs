@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using GalaSoft.MvvmLight.Ioc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RedArmory.Models.Services;
 
@@ -12,7 +13,9 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void GetBitnamiRedmineStacks()
         {
-            var stacks = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
+            var bitnamiRedmineService = SimpleIoc.Default.GetInstance<IBitnamiRedmineService>();
+
+            var stacks = bitnamiRedmineService.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(stacks.Length != 0);
 
             foreach (var stack in stacks)
@@ -25,7 +28,9 @@ namespace RedArmory.Test.Models
         [TestMethod]
         public void StartService()
         {
-            var stacks = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
+            var bitnamiRedmineService = SimpleIoc.Default.GetInstance<IBitnamiRedmineService>();
+
+            var stacks = bitnamiRedmineService.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(stacks.Length != 0);
 
             foreach (var stack in stacks)
@@ -33,14 +38,16 @@ namespace RedArmory.Test.Models
                 var configuration = new ServiceConfiguration();
                 configuration.Redmine = true;
 
-                RedArmory.Models.Services.BitnamiRedmineService.Instance.StartService(stack, configuration);
+                bitnamiRedmineService.StartService(stack, configuration);
             }
         }
 
         [TestMethod]
         public void StopService()
         {
-            var stacks = RedArmory.Models.Services.BitnamiRedmineService.Instance.GetBitnamiRedmineStacks().ToArray();
+            var bitnamiRedmineService = SimpleIoc.Default.GetInstance<IBitnamiRedmineService>();
+
+            var stacks = bitnamiRedmineService.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(stacks.Length != 0);
 
             foreach (var stack in stacks)
@@ -48,8 +55,17 @@ namespace RedArmory.Test.Models
                 var configuration = new ServiceConfiguration();
                 configuration.Redmine = true;
 
-                RedArmory.Models.Services.BitnamiRedmineService.Instance.StopService(stack, configuration);
+                bitnamiRedmineService.StopService(stack, configuration);
             }
+        }
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            SimpleIoc.Default.Register<ILoggerService, LoggerService>();
+            SimpleIoc.Default.Register<IDatabaseService, MySqlService>();
+            SimpleIoc.Default.Register<IBackupService, BackupService>();
+            SimpleIoc.Default.Register<IBitnamiRedmineService, BitnamiRedmineService>();
         }
 
     }

@@ -8,7 +8,7 @@ using RedArmory.Models.Helpers;
 namespace RedArmory.Models.Services
 {
 
-    internal sealed class BitnamiRedmineService
+    internal sealed class BitnamiRedmineService : IBitnamiRedmineService
     {
 
         #region イベント
@@ -25,35 +25,55 @@ namespace RedArmory.Models.Services
 
         private const string SubversionPath = @"subversion\scripts\winserv.exe";
 
+        private readonly IBitnamiRedmineService _BitnamiRedmineService;
+
+        private readonly ILoggerService _LoggerService;
+
         #endregion
 
         #region コンストラクタ
 
-        static BitnamiRedmineService()
+        public BitnamiRedmineService( ILoggerService loggerService)
         {
-        }
-
-        private BitnamiRedmineService()
-        {
-        }
-
-        #endregion
-
-        #region プロパティ
-
-        private static BitnamiRedmineService _Instance;
-
-        public static BitnamiRedmineService Instance
-        {
-            get
-            {
-                return _Instance ?? (_Instance = new BitnamiRedmineService());
-            }
+            if (loggerService == null)
+                throw new ArgumentNullException(nameof(loggerService));
+            
+            this._LoggerService = loggerService;
         }
 
         #endregion
 
         #region メソッド
+
+        #region ヘルパーメソッド
+
+        private static ServiceStartupType GetStartupType(RegistryKey subKey)
+        {
+            var start = (int)subKey.GetValue("Start");
+            switch (start)
+            {
+                case 2:
+                    var value = subKey.GetValue("DelayedAutostart");
+                    if (value == null)
+                    {
+                        return ServiceStartupType.Automatic;
+                    }
+
+                    return (int)value == 1 ? ServiceStartupType.DelayStart : ServiceStartupType.Automatic;
+                case 3:
+                    return ServiceStartupType.Manual;
+                case 4:
+                    return ServiceStartupType.Disabled;
+            }
+
+            return ServiceStartupType.Unknown;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region IBitnamiRedmineService メンバー
 
         public IEnumerable<BitnamiRedmineStack> GetBitnamiRedmineStacks()
         {
@@ -63,19 +83,14 @@ namespace RedArmory.Models.Services
             {
                 if (key == null)
                 {
-                    throw new KeyNotFoundException(string.Format("サブキー 'HKEY_LOCAL_MACHINE\\{0}' が存在しません。", registryKey));
+                    throw new KeyNotFoundException($"サブキー 'HKEY_LOCAL_MACHINE\\{registryKey}' が存在しません。");
                 }
 
                 foreach (var subkeyName in key.GetSubKeyNames())
                 {
                     using (var subkey = key.OpenSubKey(subkeyName))
                     {
-                        if (subkey == null)
-                        {
-                            continue;
-                        }
-
-                        var value = subkey.GetValue("DisplayName") as string;
+                        var value = subkey?.GetValue("DisplayName") as string;
                         if (value == null)
                         {
                             continue;
@@ -121,21 +136,14 @@ namespace RedArmory.Models.Services
             using (var key = Registry.LocalMachine.OpenSubKey(registryKey))
             {
                 if (key == null)
-                {
-                    throw new KeyNotFoundException(string.Format("サブキー 'HKEY_LOCAL_MACHINE\\{0}' が存在しません。", registryKey));
-                }
+                    throw new KeyNotFoundException($"サブキー 'HKEY_LOCAL_MACHINE\\{registryKey}' が存在しません。");
 
                 var subKeyNames = key.GetSubKeyNames();
                 foreach (var subkeyName in subKeyNames)
                 {
                     using (var subkey = key.OpenSubKey(subkeyName))
                     {
-                        if (subkey == null)
-                        {
-                            continue;
-                        }
-
-                        var imagePath = subkey.GetValue("ImagePath") as string;
+                        var imagePath = subkey?.GetValue("ImagePath") as string;
                         if (string.IsNullOrWhiteSpace(imagePath))
                         {
                             continue;
@@ -179,7 +187,7 @@ namespace RedArmory.Models.Services
                             if (imagePath.Contains(service.Path))
                             {
                                 var startupType = GetStartupType(subkey);
-                                yield return new ServiceStatus(subkeyName, startupType);
+                                yield return new ServiceStatus(this, subkeyName, startupType);
                             }
                         }
                     }
@@ -194,9 +202,7 @@ namespace RedArmory.Models.Services
             using (var key = Registry.LocalMachine.OpenSubKey(string.Format(registryKey, displayName)))
             {
                 if (key == null)
-                {
-                    throw new KeyNotFoundException(string.Format("サブキー 'HKEY_LOCAL_MACHINE\\{0}' が存在しません。", registryKey));
-                }
+                    throw new KeyNotFoundException($"サブキー 'HKEY_LOCAL_MACHINE\\{registryKey}' が存在しません。");
 
                 return GetStartupType(key);
             }
@@ -209,9 +215,7 @@ namespace RedArmory.Models.Services
             using (var key = Registry.LocalMachine.OpenSubKey(string.Format(registryKey, displayName), true))
             {
                 if (key == null)
-                {
-                    throw new KeyNotFoundException(string.Format("サブキー 'HKEY_LOCAL_MACHINE\\{0}' が存在しません。", registryKey));
-                }
+                    throw new KeyNotFoundException($"サブキー 'HKEY_LOCAL_MACHINE\\{registryKey}' が存在しません。");
 
                 switch (startupType)
                 {
@@ -236,14 +240,10 @@ namespace RedArmory.Models.Services
         public bool StartService(BitnamiRedmineStack stack, ServiceConfiguration configuration)
         {
             if (stack == null)
-            {
-                throw new ArgumentNullException("stack");
-            }
+                throw new ArgumentNullException(nameof(stack));
 
             if (configuration == null)
-            {
-                throw new ArgumentNullException("configuration");
-            }
+                throw new ArgumentNullException(nameof(configuration));
 
             foreach (var displayName in GetServiceDisplayNames(stack, configuration))
             {
@@ -287,14 +287,10 @@ namespace RedArmory.Models.Services
         public bool StopService(BitnamiRedmineStack stack, ServiceConfiguration configuration)
         {
             if (stack == null)
-            {
-                throw new ArgumentNullException("stack");
-            }
+                throw new ArgumentNullException(nameof(stack));
 
             if (configuration == null)
-            {
-                throw new ArgumentNullException("configuration");
-            }
+                throw new ArgumentNullException(nameof(configuration));
 
             foreach (var displayName in GetServiceDisplayNames(stack, configuration))
             {
@@ -331,32 +327,6 @@ namespace RedArmory.Models.Services
 
             return true;
         }
-
-        #region ヘルパーメソッド
-
-        private static ServiceStartupType GetStartupType(RegistryKey subKey)
-        {
-            var start = (int)subKey.GetValue("Start");
-            switch (start)
-            {
-                case 2:
-                    var value = subKey.GetValue("DelayedAutostart");
-                    if (value == null)
-                    {
-                        return ServiceStartupType.Automatic;
-                    }
-
-                    return (int)value == 1 ? ServiceStartupType.DelayStart : ServiceStartupType.Automatic;
-                case 3:
-                    return ServiceStartupType.Manual;
-                case 4:
-                    return ServiceStartupType.Disabled;
-            }
-
-            return ServiceStartupType.Unknown;
-        }
-
-        #endregion
 
         #endregion
 

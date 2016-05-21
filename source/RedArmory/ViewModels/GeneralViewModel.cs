@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using RedArmory.Models;
+using RedArmory.Models.Services;
 
 namespace RedArmory.ViewModels
 {
@@ -10,10 +11,18 @@ namespace RedArmory.ViewModels
     public sealed class GeneralViewModel : ViewModelBase
     {
 
+        #region フィールド
+
+        private readonly ILoggerService _LoggerService;
+
+        #endregion
+
         #region コンストラクタ
 
-        public GeneralViewModel()
+        public GeneralViewModel(ILoggerService loggerService)
         {
+            this._LoggerService = loggerService;
+
             var languageModels = new[]
             {
                 new LanguageModel 

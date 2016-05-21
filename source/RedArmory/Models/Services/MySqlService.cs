@@ -6,7 +6,8 @@ using MySql.Data.MySqlClient;
 
 namespace RedArmory.Models.Services
 {
-    internal sealed class MySqlService
+
+    internal sealed class MySqlService : IDatabaseService
     {
 
         #region イベント
@@ -16,108 +17,23 @@ namespace RedArmory.Models.Services
 
         private const string MySqlDumpPath = @"mysql\bin\mysqldump.exe";
 
+        private readonly ILoggerService _LoggerService;
+
         #endregion
 
         #region コンストラクタ
 
-        static MySqlService()
+        public MySqlService(ILoggerService loggerService)
         {
-        }
+            if (loggerService == null)
+                throw new ArgumentNullException(nameof(loggerService));
 
-        private MySqlService()
-        {
-        }
-
-        #endregion
-
-        #region プロパティ
-
-        private static MySqlService _Instance;
-
-        public static MySqlService Instance
-        {
-            get
-            {
-                return _Instance ?? (_Instance = new MySqlService());
-            }
+            this._LoggerService = loggerService;
         }
 
         #endregion
 
         #region メソッド
-
-        public void Backup(BitnamiRedmineStack stack, DatabaseConfiguration configuration, string path)
-        {
-            if (configuration == null)
-            {
-                throw new ArgumentNullException("configuration");
-            }
-
-            var apppath = CreateMySqlDumpLocation(stack);
-            if (!File.Exists(apppath))
-            {
-                throw new FileNotFoundException("mysqldump.exe が存在しません。", apppath);
-            }
-
-            // サポートしている文字コードは
-            // mysql> show character set; を実行
-            Encoding encoding;
-            switch (configuration.Encoding)
-            {
-                case "utf8":
-                    encoding = Encoding.UTF8;
-                    break;
-                default:
-                    throw new NotSupportedException(string.Format("{0} はサポートしていません。", configuration.Encoding));
-            }
-
-            const string format =
-                "--default-character-set={0} --user={1} --password={2} --port={3} --databases {4}";
-            var arguments = string.Format(
-                    format,
-                    configuration.Encoding,
-                    configuration.Username,
-                    configuration.Password,
-                    configuration.Port,
-                    configuration.Name);
-
-            var psInfo = new ProcessStartInfo();
-            psInfo.FileName = apppath;
-            psInfo.Arguments = arguments;
-            psInfo.CreateNoWindow = true;
-            psInfo.UseShellExecute = false;
-            psInfo.RedirectStandardOutput = true;
-            psInfo.StandardOutputEncoding = encoding;
-
-            using (var process = Process.Start(psInfo))
-            {
-                var contents = process.StandardOutput.ReadToEnd();
-
-                process.WaitForExit();
-                File.WriteAllText(path, contents, encoding);
-            }
-        }
-
-        public void Restore(BitnamiRedmineStack stack, DatabaseConfiguration configuration, string path)
-        {
-            if (configuration == null)
-            {
-                throw new ArgumentNullException("configuration");
-            }
-
-            if (!File.Exists(path))
-            {
-                throw new FileNotFoundException("インポートする sql ファイルが存在しません。", path);
-            }
-
-            var connectionString = CreateConnectionString(configuration);
-            using (var con = new MySqlConnection(connectionString))
-            {
-                var text = File.ReadAllText(path);
-                var script = new MySqlScript(con, text);
-                var result = script.Execute();
-            }
-        }
 
         #region オーバーライド
         #endregion
@@ -141,5 +57,85 @@ namespace RedArmory.Models.Services
 
         #endregion
 
+        #region IDatabaseService メンバー
+
+        public void Backup(BitnamiRedmineStack stack, DatabaseConfiguration configuration, string path)
+        {
+            if (configuration == null)
+                throw new ArgumentNullException(nameof(configuration));
+
+            var apppath = CreateMySqlDumpLocation(stack);
+            if (!File.Exists(apppath))
+                throw new FileNotFoundException("mysqldump.exe が存在しません。", apppath);
+
+            // サポートしている文字コードは
+            // mysql> show character set; を実行
+            Encoding encoding;
+            switch (configuration.Encoding)
+            {
+                case "utf8":
+                    encoding = Encoding.UTF8;
+                    break;
+                default:
+                    throw new NotSupportedException($"{configuration.Encoding} はサポートしていません。");
+            }
+
+            const string format =
+                "--default-character-set={0} --user={1} --password={2} --port={3} --databases {4}";
+            var arguments = string.Format(
+                    format,
+                    configuration.Encoding,
+                    configuration.Username,
+                    configuration.Password,
+                    configuration.Port,
+                    configuration.Name);
+
+            var psInfo = new ProcessStartInfo();
+            psInfo.FileName = apppath;
+            psInfo.Arguments = arguments;
+            psInfo.CreateNoWindow = true;
+            psInfo.UseShellExecute = false;
+            psInfo.RedirectStandardOutput = true;
+            psInfo.StandardOutputEncoding = encoding;
+
+            this._LoggerService.Info("Create mysqldump.exe process");
+            using (var process = Process.Start(psInfo))
+            {
+                var contents = process.StandardOutput.ReadToEnd();
+
+                this._LoggerService.Info("Start mysqldump.exe");
+                process.WaitForExit();
+
+                this._LoggerService.Info("End mysqldump.exe");
+                File.WriteAllText(path, contents, encoding);
+            }
+        }
+
+        public void Restore(BitnamiRedmineStack stack, DatabaseConfiguration configuration, string path)
+        {
+            if (configuration == null)
+                throw new ArgumentNullException(nameof(configuration));
+
+            if (!File.Exists(path))
+                throw new FileNotFoundException("インポートする sql ファイルが存在しません。", path);
+
+            var connectionString = CreateConnectionString(configuration);
+
+            this._LoggerService.Info("Create MySqlConnection");
+            using (var con = new MySqlConnection(connectionString))
+            {
+                var text = File.ReadAllText(path);
+                var script = new MySqlScript(con, text);
+
+                this._LoggerService.Info("Execute MySqlScript");
+                var result = script.Execute();
+
+                this._LoggerService.Info("MySqlScript,Execute returns {0}", result);
+            }
+        }
+
+        #endregion
+
     }
+
 }

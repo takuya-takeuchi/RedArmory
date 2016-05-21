@@ -158,6 +158,11 @@
     <Compile Include="Models\Services\Dialog\DialogServiceBase.cs" />
     <Compile Include="Models\Services\Dialog\ProgressService.cs" />
     <Compile Include="Models\Services\Dialog\YesNoDialogService.cs" />
+    <Compile Include="Models\Services\IBackupService.cs" />
+    <Compile Include="Models\Services\IBitnamiRedmineService.cs" />
+    <Compile Include="Models\Services\IDatabaseService.cs" />
+    <Compile Include="Models\Services\ILoggerService.cs" />
+    <Compile Include="Models\Services\LoggerService.cs" />
     <Compile Include="Models\Services\MySqlService.cs" />
     <Compile Include="Models\Services\RedmineDatabaseConfigurationService.cs" />
     <Compile Include="Models\Services\BitnamiRedmineStack.cs" />
@@ -406,6 +411,9 @@
     <None Include="app.manifest" />
     <None Include="BitnamiRedmineStackConfiguration.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>

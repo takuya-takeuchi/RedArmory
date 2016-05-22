@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.ServiceProcess;
 using Microsoft.Win32;
 using RedArmory.Models.Helpers;
@@ -31,11 +32,11 @@ namespace RedArmory.Models.Services
 
         #region コンストラクタ
 
-        public BitnamiRedmineService( ILoggerService loggerService)
+        public BitnamiRedmineService(ILoggerService loggerService)
         {
             if (loggerService == null)
                 throw new ArgumentNullException(nameof(loggerService));
-            
+
             this._LoggerService = loggerService;
         }
 
@@ -185,7 +186,8 @@ namespace RedArmory.Models.Services
                             if (imagePath.Contains(service.Path))
                             {
                                 var startupType = GetStartupType(subkey);
-                                yield return new ServiceStatus(this, subkeyName, startupType);
+                                var status = new ServiceStatus(this, subkeyName, startupType);
+                                yield return status;
                             }
                         }
                     }
@@ -234,92 +236,136 @@ namespace RedArmory.Models.Services
                 }
             }
         }
-
-        public bool StartService(BitnamiRedmineStack stack, ServiceConfiguration configuration)
+        
+        private void StartService(ServiceStatus serviceStatus, ProgressReportsModel report, IProgress<ProgressReportsModel> progress = null)
         {
-            if (stack == null)
-                throw new ArgumentNullException(nameof(stack));
-
-            if (configuration == null)
-                throw new ArgumentNullException(nameof(configuration));
-
-            foreach (var displayName in GetServiceDisplayNames(stack, configuration))
+            using (var sc = new ServiceController(serviceStatus.ServiceName))
             {
-                using (var sc = new ServiceController(displayName.ServiceName))
+                report.UpdateProgress(serviceStatus.ServiceName, ProgressState.InProgress);
+                progress?.Report(report);
+
+                sc.Refresh();
+
+                if (sc.Status == ServiceControllerStatus.Stopped)
+                    sc.Start();
+
+                var svcStatus = sc.Status;
+                while (svcStatus != ServiceControllerStatus.Running)
                 {
                     sc.Refresh();
 
-                    if (sc.Status == ServiceControllerStatus.Stopped)
+                    switch (sc.Status)
                     {
-                        sc.Start();
+                        case ServiceControllerStatus.Paused:
+                            sc.Continue();
+                            break;
+                        case ServiceControllerStatus.Stopped:
+                            sc.Start();
+                            break;
+                        case ServiceControllerStatus.ContinuePending:
+                        case ServiceControllerStatus.PausePending:
+                        case ServiceControllerStatus.StartPending:
+                        case ServiceControllerStatus.StopPending:
+                            break;
                     }
 
-                    var svcStatus = sc.Status;
-                    while (svcStatus != ServiceControllerStatus.Running)
-                    {
-                        sc.Refresh();
-
-                        switch (sc.Status)
-                        {
-                            case ServiceControllerStatus.Paused:
-                                sc.Continue();
-                                break;
-                            case ServiceControllerStatus.Stopped:
-                                sc.Start();
-                                break;
-                            case ServiceControllerStatus.ContinuePending:
-                            case ServiceControllerStatus.PausePending:
-                            case ServiceControllerStatus.StartPending:
-                            case ServiceControllerStatus.StopPending:
-                                break;
-                        }
-
-                        svcStatus = sc.Status;
-                    }
+                    svcStatus = sc.Status;
                 }
+
+                report.UpdateProgress(serviceStatus.ServiceName, ProgressState.Complete);
+                progress?.Report(report);
             }
-
-            return true;
         }
-
-        public bool StopService(BitnamiRedmineStack stack, ServiceConfiguration configuration)
+        
+        private void StopService(ServiceStatus serviceStatus, ProgressReportsModel report, IProgress<ProgressReportsModel> progress = null)
         {
-            if (stack == null)
-                throw new ArgumentNullException(nameof(stack));
-
-            if (configuration == null)
-                throw new ArgumentNullException(nameof(configuration));
-
-            foreach (var displayName in GetServiceDisplayNames(stack, configuration))
+            using (var sc = new ServiceController(serviceStatus.ServiceName))
             {
-                using (var sc = new ServiceController(displayName.ServiceName))
-                {
-                    sc.Refresh();
+                report.UpdateProgress(serviceStatus.ServiceName, ProgressState.InProgress);
+                progress?.Report(report);
 
+                sc.Refresh();
+
+                if (sc.CanStop)
                     sc.Stop();
 
-                    var svcStatus = sc.Status;
-                    while (svcStatus != ServiceControllerStatus.Stopped)
+                var svcStatus = sc.Status;
+                while (svcStatus != ServiceControllerStatus.Stopped)
+                {
+                    sc.Refresh();
+
+                    switch (sc.Status)
                     {
-                        sc.Refresh();
-
-                        switch (sc.Status)
-                        {
-                            case ServiceControllerStatus.Paused:
-                                sc.Continue();
-                                break;
-                            case ServiceControllerStatus.Running:
-                                sc.Stop();
-                                break;
-                            case ServiceControllerStatus.ContinuePending:
-                            case ServiceControllerStatus.PausePending:
-                            case ServiceControllerStatus.StartPending:
-                            case ServiceControllerStatus.StopPending:
-                                break;
-                        }
-
-                        svcStatus = sc.Status;
+                        case ServiceControllerStatus.Paused:
+                            sc.Continue();
+                            break;
+                        case ServiceControllerStatus.Running:
+                            sc.Stop();
+                            break;
+                        case ServiceControllerStatus.ContinuePending:
+                        case ServiceControllerStatus.PausePending:
+                        case ServiceControllerStatus.StartPending:
+                        case ServiceControllerStatus.StopPending:
+                            break;
                     }
+
+                    svcStatus = sc.Status;
+                }
+
+                report.UpdateProgress(serviceStatus.ServiceName, ProgressState.Complete);
+                progress?.Report(report);
+            }
+        }
+
+        public bool ControlService(BitnamiRedmineStack stack, ServiceConfiguration configuration, IProgress<ProgressReportsModel> progress = null)
+        {
+            if (stack == null)
+                throw new ArgumentNullException(nameof(stack));
+
+            if (configuration == null)
+                throw new ArgumentNullException(nameof(configuration));
+
+
+            // 開始するサービスを取得
+            var startServices = this.GetServiceDisplayNames(stack, new ServiceConfiguration
+            {
+                Apache = configuration.Apache,
+                MySql = configuration.MySql,
+                Redmine = configuration.Redmine,
+                Subversion = configuration.Subversion
+            }).ToArray();
+
+            // 停止するサービスを取得
+            var stopServices = this.GetServiceDisplayNames(stack, new ServiceConfiguration
+            {
+                Apache = !configuration.Apache,
+                MySql = !configuration.MySql,
+                Redmine = !configuration.Redmine,
+                Subversion = !configuration.Subversion
+            }).ToArray();
+
+            var serviceGroups = new[]
+            {
+                new { Services = startServices, RequireStart = true },
+                new { Services = stopServices,  RequireStart = false },
+            };
+            
+            // 全てのステータスをリセット
+            var report = new ProgressReportsModel(
+                startServices.Concat(stopServices).Select(status => new ProgressItemModel
+                {
+                    Name = status.ServiceName,
+                    Progress = ProgressState.NotStart
+                }));
+
+            foreach (var group in serviceGroups)
+            {
+                foreach (var serviceStatus in group.Services)
+                {
+                    if (group.RequireStart)
+                        this.StartService(serviceStatus, report, progress);
+                    else
+                        this.StopService(serviceStatus, report, progress);
                 }
             }
 

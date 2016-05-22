@@ -17,6 +17,7 @@ namespace RedArmory.Test.Models
         {
             var databaseService = SimpleIoc.Default.GetInstance<IDatabaseService>();
             var bitnamiRedmineService = SimpleIoc.Default.GetInstance<IBitnamiRedmineService>();
+            var redmineDatabaseConfigurationService = SimpleIoc.Default.GetInstance<IRedmineDatabaseConfigurationService>();
 
             var values = bitnamiRedmineService.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(values.Length != 0);
@@ -24,7 +25,7 @@ namespace RedArmory.Test.Models
             const string basePath = @"F:\";
             foreach (var stack in values)
             {
-                var configurations = RedArmory.Models.Services.RedmineDatabaseConfigurationService.Instance.GetDatabaseConfiguration(stack).ToArray();
+                var configurations = redmineDatabaseConfigurationService.GetDatabaseConfiguration(stack).ToArray();
                 Assert.IsTrue(configurations.Length != 0);
 
                 foreach (var configuration in configurations)
@@ -41,6 +42,7 @@ namespace RedArmory.Test.Models
         {
             var databaseService = SimpleIoc.Default.GetInstance<IDatabaseService>();
             var bitnamiRedmineService = SimpleIoc.Default.GetInstance<IBitnamiRedmineService>();
+            var redmineDatabaseConfigurationService = SimpleIoc.Default.GetInstance<IRedmineDatabaseConfigurationService>();
 
             var values = bitnamiRedmineService.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(values.Length != 0);
@@ -48,7 +50,7 @@ namespace RedArmory.Test.Models
             const string basePath = @"F:\";
             foreach (var stack in values)
             {
-                var configurations = RedArmory.Models.Services.RedmineDatabaseConfigurationService.Instance.GetDatabaseConfiguration(stack).ToArray();
+                var configurations = redmineDatabaseConfigurationService.GetDatabaseConfiguration(stack).ToArray();
                 Assert.IsTrue(configurations.Length != 0);
 
                 foreach (var configuration in configurations)
@@ -66,6 +68,7 @@ namespace RedArmory.Test.Models
             SimpleIoc.Default.Register<IDatabaseService, MySqlService>();
             SimpleIoc.Default.Register<IBackupService, BackupService>();
             SimpleIoc.Default.Register<IBitnamiRedmineService, BitnamiRedmineService>();
+            SimpleIoc.Default.Register<IRedmineDatabaseConfigurationService, RedmineDatabaseConfigurationService>();
         }
 
     }

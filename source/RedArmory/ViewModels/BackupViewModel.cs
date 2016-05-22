@@ -30,7 +30,7 @@ namespace RedArmory.ViewModels
             var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
 
             this.Stacks = new ObservableCollection<BackupModel>(bitNamiRedmineStacks.Select(
-                stack => new BackupModel(applicationSettingService, backupService, loggerService, stack)));
+                stack => new BackupModel(applicationSettingService, bitnamiRedmineService, backupService, loggerService, stack)));
         }
 
         #endregion

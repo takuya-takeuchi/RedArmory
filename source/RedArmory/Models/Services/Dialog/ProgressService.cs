@@ -32,7 +32,7 @@ namespace RedArmory.Models.Services.Dialog
             set;
         }
 
-        public BackupRestoreProgressReport Report
+        public ProgressReportsModel Report
         {
             get;
             set;

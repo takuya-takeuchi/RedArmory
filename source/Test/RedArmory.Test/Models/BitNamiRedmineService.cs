@@ -38,7 +38,7 @@ namespace RedArmory.Test.Models
                 var configuration = new ServiceConfiguration();
                 configuration.Redmine = true;
 
-                bitnamiRedmineService.StartService(stack, configuration);
+                bitnamiRedmineService.ControlService(stack, configuration);
             }
         }
 
@@ -53,9 +53,9 @@ namespace RedArmory.Test.Models
             foreach (var stack in stacks)
             {
                 var configuration = new ServiceConfiguration();
-                configuration.Redmine = true;
+                configuration.Redmine = false;
 
-                bitnamiRedmineService.StopService(stack, configuration);
+                bitnamiRedmineService.ControlService(stack, configuration);
             }
         }
 

@@ -12,9 +12,9 @@ namespace RedArmory.ViewModels
 
         #region プロパティ
 
-        private BackupRestoreProgressReport _Report;
+        private ProgressReportsModel _Report;
 
-        public BackupRestoreProgressReport Report
+        public ProgressReportsModel Report
         {
             get
             {

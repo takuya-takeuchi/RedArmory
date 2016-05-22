@@ -14,8 +14,8 @@ namespace RedArmory.Models
 
         #region コンストラクタ
 
-        public BackupModel(IApplicationSettingService applicationSettingService, IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
-            : base(applicationSettingService, backupService, loggerService, stack)
+        public BackupModel(IApplicationSettingService applicationSettingService, IBitnamiRedmineService bitnamiRedmineService, IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
+            : base(applicationSettingService, bitnamiRedmineService, backupService, loggerService, stack)
         {
             this.PropertyChanged += (sender, args) =>
             {
@@ -152,39 +152,55 @@ namespace RedArmory.Models
                 Themes = this.Themes
             };
 
+            // MySql 以外のサービスの停止 (Databaseの更新がないなら、MySql も停止)
+            if (!await this.ControlServices(new ServiceConfiguration
+            {
+                Apache = false,
+                Redmine = false,
+                MySql = configuration.Database,
+                Subversion = false
+            }))
+            {
+                return;
+            }
+
             try
             {
                 var progressDialogService = new ProgressDialogService();
-                var report = new BackupRestoreProgressReport();
-                progressDialogService.Action = () => this._BackupService.Backup(this.Stack, configuration, path, new Progress<BackupRestoreProgressReport>(
+                var report = new ProgressReportsModel(new[]
+                {
+                    new ProgressItemModel {Name = Resources.Word_Database, Progress = ProgressState.NotStart},
+                    new ProgressItemModel {Name = Resources.Word_Plugin, Progress = ProgressState.NotStart},
+                    new ProgressItemModel {Name = Resources.Word_Theme, Progress = ProgressState.NotStart},
+                    new ProgressItemModel {Name = Resources.Word_AttachedFile, Progress = ProgressState.NotStart},
+                });
+
+                progressDialogService.Action = () => this._BackupService.Backup(this.Stack, configuration, path, new Progress<ProgressReportsModel>(
                     progressReport =>
                     {
-                        report.Database = progressReport.Database;
-                        report.Plugin = progressReport.Plugin;
-                        report.Theme = progressReport.Theme;
-                        report.AttachedFile = progressReport.AttachedFile;
+                        foreach (var p in progressReport.Progresses)
+                            report.UpdateProgress(p.Name, p.Progress);
                     }));
+
 
                 progressDialogService.Report = report;
                 await progressDialogService.ShowMessage(null, null);
+
+                message = Resources.Msg_BackupComplete;
             }
             catch (Exception ex)
             {
-                message = Resources.Msg_BackupFailed;
-                await new OKDialogService().ShowMessage(message, null);
-
-                this._LoggerService.Error(message);
-
                 message = $"Exception is thown. Reason is {ex.Message}";
                 this._LoggerService.Error(message);
 
                 message = $"StackTrace is {ex.StackTrace}";
                 this._LoggerService.Error(message);
 
+                message = Resources.Msg_BackupFailed;
+                await new OKDialogService().ShowMessage(message, null);
+
                 return;
             }
-
-            message = Resources.Msg_BackupComplete;
 
             // Update Setting
             RedmineSetting redmineSetting;

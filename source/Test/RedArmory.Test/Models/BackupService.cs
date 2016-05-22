@@ -38,7 +38,7 @@ namespace RedArmory.Test.Models
                 configuration.Themes = true;
                 configuration.Files = true;
                 configuration.Plugins = true;
-                backupService.Backup(stack, configuration, path ,new Progress<BackupRestoreProgressReport>());
+                backupService.Backup(stack, configuration, path ,new Progress<ProgressReportsModel>());
             }
         }
 
@@ -59,7 +59,7 @@ namespace RedArmory.Test.Models
                 configuration.Themes = true;
                 configuration.Files = true;
                 configuration.Plugins = true;
-                backupService.Restore(stack, configuration, path, new Progress<BackupRestoreProgressReport>());
+                backupService.Restore(stack, configuration, path, new Progress<ProgressReportsModel>());
             }
         }
 

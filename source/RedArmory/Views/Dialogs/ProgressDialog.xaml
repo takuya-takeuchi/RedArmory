@@ -15,71 +15,43 @@
                      Height="120"
                      IsIndeterminate="True"
                      Style="{DynamicResource MaterialDesignCircularProgressBar}" />
-        <Grid Margin="0 20 0 0">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition MinWidth="200"/>
             </Grid.ColumnDefinitions>
+            <ItemsControl Grid.Column="0"
+                          Margin="0 20 0 0"
+                          HorizontalAlignment="Left"
+                          ItemsSource="{Binding Report.Progresses}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:ProgressItemModel">
+                        <Grid>
 
-            <Label Grid.Row="0"
-                   Grid.Column="0"
-                   Content="{Binding Source={x:Static models:ResourceService.Instance},
-                                     Path=Resources.Word_Database,
-                                     Mode=OneWay}" />
-
-            <Label Grid.Row="0"
-                   Grid.Column="1"
-                   HorizontalAlignment="Left"
-                   Content="{Binding Report.Database,
-                                     Converter={StaticResource ProgressStateToStringConverter}}"
-                   FontWeight="Bold"
-                   Foreground="{Binding Report.Database,
-                                        Converter={StaticResource ProgressStateToBrushConverter}}" />
-            <Label Grid.Row="1"
-                   Grid.Column="0"
-                   Content="{Binding Source={x:Static models:ResourceService.Instance},
-                                     Path=Resources.Word_Plugin,
-                                     Mode=OneWay}" />
-            <Label Grid.Row="1"
-                   Grid.Column="1"
-                   HorizontalAlignment="Left"
-                   Content="{Binding Report.Plugin,
-                                     Converter={StaticResource ProgressStateToStringConverter}}"
-                   FontWeight="Bold"
-                   Foreground="{Binding Report.Plugin,
-                                        Converter={StaticResource ProgressStateToBrushConverter}}" />
-            <Label Grid.Row="2"
-                   Grid.Column="0"
-                   Content="{Binding Source={x:Static models:ResourceService.Instance},
-                                     Path=Resources.Word_Theme,
-                                     Mode=OneWay}" />
-            <Label Grid.Row="2"
-                   Grid.Column="1"
-                   HorizontalAlignment="Left"
-                   Content="{Binding Report.Theme,
-                                     Converter={StaticResource ProgressStateToStringConverter}}"
-                   FontWeight="Bold"
-                   Foreground="{Binding Report.Theme,
-                                        Converter={StaticResource ProgressStateToBrushConverter}}" />
-            <Label Grid.Row="3"
-                   Grid.Column="0"
-                   Content="{Binding Source={x:Static models:ResourceService.Instance},
-                                     Path=Resources.Word_AttachedFile,
-                                     Mode=OneWay}" />
-            <Label Grid.Row="3"
-                   Grid.Column="1"
-                   HorizontalAlignment="Left"
-                   Content="{Binding Report.AttachedFile,
-                                     Converter={StaticResource ProgressStateToStringConverter}}"
-                   FontWeight="Bold"
-                   Foreground="{Binding Report.AttachedFile,
-                                        Converter={StaticResource ProgressStateToBrushConverter}}" />
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Content="{Binding Name}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <ItemsControl Grid.Column="1"
+                          Margin="0 20 0 0"
+                          HorizontalAlignment="Left"
+                          ItemsSource="{Binding Report.Progresses}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:ProgressItemModel">
+                        <Grid>
+                            <Label HorizontalAlignment="Left"
+                                   Content="{Binding Progress,
+                                                     Converter={StaticResource ProgressStateToStringConverter}}"
+                                   FontWeight="Bold"
+                                   Foreground="{Binding Progress,
+                                                        Converter={StaticResource ProgressStateToBrushConverter}}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
     </StackPanel>
 </UserControl>

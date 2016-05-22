@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using RedArmory.Models.Services;
+using RedArmory.Models.Services.Dialog;
+using RedArmory.Properties;
 
 namespace RedArmory.Models
 {
@@ -15,6 +17,8 @@ namespace RedArmory.Models
 
         protected readonly IApplicationSettingService _ApplicationSettingService;
 
+        protected readonly IBitnamiRedmineService _BitnamiRedmineService;
+
         protected readonly IBackupService _BackupService;
 
         protected readonly ILoggerService _LoggerService;
@@ -25,10 +29,13 @@ namespace RedArmory.Models
 
         #region コンストラクタ
 
-        protected BackupRestoreModel(IApplicationSettingService applicationSettingService, IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
+        protected BackupRestoreModel(IApplicationSettingService applicationSettingService, IBitnamiRedmineService bitnamiRedmineService, IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
         {
             if (applicationSettingService == null)
                 throw new ArgumentNullException(nameof(applicationSettingService));
+
+            if (bitnamiRedmineService == null)
+                throw new ArgumentNullException(nameof(bitnamiRedmineService));
 
             if (backupService == null)
                 throw new ArgumentNullException(nameof(backupService));
@@ -40,6 +47,7 @@ namespace RedArmory.Models
                 throw new ArgumentNullException(nameof(stack));
 
             this._ApplicationSettingService = applicationSettingService;
+            this._BitnamiRedmineService = bitnamiRedmineService;
             this._BackupService = backupService;
             this._LoggerService = loggerService;
             this._Stack = stack;
@@ -245,6 +253,60 @@ namespace RedArmory.Models
 
         protected abstract bool CanExecuteSelectDirectory();
 
+        protected async Task<bool> ControlServices(ServiceConfiguration serviceConfiguration)
+        {
+            try
+            {
+                var allServices = this._BitnamiRedmineService.GetServiceDisplayNames(this.Stack, new ServiceConfiguration
+                {
+                    Apache = true,
+                    MySql = true,
+                    Redmine = true,
+                    Subversion = true
+                });
+
+                var report = new ProgressReportsModel(
+                    allServices.Select(status => new ProgressItemModel
+                    {
+                        Name = status.ServiceName,
+                        Progress = ProgressState.NotStart
+                    }));
+
+                var progressDialogService = new ProgressDialogService
+                {
+                    Action = () => this._BitnamiRedmineService.ControlService(
+                        this.Stack,
+                        serviceConfiguration,
+                        new Progress<ProgressReportsModel>(
+                            progressReport =>
+                            {
+                                foreach (var p in progressReport.Progresses)
+                                    report.UpdateProgress(p.Name, p.Progress);
+                            })),
+                    Report = report
+                };
+
+                await progressDialogService.ShowMessage(null, null);
+            }
+            catch (Exception ex)
+            {
+                var message = Resources.Msg_BackupFailed;
+                await new OKDialogService().ShowMessage(message, null);
+
+                this._LoggerService.Error(message);
+
+                message = $"Exception is thown. Reason is {ex.Message}";
+                this._LoggerService.Error(message);
+
+                message = $"StackTrace is {ex.StackTrace}";
+                this._LoggerService.Error(message);
+
+                return false;
+            }
+
+            return true;
+        }
+
         protected abstract void Execute();
 
         protected abstract void ExecuteSelectDirectory();
@@ -252,8 +314,8 @@ namespace RedArmory.Models
         protected ApplicationSetting GetApplicationSetting(out RedmineSetting redmineSetting)
         {
             var applicationSetting = this._ApplicationSettingService.GetApplicationSetting();
-             redmineSetting = applicationSetting.RedmineSettings.
-                FirstOrDefault(setting => this.Stack.DisplayVersion.Equals(setting.DisplayVersion));
+            redmineSetting = applicationSetting.RedmineSettings.
+               FirstOrDefault(setting => this.Stack.DisplayVersion.Equals(setting.DisplayVersion));
             if (redmineSetting == null)
             {
                 redmineSetting = new RedmineSetting

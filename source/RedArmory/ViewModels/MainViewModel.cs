@@ -1,10 +1,8 @@
 using System.Globalization;
-using System.Linq;
 using System.Windows;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight;
-using RedArmory.Models;
 using RedArmory.Models.Services;
 
 namespace RedArmory.ViewModels

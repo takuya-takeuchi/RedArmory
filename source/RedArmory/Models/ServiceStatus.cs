@@ -30,6 +30,21 @@ namespace RedArmory.Models
 
         #region プロパティ
 
+        private bool _StopRequire;
+
+        public bool StopRequire
+        {
+            get
+            {
+                return this._StopRequire;
+            }
+            set
+            {
+                this._StopRequire = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
         private string _ServiceName;
 
         public string ServiceName

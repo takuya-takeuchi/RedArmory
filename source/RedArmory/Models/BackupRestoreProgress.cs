@@ -3,7 +3,7 @@
 namespace RedArmory.Models
 {
 
-    public sealed class BackupRestoreProgress : Progress<BackupRestoreProgressReport>
+    public sealed class BackupRestoreProgress : Progress<ProgressReportsModel>
     {
 
         #region イベント

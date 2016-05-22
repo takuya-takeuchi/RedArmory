@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using RedArmory.Properties;
 
 namespace RedArmory.Models.Services
 {
@@ -104,7 +105,7 @@ namespace RedArmory.Models.Services
 
         #region IBackupService メンバー
 
-        public void Backup(BitnamiRedmineStack stack, BackupConfiguration configuration, string path, IProgress<BackupRestoreProgressReport> progress)
+        public void Backup(BitnamiRedmineStack stack, BackupConfiguration configuration, string path, IProgress<ProgressReportsModel> progress = null)
         {
             if (configuration == null)
                 throw new ArgumentNullException(nameof(configuration));
@@ -112,13 +113,24 @@ namespace RedArmory.Models.Services
             if (!Directory.Exists(path))
                 throw new DirectoryNotFoundException($"{path} は存在しません。");
 
-            var report = new BackupRestoreProgressReport();
+            var databaseName = Resources.Word_Database;
+            var pluginName = Resources.Word_Plugin;
+            var themeName = Resources.Word_Theme;
+            var attachedFileName = Resources.Word_AttachedFile;
+
+            var report = new ProgressReportsModel(new[]
+            {
+                new ProgressItemModel {Name = databaseName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Name = pluginName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Name = themeName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Name = attachedFileName, Progress = ProgressState.NotStart},
+            });
 
             // データベースのバックアップ
             if (configuration.Database)
             {
-                report.Database = ProgressState.InProgress;
-                progress.Report(report);
+                report.UpdateProgress(databaseName, ProgressState.InProgress);
+                progress?.Report(report);
 
                 var databaseConfigurations = this._DatabaseConfigurationService.GetDatabaseConfiguration(stack).ToArray();
                 foreach (var databaseConfiguration in databaseConfigurations)
@@ -128,13 +140,13 @@ namespace RedArmory.Models.Services
 
                     this._DatabaseService.Backup(stack, databaseConfiguration, filepath);
                 }
-
-                report.Database = ProgressState.Complete;
-                progress.Report(report);
+                
+                report.UpdateProgress(databaseName, ProgressState.Complete);
+                progress?.Report(report);
             }
             else
             {
-                report.Database = ProgressState.NotRequire;
+                report.UpdateProgress(databaseName, ProgressState.NotRequire);
 
                 this._LoggerService.Info("Database is skipped");
             }
@@ -150,8 +162,8 @@ namespace RedArmory.Models.Services
                     Target = PluginsDirectoryName,
                     ReportAction = new Action<ProgressState>(state =>
                     {
-                        report.Plugin = state;
-                        progress.Report(report);
+                        report.UpdateProgress(pluginName, state);
+                        progress?.Report(report);
                     } )
                 },
                 new
@@ -162,8 +174,8 @@ namespace RedArmory.Models.Services
                     Target = ThemeseDirectoryName,
                     ReportAction = new Action<ProgressState>(state =>
                     {
-                        report.Theme = state;
-                        progress.Report(report);
+                        report.UpdateProgress(themeName, state);
+                        progress?.Report(report);
                     } )
                 },
                 new
@@ -174,8 +186,8 @@ namespace RedArmory.Models.Services
                     Target = FilesDirectoryName,
                     ReportAction = new Action<ProgressState>(state =>
                     {
-                        report.AttachedFile = state;
-                        progress.Report(report);
+                        report.UpdateProgress(attachedFileName, state);
+                        progress?.Report(report);
                     } )
                 }
             };
@@ -269,23 +281,34 @@ namespace RedArmory.Models.Services
             return configuration;
         }
 
-        public void Restore(BitnamiRedmineStack stack, BackupConfiguration configuration, string path, IProgress<BackupRestoreProgressReport> progress)
+        public void Restore(BitnamiRedmineStack stack, BackupConfiguration configuration, string path, IProgress<ProgressReportsModel> progress = null)
         {
             if (!Directory.Exists(path))
                 throw new DirectoryNotFoundException($"{path} は存在しません。");
 
-            var report = new BackupRestoreProgressReport();
+            var databaseName = Resources.Word_Database;
+            var pluginName = Resources.Word_Plugin;
+            var themeName = Resources.Word_Theme;
+            var attachedFileName = Resources.Word_AttachedFile;
+
+            var report = new ProgressReportsModel(new[]
+            {
+                new ProgressItemModel {Name = databaseName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Name = pluginName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Name = themeName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Name = attachedFileName, Progress = ProgressState.NotStart},
+            });
 
             // データベースの復元
             if (configuration.Database)
             {
-                report.Database = ProgressState.InProgress;
-                progress.Report(report);
+                report.UpdateProgress(databaseName, ProgressState.InProgress);
+                progress?.Report(report);
 
                 var databaseConfigurations = this._DatabaseConfigurationService.GetDatabaseConfiguration(stack).ToArray();
                 foreach (var databaseConfiguration in databaseConfigurations)
                 {
-                    var sqlFileName = string.Format("{0}.sql", databaseConfiguration.Mode);
+                    var sqlFileName = $"{databaseConfiguration.Mode}.sql";
                     var sqlFilePath = Path.Combine(path, sqlFileName);
                     if (!File.Exists(sqlFilePath))
                     {
@@ -294,13 +317,13 @@ namespace RedArmory.Models.Services
 
                     this._DatabaseService.Restore(stack, databaseConfiguration, sqlFilePath);
                 }
-
-                report.Database = ProgressState.Complete;
-                progress.Report(report);
+                
+                report.UpdateProgress(databaseName, ProgressState.Complete);
+                progress?.Report(report);
             }
             else
             {
-                report.Database = ProgressState.NotRequire;
+                report.UpdateProgress(databaseName, ProgressState.NotRequire);
             }
 
             // プラグイン、テーマ、添付ファイルの復元
@@ -313,8 +336,8 @@ namespace RedArmory.Models.Services
                     Source = PluginsDirectoryName,
                     CheckAction = new Action<ProgressState>(state =>
                     {
-                        report.Plugin = state;
-                        progress.Report(report);
+                        report.UpdateProgress(pluginName, state);
+                        progress?.Report(report);
                     } )
                 },
                 new
@@ -324,8 +347,8 @@ namespace RedArmory.Models.Services
                     Source = ThemeseDirectoryName,
                     CheckAction = new Action<ProgressState>(state =>
                     {
-                        report.Theme = state;
-                        progress.Report(report);
+                        report.UpdateProgress(themeName, state);
+                        progress?.Report(report);
                     } )
                 },
                 new
@@ -335,8 +358,8 @@ namespace RedArmory.Models.Services
                     Source = FilesDirectoryName,
                     CheckAction = new Action<ProgressState>(state =>
                     {
-                        report.AttachedFile = state;
-                        progress.Report(report);
+                        report.UpdateProgress(attachedFileName, state);
+                        progress?.Report(report);
                     } )
                 }
             };

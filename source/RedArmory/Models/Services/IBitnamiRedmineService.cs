@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RedArmory.Models.Services
 {
@@ -12,10 +13,8 @@ namespace RedArmory.Models.Services
         ServiceStartupType GetStartupType(string displayName);
 
         void SetStartupType(string displayName, ServiceStartupType startupType);
-
-        bool StartService(BitnamiRedmineStack stack, ServiceConfiguration configuration);
-
-        bool StopService(BitnamiRedmineStack stack, ServiceConfiguration configuration);
+        
+        bool ControlService(BitnamiRedmineStack stack, ServiceConfiguration configuration,IProgress<ProgressReportsModel> progress = null);
 
     }
 }

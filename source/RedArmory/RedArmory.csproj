@@ -132,6 +132,7 @@
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\BooleanReverseConverter.cs" />
     <Compile Include="Converters\CultureNameToLocalizedStringConverter.cs" />
+    <Compile Include="Extensions\ServiceStatusExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Interop\SafeNativeMethods.cs" />
     <Compile Include="Models\BackupModel.cs" />
@@ -160,10 +161,12 @@
     <Compile Include="Models\Services\Dialog\DialogServiceBase.cs" />
     <Compile Include="Models\Services\Dialog\ProgressService.cs" />
     <Compile Include="Models\Services\Dialog\YesNoDialogService.cs" />
+    <Compile Include="Models\Services\DispatcherService.cs" />
     <Compile Include="Models\Services\IApplicationSettingService.cs" />
     <Compile Include="Models\Services\IBackupService.cs" />
     <Compile Include="Models\Services\IBitnamiRedmineService.cs" />
     <Compile Include="Models\Services\IDatabaseService.cs" />
+    <Compile Include="Models\Services\IDispatcherService.cs" />
     <Compile Include="Models\Services\ILoggerService.cs" />
     <Compile Include="Models\Services\IRedmineDatabaseConfigurationService.cs" />
     <Compile Include="Models\Services\LoggerService.cs" />

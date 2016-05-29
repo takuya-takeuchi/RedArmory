@@ -21,6 +21,8 @@ namespace RedArmory.Models
 
         protected readonly IBackupService _BackupService;
 
+        protected readonly IDispatcherService _DispatcherService;
+
         protected readonly ILoggerService _LoggerService;
 
         private readonly BitnamiRedmineStack _Stack;
@@ -29,7 +31,13 @@ namespace RedArmory.Models
 
         #region コンストラクタ
 
-        protected BackupRestoreModel(IApplicationSettingService applicationSettingService, IBitnamiRedmineService bitnamiRedmineService, IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
+        protected BackupRestoreModel(
+            IApplicationSettingService applicationSettingService,
+            IBitnamiRedmineService bitnamiRedmineService,
+            IBackupService backupService,
+            IDispatcherService dispatcherService,
+            ILoggerService loggerService, 
+            BitnamiRedmineStack stack)
         {
             if (applicationSettingService == null)
                 throw new ArgumentNullException(nameof(applicationSettingService));
@@ -40,6 +48,9 @@ namespace RedArmory.Models
             if (backupService == null)
                 throw new ArgumentNullException(nameof(backupService));
 
+            if (dispatcherService == null)
+                throw new ArgumentNullException(nameof(dispatcherService));
+
             if (loggerService == null)
                 throw new ArgumentNullException(nameof(loggerService));
 
@@ -49,6 +60,7 @@ namespace RedArmory.Models
             this._ApplicationSettingService = applicationSettingService;
             this._BitnamiRedmineService = bitnamiRedmineService;
             this._BackupService = backupService;
+            this._DispatcherService = dispatcherService;
             this._LoggerService = loggerService;
             this._Stack = stack;
 
@@ -252,60 +264,6 @@ namespace RedArmory.Models
         protected abstract bool CanExecute();
 
         protected abstract bool CanExecuteSelectDirectory();
-
-        protected async Task<bool> ControlServices(ServiceConfiguration serviceConfiguration)
-        {
-            try
-            {
-                var allServices = this._BitnamiRedmineService.GetServiceDisplayNames(this.Stack, new ServiceConfiguration
-                {
-                    Apache = true,
-                    MySql = true,
-                    Redmine = true,
-                    Subversion = true
-                });
-
-                var report = new ProgressReportsModel(
-                    allServices.Select(status => new ProgressItemModel
-                    {
-                        Name = status.ServiceName,
-                        Progress = ProgressState.NotStart
-                    }));
-
-                var progressDialogService = new ProgressDialogService
-                {
-                    Action = () => this._BitnamiRedmineService.ControlService(
-                        this.Stack,
-                        serviceConfiguration,
-                        new Progress<ProgressReportsModel>(
-                            progressReport =>
-                            {
-                                foreach (var p in progressReport.Progresses)
-                                    report.UpdateProgress(p.Name, p.Progress);
-                            })),
-                    Report = report
-                };
-
-                await progressDialogService.ShowMessage(null, null);
-            }
-            catch (Exception ex)
-            {
-                var message = Resources.Msg_BackupFailed;
-                await new OKDialogService().ShowMessage(message, null);
-
-                this._LoggerService.Error(message);
-
-                message = $"Exception is thown. Reason is {ex.Message}";
-                this._LoggerService.Error(message);
-
-                message = $"StackTrace is {ex.StackTrace}";
-                this._LoggerService.Error(message);
-
-                return false;
-            }
-
-            return true;
-        }
 
         protected abstract void Execute();
 

@@ -10,6 +10,18 @@ namespace RedArmory.Converters
     public sealed class DateTimeToStringConverter : IValueConverter
     {
 
+        public bool IsSourceUtc
+        {
+            get;
+            set;
+        }
+
+        public bool IsOutputUtc
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// 値を変換します。
         /// </summary>
@@ -23,7 +35,23 @@ namespace RedArmory.Converters
             if (value is DateTime)
             {
                 var datetime = (DateTime)value;
-                var formatBackupDate =Properties.Resources.Format_BackupDate;
+
+                if (this.IsOutputUtc)
+                {
+                    if (!this.IsSourceUtc)
+                    {
+                        datetime = datetime.ToUniversalTime();
+                    }
+                }
+                else
+                {
+                    if (this.IsSourceUtc)
+                    {
+                        datetime = datetime.ToLocalTime();
+                    }
+                }
+
+                var formatBackupDate = Properties.Resources.Format_BackupDate;
                 return datetime.ToString(formatBackupDate);
             }
 

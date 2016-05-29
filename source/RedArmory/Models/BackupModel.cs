@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
+using RedArmory.Extensions;
 using RedArmory.Models.Services;
 using RedArmory.Models.Services.Dialog;
 using RedArmory.Properties;
@@ -14,8 +17,14 @@ namespace RedArmory.Models
 
         #region コンストラクタ
 
-        public BackupModel(IApplicationSettingService applicationSettingService, IBitnamiRedmineService bitnamiRedmineService, IBackupService backupService, ILoggerService loggerService, BitnamiRedmineStack stack)
-            : base(applicationSettingService, bitnamiRedmineService, backupService, loggerService, stack)
+        public BackupModel(
+            IApplicationSettingService applicationSettingService,
+            IBitnamiRedmineService bitnamiRedmineService,
+            IBackupService backupService,
+            IDispatcherService dispatcherService,
+            ILoggerService loggerService,
+            BitnamiRedmineStack stack)
+            : base(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, loggerService, stack)
         {
             this.PropertyChanged += (sender, args) =>
             {
@@ -152,41 +161,161 @@ namespace RedArmory.Models
                 Themes = this.Themes
             };
 
-            // MySql 以外のサービスの停止 (Databaseの更新がないなら、MySql も停止)
-            if (!await this.ControlServices(new ServiceConfiguration
-            {
-                Apache = false,
-                Redmine = false,
-                MySql = configuration.Database,
-                Subversion = false
-            }))
-            {
-                return;
-            }
-
             try
             {
-                var progressDialogService = new ProgressDialogService();
-                var report = new ProgressReportsModel(new[]
-                {
-                    new ProgressItemModel {Name = Resources.Word_Database, Progress = ProgressState.NotStart},
-                    new ProgressItemModel {Name = Resources.Word_Plugin, Progress = ProgressState.NotStart},
-                    new ProgressItemModel {Name = Resources.Word_Theme, Progress = ProgressState.NotStart},
-                    new ProgressItemModel {Name = Resources.Word_AttachedFile, Progress = ProgressState.NotStart},
-                });
+                var progressDialogService = new ProgressDialogService {IsAutoClose = true};
 
-                progressDialogService.Action = () => this._BackupService.Backup(this.Stack, configuration, path, new Progress<ProgressReportsModel>(
-                    progressReport =>
+                // Apache
+                var apacheServices = this._BitnamiRedmineService.GetServiceDisplayNames(this.Stack, new ServiceConfiguration
+                {
+                    Apache = true,
+                    MySql = false,
+                    Redmine = false,
+                    Subversion = false
+                }).Select(status => new KeyValuePair<ServiceStatus, ProgressItemModel>(status, status.ToProgressItemModel(false)));
+
+                // MySql
+                var mySqlServices = this._BitnamiRedmineService.GetServiceDisplayNames(this.Stack, new ServiceConfiguration
+                {
+                    Apache = false,
+                    MySql = true,
+                    Redmine = false,
+                    Subversion = false
+                }).Select(status => new KeyValuePair<ServiceStatus, ProgressItemModel>(status, status.ToProgressItemModel(configuration.Database)));
+
+                // Subversion
+                var subversionServices = this._BitnamiRedmineService.GetServiceDisplayNames(this.Stack, new ServiceConfiguration
+                {
+                    Apache = false,
+                    MySql = false,
+                    Redmine = false,
+                    Subversion = true
+                }).Select(status => new KeyValuePair<ServiceStatus, ProgressItemModel>(status, status.ToProgressItemModel(false)));
+
+                // Redmine
+                var redmineServices = this._BitnamiRedmineService.GetServiceDisplayNames(this.Stack, new ServiceConfiguration
+                {
+                    Apache = false,
+                    MySql = false,
+                    Redmine = true,
+                    Subversion = false
+                }).Select(status => new KeyValuePair<ServiceStatus, ProgressItemModel>(status, status.ToProgressItemModel(false)));
+
+                var beforeServiceReports =
+                    apacheServices.Concat(
+                    mySqlServices).Concat(
+                    subversionServices).Concat(
+                    redmineServices).ToArray();
+
+                var mainTaskReports = new[]
+                {
+                    new ProgressItemModel {Key = Resources.Word_Database, TaskName = Resources.Word_Database,Progress = ProgressState.NotStart},
+                    new ProgressItemModel {Key = Resources.Word_Plugin, TaskName = Resources.Word_Plugin,Progress = ProgressState.NotStart},
+                    new ProgressItemModel {Key = Resources.Word_Theme, TaskName = Resources.Word_Theme,Progress = ProgressState.NotStart},
+                    new ProgressItemModel {Key = Resources.Word_AttachedFile, TaskName = Resources.Word_AttachedFile,Progress = ProgressState.NotStart},
+                };
+
+                var afterServiceReports = this._BitnamiRedmineService.GetServiceDisplayNames(this.Stack, new ServiceConfiguration
+                {
+                    Apache = true,
+                    MySql = true,
+                    Redmine = true,
+                    Subversion = true
+                }).Select(status => status.ToProgressItemModel(true)).ToArray();
+
+                var report = new ProgressReportsModel(this._DispatcherService, beforeServiceReports.Select(pair => pair.Value).Concat(mainTaskReports).Concat(afterServiceReports));
+
+                progressDialogService.Action = () =>
+                {
+                    // サービスの停止
+                    var beforeTargets = new[]
+                    {
+                        new { Reports = apacheServices,       RequiredStart = false },
+                        new { Reports = mySqlServices,        RequiredStart = configuration.Database },
+                        new { Reports = subversionServices,   RequiredStart = false },
+                        new { Reports = redmineServices,      RequiredStart = false },
+                    };
+
+                    var beforeServiceProgress = new Progress<ProgressReportsModel>(progressReport =>
                     {
                         foreach (var p in progressReport.Progresses)
-                            report.UpdateProgress(p.Name, p.Progress);
-                    }));
+                        {
+                            var progressItemModel = beforeServiceReports.Select(kvp => kvp.Value).FirstOrDefault(model => model.Key.Equals(p.Key));
+                            if (progressItemModel == null)
+                                continue;
 
+                            progressItemModel.Progress = p.Progress;
+                            progressItemModel.ErrorMessages = p.ErrorMessages;
+                        }
+                    });
+
+                    foreach (var t in beforeTargets)
+                        foreach (var s in t.Reports)
+                            if (t.RequiredStart)
+                                this._BitnamiRedmineService.StartService(s.Key, new ProgressReportsModel(this._DispatcherService, new[] { s.Value }), beforeServiceProgress);
+                            else
+                                this._BitnamiRedmineService.StopService(s.Key, new ProgressReportsModel(this._DispatcherService, new[] { s.Value }), beforeServiceProgress);
+
+
+                    // バックアップ処理
+                    this._BackupService.Backup(this.Stack, configuration, path, new Progress<ProgressReportsModel>(
+                        progressReport =>
+                        {
+                            foreach (var p in progressReport.Progresses)
+                            {
+                                var progressItemModel = mainTaskReports.FirstOrDefault(model => model.Key.Equals(p.Key));
+                                if (progressItemModel == null)
+                                    continue;
+
+                                progressItemModel.Progress = p.Progress;
+                                progressItemModel.ErrorMessages = p.ErrorMessages;
+                            }
+                        }));
+
+                    // サービスの開始
+                    var afterTargets = new[]
+                    {
+                        new { Reports = apacheServices,       RequiredStart = true },
+                        new { Reports = mySqlServices,        RequiredStart = true },
+                        new { Reports = subversionServices,   RequiredStart = true },
+                        new { Reports = redmineServices,      RequiredStart = true },
+                    };
+
+
+                    var afterServiceProgress = new Progress<ProgressReportsModel>(progressReport =>
+                    {
+                        foreach (var p in progressReport.Progresses)
+                        {
+                            var progressItemModel = afterServiceReports.FirstOrDefault(model => model.Key.Equals(p.Key));
+                            if (progressItemModel == null)
+                                continue;
+
+                            progressItemModel.Progress = p.Progress;
+                            progressItemModel.ErrorMessages = p.ErrorMessages;
+                        }
+                    });
+                    
+                    foreach (var t in afterTargets)
+                        foreach (var s in t.Reports)
+                            if (t.RequiredStart)
+                                this._BitnamiRedmineService.StartService(s.Key, new ProgressReportsModel(this._DispatcherService, new[] { s.Value }), afterServiceProgress);
+                            else
+                                this._BitnamiRedmineService.StopService(s.Key, new ProgressReportsModel(this._DispatcherService, new[] { s.Value }), afterServiceProgress);
+                };
 
                 progressDialogService.Report = report;
                 await progressDialogService.ShowMessage(null, null);
+                if (progressDialogService.Result == MessageBoxResult.Cancel)
+                {
+                    message = Resources.Msg_BackupCancel;
+                    await new OKDialogService().ShowMessage(message, null);
 
-                message = Resources.Msg_BackupComplete;
+                    return;
+                }
+                else
+                {
+                    message = Resources.Msg_BackupComplete;
+                }
             }
             catch (Exception ex)
             {
@@ -201,6 +330,7 @@ namespace RedArmory.Models
 
                 return;
             }
+
 
             // Update Setting
             RedmineSetting redmineSetting;

@@ -3,7 +3,8 @@ using System.Text.RegularExpressions;
 
 namespace RedArmory.Extensions
 {
-    public static class StringExtension
+
+    internal static class StringExtension
     {
 
         public static Version ToVersion(this string source)

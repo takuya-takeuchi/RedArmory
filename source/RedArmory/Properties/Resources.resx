@@ -268,7 +268,7 @@
     <value>%VERSION% : Version of Redmine</value>
   </data>
   <data name="Format_BackupDate" xml:space="preserve">
-    <value>dd/MM/yyyy hh:mm:ss</value>
+    <value>dd/MM/yyyy HH:mm:ss</value>
   </data>
   <data name="Msg_DeleteHistory" xml:space="preserve">
     <value>Are you sure you want to delete the selected history item?</value>
@@ -287,5 +287,35 @@
   </data>
   <data name="Word_ProgressState_NotStart" xml:space="preserve">
     <value>Not Start</value>
+  </data>
+  <data name="Format_StartService" xml:space="preserve">
+    <value>Start of {0}</value>
+  </data>
+  <data name="Format_StopService" xml:space="preserve">
+    <value>Stop of {0}</value>
+  </data>
+  <data name="Word_Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Word_Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Format_FailedDoService" xml:space="preserve">
+    <value>Failed to {0} service</value>
+  </data>
+  <data name="Format_SucceedDoService" xml:space="preserve">
+    <value>Succeed to {0} service</value>
+  </data>
+  <data name="Msg_BackupCancel" xml:space="preserve">
+    <value>Backup is cancelled.</value>
+  </data>
+  <data name="Msg_RestoreCancel" xml:space="preserve">
+    <value>Restore is cancelled.</value>
+  </data>
+  <data name="Msg_BackupSkip" xml:space="preserve">
+    <value>Backup is skipped.</value>
+  </data>
+  <data name="Msg_RestoreSkip" xml:space="preserve">
+    <value>Restore is skipped.</value>
   </data>
 </root>

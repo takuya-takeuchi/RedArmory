@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RedArmory.Models;
 using RedArmory.Models.Services;
 
 namespace RedArmory.Test.Models
@@ -35,10 +36,15 @@ namespace RedArmory.Test.Models
 
             foreach (var stack in stacks)
             {
-                var configuration = new ServiceConfiguration();
-                configuration.Redmine = true;
+                var configuration = new ServiceConfiguration
+                {
+                    Redmine = true
+                };
 
-                bitnamiRedmineService.ControlService(stack, configuration);
+                foreach (var serviceStatuse in bitnamiRedmineService.GetServiceDisplayNames(stack, configuration))
+                {
+                    bitnamiRedmineService.StartService(serviceStatuse, new ProgressReportsModel(new[] { new ProgressItemModel() }));
+                }
             }
         }
 
@@ -52,10 +58,15 @@ namespace RedArmory.Test.Models
 
             foreach (var stack in stacks)
             {
-                var configuration = new ServiceConfiguration();
-                configuration.Redmine = false;
+                var configuration = new ServiceConfiguration
+                {
+                    Redmine = true
+                };
 
-                bitnamiRedmineService.ControlService(stack, configuration);
+                foreach (var serviceStatuse in bitnamiRedmineService.GetServiceDisplayNames(stack, configuration))
+                {
+                    bitnamiRedmineService.StopService(serviceStatuse, new ProgressReportsModel(new[] { new ProgressItemModel()}));
+                }
             }
         }
 

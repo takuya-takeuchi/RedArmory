@@ -35,7 +35,7 @@ namespace RedArmory.Models.Services.Dialog
         public MessageBoxResult Result
         {
             get;
-            private set;
+            protected set;
         }
 
         #endregion
@@ -55,17 +55,17 @@ namespace RedArmory.Models.Services.Dialog
 
         #region IDialogService メンバ
 
-        public Task ShowError(string message, string title, string buttonText, Action afterHideCallback)
+        public virtual Task ShowError(string message, string title, string buttonText, Action afterHideCallback)
         {
             return null;
         }
 
-        public Task ShowError(Exception error, string title, string buttonText, Action afterHideCallback)
+        public virtual Task ShowError(Exception error, string title, string buttonText, Action afterHideCallback)
         {
             return null;
         }
 
-        public async Task ShowMessage(string message, string title)
+        public virtual async Task ShowMessage(string message, string title)
         {
             var viewModel = new MessageDialogViewModel
             {
@@ -87,17 +87,17 @@ namespace RedArmory.Models.Services.Dialog
             this.Result = (MessageBoxResult) result;
         }
 
-        public Task ShowMessage(string message, string title, string buttonText, Action afterHideCallback)
+        public virtual Task ShowMessage(string message, string title, string buttonText, Action afterHideCallback)
         {
             return null;
         }
 
-        public Task<bool> ShowMessage(string message, string title, string buttonConfirmText, string buttonCancelText, Action<bool> afterHideCallback)
+        public virtual Task<bool> ShowMessage(string message, string title, string buttonConfirmText, string buttonCancelText, Action<bool> afterHideCallback)
         {
             return null;
         }
 
-        public Task ShowMessageBox(string message, string title)
+        public virtual Task ShowMessageBox(string message, string title)
         {
             return null;
         }

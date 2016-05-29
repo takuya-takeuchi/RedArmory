@@ -21,13 +21,15 @@ namespace RedArmory.Models.Services
 
         private readonly IRedmineDatabaseConfigurationService _DatabaseConfigurationService;
 
+        private readonly IDispatcherService _DispatcherService;
+
         private readonly ILoggerService _LoggerService;
 
         #endregion
 
         #region コンストラクタ
 
-        public BackupService(IDatabaseService databaseService, IRedmineDatabaseConfigurationService databaseConfigurationService, ILoggerService loggerService)
+        public BackupService(IDatabaseService databaseService, IRedmineDatabaseConfigurationService databaseConfigurationService, IDispatcherService dispatcherService, ILoggerService loggerService)
         {
             if (databaseService == null)
                 throw new ArgumentNullException(nameof(databaseService));
@@ -35,11 +37,15 @@ namespace RedArmory.Models.Services
             if (databaseConfigurationService == null)
                 throw new ArgumentNullException(nameof(databaseConfigurationService));
 
+            if (dispatcherService == null)
+                throw new ArgumentNullException(nameof(dispatcherService));
+
             if (loggerService == null)
                 throw new ArgumentNullException(nameof(loggerService));
 
             this._DatabaseService = databaseService;
             this._DatabaseConfigurationService = databaseConfigurationService;
+            this._DispatcherService = dispatcherService;
             this._LoggerService = loggerService;
         }
 
@@ -118,12 +124,12 @@ namespace RedArmory.Models.Services
             var themeName = Resources.Word_Theme;
             var attachedFileName = Resources.Word_AttachedFile;
 
-            var report = new ProgressReportsModel(new[]
+            var report = new ProgressReportsModel(this._DispatcherService, new[]
             {
-                new ProgressItemModel {Name = databaseName, Progress = ProgressState.NotStart},
-                new ProgressItemModel {Name = pluginName, Progress = ProgressState.NotStart},
-                new ProgressItemModel {Name = themeName, Progress = ProgressState.NotStart},
-                new ProgressItemModel {Name = attachedFileName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Key = databaseName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Key = pluginName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Key = themeName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Key = attachedFileName, Progress = ProgressState.NotStart},
             });
 
             // データベースのバックアップ
@@ -140,13 +146,15 @@ namespace RedArmory.Models.Services
 
                     this._DatabaseService.Backup(stack, databaseConfiguration, filepath);
                 }
-                
+
                 report.UpdateProgress(databaseName, ProgressState.Complete);
                 progress?.Report(report);
+                report.AddErrorMessage(databaseName, Resources.Msg_BackupComplete);
             }
             else
             {
                 report.UpdateProgress(databaseName, ProgressState.NotRequire);
+                report.AddErrorMessage(databaseName, Resources.Msg_BackupSkip);
 
                 this._LoggerService.Info("Database is skipped");
             }
@@ -164,6 +172,19 @@ namespace RedArmory.Models.Services
                     {
                         report.UpdateProgress(pluginName, state);
                         progress?.Report(report);
+
+                        switch (state)
+                        {
+                            case ProgressState.Complete:
+                                report.AddErrorMessage(databaseName, Resources.Msg_BackupComplete);
+                                break;
+                            case ProgressState.NotRequire:
+                                report.AddErrorMessage(databaseName, Resources.Msg_BackupSkip);
+                                break;
+                            case ProgressState.Failed:
+                                report.AddErrorMessage(databaseName, Resources.Msg_BackupFailed);
+                                break;
+                        }
                     } )
                 },
                 new
@@ -176,6 +197,19 @@ namespace RedArmory.Models.Services
                     {
                         report.UpdateProgress(themeName, state);
                         progress?.Report(report);
+
+                        switch (state)
+                        {
+                            case ProgressState.Complete:
+                                report.AddErrorMessage(databaseName, Resources.Msg_BackupComplete);
+                                break;
+                            case ProgressState.NotRequire:
+                                report.AddErrorMessage(databaseName, Resources.Msg_BackupSkip);
+                                break;
+                            case ProgressState.Failed:
+                                report.AddErrorMessage(databaseName, Resources.Msg_BackupFailed);
+                                break;
+                        }
                     } )
                 },
                 new
@@ -188,6 +222,19 @@ namespace RedArmory.Models.Services
                     {
                         report.UpdateProgress(attachedFileName, state);
                         progress?.Report(report);
+
+                        switch (state)
+                        {
+                            case ProgressState.Complete:
+                                report.AddErrorMessage(databaseName, Resources.Msg_BackupComplete);
+                                break;
+                            case ProgressState.NotRequire:
+                                report.AddErrorMessage(databaseName, Resources.Msg_BackupSkip);
+                                break;
+                            case ProgressState.Failed:
+                                report.AddErrorMessage(databaseName, Resources.Msg_BackupFailed);
+                                break;
+                        }
                     } )
                 }
             };
@@ -291,12 +338,12 @@ namespace RedArmory.Models.Services
             var themeName = Resources.Word_Theme;
             var attachedFileName = Resources.Word_AttachedFile;
 
-            var report = new ProgressReportsModel(new[]
+            var report = new ProgressReportsModel(this._DispatcherService, new[]
             {
-                new ProgressItemModel {Name = databaseName, Progress = ProgressState.NotStart},
-                new ProgressItemModel {Name = pluginName, Progress = ProgressState.NotStart},
-                new ProgressItemModel {Name = themeName, Progress = ProgressState.NotStart},
-                new ProgressItemModel {Name = attachedFileName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Key = databaseName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Key = pluginName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Key = themeName, Progress = ProgressState.NotStart},
+                new ProgressItemModel {Key = attachedFileName, Progress = ProgressState.NotStart},
             });
 
             // データベースの復元
@@ -317,13 +364,17 @@ namespace RedArmory.Models.Services
 
                     this._DatabaseService.Restore(stack, databaseConfiguration, sqlFilePath);
                 }
-                
+
                 report.UpdateProgress(databaseName, ProgressState.Complete);
                 progress?.Report(report);
+                report.AddErrorMessage(databaseName, Resources.Msg_RestoreComplete);
             }
             else
             {
                 report.UpdateProgress(databaseName, ProgressState.NotRequire);
+                report.AddErrorMessage(databaseName, Resources.Msg_RestoreSkip);
+
+                this._LoggerService.Info("Database is skipped");
             }
 
             // プラグイン、テーマ、添付ファイルの復元
@@ -338,6 +389,19 @@ namespace RedArmory.Models.Services
                     {
                         report.UpdateProgress(pluginName, state);
                         progress?.Report(report);
+
+                        switch (state)
+                        {
+                            case ProgressState.Complete:
+                                report.AddErrorMessage(databaseName, Resources.Msg_RestoreComplete);
+                                break;
+                            case ProgressState.NotRequire:
+                                report.AddErrorMessage(databaseName, Resources.Msg_RestoreSkip);
+                                break;
+                            case ProgressState.Failed:
+                                report.AddErrorMessage(databaseName, Resources.Msg_RestoreFailed);
+                                break;
+                        }
                     } )
                 },
                 new
@@ -349,6 +413,19 @@ namespace RedArmory.Models.Services
                     {
                         report.UpdateProgress(themeName, state);
                         progress?.Report(report);
+
+                        switch (state)
+                        {
+                            case ProgressState.Complete:
+                                report.AddErrorMessage(databaseName, Resources.Msg_RestoreComplete);
+                                break;
+                            case ProgressState.NotRequire:
+                                report.AddErrorMessage(databaseName, Resources.Msg_RestoreSkip);
+                                break;
+                            case ProgressState.Failed:
+                                report.AddErrorMessage(databaseName, Resources.Msg_RestoreFailed);
+                                break;
+                        }
                     } )
                 },
                 new
@@ -360,7 +437,20 @@ namespace RedArmory.Models.Services
                     {
                         report.UpdateProgress(attachedFileName, state);
                         progress?.Report(report);
-                    } )
+
+                        switch (state)
+                        {
+                            case ProgressState.Complete:
+                                report.AddErrorMessage(databaseName, Resources.Msg_RestoreComplete);
+                                break;
+                            case ProgressState.NotRequire:
+                                report.AddErrorMessage(databaseName, Resources.Msg_RestoreSkip);
+                                break;
+                            case ProgressState.Failed:
+                                report.AddErrorMessage(databaseName, Resources.Msg_RestoreFailed);
+                                break;
+                        }
+                    })
                 }
             };
 
@@ -390,7 +480,5 @@ namespace RedArmory.Models.Services
         }
 
         #endregion
-
     }
-
 }

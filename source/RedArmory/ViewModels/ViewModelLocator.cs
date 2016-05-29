@@ -12,6 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using System.Windows.Threading;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using RedArmory.Models.Services;
@@ -42,7 +43,10 @@ namespace RedArmory.ViewModels
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+            SimpleIoc.Default.Register(() => System.Windows.Application.Current.Dispatcher);
+
             SimpleIoc.Default.Register<ILoggerService, LoggerService>();
+            SimpleIoc.Default.Register<IDispatcherService, DispatcherService>();
             SimpleIoc.Default.Register<IApplicationSettingService, ApplicationSettingService>();
             SimpleIoc.Default.Register<IRedmineDatabaseConfigurationService, RedmineDatabaseConfigurationService>();
             SimpleIoc.Default.Register<IDatabaseService, MySqlService>();

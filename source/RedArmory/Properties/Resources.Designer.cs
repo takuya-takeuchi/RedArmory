@@ -61,11 +61,47 @@ namespace RedArmory.Properties {
         }
         
         /// <summary>
-        ///   dd/MM/yyyy hh:mm:ss に類似しているローカライズされた文字列を検索します。
+        ///   dd/MM/yyyy HH:mm:ss に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Format_BackupDate {
             get {
                 return ResourceManager.GetString("Format_BackupDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Failed to {0} service に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Format_FailedDoService {
+            get {
+                return ResourceManager.GetString("Format_FailedDoService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Start of {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Format_StartService {
+            get {
+                return ResourceManager.GetString("Format_StartService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Stop of {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Format_StopService {
+            get {
+                return ResourceManager.GetString("Format_StopService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Succeed to {0} service に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Format_SucceedDoService {
+            get {
+                return ResourceManager.GetString("Format_SucceedDoService", resourceCulture);
             }
         }
         
@@ -88,6 +124,15 @@ namespace RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Backup is cancelled. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_BackupCancel {
+            get {
+                return ResourceManager.GetString("Msg_BackupCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Backup is complete. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Msg_BackupComplete {
@@ -102,6 +147,15 @@ namespace RedArmory.Properties {
         public static string Msg_BackupFailed {
             get {
                 return ResourceManager.GetString("Msg_BackupFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Backup is skipped. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_BackupSkip {
+            get {
+                return ResourceManager.GetString("Msg_BackupSkip", resourceCulture);
             }
         }
         
@@ -133,6 +187,15 @@ namespace RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Restore is cancelled. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_RestoreCancel {
+            get {
+                return ResourceManager.GetString("Msg_RestoreCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Restore is complete. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Msg_RestoreComplete {
@@ -147,6 +210,15 @@ namespace RedArmory.Properties {
         public static string Msg_RestoreFailed {
             get {
                 return ResourceManager.GetString("Msg_RestoreFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Restore is skipped. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_RestoreSkip {
+            get {
+                return ResourceManager.GetString("Msg_RestoreSkip", resourceCulture);
             }
         }
         
@@ -493,6 +565,15 @@ namespace RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Start に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Start {
+            get {
+                return ResourceManager.GetString("Word_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Start Backup に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_StartBackup {
@@ -507,6 +588,15 @@ namespace RedArmory.Properties {
         public static string Word_StartRestore {
             get {
                 return ResourceManager.GetString("Word_StartRestore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Stop に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Stop {
+            get {
+                return ResourceManager.GetString("Word_Stop", resourceCulture);
             }
         }
         

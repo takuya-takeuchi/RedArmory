@@ -12,7 +12,7 @@ namespace RedArmory.Models.Services.Dialog
     /// <summary>
     /// ダイアログの表示機能を提供します。このクラスは継承できません。
     /// </summary>
-    public sealed class ProgressDialogService : IDialogService
+    public sealed class ProgressDialogService : DialogServiceBase<ProgressDialog>
     {
 
         #region イベント
@@ -27,6 +27,12 @@ namespace RedArmory.Models.Services.Dialog
         #region プロパティ
 
         public Action Action
+        {
+            get;
+            set;
+        }
+
+        public bool IsAutoClose
         {
             get;
             set;
@@ -55,17 +61,7 @@ namespace RedArmory.Models.Services.Dialog
 
         #region IDialogService メンバ
 
-        public Task ShowError(string message, string title, string buttonText, Action afterHideCallback)
-        {
-            return null;
-        }
-
-        public Task ShowError(Exception error, string title, string buttonText, Action afterHideCallback)
-        {
-            return null;
-        }
-
-        public async Task ShowMessage(string message, string title)
+        public override async Task ShowMessage(string message, string title)
         {
             var viewModel = new ProgressDialogViewModel
             {
@@ -78,32 +74,27 @@ namespace RedArmory.Models.Services.Dialog
                 DataContext = viewModel
             };
 
-            await DialogHost.Show(view, "RootDialog", new DialogOpenedEventHandler((sender, args) =>
+
+
+            MessageBoxResult result;
+
+            result = (MessageBoxResult)await DialogHost.Show(view, "RootDialog", new DialogOpenedEventHandler((sender, args) =>
             {
                 Task.Factory.StartNew(() =>
                 {
                     this.Action();
-                    Application.Current.Dispatcher.Invoke(() =>
+
+                    if (this.IsAutoClose)
                     {
-                        DialogHost.CloseDialogCommand.Execute(MessageBoxResult.OK, view);
-                    });
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            DialogHost.CloseDialogCommand.Execute(MessageBoxResult.OK, view);
+                        });
+                    }
                 });
             }));
-        }
 
-        public Task ShowMessage(string message, string title, string buttonText, Action afterHideCallback)
-        {
-            return null;
-        }
-
-        public Task<bool> ShowMessage(string message, string title, string buttonConfirmText, string buttonCancelText, Action<bool> afterHideCallback)
-        {
-            return null;
-        }
-
-        public Task ShowMessageBox(string message, string title)
-        {
-            return null;
+            this.Result = result;
         }
 
         #endregion

@@ -236,140 +236,109 @@ namespace RedArmory.Models.Services
                 }
             }
         }
-        
-        private void StartService(ServiceStatus serviceStatus, ProgressReportsModel report, IProgress<ProgressReportsModel> progress = null)
+
+        public void StartService(ServiceStatus serviceStatus, ProgressReportsModel report, IProgress<ProgressReportsModel> progress = null)
         {
-            using (var sc = new ServiceController(serviceStatus.ServiceName))
+            var serviceName = serviceStatus.ServiceName;
+            using (var sc = new ServiceController(serviceName))
             {
-                report.UpdateProgress(serviceStatus.ServiceName, ProgressState.InProgress);
-                progress?.Report(report);
-
-                sc.Refresh();
-
-                if (sc.Status == ServiceControllerStatus.Stopped)
-                    sc.Start();
-
-                var svcStatus = sc.Status;
-                while (svcStatus != ServiceControllerStatus.Running)
+                try
                 {
-                    sc.Refresh();
+                    report.UpdateProgress(serviceName, ProgressState.InProgress);
+                    progress?.Report(report);
 
-                    switch (sc.Status)
+                    var svcStatus = sc.Status;
+                    while (svcStatus != ServiceControllerStatus.Running)
                     {
-                        case ServiceControllerStatus.Paused:
-                            sc.Continue();
-                            break;
-                        case ServiceControllerStatus.Stopped:
-                            sc.Start();
-                            break;
-                        case ServiceControllerStatus.ContinuePending:
-                        case ServiceControllerStatus.PausePending:
-                        case ServiceControllerStatus.StartPending:
-                        case ServiceControllerStatus.StopPending:
-                            break;
+                        sc.Refresh();
+
+                        svcStatus = sc.Status;
+
+                        this._LoggerService.Info($"Sercive status of {serviceStatus.ServiceName} is {svcStatus}");
+
+                        switch (svcStatus)
+                        {
+                            case ServiceControllerStatus.Paused:
+                                sc.Continue();
+                                break;
+                            case ServiceControllerStatus.Stopped:
+                                sc.Start();
+                                break;
+                            case ServiceControllerStatus.ContinuePending:
+                            case ServiceControllerStatus.PausePending:
+                            case ServiceControllerStatus.StartPending:
+                            case ServiceControllerStatus.StopPending:
+                                break;
+                        }
+
+                        svcStatus = sc.Status;
                     }
 
-                    svcStatus = sc.Status;
+                    report.UpdateProgress(serviceName, ProgressState.Complete);
+                    report.AddErrorMessage(serviceName, string.Format(Properties.Resources.Format_SucceedDoService, Properties.Resources.Word_Start));
                 }
-
-                report.UpdateProgress(serviceStatus.ServiceName, ProgressState.Complete);
-                progress?.Report(report);
-            }
-        }
-        
-        private void StopService(ServiceStatus serviceStatus, ProgressReportsModel report, IProgress<ProgressReportsModel> progress = null)
-        {
-            using (var sc = new ServiceController(serviceStatus.ServiceName))
-            {
-                report.UpdateProgress(serviceStatus.ServiceName, ProgressState.InProgress);
-                progress?.Report(report);
-
-                sc.Refresh();
-
-                if (sc.CanStop)
-                    sc.Stop();
-
-                var svcStatus = sc.Status;
-                while (svcStatus != ServiceControllerStatus.Stopped)
+                catch (Exception ex)
                 {
-                    sc.Refresh();
+                    report.UpdateProgress(serviceName, ProgressState.Failed);
+                    report.AddErrorMessage(serviceName, string.Format(Properties.Resources.Format_FailedDoService, Properties.Resources.Word_Start));
 
-                    switch (sc.Status)
-                    {
-                        case ServiceControllerStatus.Paused:
-                            sc.Continue();
-                            break;
-                        case ServiceControllerStatus.Running:
-                            sc.Stop();
-                            break;
-                        case ServiceControllerStatus.ContinuePending:
-                        case ServiceControllerStatus.PausePending:
-                        case ServiceControllerStatus.StartPending:
-                        case ServiceControllerStatus.StopPending:
-                            break;
-                    }
-
-                    svcStatus = sc.Status;
+                    this._LoggerService.Error($"Failed to start '{serviceName}'. Exception is {ex.Message}");
                 }
 
-                report.UpdateProgress(serviceStatus.ServiceName, ProgressState.Complete);
                 progress?.Report(report);
             }
         }
 
-        public bool ControlService(BitnamiRedmineStack stack, ServiceConfiguration configuration, IProgress<ProgressReportsModel> progress = null)
+        public void StopService(ServiceStatus serviceStatus, ProgressReportsModel report, IProgress<ProgressReportsModel> progress = null)
         {
-            if (stack == null)
-                throw new ArgumentNullException(nameof(stack));
-
-            if (configuration == null)
-                throw new ArgumentNullException(nameof(configuration));
-
-
-            // 開始するサービスを取得
-            var startServices = this.GetServiceDisplayNames(stack, new ServiceConfiguration
+            var serviceName = serviceStatus.ServiceName;
+            using (var sc = new ServiceController(serviceName))
             {
-                Apache = configuration.Apache,
-                MySql = configuration.MySql,
-                Redmine = configuration.Redmine,
-                Subversion = configuration.Subversion
-            }).ToArray();
-
-            // 停止するサービスを取得
-            var stopServices = this.GetServiceDisplayNames(stack, new ServiceConfiguration
-            {
-                Apache = !configuration.Apache,
-                MySql = !configuration.MySql,
-                Redmine = !configuration.Redmine,
-                Subversion = !configuration.Subversion
-            }).ToArray();
-
-            var serviceGroups = new[]
-            {
-                new { Services = startServices, RequireStart = true },
-                new { Services = stopServices,  RequireStart = false },
-            };
-            
-            // 全てのステータスをリセット
-            var report = new ProgressReportsModel(
-                startServices.Concat(stopServices).Select(status => new ProgressItemModel
+                try
                 {
-                    Name = status.ServiceName,
-                    Progress = ProgressState.NotStart
-                }));
+                    report.UpdateProgress(serviceName, ProgressState.InProgress);
+                    progress?.Report(report);
 
-            foreach (var group in serviceGroups)
-            {
-                foreach (var serviceStatus in group.Services)
-                {
-                    if (group.RequireStart)
-                        this.StartService(serviceStatus, report, progress);
-                    else
-                        this.StopService(serviceStatus, report, progress);
+                    var svcStatus = sc.Status;
+                    while (svcStatus != ServiceControllerStatus.Stopped)
+                    {
+                        sc.Refresh();
+
+                        svcStatus = sc.Status;
+
+                        this._LoggerService.Info($"Sercive status of {serviceStatus.ServiceName} is {svcStatus}");
+
+                        switch (svcStatus)
+                        {
+                            case ServiceControllerStatus.Paused:
+                                sc.Continue();
+                                break;
+                            case ServiceControllerStatus.Running:
+                                sc.Stop();
+                                break;
+                            case ServiceControllerStatus.ContinuePending:
+                            case ServiceControllerStatus.PausePending:
+                            case ServiceControllerStatus.StartPending:
+                            case ServiceControllerStatus.StopPending:
+                                break;
+                        }
+
+                        svcStatus = sc.Status;
+                    }
+
+                    report.UpdateProgress(serviceName, ProgressState.Complete);
+                    report.AddErrorMessage(serviceName, string.Format(Properties.Resources.Format_SucceedDoService, Properties.Resources.Word_Stop));
                 }
-            }
+                catch (Exception ex)
+                {
+                    report.UpdateProgress(serviceName, ProgressState.Failed);
+                    report.AddErrorMessage(serviceName, string.Format(Properties.Resources.Format_FailedDoService, Properties.Resources.Word_Stop));
 
-            return true;
+                    this._LoggerService.Error($"Failed to stop '{serviceName}'. Exception is {ex.Message}");
+                }
+
+                progress?.Report(report);
+            }
         }
 
         #endregion

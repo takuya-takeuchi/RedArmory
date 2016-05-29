@@ -1,4 +1,7 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight;
 
 namespace RedArmory.Models
 {
@@ -6,19 +9,58 @@ namespace RedArmory.Models
     public sealed class ProgressItemModel : ViewModelBase
     {
 
+        #region コンストラクタ
+
+        public ProgressItemModel()
+        {
+            this.ErrorMessages = new ObservableCollection<string>();
+        }
+
+        #endregion
+
         #region プロパティ
 
-        private string _Name;
+        private ObservableCollection<string> _ErrorMessages;
 
-        public string Name
+        public ObservableCollection<string> ErrorMessages
         {
             get
             {
-                return this._Name;
+                return this._ErrorMessages;
             }
             set
             {
-                this._Name = value;
+                this._ErrorMessages = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        private string _Key;
+
+        public string Key
+        {
+            get
+            {
+                return this._Key;
+            }
+            set
+            {
+                this._Key = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        private string _TaskName;
+
+        public string TaskName
+        {
+            get
+            {
+                return this._TaskName;
+            }
+            set
+            {
+                this._TaskName = value;
                 this.RaisePropertyChanged();
             }
         }

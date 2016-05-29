@@ -13,8 +13,11 @@ namespace RedArmory.Models.Services
         ServiceStartupType GetStartupType(string displayName);
 
         void SetStartupType(string displayName, ServiceStartupType startupType);
-        
-        bool ControlService(BitnamiRedmineStack stack, ServiceConfiguration configuration,IProgress<ProgressReportsModel> progress = null);
+
+        void StartService(ServiceStatus serviceStatus, ProgressReportsModel report, IProgress<ProgressReportsModel> progress = null);
+
+        void StopService(ServiceStatus serviceStatus, ProgressReportsModel report, IProgress<ProgressReportsModel> progress = null);
 
     }
+
 }

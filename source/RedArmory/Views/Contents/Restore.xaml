@@ -5,11 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:RedArmory.Models"
              xmlns:services="clr-namespace:RedArmory.Models.Services"
+             x:Name="_Root"
              d:DesignHeight="800"
              d:DesignWidth="1200"
              DataContext="{Binding Source={StaticResource Locator},
                                    Path=Restore}"
-             x:Name="_Root"
              mc:Ignorable="d">
     <UserControl.Resources>
         <DataTemplate x:Key="StackDataTemplate" DataType="{x:Type models:BackupRestoreModel}">
@@ -118,13 +118,13 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <StackPanel Orientation="Horizontal">
-                                <ComboBox MinWidth="500"
-                                          Name="_ComboBox"
+                                <ComboBox Name="_ComboBox"
+                                          MinWidth="500"
                                           Margin="5,5,5,5"
                                           HorizontalAlignment="Left"
                                           VerticalAlignment="Center"
                                           IsEditable="True"
-                                          ItemsSource="{Binding SelectedStack.BackupHistories}"
+                                          ItemsSource="{Binding SelectedStack.BackupHistories.View}"
                                           Text="{Binding SelectedStack.Directory,
                                                          UpdateSourceTrigger=PropertyChanged}"
                                           TextSearch.TextPath="OutputDirectory">
@@ -152,7 +152,8 @@
                                                 <Button Grid.Row="0"
                                                         Grid.RowSpan="2"
                                                         Grid.Column="2"
-                                                        Command="{Binding ElementName=_Root, Path=DataContext.SelectedStack.DeleteHistoryCommand}"
+                                                        Command="{Binding ElementName=_Root,
+                                                                          Path=DataContext.SelectedStack.DeleteHistoryCommand}"
                                                         CommandParameter="{Binding}"
                                                         Style="{StaticResource MaterialDesignFloatingActionButton}">
                                                     <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">

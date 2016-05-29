@@ -12,7 +12,12 @@ namespace RedArmory.ViewModels
 
         #region コンストラクタ
 
-        public BackupViewModel(IApplicationSettingService applicationSettingService, IBitnamiRedmineService bitnamiRedmineService, IBackupService backupService, ILoggerService loggerService)
+        public BackupViewModel(
+            IApplicationSettingService applicationSettingService, 
+            IBitnamiRedmineService bitnamiRedmineService, 
+            IBackupService backupService,
+            IDispatcherService dispatcherService,
+            ILoggerService loggerService)
             : base(loggerService)
         {
             if (applicationSettingService == null)
@@ -24,13 +29,16 @@ namespace RedArmory.ViewModels
             if (backupService == null)
                 throw new ArgumentNullException(nameof(backupService));
 
+            if (dispatcherService == null)
+                throw new ArgumentNullException(nameof(dispatcherService));
+
             if (loggerService == null)
                 throw new ArgumentNullException(nameof(loggerService));
 
             var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
 
             this.Stacks = new ObservableCollection<BackupModel>(bitNamiRedmineStacks.Select(
-                stack => new BackupModel(applicationSettingService, bitnamiRedmineService, backupService, loggerService, stack)));
+                stack => new BackupModel(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService,loggerService, stack)));
         }
 
         #endregion

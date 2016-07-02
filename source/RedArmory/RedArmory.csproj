@@ -7,7 +7,7 @@
     <ProjectGuid>{B473D048-EF35-431F-9A26-452750B6BB3A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RedArmory</RootNamespace>
+    <RootNamespace>Ouranos.RedArmory</RootNamespace>
     <AssemblyName>RedArmory</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

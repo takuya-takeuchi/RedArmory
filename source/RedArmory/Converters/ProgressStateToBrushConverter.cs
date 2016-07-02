@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Data;
 using System.Windows.Media;
-using RedArmory.Models;
+using Ouranos.RedArmory.Models;
 
-namespace RedArmory.Converters
+namespace Ouranos.RedArmory.Converters
 {
 
     /// <summary>

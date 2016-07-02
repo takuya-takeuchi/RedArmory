@@ -22,7 +22,7 @@ using FLOAT = Single; // Visual C++ では float
 using DOUBLE = Double; // Visual C++ では double
 */
 
-namespace RedArmory.Interop
+namespace Ouranos.RedArmory.Interop
 {
 
     /// <summary>

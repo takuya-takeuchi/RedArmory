@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace RedArmory.Models.Services
+namespace Ouranos.RedArmory.Models.Services
 {
 
     public interface IApplicationSettingService

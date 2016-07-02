@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
-using GalaSoft.MvvmLight.Views;
 using MaterialDesignThemes.Wpf;
-using RedArmory.ViewModels;
-using RedArmory.Views.Dialogs;
+using Ouranos.RedArmory.ViewModels;
+using Ouranos.RedArmory.Views.Dialogs;
 
-namespace RedArmory.Models.Services.Dialog
+namespace Ouranos.RedArmory.Models.Services.Dialog
 {
 
     /// <summary>

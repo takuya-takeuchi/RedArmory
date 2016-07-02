@@ -1,8 +1,7 @@
 ﻿using System.Globalization;
 using GalaSoft.MvvmLight;
-using RedArmory.Properties;
 
-namespace RedArmory.Models
+namespace Ouranos.RedArmory.Models
 {
     /// <summary>
     /// 多言語化されたリソースと、言語の切り替え機能を提供します。
@@ -33,12 +32,12 @@ namespace RedArmory.Models
             }
         }
 
-        private readonly Resources _Resources = new Resources();
+        private readonly Properties.Resources _Resources = new Properties.Resources();
 
         /// <summary>
         /// 多言語化されたリソースを取得します。
         /// </summary>
-        public Resources Resources
+        public Properties.Resources Resources
         {
             get
             {
@@ -52,7 +51,7 @@ namespace RedArmory.Models
 
         public void ChangeCulture(string name)
         {
-            Resources.Culture = CultureInfo.GetCultureInfo(name);
+            Properties.Resources.Culture = CultureInfo.GetCultureInfo(name);
             this.RaisePropertyChanged("Resources");
         }
 

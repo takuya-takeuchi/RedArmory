@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using RedArmory.Models;
-using RedArmory.Models.Services;
+using Ouranos.RedArmory.Models;
+using Ouranos.RedArmory.Models.Services;
 
-namespace RedArmory.ViewModels
+namespace Ouranos.RedArmory.ViewModels
 {
 
     public sealed class RestoreViewModel : BitnamiStackCommonViewModel<RestoreModel>

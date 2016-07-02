@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Xml;
 
-namespace RedArmory.Models.Services
+namespace Ouranos.RedArmory.Models.Services
 {
 
     public sealed class ApplicationSettingService : IApplicationSettingService

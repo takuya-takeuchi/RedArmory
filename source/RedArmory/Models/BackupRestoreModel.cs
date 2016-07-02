@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using RedArmory.Models.Services;
-using RedArmory.Models.Services.Dialog;
-using RedArmory.Properties;
+using Ouranos.RedArmory.Models.Services;
 
-namespace RedArmory.Models
+namespace Ouranos.RedArmory.Models
 {
 
     public abstract class BackupRestoreModel : ViewModelBase

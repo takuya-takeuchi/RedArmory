@@ -4,12 +4,12 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using RedArmory.Extensions;
-using RedArmory.Models.Services;
-using RedArmory.Models.Services.Dialog;
-using RedArmory.Properties;
+using Ouranos.RedArmory.Extensions;
+using Ouranos.RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services.Dialog;
+using Ouranos.RedArmory.Properties;
 
-namespace RedArmory.Models
+namespace Ouranos.RedArmory.Models
 {
 
     public sealed class BackupModel : BackupRestoreModel
@@ -141,7 +141,7 @@ namespace RedArmory.Models
             }
 
             // 空かどうか検証
-            if (!IsOutputDirectoryEmpty(directory.FullName))
+            if (!this.IsOutputDirectoryEmpty(directory.FullName))
             {
                 message = Resources.Msg_DirectoryIsNotEmpty;
                 var yesNoDialogService = new YesNoDialogService();

@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 
-namespace RedArmory.Models
+namespace Ouranos.RedArmory.Models
 {
 
     /// <summary>

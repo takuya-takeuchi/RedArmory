@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RedArmory.Models;
-using RedArmory.Models.Services;
+using Ouranos.RedArmory.Models;
+using Ouranos.RedArmory.Models.Services;
 
 namespace RedArmory.Test.Models
 {

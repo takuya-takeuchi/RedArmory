@@ -1,4 +1,4 @@
-﻿namespace RedArmory.Models
+﻿namespace Ouranos.RedArmory.Models
 {
 
     /// <summary>

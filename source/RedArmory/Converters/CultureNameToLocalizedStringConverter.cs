@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace RedArmory.Converters
+namespace Ouranos.RedArmory.Converters
 {
 
     public sealed class CultureNameToLocalizedStringConverter : IValueConverter

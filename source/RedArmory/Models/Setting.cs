@@ -1,9 +1,9 @@
 using System;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
-using RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services;
 
-namespace RedArmory.Models
+namespace Ouranos.RedArmory.Models
 {
 
     public class Setting : ViewModelBase

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using RedArmory.Properties;
+using Ouranos.RedArmory.Properties;
 
-namespace RedArmory.Models.Services
+namespace Ouranos.RedArmory.Models.Services
 {
 
     internal sealed class BackupService : IBackupService
@@ -101,7 +101,7 @@ namespace RedArmory.Models.Services
             var dirs = Directory.GetDirectories(sourceDir);
             foreach (var dir in dirs)
             {
-                CopyDirectory(dir, targetDir + Path.GetFileName(dir));
+                this.CopyDirectory(dir, targetDir + Path.GetFileName(dir));
             }
         }
 
@@ -255,7 +255,7 @@ namespace RedArmory.Models.Services
                 rule.ReportAction(ProgressState.InProgress);
 
                 this._LoggerService.Info($"Start copy {rule.Name}");
-                CopyDirectory(sourceDir, targetDir);
+                this.CopyDirectory(sourceDir, targetDir);
                 this._LoggerService.Info($"End copy {rule.Name}");
 
                 rule.ReportAction(ProgressState.Complete);
@@ -473,7 +473,7 @@ namespace RedArmory.Models.Services
 
                 rule.CheckAction(ProgressState.InProgress);
 
-                CopyDirectory(sourceDir, targetDir);
+                this.CopyDirectory(sourceDir, targetDir);
 
                 rule.CheckAction(ProgressState.Complete);
             }

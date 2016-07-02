@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Data;
-using RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services;
 
-namespace RedArmory.Converters
+namespace Ouranos.RedArmory.Converters
 {
 
     /// <summary>

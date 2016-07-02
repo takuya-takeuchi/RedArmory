@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
-using RedArmory.Models;
+using Ouranos.RedArmory.Models;
 
-namespace RedArmory.ViewModels
+namespace Ouranos.RedArmory.ViewModels
 {
 
     public sealed class ProgressDialogViewModel : ViewModelBase

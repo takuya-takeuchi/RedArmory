@@ -1,7 +1,7 @@
-using RedArmory.Models;
-using RedArmory.Properties;
+using Ouranos.RedArmory.Models;
+using Ouranos.RedArmory.Properties;
 
-namespace RedArmory.Extensions
+namespace Ouranos.RedArmory.Extensions
 {
 
     internal static class ServiceStatusExtension

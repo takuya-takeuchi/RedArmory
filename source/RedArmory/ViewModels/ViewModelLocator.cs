@@ -12,12 +12,11 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using System.Windows.Threading;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services;
 
-namespace RedArmory.ViewModels
+namespace Ouranos.RedArmory.ViewModels
 {
     /// <summary>
     /// This class contains static references to all the view models in the

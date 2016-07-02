@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace RedArmory.Models.Services
+namespace Ouranos.RedArmory.Models.Services
 {
 
     [DataContract]

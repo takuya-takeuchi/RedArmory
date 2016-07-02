@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace RedArmory.Models.Services
+namespace Ouranos.RedArmory.Models.Services
 {
 
     public sealed class DispatcherService : IDispatcherService

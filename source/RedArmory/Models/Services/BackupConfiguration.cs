@@ -1,4 +1,4 @@
-﻿namespace RedArmory.Models.Services
+﻿namespace Ouranos.RedArmory.Models.Services
 {
 
     public sealed class BackupConfiguration

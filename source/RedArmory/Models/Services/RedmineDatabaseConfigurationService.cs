@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Yaml.Serialization;
 
-namespace RedArmory.Models.Services
+namespace Ouranos.RedArmory.Models.Services
 {
 
     internal sealed class RedmineDatabaseConfigurationService : IRedmineDatabaseConfigurationService

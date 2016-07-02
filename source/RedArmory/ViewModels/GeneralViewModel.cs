@@ -2,10 +2,10 @@
 using System.Globalization;
 using System.Linq;
 using GalaSoft.MvvmLight;
-using RedArmory.Models;
-using RedArmory.Models.Services;
+using Ouranos.RedArmory.Models;
+using Ouranos.RedArmory.Models.Services;
 
-namespace RedArmory.ViewModels
+namespace Ouranos.RedArmory.ViewModels
 {
 
     public sealed class GeneralViewModel : ViewModelBase

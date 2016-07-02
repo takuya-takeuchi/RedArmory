@@ -1,10 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using RedArmory.Models;
-using RedArmory.Models.Services;
+using Ouranos.RedArmory.Models;
+using Ouranos.RedArmory.Models.Services;
 
-namespace RedArmory.ViewModels
+namespace Ouranos.RedArmory.ViewModels
 {
 
     public sealed class AboutViewModel : ViewModelBase

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace RedArmory.Extensions
+namespace Ouranos.RedArmory.Extensions
 {
 
     internal static class StringExtension

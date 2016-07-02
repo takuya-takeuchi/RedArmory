@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight.Views;
 using MaterialDesignThemes.Wpf;
-using RedArmory.ViewModels;
+using Ouranos.RedArmory.ViewModels;
 
-namespace RedArmory.Models.Services.Dialog
+namespace Ouranos.RedArmory.Models.Services.Dialog
 {
 
     /// <summary>

@@ -5,12 +5,12 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using GalaSoft.MvvmLight.Command;
-using RedArmory.Extensions;
-using RedArmory.Models.Services;
-using RedArmory.Models.Services.Dialog;
-using RedArmory.Properties;
+using Ouranos.RedArmory.Extensions;
+using Ouranos.RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services.Dialog;
+using Ouranos.RedArmory.Properties;
 
-namespace RedArmory.Models
+namespace Ouranos.RedArmory.Models
 {
 
     public sealed class RestoreModel : BackupRestoreModel

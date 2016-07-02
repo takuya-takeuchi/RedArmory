@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 
-namespace RedArmory.Models
+namespace Ouranos.RedArmory.Models
 {
 
     public sealed class ProgressItemModel : ViewModelBase

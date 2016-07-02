@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="RedArmory.Views.Contents.Settings.Services"
+﻿<UserControl x:Class="Ouranos.RedArmory.Views.Contents.Settings.Services"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:RedArmory.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:RedArmory.Models"
+             xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
+             xmlns:local="clr-namespace:Ouranos.RedArmory.ViewModels"
              Background="{StaticResource BackgroundBrush}"
              DataContext="{Binding Source={StaticResource Locator},
                                    Path=Setting}"

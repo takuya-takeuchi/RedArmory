@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace RedArmory
+namespace Ouranos.RedArmory
 {
     /// <summary>
     /// App.xaml の相互作用ロジック

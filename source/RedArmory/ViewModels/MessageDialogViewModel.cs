@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 
-namespace RedArmory.ViewModels
+namespace Ouranos.RedArmory.ViewModels
 {
 
     public sealed class MessageDialogViewModel : ViewModelBase

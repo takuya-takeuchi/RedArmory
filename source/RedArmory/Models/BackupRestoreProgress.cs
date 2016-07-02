@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RedArmory.Models
+namespace Ouranos.RedArmory.Models
 {
 
     public sealed class BackupRestoreProgress : Progress<ProgressReportsModel>

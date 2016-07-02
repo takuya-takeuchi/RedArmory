@@ -1,4 +1,4 @@
-﻿namespace RedArmory
+﻿namespace Ouranos.RedArmory
 {
     internal static class AssemblyProperty
     {
@@ -26,12 +26,12 @@
         /// <summary>
         /// アセンブリ マニフェストに含める、ファイル バージョンを定義します。
         /// </summary>
-        public const string FileVersion = "1.0.0.0";
+        public const string FileVersion = "1.1.1.0";
 
         /// <summary>
         /// アセンブリ マニフェストに含める、アセンブリ バージョンを定義します。
         /// </summary>
-        public const string Version = "1.0.0.0";
+        public const string Version = "1.1.1.0";
 
     }
 

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace RedArmory.Views.Contents
+namespace Ouranos.RedArmory.Views.Contents
 {
     /// <summary>
     /// Setting.xaml の相互作用ロジック

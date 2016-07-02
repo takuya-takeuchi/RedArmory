@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RedArmory.Models.Services
+namespace Ouranos.RedArmory.Models.Services
 {
 
     internal interface IRedmineDatabaseConfigurationService

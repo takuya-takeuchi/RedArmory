@@ -1,6 +1,6 @@
-﻿using RedArmory.Views.Dialogs;
+﻿using Ouranos.RedArmory.Views.Dialogs;
 
-namespace RedArmory.Models.Services.Dialog
+namespace Ouranos.RedArmory.Models.Services.Dialog
 {
 
     /// <summary>

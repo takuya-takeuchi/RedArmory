@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace RedArmory.Converters
+namespace Ouranos.RedArmory.Converters
 {
 
     /// <summary>

@@ -3,9 +3,9 @@ using System.Windows;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight;
-using RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services;
 
-namespace RedArmory.ViewModels
+namespace Ouranos.RedArmory.ViewModels
 {
 
     public class MainViewModel : ViewModelBase
@@ -28,10 +28,10 @@ namespace RedArmory.ViewModels
 
             this.Title = AssemblyProperty.Title;
 
-            Application.Current.Startup += CurrentOnStartup;
-            Application.Current.Exit += CurrentOnExit;
-            Application.Current.DispatcherUnhandledException += CurrentOnDispatcherUnhandledException;
-            Application.Current.LoadCompleted += CurrentOnLoadCompleted;
+            Application.Current.Startup += this.CurrentOnStartup;
+            Application.Current.Exit += this.CurrentOnExit;
+            Application.Current.DispatcherUnhandledException += this.CurrentOnDispatcherUnhandledException;
+            Application.Current.LoadCompleted += this.CurrentOnLoadCompleted;
         }
 
         #endregion

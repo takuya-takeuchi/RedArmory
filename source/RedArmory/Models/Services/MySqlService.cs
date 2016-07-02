@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using MySql.Data.MySqlClient;
 
-namespace RedArmory.Models.Services
+namespace Ouranos.RedArmory.Models.Services
 {
 
     internal sealed class MySqlService : IDatabaseService

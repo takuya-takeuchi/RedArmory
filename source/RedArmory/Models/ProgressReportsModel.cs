@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using GalaSoft.MvvmLight;
-using RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services;
 
-namespace RedArmory.Models
+namespace Ouranos.RedArmory.Models
 {
 
     public sealed class ProgressReportsModel : ViewModelBase

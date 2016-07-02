@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Text;
-using RedArmory.Interop;
+using Ouranos.RedArmory.Interop;
 
-namespace RedArmory.Models.Helpers
+namespace Ouranos.RedArmory.Models.Helpers
 {
 
     internal static class InteropHelper

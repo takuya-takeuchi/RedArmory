@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace RedArmory.Views.Dialogs
+namespace Ouranos.RedArmory.Views.Dialogs
 {
     /// <summary>
     /// ProgressDialog.xaml の相互作用ロジック

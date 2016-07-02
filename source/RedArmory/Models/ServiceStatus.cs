@@ -1,8 +1,8 @@
 using System;
 using GalaSoft.MvvmLight;
-using RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services;
 
-namespace RedArmory.Models
+namespace Ouranos.RedArmory.Models
 {
 
     public sealed class ServiceStatus : ViewModelBase

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.ServiceProcess;
 using Microsoft.Win32;
-using RedArmory.Models.Helpers;
+using Ouranos.RedArmory.Models.Helpers;
 
-namespace RedArmory.Models.Services
+namespace Ouranos.RedArmory.Models.Services
 {
 
     internal sealed class BitnamiRedmineService : IBitnamiRedmineService

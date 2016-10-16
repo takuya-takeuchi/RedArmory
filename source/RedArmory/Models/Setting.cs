@@ -1,7 +1,12 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using GalaSoft.MvvmLight;
+using Ouranos.RedArmory.Models.DatabaseObjects;
 using Ouranos.RedArmory.Models.Services;
+using Ouranos.RedArmory.ViewModels;
 
 namespace Ouranos.RedArmory.Models
 {
@@ -14,16 +19,33 @@ namespace Ouranos.RedArmory.Models
 
         #region フィールド
 
+        private readonly IDatabaseConnectorService _DatabaseConnectorService;
+
+        private readonly DatabaseConfiguration _DatabaseConfiguration;
+
         private readonly BitnamiRedmineStack _Stack;
 
         #endregion
 
         #region コンストラクタ
 
-        public Setting(IBitnamiRedmineService bitnamiRedmineService, BitnamiRedmineStack stack)
+        static Setting()
+        {
+            _EnumerationTypes = new[]
+            {
+                EnumerationType.DocumentCategory,
+                EnumerationType.IssuePriority,
+                EnumerationType.TimeEntryActivity
+            };
+        }
+
+        public Setting(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, BitnamiRedmineStack stack)
         {
             if (bitnamiRedmineService == null)
                 throw new ArgumentNullException(nameof(bitnamiRedmineService));
+
+            if (databaseConfigurationService == null)
+                throw new ArgumentNullException(nameof(databaseConfigurationService));
 
             if (stack == null)
                 throw new ArgumentNullException(nameof(stack));
@@ -39,12 +61,94 @@ namespace Ouranos.RedArmory.Models
             };
 
             var serviceStatuses = bitnamiRedmineService.GetServiceDisplayNames(stack, configuration);
-            this.ServiceStatuses = new ObservableCollection<ServiceStatus>(serviceStatuses);
+            this._ServiceStatuses = new ObservableCollection<ServiceStatus>(serviceStatuses);
+
+            this._DatabaseConfiguration = databaseConfigurationService.GetDatabaseConfiguration(stack).FirstOrDefault();
+            this._DatabaseConnectorService = new MySqlConnectorService(this._DatabaseConfiguration);
+
+            var projects = this._DatabaseConnectorService.GetProjects().ToList();
+            projects.Insert(0, new ProjectItem(new ProjectObject { Id = 0, Name = "[全体]" }));
+            this._Projects = new ObservableCollection<ProjectItem>(projects);
+
+            this._SelectedProject = this._Projects.First();
+            this._SelectedEnumerationType = EnumerationTypes.First();
+
+            this.UpdateSelectedEnumeration();
         }
 
         #endregion
 
         #region プロパティ
+
+        private static IEnumerable<EnumerationType> _EnumerationTypes;
+
+        public static IEnumerable<EnumerationType> EnumerationTypes
+        {
+            get
+            {
+                return _EnumerationTypes;
+            }
+        }
+
+        private ObservableCollection<ProjectItem> _Projects;
+
+        public ObservableCollection<ProjectItem> Projects
+        {
+            get
+            {
+                return this._Projects;
+            }
+        }
+
+        private EnumerationViewModel _SelectedEnumeration;
+
+        public EnumerationViewModel SelectedEnumeration
+        {
+            get
+            {
+                return this._SelectedEnumeration;
+            }
+            set
+            {
+                this._SelectedEnumeration = value;
+                value?.RefreshCommand.Execute(null);
+                this.RaisePropertyChanged();
+            }
+        }
+
+        private EnumerationType _SelectedEnumerationType;
+
+        public EnumerationType SelectedEnumerationType
+        {
+            get
+            {
+                return this._SelectedEnumerationType;
+            }
+            set
+            {
+                this._SelectedEnumerationType = value;
+                this.RaisePropertyChanged();
+
+                this.UpdateSelectedEnumeration();
+            }
+        }
+
+        private ProjectItem _SelectedProject;
+
+        public ProjectItem SelectedProject
+        {
+            get
+            {
+                return this._SelectedProject;
+            }
+            set
+            {
+                this._SelectedProject = value;
+                this.RaisePropertyChanged();
+
+                this.UpdateSelectedEnumeration();
+            }
+        }
 
         private ObservableCollection<ServiceStatus> _ServiceStatuses;
 
@@ -53,11 +157,6 @@ namespace Ouranos.RedArmory.Models
             get
             {
                 return this._ServiceStatuses;
-            }
-            set
-            {
-                this._ServiceStatuses = value;
-                this.RaisePropertyChanged();
             }
         }
 
@@ -82,6 +181,12 @@ namespace Ouranos.RedArmory.Models
         #endregion
 
         #region ヘルパーメソッド
+
+        private void UpdateSelectedEnumeration()
+        {
+
+            this.SelectedEnumeration = new EnumerationViewModel(this._DatabaseConfiguration, this._SelectedProject, this._SelectedEnumerationType);
+        }
 
         #endregion
 

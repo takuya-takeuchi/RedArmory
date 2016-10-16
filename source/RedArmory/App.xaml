@@ -1,11 +1,12 @@
 ﻿<Application x:Class="Ouranos.RedArmory.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:Ouranos.RedArmory.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+             xmlns:services="clr-namespace:Ouranos.RedArmory.Models.Services"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             xmlns:converters="clr-namespace:Ouranos.RedArmory.Converters"
              xmlns:viewModels="clr-namespace:Ouranos.RedArmory.ViewModels"
              d1p1:Ignorable="d"
              StartupUri="MainWindow.xaml">
@@ -97,6 +98,7 @@
             <!--  Size  -->
             <system:Double x:Key="ListBoxItemHeight">36</system:Double>
             <system:Double x:Key="IconSize">16</system:Double>
+            <system:Double x:Key="LargeIconSize">24</system:Double>
             <system:Double x:Key="IconPathSize">34</system:Double>
             <system:Double x:Key="HeaderBarHeight">50</system:Double>
             <system:Double x:Key="FooterBarHeight">50</system:Double>
@@ -120,6 +122,8 @@
                                                      IsHidden="False"
                                                      TriggerValue="True" />
             <converters:ServiceStartupTypeToStringConverter x:Key="ServiceStartupTypeToStringConverter" />
+            <converters:EnumerationTypeToStringConverter x:Key="EnumerationTypeToStringConverter" />
+            <converters:ProjectItemNameToStringConverter x:Key="ProjectItemNameToStringConverter" />
             <converters:BooleanReverseConverter x:Key="BooleanReverseConverter" />
             <converters:CultureNameToLocalizedStringConverter x:Key="CultureNameToLocalizedStringConverter" />
             <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" IsSourceUtc="True" />

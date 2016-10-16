@@ -75,6 +75,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Models\BitNamiRedmineService.cs" />
+    <Compile Include="Models\MySqlConnectorService.cs" />
     <Compile Include="Models\MySqlService.cs" />
     <Compile Include="Models\BackupService.cs" />
     <Compile Include="Models\RedmineDatabaseConfigurationService.cs" />

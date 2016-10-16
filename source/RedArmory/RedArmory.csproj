@@ -40,6 +40,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="De.TorstenMandelkow.MetroChart">
       <HintPath>..\..\assemblies\Modern UI (Metro) Charts for Windows 8, WPF, Silverlight\WPF\De.TorstenMandelkow.MetroChart.dll</HintPath>
     </Reference>
@@ -127,16 +131,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AssemblyProperty.cs" />
+    <Compile Include="Converters\ProjectItemNameToStringConverter.cs" />
     <Compile Include="Converters\ProgressStateToBrushConverter.cs" />
     <Compile Include="Converters\ProgressStateToStringConverter.cs" />
     <Compile Include="Converters\DateTimeToStringConverter.cs" />
     <Compile Include="Converters\BooleanReverseConverter.cs" />
     <Compile Include="Converters\CultureNameToLocalizedStringConverter.cs" />
+    <Compile Include="Converters\EnumerationTypeToStringConverter.cs" />
     <Compile Include="Extensions\ServiceStatusExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Interop\SafeNativeMethods.cs" />
     <Compile Include="Models\BackupModel.cs" />
     <Compile Include="Models\BackupRestoreProgress.cs" />
+    <Compile Include="Models\DatabaseObjects\ProjectObject.cs" />
+    <Compile Include="Models\DatabaseObjects\EnumerationObject.cs" />
+    <Compile Include="Models\EnumerationType.cs" />
+    <Compile Include="Models\ProjectItem.cs" />
+    <Compile Include="Models\EnumerationItem.cs" />
     <Compile Include="Models\ProgressReportsModel.cs" />
     <Compile Include="Converters\ServiceStartupTypeToStringConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -165,11 +176,13 @@
     <Compile Include="Models\Services\IApplicationSettingService.cs" />
     <Compile Include="Models\Services\IBackupService.cs" />
     <Compile Include="Models\Services\IBitnamiRedmineService.cs" />
+    <Compile Include="Models\Services\IDatabaseConnectorService.cs" />
     <Compile Include="Models\Services\IDatabaseService.cs" />
     <Compile Include="Models\Services\IDispatcherService.cs" />
     <Compile Include="Models\Services\ILoggerService.cs" />
     <Compile Include="Models\Services\IRedmineDatabaseConfigurationService.cs" />
     <Compile Include="Models\Services\LoggerService.cs" />
+    <Compile Include="Models\Services\MySqlConnectorService.cs" />
     <Compile Include="Models\Services\MySqlService.cs" />
     <Compile Include="Models\Services\RedmineDatabaseConfigurationService.cs" />
     <Compile Include="Models\Services\BitnamiRedmineStack.cs" />
@@ -177,6 +190,7 @@
     <Compile Include="Models\Services\RestoreSetting.cs" />
     <Compile Include="Models\Services\ServiceConfiguration.cs" />
     <Compile Include="Models\Services\ServiceStartupType.cs" />
+    <Compile Include="ViewModels\EnumerationViewModel.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Properties\Resources.ja-JP.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -208,6 +222,9 @@
     <Compile Include="Views\Contents\Settings\General.xaml.cs">
       <DependentUpon>General.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Contents\Settings\Enumerations.xaml.cs">
+      <DependentUpon>Enumerations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Contents\Settings\Services.xaml.cs">
       <DependentUpon>Services.xaml</DependentUpon>
     </Compile>
@@ -223,6 +240,10 @@
     <Compile Include="Views\Dialogs\YesNoDialog.xaml.cs">
       <DependentUpon>YesNoDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="Assets\appbar_arrow_upward.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\appbar_backup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -368,6 +389,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Contents\Settings\General.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Contents\Settings\Enumerations.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

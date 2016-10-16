@@ -223,6 +223,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Move down に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_Down {
+            get {
+                return ResourceManager.GetString("Tooltip_Down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   %LONGDATE% : yyyyMMdd hhmmss に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Tooltip_FolderNameLongDate {
@@ -246,6 +255,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Tooltip_FolderNameVersion {
             get {
                 return ResourceManager.GetString("Tooltip_FolderNameVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Save the changes に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_Save {
+            get {
+                return ResourceManager.GetString("Tooltip_Save", resourceCulture);
             }
         }
         
@@ -286,6 +304,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Move up に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_Up {
+            get {
+                return ResourceManager.GetString("Tooltip_Up", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   About this application に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_AboutThisApplication {
@@ -300,6 +327,24 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_Acknowledgements {
             get {
                 return ResourceManager.GetString("Word_Acknowledgements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Active に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Active {
+            get {
+                return ResourceManager.GetString("Word_Active", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Activities (time tracking) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Activities_TimeTracking {
+            get {
+                return ResourceManager.GetString("Word_Activities_TimeTracking", resourceCulture);
             }
         }
         
@@ -340,6 +385,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Default value に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_DefaultValue {
+            get {
+                return ResourceManager.GetString("Word_DefaultValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Description に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Description {
@@ -354,6 +408,24 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_Destination {
             get {
                 return ResourceManager.GetString("Word_Destination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Document categories に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_DocumentCategories {
+            get {
+                return ResourceManager.GetString("Word_DocumentCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Enumeration Type に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_EnumerationType {
+            get {
+                return ResourceManager.GetString("Word_EnumerationType", resourceCulture);
             }
         }
         
@@ -376,6 +448,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Issue priorities に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_IssuePriorities {
+            get {
+                return ResourceManager.GetString("Word_IssuePriorities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Language に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Language {
@@ -390,6 +471,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_Licence {
             get {
                 return ResourceManager.GetString("Word_Licence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Name に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Name {
+            get {
+                return ResourceManager.GetString("Word_Name", resourceCulture);
             }
         }
         
@@ -493,6 +583,24 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   [All Projects] に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_ProjectAll {
+            get {
+                return ResourceManager.GetString("Word_ProjectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Save に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Save {
+            get {
+                return ResourceManager.GetString("Word_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Select folder you want to restore に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_SelectSourceDirectoryTitle {
@@ -556,6 +664,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Sort に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Sort {
+            get {
+                return ResourceManager.GetString("Word_Sort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Source に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Source {
@@ -597,6 +714,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_Stop {
             get {
                 return ResourceManager.GetString("Word_Stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Target Project に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TargetProject {
+            get {
+                return ResourceManager.GetString("Word_TargetProject", resourceCulture);
             }
         }
         

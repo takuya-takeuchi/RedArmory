@@ -32,7 +32,7 @@ namespace Ouranos.RedArmory.ViewModels
             };
         }
 
-        public SettingViewModel(IBitnamiRedmineService bitnamiRedmineService, ILoggerService loggerService)
+        public SettingViewModel(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ILoggerService loggerService)
         {
             if (bitnamiRedmineService == null)
                 throw new ArgumentNullException(nameof(bitnamiRedmineService));
@@ -43,8 +43,8 @@ namespace Ouranos.RedArmory.ViewModels
             this._LoggerService = loggerService;
             var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
 
-            this.Stacks = new ObservableCollection<Setting>(bitNamiRedmineStacks.Select(stack => new Setting(bitnamiRedmineService, stack)));
-            this.IsEmptyStacks = !this.Stacks.Any();
+            this.Settings = new ObservableCollection<Setting>(bitNamiRedmineStacks.Select(stack => new Setting(bitnamiRedmineService, databaseConfigurationService, stack)));
+            this.IsEmptyStacks = !this.Settings.Any();
         }
 
         #endregion
@@ -78,33 +78,33 @@ namespace Ouranos.RedArmory.ViewModels
             }
         }
 
-        private Setting _SelectedStack;
+        private Setting _SelectedSetting;
 
-        public Setting SelectedStack
+        public Setting SelectedSetting
         {
             get
             {
-                return this._SelectedStack;
+                return this._SelectedSetting;
             }
             set
             {
-                this._SelectedStack = value;
+                this._SelectedSetting = value;
 
                 this.RaisePropertyChanged();
             }
         }
 
-        private ObservableCollection<Setting> _Stacks;
+        private ObservableCollection<Setting> _Settings;
 
-        public ObservableCollection<Setting> Stacks
+        public ObservableCollection<Setting> Settings
         {
             get
             {
-                return this._Stacks;
+                return this._Settings;
             }
             set
             {
-                this._Stacks = value;
+                this._Settings = value;
                 this.RaisePropertyChanged();
             }
         }

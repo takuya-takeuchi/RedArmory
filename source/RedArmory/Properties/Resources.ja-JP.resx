@@ -318,4 +318,46 @@
   <data name="Msg_RestoreSkip" xml:space="preserve">
     <value>復元がスキップされました。</value>
   </data>
+  <data name="Tooltip_Save" xml:space="preserve">
+    <value>変更を保存します</value>
+  </data>
+  <data name="Word_Active" xml:space="preserve">
+    <value>有効</value>
+  </data>
+  <data name="Word_Activities_TimeTracking" xml:space="preserve">
+    <value>作業分類 (時間管理)</value>
+  </data>
+  <data name="Word_DefaultValue" xml:space="preserve">
+    <value>デフォルト値</value>
+  </data>
+  <data name="Word_DocumentCategories" xml:space="preserve">
+    <value>文書カテゴリ</value>
+  </data>
+  <data name="Word_IssuePriorities" xml:space="preserve">
+    <value>チケットの優先度</value>
+  </data>
+  <data name="Word_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="Word_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Word_Sort" xml:space="preserve">
+    <value>ソート</value>
+  </data>
+  <data name="Word_EnumerationType" xml:space="preserve">
+    <value>列挙項目の種別</value>
+  </data>
+  <data name="Word_ProjectAll" xml:space="preserve">
+    <value>[プロジェクト全体]</value>
+  </data>
+  <data name="Word_TargetProject" xml:space="preserve">
+    <value>対象プロジェクト</value>
+  </data>
+  <data name="Tooltip_Down" xml:space="preserve">
+    <value>下へ</value>
+  </data>
+  <data name="Tooltip_Up" xml:space="preserve">
+    <value>上へ</value>
+  </data>
 </root>

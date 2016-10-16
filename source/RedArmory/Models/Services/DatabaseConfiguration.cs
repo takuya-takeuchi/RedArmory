@@ -1,7 +1,7 @@
 ﻿namespace Ouranos.RedArmory.Models.Services
 {
 
-    internal sealed class DatabaseConfiguration
+    public sealed class DatabaseConfiguration
     {
 
         #region コンストラクタ

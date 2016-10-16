@@ -3,7 +3,7 @@
 namespace Ouranos.RedArmory.Models.Services
 {
 
-    internal interface IRedmineDatabaseConfigurationService
+    public interface IRedmineDatabaseConfigurationService
     {
 
         IEnumerable<DatabaseConfiguration> GetDatabaseConfiguration(BitnamiRedmineStack info);

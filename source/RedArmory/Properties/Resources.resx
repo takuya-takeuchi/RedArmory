@@ -318,4 +318,46 @@
   <data name="Msg_RestoreSkip" xml:space="preserve">
     <value>Restore is skipped.</value>
   </data>
+  <data name="Tooltip_Save" xml:space="preserve">
+    <value>Save the changes</value>
+  </data>
+  <data name="Word_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Word_Activities_TimeTracking" xml:space="preserve">
+    <value>Activities (time tracking)</value>
+  </data>
+  <data name="Word_DefaultValue" xml:space="preserve">
+    <value>Default value</value>
+  </data>
+  <data name="Word_DocumentCategories" xml:space="preserve">
+    <value>Document categories</value>
+  </data>
+  <data name="Word_IssuePriorities" xml:space="preserve">
+    <value>Issue priorities</value>
+  </data>
+  <data name="Word_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Word_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Word_Sort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="Word_ProjectAll" xml:space="preserve">
+    <value>[All Projects]</value>
+  </data>
+  <data name="Word_EnumerationType" xml:space="preserve">
+    <value>Enumeration Type</value>
+  </data>
+  <data name="Word_TargetProject" xml:space="preserve">
+    <value>Target Project</value>
+  </data>
+  <data name="Tooltip_Down" xml:space="preserve">
+    <value>Move down</value>
+  </data>
+  <data name="Tooltip_Up" xml:space="preserve">
+    <value>Move up</value>
+  </data>
 </root>

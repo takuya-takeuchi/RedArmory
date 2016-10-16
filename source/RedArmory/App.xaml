@@ -129,6 +129,7 @@
             <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" IsSourceUtc="True" />
             <converters:ProgressStateToStringConverter x:Key="ProgressStateToStringConverter" />
             <converters:ProgressStateToBrushConverter x:Key="ProgressStateToBrushConverter" />
+            <converters:CollectionCountToVisibilityConverter x:Key="CollectionCountToVisibilityConverter" IsHidden="False" TriggerCount="1" />
 
             <!--  Chart  -->
             <Style x:Key="MinimalChartStyle" TargetType="metroChart:ChartBase">

@@ -37,7 +37,7 @@
                            Foreground="{StaticResource IdealForegroundColorBrush}"
                            Text="Backup" />
             </Grid>
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding Stacks, Converter={StaticResource CollectionCountToVisibilityConverter}}">
                 <ListBox Name="_StackListBox"
                          Width="250"
                          Background="{StaticResource SecondaryAccentBrush}"
@@ -193,7 +193,9 @@
                                     </TextBlock>
                                 </TextBox.ToolTip>
                             </TextBox>
-                            <TextBlock Margin="5,0,0,0" FontWeight="Bold" Text="{Binding SelectedStack.OutputDirectory}" />
+                            <TextBlock Margin="5,0,0,0"
+                                       FontWeight="Bold"
+                                       Text="{Binding SelectedStack.OutputDirectory}" />
                         </StackPanel>
                         <!--#endregion-->
                         <!--#region Options-->

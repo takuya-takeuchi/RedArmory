@@ -131,6 +131,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AssemblyProperty.cs" />
+    <Compile Include="Converters\CollectionCountToVisibilityConverter.cs" />
     <Compile Include="Converters\ProjectItemNameToStringConverter.cs" />
     <Compile Include="Converters\ProgressStateToBrushConverter.cs" />
     <Compile Include="Converters\ProgressStateToStringConverter.cs" />

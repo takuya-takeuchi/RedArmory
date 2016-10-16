@@ -22,7 +22,7 @@
                    VerticalAlignment="Stretch"
                    IsEnabled="{Binding HasStacks}"
                    LastChildFill="True">
-            <ScrollViewer>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding Settings, Converter={StaticResource CollectionCountToVisibilityConverter}}">
                 <ListBox Name="_OperatingSystemListBox"
                          Width="250"
                          Background="{StaticResource SecondaryAccentBrush}"
@@ -36,9 +36,32 @@
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <ScrollViewer Grid.Row="0"
+                <!--  52 は 36 + ((40 - 24) / 2) * 2  -->
+                <Grid Grid.Row="0"
+                      Height="52"
+                      Background="{StaticResource SubHeaderBackgroundBrush}">
+                    <StackPanel Orientation="Horizontal">
+                        <Viewbox Width="24"
+                                 Height="24"
+                                 Margin="16 0 6 0"
+                                 VerticalAlignment="Center">
+                            <Path Width="40"
+                                  Height="40"
+                                  Data="M17.129,16.75 C20.588867,16.75 20.589001,16.75 20.589001,16.75 L20.589001,28.337 17.129066,28.337 z M17.129,9.7539997 L20.589001,9.7539997 20.589001,13.242 17.129032,13.242 z M18.921801,3.8392997 C10.683644,3.8392999 4.0053,10.517645 4.0053,18.7558 4.0053,26.993956 10.683644,33.672298 18.921801,33.672298 27.159956,33.672298 33.838299,26.993956 33.838299,18.7558 33.838299,10.517645 27.159956,3.8392999 18.921801,3.8392997 z M19.003,0 C29.498068,0 38.006001,8.5079327 38.006001,19.003 38.006001,29.498068 29.498068,38.006001 19.003,38.006001 8.5079327,38.006001 0,29.498068 0,19.003 0,8.5079327 8.5079327,0 19.003,0 z"
+                                  Fill="{StaticResource IdealForegroundColorBrush}"
+                                  Stretch="Uniform" />
+                        </Viewbox>
+                        <Label VerticalAlignment="Center"
+                               Content="{Binding SelectedSetting.Stack.InstallLocation}"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Foreground="{StaticResource IdealForegroundColorBrush}" />
+                    </StackPanel>
+                </Grid>
+                <ScrollViewer Grid.Row="1"
                               Grid.Column="0"
                               Width="Auto"
                               Height="Auto"

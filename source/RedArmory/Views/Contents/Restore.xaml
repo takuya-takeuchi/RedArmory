@@ -38,7 +38,7 @@
                            Foreground="{StaticResource IdealForegroundColorBrush}"
                            Text="Restore" />
             </Grid>
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding Stacks, Converter={StaticResource CollectionCountToVisibilityConverter}}">
                 <ListBox Name="_StackListBox"
                          Width="250"
                          Background="{StaticResource SecondaryAccentBrush}"

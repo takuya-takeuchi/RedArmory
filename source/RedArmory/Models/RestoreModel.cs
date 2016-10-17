@@ -302,7 +302,7 @@ namespace Ouranos.RedArmory.Models
                 }
                 else
                 {
-                    message = Resources.Msg_BackupComplete;
+                    message = Resources.Msg_RestoreComplete;
                 }
             }
             catch (Exception ex)

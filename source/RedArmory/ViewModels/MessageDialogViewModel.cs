@@ -3,7 +3,7 @@
 namespace Ouranos.RedArmory.ViewModels
 {
 
-    public sealed class MessageDialogViewModel : ViewModelBase
+    internal sealed class MessageDialogViewModel : ViewModelBase
     {
 
         #region イベント

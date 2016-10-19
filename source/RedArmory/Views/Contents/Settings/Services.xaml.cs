@@ -5,7 +5,7 @@ namespace Ouranos.RedArmory.Views.Contents.Settings
     /// <summary>
     /// Services.xaml の相互作用ロジック
     /// </summary>
-    public partial class Services : UserControl
+    internal partial class Services : UserControl
     {
         public Services()
         {

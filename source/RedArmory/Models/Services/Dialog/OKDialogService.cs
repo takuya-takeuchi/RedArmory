@@ -6,7 +6,7 @@ namespace Ouranos.RedArmory.Models.Services.Dialog
     /// <summary>
     /// ダイアログの表示機能を提供します。このクラスは継承できません。
     /// </summary>
-    public sealed class OKDialogService : DialogServiceBase<OKDialog>
+    internal sealed class OKDialogService : DialogServiceBase<OKDialog>
     {
     }
 

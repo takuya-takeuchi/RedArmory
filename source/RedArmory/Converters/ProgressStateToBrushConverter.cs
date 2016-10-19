@@ -9,7 +9,7 @@ namespace Ouranos.RedArmory.Converters
     /// <summary>
     /// <see cref="ProgressState"/>を<see cref="Brush"/>に変換します。このクラスは継承できません。
     /// </summary>
-    public sealed class ProgressStateToBrushConverter : IValueConverter
+    internal sealed class ProgressStateToBrushConverter : IValueConverter
     {
 
         /// <summary>

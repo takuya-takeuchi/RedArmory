@@ -22,7 +22,7 @@ namespace Ouranos.RedArmory.ViewModels
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.
     /// </summary>
-    public class ViewModelLocator
+    internal class ViewModelLocator
     {
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
@@ -41,23 +41,45 @@ namespace Ouranos.RedArmory.ViewModels
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
+            
+            if (!SimpleIoc.Default.IsRegistered<System.Windows.Threading.Dispatcher>())
+                SimpleIoc.Default.Register(() => System.Windows.Application.Current.Dispatcher);
 
-            SimpleIoc.Default.Register(() => System.Windows.Application.Current.Dispatcher);
+            Register<ILoggerService, LoggerService>();
+            Register<IDispatcherService, DispatcherService>();
+            Register<IApplicationSettingService, ApplicationSettingService>();
+            Register<IRedmineDatabaseConfigurationService, RedmineDatabaseConfigurationService>();
+            Register<IDatabaseService, MySqlService>();
+            Register<IBackupService, BackupService>();
+            Register<IBitnamiRedmineService, BitnamiRedmineService>();
 
-            SimpleIoc.Default.Register<ILoggerService, LoggerService>();
-            SimpleIoc.Default.Register<IDispatcherService, DispatcherService>();
-            SimpleIoc.Default.Register<IApplicationSettingService, ApplicationSettingService>();
-            SimpleIoc.Default.Register<IRedmineDatabaseConfigurationService, RedmineDatabaseConfigurationService>();
-            SimpleIoc.Default.Register<IDatabaseService, MySqlService>();
-            SimpleIoc.Default.Register<IBackupService, BackupService>();
-            SimpleIoc.Default.Register<IBitnamiRedmineService, BitnamiRedmineService>();
+            Register<MainViewModel>();
+            Register<AboutViewModel>();
+            Register<BackupViewModel>();
+            Register<GeneralViewModel>();
+            Register<RestoreViewModel>();
+            Register<SettingViewModel>();
+        }
 
-            SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<AboutViewModel>();
-            SimpleIoc.Default.Register<BackupViewModel>();
-            SimpleIoc.Default.Register<GeneralViewModel>();
-            SimpleIoc.Default.Register<RestoreViewModel>();
-            SimpleIoc.Default.Register<SettingViewModel>();
+        private static void Register<T>(System.Func<T> factory)
+        {
+            if (!SimpleIoc.Default.IsRegistered<T>())
+                SimpleIoc.Default.Register(() => factory);
+        }
+
+        private static void Register<T>()
+            where T : class
+        {
+            if (!SimpleIoc.Default.IsRegistered<T>())
+                SimpleIoc.Default.Register<T>();
+        }
+
+        private static void Register<T, U>()
+            where T : class
+            where U : class
+        {
+            if (!SimpleIoc.Default.IsRegistered<T>())
+                SimpleIoc.Default.Register<T, U>();
         }
 
         public AboutViewModel About
@@ -107,7 +129,7 @@ namespace Ouranos.RedArmory.ViewModels
                 return ServiceLocator.Current.GetInstance<SettingViewModel>();
             }
         }
-        
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

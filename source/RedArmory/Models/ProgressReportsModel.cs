@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using GalaSoft.MvvmLight;
@@ -20,16 +19,12 @@ namespace Ouranos.RedArmory.Models
         #region コンストラクタ
 
         public ProgressReportsModel(IEnumerable<ProgressItemModel> progressItem)
+            :this(null, progressItem)
         {
-            this._DispatcherService = null;
-            this.Progresses = new ObservableCollection<ProgressItemModel>(progressItem);
         }
 
         public ProgressReportsModel(IDispatcherService dispatcherService, IEnumerable<ProgressItemModel> progressItem)
         {
-            if (dispatcherService == null)
-                throw new ArgumentNullException(nameof(dispatcherService));
-
             this._DispatcherService = dispatcherService;
             this.Progresses = new ObservableCollection<ProgressItemModel>(progressItem);
         }
@@ -60,7 +55,15 @@ namespace Ouranos.RedArmory.Models
         public void AddErrorMessage(string name, string message)
         {
             var target = this._Progresses.FirstOrDefault(model => model.Key.Equals(name));
-            this._DispatcherService.SafeAction(() => target?.ErrorMessages.Add(message));
+
+            if (this._DispatcherService != null)
+            {
+                this._DispatcherService.SafeAction(() => target?.ErrorMessages.Add(message));
+            }
+            else
+            {
+                target?.ErrorMessages.Add(message);
+            }
         }
 
         public void UpdateProgress(string name, ProgressState state)

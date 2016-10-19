@@ -8,7 +8,7 @@
              d:DesignHeight="500"
              d:DesignWidth="700"
              Background="{StaticResource BackgroundBrush}"
-             mc:Ignorable="d">
+             mc:Ignorable="d" x:ClassModifier="internal">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

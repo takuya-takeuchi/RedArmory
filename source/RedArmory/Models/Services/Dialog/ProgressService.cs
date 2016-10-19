@@ -11,7 +11,7 @@ namespace Ouranos.RedArmory.Models.Services.Dialog
     /// <summary>
     /// ダイアログの表示機能を提供します。このクラスは継承できません。
     /// </summary>
-    public sealed class ProgressDialogService : DialogServiceBase<ProgressDialog>
+    internal sealed class ProgressDialogService : DialogServiceBase<ProgressDialog>
     {
 
         #region イベント

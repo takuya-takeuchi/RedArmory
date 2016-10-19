@@ -7,7 +7,7 @@ using Ouranos.RedArmory.Models.Services;
 namespace Ouranos.RedArmory.ViewModels
 {
 
-    public abstract class BitnamiStackCommonViewModel<T> : ViewModelBase
+    internal abstract class BitnamiStackCommonViewModel<T> : ViewModelBase
         where T : BackupRestoreModel
     {
 

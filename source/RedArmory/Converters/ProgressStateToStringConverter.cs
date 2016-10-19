@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Converters
     /// <summary>
     /// <see cref="ProgressState"/>をカルチャに応じた文字列に変換します。このクラスは継承できません。
     /// </summary>
-    public sealed class ProgressStateToStringConverter : IValueConverter
+    internal sealed class ProgressStateToStringConverter : IValueConverter
     {
 
         /// <summary>

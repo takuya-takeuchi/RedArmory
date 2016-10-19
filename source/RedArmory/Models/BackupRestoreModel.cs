@@ -7,7 +7,7 @@ using Ouranos.RedArmory.Models.Services;
 namespace Ouranos.RedArmory.Models
 {
 
-    public abstract class BackupRestoreModel : ViewModelBase
+    internal abstract class BackupRestoreModel : ViewModelBase
     {
 
         #region フィールド

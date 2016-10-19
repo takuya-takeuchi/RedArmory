@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Data;
 using Ouranos.RedArmory.Models;
-using Ouranos.RedArmory.Models.Services;
 
 namespace Ouranos.RedArmory.Converters
 {
@@ -9,7 +8,7 @@ namespace Ouranos.RedArmory.Converters
     /// <summary>
     /// <see cref="EnumerationType"/> から <see cref="string"/> への変換を行うコンバーターを表します。このクラスは継承できません。
     /// </summary>
-    public sealed class EnumerationTypeToStringConverter : IValueConverter
+    internal sealed class EnumerationTypeToStringConverter : IValueConverter
     {
 
         /// <summary>

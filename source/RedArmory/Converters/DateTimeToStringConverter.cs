@@ -7,7 +7,7 @@ namespace Ouranos.RedArmory.Converters
     /// <summary>
     /// <see cref="DateTime"/>をカルチャに応じた文字列に変換します。このクラスは継承できません。
     /// </summary>
-    public sealed class DateTimeToStringConverter : IValueConverter
+    internal sealed class DateTimeToStringConverter : IValueConverter
     {
 
         public bool IsSourceUtc

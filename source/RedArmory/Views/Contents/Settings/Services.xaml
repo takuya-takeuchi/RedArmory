@@ -10,7 +10,7 @@
              Background="{StaticResource BackgroundBrush}"
              DataContext="{Binding Source={StaticResource Locator},
                                    Path=Setting}"
-             mc:Ignorable="d">
+             mc:Ignorable="d" x:ClassModifier="internal">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,7 +10,7 @@ using Ouranos.RedArmory.ViewModels;
 namespace Ouranos.RedArmory.Models
 {
 
-    public class Setting : ViewModelBase
+    internal sealed class Setting : ViewModelBase
     {
 
         #region ƒCƒxƒ“ƒg

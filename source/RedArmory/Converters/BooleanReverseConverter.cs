@@ -7,7 +7,7 @@ namespace Ouranos.RedArmory.Converters
     /// <summary>
     /// ブール値の逆転を行うコンバーターを表します。このクラスは継承できません。
     /// </summary>
-    public sealed class BooleanReverseConverter : IValueConverter
+    internal sealed class BooleanReverseConverter : IValueConverter
     {
 
         /// <summary>

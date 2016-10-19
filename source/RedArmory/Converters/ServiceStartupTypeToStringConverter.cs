@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Converters
     /// <summary>
     /// <see cref="ServiceStartupType"/> から <see cref="string"/> への変換を行うコンバーターを表します。このクラスは継承できません。
     /// </summary>
-    public sealed class ServiceStartupTypeToStringConverter : IValueConverter
+    internal sealed class ServiceStartupTypeToStringConverter : IValueConverter
     {
 
         /// <summary>

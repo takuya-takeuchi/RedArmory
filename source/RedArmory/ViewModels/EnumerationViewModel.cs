@@ -208,7 +208,8 @@ namespace Ouranos.RedArmory.ViewModels
             var type = this._EnumerationType.ToString();
             var items = this._DatabaseConnectorService.GetEnumerations().
                 Where(item => item.ProjectId == projectId).
-                Where(item => item.Type == type);
+                Where(item => item.Type == type).
+                OrderBy(item => item.Position);
 
             foreach (var item in items)
                 this.Items.Add(item);

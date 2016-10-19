@@ -6,6 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="300"
              d:DesignWidth="300"
+             x:ClassModifier="internal"
              mc:Ignorable="d">
     <Grid Margin="16">
         <Grid.RowDefinitions>

@@ -11,7 +11,7 @@ namespace Ouranos.RedArmory.Models.Services.Dialog
     /// <summary>
     /// ダイアログの表示機能を提供します。このクラスは抽象クラスです。
     /// </summary>
-    public abstract class DialogServiceBase<T> : IDialogService
+    internal abstract class DialogServiceBase<T> : IDialogService
         where T : FrameworkElement, new()
     {
 

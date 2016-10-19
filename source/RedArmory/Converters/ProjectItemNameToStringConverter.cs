@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Data;
 using Ouranos.RedArmory.Models;
-using Ouranos.RedArmory.Models.Services;
 
 namespace Ouranos.RedArmory.Converters
 {
@@ -9,7 +8,7 @@ namespace Ouranos.RedArmory.Converters
     /// <summary>
     /// <see cref="ProjectItem.Name"/> を 適切な表現への変換を行うコンバーターを表します。このクラスは継承できません。
     /// </summary>
-    public sealed class ProjectItemNameToStringConverter : IValueConverter
+    internal sealed class ProjectItemNameToStringConverter : IValueConverter
     {
 
         /// <summary>

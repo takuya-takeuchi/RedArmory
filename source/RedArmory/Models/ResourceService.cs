@@ -6,7 +6,7 @@ namespace Ouranos.RedArmory.Models
     /// <summary>
     /// 多言語化されたリソースと、言語の切り替え機能を提供します。
     /// </summary>
-    public sealed class ResourceService : ViewModelBase
+    internal sealed class ResourceService : ViewModelBase
     {
 
         #region コンストラクタ

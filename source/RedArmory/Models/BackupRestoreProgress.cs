@@ -3,7 +3,7 @@
 namespace Ouranos.RedArmory.Models
 {
 
-    public sealed class BackupRestoreProgress : Progress<ProgressReportsModel>
+    internal sealed class BackupRestoreProgress : Progress<ProgressReportsModel>
     {
 
         #region イベント

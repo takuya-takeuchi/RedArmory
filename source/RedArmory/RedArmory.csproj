@@ -91,6 +91,10 @@
       <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Mono.Options, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Options.4.4.0.0\lib\net4-client\Mono.Options.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
@@ -141,7 +145,10 @@
     <Compile Include="Converters\EnumerationTypeToStringConverter.cs" />
     <Compile Include="Extensions\ServiceStatusExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Interfaces\RestoreEngine.cs" />
+    <Compile Include="Interfaces\BackupEngine.cs" />
     <Compile Include="Interop\SafeNativeMethods.cs" />
+    <Compile Include="Models\Helpers\Utility.cs" />
     <Compile Include="Models\BackupModel.cs" />
     <Compile Include="Models\BackupRestoreProgress.cs" />
     <Compile Include="Models\DatabaseObjects\ProjectObject.cs" />

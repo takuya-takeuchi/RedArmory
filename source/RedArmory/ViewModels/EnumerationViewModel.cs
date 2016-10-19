@@ -11,7 +11,7 @@ using Ouranos.RedArmory.Models.Services;
 namespace Ouranos.RedArmory.ViewModels
 {
 
-    public class EnumerationViewModel : ViewModelBase
+    internal class EnumerationViewModel : ViewModelBase
     {
 
         #region フィールド

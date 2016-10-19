@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Converters
     /// <summary>
     /// ブール値から Visibility 列挙値への変換や、その逆の変換を行うコンバーターを表します。このクラスは継承できません。
     /// </summary>
-    public sealed class BooleanToVisibilityConverter : IValueConverter
+    internal sealed class BooleanToVisibilityConverter : IValueConverter
     {
 
         private bool _IsHidden;

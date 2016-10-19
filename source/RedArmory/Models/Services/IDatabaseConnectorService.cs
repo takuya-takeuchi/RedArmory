@@ -3,7 +3,7 @@
 namespace Ouranos.RedArmory.Models.Services
 {
 
-    public interface IDatabaseConnectorService
+    internal interface IDatabaseConnectorService
     {
 
         IEnumerable<EnumerationItem> GetEnumerations();

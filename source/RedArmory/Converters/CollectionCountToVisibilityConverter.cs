@@ -9,7 +9,7 @@ namespace Ouranos.RedArmory.Converters
     /// <summary>
     /// コレクションの要素数が指定した要素数以下の時、要素の Visibility 列挙値を指定した Visibility へ変換するコンバーターを表します。このクラスは継承できません。
     /// </summary>
-    public sealed class CollectionCountToVisibilityConverter : IValueConverter
+    internal sealed class CollectionCountToVisibilityConverter : IValueConverter
     {
 
         private bool _IsHidden;

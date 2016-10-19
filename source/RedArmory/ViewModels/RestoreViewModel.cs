@@ -7,7 +7,7 @@ using Ouranos.RedArmory.Models.Services;
 namespace Ouranos.RedArmory.ViewModels
 {
 
-    public sealed class RestoreViewModel : BitnamiStackCommonViewModel<RestoreModel>
+    internal sealed class RestoreViewModel : BitnamiStackCommonViewModel<RestoreModel>
     {
 
         #region コンストラクタ

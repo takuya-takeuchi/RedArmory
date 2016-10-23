@@ -360,4 +360,127 @@
   <data name="Tooltip_Up" xml:space="preserve">
     <value>Move up</value>
   </data>
+  <data name="Tooltip_CreateTaskSchedule" xml:space="preserve">
+    <value>Create task from this setting and add to task scheduler</value>
+  </data>
+  <data name="Word_CreateTaskSchedule" xml:space="preserve">
+    <value>Create task schedule</value>
+  </data>
+  <data name="Word_TaskDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Word_TaskName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Word_Trigger" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
+  <data name="Word_TriggerDaily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="Word_TriggerMonthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="Word_TriggerOneTime" xml:space="preserve">
+    <value>One time</value>
+  </data>
+  <data name="Word_TriggerWeekly" xml:space="preserve">
+    <value>Weekly</value>
+  </data>
+  <data name="Word_April" xml:space="preserve">
+    <value>April</value>
+  </data>
+  <data name="Word_August" xml:space="preserve">
+    <value>August</value>
+  </data>
+  <data name="Word_Days" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="Word_December" xml:space="preserve">
+    <value>December</value>
+  </data>
+  <data name="Word_February" xml:space="preserve">
+    <value>February</value>
+  </data>
+  <data name="Word_First" xml:space="preserve">
+    <value>First</value>
+  </data>
+  <data name="Word_Fourth" xml:space="preserve">
+    <value>Fourth</value>
+  </data>
+  <data name="Word_Friday" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="Word_January" xml:space="preserve">
+    <value>January</value>
+  </data>
+  <data name="Word_July" xml:space="preserve">
+    <value>July</value>
+  </data>
+  <data name="Word_June" xml:space="preserve">
+    <value>June</value>
+  </data>
+  <data name="Word_Last" xml:space="preserve">
+    <value>Last</value>
+  </data>
+  <data name="Word_March" xml:space="preserve">
+    <value>March</value>
+  </data>
+  <data name="Word_May" xml:space="preserve">
+    <value>May</value>
+  </data>
+  <data name="Word_Monday" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="Word_Months" xml:space="preserve">
+    <value>Months</value>
+  </data>
+  <data name="Word_November" xml:space="preserve">
+    <value>November</value>
+  </data>
+  <data name="Word_October" xml:space="preserve">
+    <value>October</value>
+  </data>
+  <data name="Word_On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Word_RecurEvery" xml:space="preserve">
+    <value>Recur every</value>
+  </data>
+  <data name="Word_RecurEveryDays" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="Word_RecurEveryWeeks" xml:space="preserve">
+    <value>weeks on</value>
+  </data>
+  <data name="Word_Saturday" xml:space="preserve">
+    <value>Saturday</value>
+  </data>
+  <data name="Word_Second" xml:space="preserve">
+    <value>Second</value>
+  </data>
+  <data name="Word_September" xml:space="preserve">
+    <value>September</value>
+  </data>
+  <data name="Word_Sunday" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="Word_Third" xml:space="preserve">
+    <value>Third</value>
+  </data>
+  <data name="Word_Thursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="Word_Tuesday" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="Word_Wednesday" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
+  <data name="Tooltip_AddTask" xml:space="preserve">
+    <value>Create backup task to Task Scheduler</value>
+  </data>
+  <data name="Word_AddTask" xml:space="preserve">
+    <value>Add new task</value>
+  </data>
 </root>

@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="Ouranos.RedArmory.Views.Contents.BackupTask"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Ouranos.RedArmory.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
+             xmlns:viewModels="clr-namespace:Ouranos.RedArmory.ViewModels"
+             d:DataContext="{d:DesignInstance {x:Type viewModels:TaskViewModel}}"
+             d:DesignHeight="800"
+             d:DesignWidth="1200"
+             x:ClassModifier="internal"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label">
+            <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Margin" Value="5,0,5,0" />
+            <Setter Property="FontSize" Value="{StaticResource ItemHeadingFontSize}" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
+            <Setter Property="Margin" Value="5,0,5,0" />
+            <Setter Property="MinWidth" Value="300" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <DataTemplate x:Key="StackDataTemplate" DataType="{x:Type models:BackupRestoreModel}">
+            <Grid>
+                <TextBlock Text="{Binding Stack.DisplayVersion}" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:OneTimeTriggerViewModel}">
+            <controls:OneTimeTriggerControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:DailyTriggerViewModel}">
+            <controls:DailyTriggerControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:WeeklyTriggerViewModel}">
+            <controls:WeeklyTriggerControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:MonthlyTriggerViewModel}">
+            <controls:MonthlyTriggerControl />
+        </DataTemplate>
+    </UserControl.Resources>
+    <ScrollViewer Width="Auto"
+                  Height="Auto"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch"
+                  VerticalContentAlignment="Stretch"
+                  VerticalScrollBarVisibility="Auto">
+        <Grid Width="Auto"
+              Height="Auto"
+              Margin="15,15,15,15"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!--#region Name-->
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Margin="5 0 5 0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                     Path=Resources.Word_TaskName,
+                                     Mode=OneWay}"
+                   FontSize="{StaticResource ItemHeadingFontSize}"
+                   FontWeight="Bold" />
+            <TextBox Grid.Row="0"
+                     Grid.Column="1"
+                     Text="{Binding Name}" />
+            <!--#endregion-->
+            <!--#region Description-->
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                     Path=Resources.Word_TaskDescription,
+                                     Mode=OneWay}" />
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Height="100"
+                     Margin="0 0 0 10"
+                     Text="{Binding Description}" />
+            <!--#endregion-->
+            <!--#region Trigger-->
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                     Path=Resources.Word_Trigger,
+                                     Mode=OneWay}" />
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ComboBox Grid.Row="0"
+                          MinWidth="300"
+                          MaxWidth="500"
+                          Margin="5 0 5 10"
+                          HorizontalAlignment="Left"
+                          ItemsSource="{Binding Triggers}"
+                          SelectedItem="{Binding SelectedTrigger}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Label Content="{Binding Converter={StaticResource TriggerViewModelToStringConverter}}" FontSize="{StaticResource ItemHeading2FontSize}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <ContentControl Grid.Row="1" Content="{Binding SelectedTrigger}" />
+                <!--<ContentControl Grid.Row="1" ContentTemplateSelector="{StaticResource TriggetTemplateSlector}" DataContext="{Binding SelectedTrigger}" />-->
+            </Grid>
+            <!--#endregion-->
+        </Grid>
+    </ScrollViewer>
+</UserControl>

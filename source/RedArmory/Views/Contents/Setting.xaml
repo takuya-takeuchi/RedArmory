@@ -7,8 +7,9 @@
              xmlns:viewModels="clr-namespace:Ouranos.RedArmory.ViewModels"
              d:DesignHeight="500"
              d:DesignWidth="700"
+             x:ClassModifier="internal"
              Background="{StaticResource BackgroundBrush}"
-             mc:Ignorable="d" x:ClassModifier="internal">
+             mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

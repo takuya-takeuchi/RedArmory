@@ -1,0 +1,152 @@
+﻿<UserControl x:Class="Ouranos.RedArmory.Controls.WeeklyTriggerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
+             xmlns:viewModels="clr-namespace:Ouranos.RedArmory.ViewModels"
+             d:DataContext="{d:DesignInstance {x:Type viewModels:WeeklyTriggerViewModel}}"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             x:ClassModifier="internal"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label">
+            <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
+            <Setter Property="FontSize" Value="{StaticResource ItemHeading2FontSize}" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Margin" Value="0 0 10 0" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
+            <Setter Property="FontSize" Value="{StaticResource ItemHeading2FontSize}" />
+        </Style>
+        <Style BasedOn="{StaticResource {x:Type CheckBox}}" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="30" />
+            <RowDefinition Height="Auto" MinHeight="30" />
+            <RowDefinition Height="Auto" MinHeight="30" />
+        </Grid.RowDefinitions>
+        <!--#region Start-->
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                 Path=Resources.Word_Start,
+                                 Mode=OneWay}" />
+        <StackPanel Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="10 0 0 10"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Text="{Binding Date, StringFormat=d, Mode=OneWay}" />
+            <Button Margin="8 0 0 0"
+                    materialDesign:DialogHost.DialogClosingAttached="CalendarDialogClosingEventHandler"
+                    materialDesign:DialogHost.DialogOpenedAttached="CalendarDialogOpenedEventHandler"
+                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                    Content="...">
+                <Button.CommandParameter>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Calendar x:Name="_Calendar" Margin="-1 -4 -1 0" />
+                        <StackPanel Grid.Row="1"
+                                    Margin="8"
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                    CommandParameter="1"
+                                    Style="{DynamicResource MaterialDesignFlatButton}">
+                                OK
+                            </Button>
+                            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                    CommandParameter="0"
+                                    Style="{DynamicResource MaterialDesignFlatButton}">
+                                CANCEL
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Button.CommandParameter>
+            </Button>
+            <TextBlock Margin="8 0 0 0"
+                       VerticalAlignment="Center"
+                       Text="{Binding Time,
+                                      StringFormat=t,
+                                      Mode=OneWay}" />
+            <Button Margin="8 0 0 0"
+                    materialDesign:DialogHost.DialogClosingAttached="ClockDialogClosingEventHandler"
+                    materialDesign:DialogHost.DialogOpenedAttached="ClockDialogOpenedEventHandler"
+                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                    Content="...">
+                <Button.CommandParameter>
+                    <Grid Margin="-1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <materialDesign:Clock x:Name="_Clock" DisplayAutomation="Cycle" />
+                        <StackPanel Grid.Row="1"
+                                    Margin="8"
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                    CommandParameter="1"
+                                    Style="{DynamicResource MaterialDesignFlatButton}">
+                                OK
+                            </Button>
+                            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                    CommandParameter="0"
+                                    Style="{DynamicResource MaterialDesignFlatButton}">
+                                CANCEL
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Button.CommandParameter>
+            </Button>
+        </StackPanel>
+        <!--#endregion-->
+        <!--#region Interval-->
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                 Path=Resources.Word_RecurEvery,
+                                 Mode=OneWay}" />
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="10 0 0 10"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <TextBox MinWidth="20"
+                     VerticalAlignment="Center"
+                     Text="{Binding Interval,
+                                    StringFormat=d}" />
+            <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_RecurEveryWeeks, Mode=OneWay}" />
+        </StackPanel>
+        <!--#region Days-->
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="10 0 0 0"
+                    VerticalAlignment="Center">
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Sunday, Mode=OneWay}" IsChecked="{Binding Sunday}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Monday, Mode=OneWay}" IsChecked="{Binding Monday}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Tuesday, Mode=OneWay}" IsChecked="{Binding Tuesday}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Wednesday, Mode=OneWay}" IsChecked="{Binding Wednesday}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Thursday, Mode=OneWay}" IsChecked="{Binding Thursday}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Friday, Mode=OneWay}" IsChecked="{Binding Friday}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Saturday, Mode=OneWay}" IsChecked="{Binding Saturday}" />
+        </StackPanel>
+        <!--#endregion-->
+    </Grid>
+</UserControl>

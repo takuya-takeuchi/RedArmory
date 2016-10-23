@@ -66,10 +66,6 @@
                 </Grid>
             </StackPanel>
         </DataTemplate>
-        <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-        </Style>
     </UserControl.Resources>
     <DockPanel Width="Auto"
                Height="Auto"
@@ -103,7 +99,7 @@
                     <TextBlock Text="{Binding Version, StringFormat=Version {0}}" TextWrapping="Wrap" />
                     <TextBlock Text="{Binding Copyright}" TextWrapping="Wrap" />
                     <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
-                        <Button Command="{Binding WebSiteCommand}">
+                        <Button Background="Transparent" Command="{Binding WebSiteCommand}">
                             <Viewbox Width="{StaticResource SocialIconSize}" Height="{StaticResource SocialIconSize}">
                                 <Path Width="{StaticResource SocialIconPathSize}"
                                       Height="{StaticResource SocialIconPathSize}"
@@ -112,7 +108,7 @@
                                       Stretch="Fill" />
                             </Viewbox>
                         </Button>
-                        <Button Command="{Binding FacebookCommand}">
+                        <Button Background="Transparent" Command="{Binding FacebookCommand}">
                             <Viewbox Width="{StaticResource SocialIconSize}" Height="{StaticResource SocialIconSize}">
                                 <Path Width="{StaticResource SocialIconPathSize}"
                                       Height="{StaticResource SocialIconPathSize}"
@@ -121,7 +117,7 @@
                                       Stretch="Fill" />
                             </Viewbox>
                         </Button>
-                        <Button Command="{Binding TwitterCommand}">
+                        <Button Background="Transparent" Command="{Binding TwitterCommand}">
                             <Viewbox Width="{StaticResource SocialIconSize}" Height="{StaticResource SocialIconSize}">
                                 <Path Width="{StaticResource SocialIconPathSize}"
                                       Height="{StaticResource SocialIconPathSize}"
@@ -130,7 +126,7 @@
                                       Stretch="Fill" />
                             </Viewbox>
                         </Button>
-                        <Button Command="{Binding GitHubCommand}">
+                        <Button Background="Transparent" Command="{Binding GitHubCommand}">
                             <Viewbox Width="{StaticResource SocialIconSize}" Height="{StaticResource SocialIconSize}">
                                 <Path Width="{StaticResource SocialIconPathSize}"
                                       Height="{StaticResource SocialIconPathSize}"

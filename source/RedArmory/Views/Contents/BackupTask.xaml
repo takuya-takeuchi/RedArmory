@@ -79,6 +79,8 @@
                    FontWeight="Bold" />
             <TextBox Grid.Row="0"
                      Grid.Column="1"
+                     MaxWidth="400"
+                     Margin="0 0 0 10"
                      Text="{Binding Name}" />
             <!--#endregion-->
             <!--#region Description-->
@@ -89,9 +91,15 @@
                                      Mode=OneWay}" />
             <TextBox Grid.Row="1"
                      Grid.Column="1"
-                     Height="100"
+                     MinHeight="100"
+                     MaxHeight="100"
+                     MaxWidth="400"
                      Margin="0 0 0 10"
-                     Text="{Binding Description}" />
+                     AcceptsReturn="True"
+                     VerticalContentAlignment="Top"
+                     VerticalScrollBarVisibility="Auto"
+                     Text="{Binding Description}"
+                     TextWrapping="Wrap" />
             <!--#endregion-->
             <!--#region Trigger-->
             <Label Grid.Row="2"

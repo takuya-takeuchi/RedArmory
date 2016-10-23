@@ -123,13 +123,16 @@
                                                      TriggerValue="True" />
             <converters:ServiceStartupTypeToStringConverter x:Key="ServiceStartupTypeToStringConverter" />
             <converters:EnumerationTypeToStringConverter x:Key="EnumerationTypeToStringConverter" />
+            <converters:TriggerViewModelToStringConverter x:Key="TriggerViewModelToStringConverter" />
             <converters:ProjectItemNameToStringConverter x:Key="ProjectItemNameToStringConverter" />
             <converters:BooleanReverseConverter x:Key="BooleanReverseConverter" />
             <converters:CultureNameToLocalizedStringConverter x:Key="CultureNameToLocalizedStringConverter" />
             <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" IsSourceUtc="True" />
             <converters:ProgressStateToStringConverter x:Key="ProgressStateToStringConverter" />
             <converters:ProgressStateToBrushConverter x:Key="ProgressStateToBrushConverter" />
-            <converters:CollectionCountToVisibilityConverter x:Key="CollectionCountToVisibilityConverter" IsHidden="False" TriggerCount="1" />
+            <converters:CollectionCountToVisibilityConverter x:Key="CollectionCountToVisibilityConverter"
+                                                             IsHidden="False"
+                                                             TriggerCount="1" />
 
             <!--  Chart  -->
             <Style x:Key="MinimalChartStyle" TargetType="metroChart:ChartBase">

@@ -4,12 +4,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
+             d:DesignHeight="800"
+             d:DesignWidth="800"
+             x:ClassModifier="internal"
              Background="{StaticResource BackgroundBrush}"
              DataContext="{Binding Source={StaticResource Locator},
                                    Path=About}"
-             d:DesignHeight="800"
-             d:DesignWidth="800"
-             mc:Ignorable="d" x:ClassModifier="internal">
+             mc:Ignorable="d">
     <UserControl.Resources>
         <DataTemplate x:Key="AcknowledgmentDataTemplate" DataType="{x:Type models:AcknowledgmentModel}">
             <StackPanel>

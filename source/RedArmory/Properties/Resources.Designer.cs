@@ -223,6 +223,24 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Create backup task to Task Scheduler に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_AddTask {
+            get {
+                return ResourceManager.GetString("Tooltip_AddTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Create task from this setting and add to task scheduler に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_CreateTaskSchedule {
+            get {
+                return ResourceManager.GetString("Tooltip_CreateTaskSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Move down に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Tooltip_Down {
@@ -349,11 +367,38 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Add new task に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_AddTask {
+            get {
+                return ResourceManager.GetString("Word_AddTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   April に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_April {
+            get {
+                return ResourceManager.GetString("Word_April", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Attached Files に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_AttachedFile {
             get {
                 return ResourceManager.GetString("Word_AttachedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   August に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_August {
+            get {
+                return ResourceManager.GetString("Word_August", resourceCulture);
             }
         }
         
@@ -376,11 +421,38 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Create task schedule に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_CreateTaskSchedule {
+            get {
+                return ResourceManager.GetString("Word_CreateTaskSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Database に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Database {
             get {
                 return ResourceManager.GetString("Word_Database", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Days に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Days {
+            get {
+                return ResourceManager.GetString("Word_Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   December に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_December {
+            get {
+                return ResourceManager.GetString("Word_December", resourceCulture);
             }
         }
         
@@ -430,11 +502,38 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   February に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_February {
+            get {
+                return ResourceManager.GetString("Word_February", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   First に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_First {
+            get {
+                return ResourceManager.GetString("Word_First", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Folder Name に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_FolderName {
             get {
                 return ResourceManager.GetString("Word_FolderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Fourth に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Fourth {
+            get {
+                return ResourceManager.GetString("Word_Fourth", resourceCulture);
             }
         }
         
@@ -448,11 +547,47 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Friday に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Friday {
+            get {
+                return ResourceManager.GetString("Word_Friday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Issue priorities に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_IssuePriorities {
             get {
                 return ResourceManager.GetString("Word_IssuePriorities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   January に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_January {
+            get {
+                return ResourceManager.GetString("Word_January", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   July に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_July {
+            get {
+                return ResourceManager.GetString("Word_July", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   June に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_June {
+            get {
+                return ResourceManager.GetString("Word_June", resourceCulture);
             }
         }
         
@@ -466,11 +601,56 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Last に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Last {
+            get {
+                return ResourceManager.GetString("Word_Last", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Licence に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Licence {
             get {
                 return ResourceManager.GetString("Word_Licence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   March に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_March {
+            get {
+                return ResourceManager.GetString("Word_March", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   May に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_May {
+            get {
+                return ResourceManager.GetString("Word_May", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Monday に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Monday {
+            get {
+                return ResourceManager.GetString("Word_Monday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Months に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Months {
+            get {
+                return ResourceManager.GetString("Word_Months", resourceCulture);
             }
         }
         
@@ -516,6 +696,33 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_NotIncludeTheme {
             get {
                 return ResourceManager.GetString("Word_NotIncludeTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   November に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_November {
+            get {
+                return ResourceManager.GetString("Word_November", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   October に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_October {
+            get {
+                return ResourceManager.GetString("Word_October", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   On に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_On {
+            get {
+                return ResourceManager.GetString("Word_On", resourceCulture);
             }
         }
         
@@ -592,11 +799,56 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Recur every に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_RecurEvery {
+            get {
+                return ResourceManager.GetString("Word_RecurEvery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   days に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_RecurEveryDays {
+            get {
+                return ResourceManager.GetString("Word_RecurEveryDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   weeks on に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_RecurEveryWeeks {
+            get {
+                return ResourceManager.GetString("Word_RecurEveryWeeks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Saturday に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Saturday {
+            get {
+                return ResourceManager.GetString("Word_Saturday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Save に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Save {
             get {
                 return ResourceManager.GetString("Word_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Second に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Second {
+            get {
+                return ResourceManager.GetString("Word_Second", resourceCulture);
             }
         }
         
@@ -615,6 +867,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_SelectTargetDirectoryTitle {
             get {
                 return ResourceManager.GetString("Word_SelectTargetDirectoryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   September に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_September {
+            get {
+                return ResourceManager.GetString("Word_September", resourceCulture);
             }
         }
         
@@ -718,11 +979,38 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Sunday に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Sunday {
+            get {
+                return ResourceManager.GetString("Word_Sunday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Target Project に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_TargetProject {
             get {
                 return ResourceManager.GetString("Word_TargetProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Description に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TaskDescription {
+            get {
+                return ResourceManager.GetString("Word_TaskDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Name に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TaskName {
+            get {
+                return ResourceManager.GetString("Word_TaskName", resourceCulture);
             }
         }
         
@@ -741,6 +1029,78 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_Theme {
             get {
                 return ResourceManager.GetString("Word_Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Third に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Third {
+            get {
+                return ResourceManager.GetString("Word_Third", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Thursday に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Thursday {
+            get {
+                return ResourceManager.GetString("Word_Thursday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Trigger に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Trigger {
+            get {
+                return ResourceManager.GetString("Word_Trigger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Daily に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TriggerDaily {
+            get {
+                return ResourceManager.GetString("Word_TriggerDaily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Monthly に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TriggerMonthly {
+            get {
+                return ResourceManager.GetString("Word_TriggerMonthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   One time に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TriggerOneTime {
+            get {
+                return ResourceManager.GetString("Word_TriggerOneTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Weekly に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TriggerWeekly {
+            get {
+                return ResourceManager.GetString("Word_TriggerWeekly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Tuesday に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Tuesday {
+            get {
+                return ResourceManager.GetString("Word_Tuesday", resourceCulture);
             }
         }
         
@@ -786,6 +1146,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_VersionInfo {
             get {
                 return ResourceManager.GetString("Word_VersionInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Wednesday に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Wednesday {
+            get {
+                return ResourceManager.GetString("Word_Wednesday", resourceCulture);
             }
         }
     }

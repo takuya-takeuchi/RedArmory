@@ -52,6 +52,7 @@ namespace Ouranos.RedArmory.ViewModels
             Register<IDatabaseService, MySqlService>();
             Register<IBackupService, BackupService>();
             Register<IBitnamiRedmineService, BitnamiRedmineService>();
+            Register<ITaskService, TaskService>();
 
             Register<MainViewModel>();
             Register<AboutViewModel>();

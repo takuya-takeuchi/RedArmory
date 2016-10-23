@@ -384,52 +384,104 @@
                                 Grid.Column="2"
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal">
-                        <Button Height="{StaticResource FooterBarHeight}"
-                                Visibility="{Binding ElementName=_ToggleButton, Path=IsChecked, Converter={StaticResource CollapsedIfTrue}}"
-                                VerticalAlignment="Center"
-                                Command="{Binding SelectedStack.Command}"
-                                Style="{DynamicResource MaterialDesignRaisedButton}"
-                                ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
-                                                  Path=Resources.Tooltip_StartBackup,
-                                                  Mode=OneWay}">
-                            <StackPanel Orientation="Horizontal">
-                                <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                    <Path Width="{StaticResource IconPathSize}"
-                                          Height="{StaticResource IconPathSize}"
-                                          Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z"
-                                          Fill="{StaticResource IdealForegroundColorBrush}"
-                                          Stretch="Fill" />
-                                </Viewbox>
-                                <Label Content="{Binding Source={x:Static models:ResourceService.Instance},
-                                                         Path=Resources.Word_StartBackup,
-                                                         Mode=OneWay}"
-                                       FontSize="12"
-                                       Foreground="{StaticResource IdealForegroundColorBrush}" />
-                            </StackPanel>
-                        </Button>
-                        <Button Height="{StaticResource FooterBarHeight}"
-                                Visibility="{Binding ElementName=_ToggleButton, Path=IsChecked, Converter={StaticResource CollapsedIfFalse}}"
-                                VerticalAlignment="Center"
-                                Command="{Binding CreateTaskCommand}"
-                                Style="{DynamicResource MaterialDesignRaisedButton}"
-                                ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
-                                                  Path=Resources.Tooltip_AddTask,
-                                                  Mode=OneWay}">
-                            <StackPanel Orientation="Horizontal">
-                                <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                    <Path Width="{StaticResource IconPathSize}"
-                                          Height="{StaticResource IconPathSize}"
-                                          Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z"
-                                          Fill="{StaticResource IdealForegroundColorBrush}"
-                                          Stretch="Fill" />
-                                </Viewbox>
-                                <Label Content="{Binding Source={x:Static models:ResourceService.Instance},
-                                                         Path=Resources.Word_AddTask,
-                                                         Mode=OneWay}"
-                                       FontSize="12"
-                                       Foreground="{StaticResource IdealForegroundColorBrush}" />
-                            </StackPanel>
-                        </Button>
+                        <Grid Visibility="{Binding ElementName=_ToggleButton, Path=IsChecked, Converter={StaticResource CollapsedIfTrue}}">
+                            <Button Name="_Button"
+                                    Height="{StaticResource FooterBarHeight}"
+                                    VerticalAlignment="Center"
+                                    Command="{Binding SelectedStack.Command}"
+                                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                                    ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
+                                                      Path=Resources.Tooltip_StartBackup,
+                                                      Mode=OneWay}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
+                                        <Path Width="{StaticResource IconPathSize}"
+                                              Height="{StaticResource IconPathSize}"
+                                              Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z"
+                                              Fill="{StaticResource IdealForegroundColorBrush}"
+                                              Stretch="Fill" />
+                                    </Viewbox>
+                                    <Label Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                                             Path=Resources.Word_StartBackup,
+                                                             Mode=OneWay}"
+                                           FontSize="12"
+                                           Foreground="{StaticResource IdealForegroundColorBrush}" />
+                                </StackPanel>
+                            </Button>
+                            <Border Width="{Binding ElementName=_Button,
+                                                    Path=Width}"
+                                    Height="{StaticResource FooterBarHeight}"
+                                    Visibility="{Binding ElementName=_Button, Path=IsEnabled, Converter={StaticResource HiddenIfTrue}}"
+                                    BorderBrush="White"
+                                    BorderThickness="2"
+                                    IsHitTestVisible="False" />
+                            <Border Width="{Binding ElementName=_Button,
+                                                    Path=Width}"
+                                    Visibility="{Binding ElementName=_Button, Path=IsEnabled, Converter={StaticResource HiddenIfTrue}}"
+                                    Opacity="0.23"
+                                    Height="{StaticResource FooterBarHeight}"
+                                    BorderBrush="{Binding ElementName=_Button,
+                                                          Path=Background}"
+                                    BorderThickness="2"
+                                    IsHitTestVisible="False" />
+                            <Border Width="{Binding ElementName=_Button,
+                                                    Path=Width}"
+                                    Visibility="{Binding ElementName=_Button, Path=IsEnabled, Converter={StaticResource HiddenIfFalse}}"
+                                    Height="{StaticResource FooterBarHeight}"
+                                    BorderBrush="{Binding ElementName=_Button,
+                                                          Path=Background}"
+                                    BorderThickness="2"
+                                    IsHitTestVisible="False" />
+                        </Grid>
+                        <Grid Visibility="{Binding ElementName=_ToggleButton, Path=IsChecked, Converter={StaticResource CollapsedIfFalse}}">
+                            <Button Name="_CreateTaskButton"
+                                    Height="{StaticResource FooterBarHeight}"
+                                    VerticalAlignment="Center"
+                                    Command="{Binding CreateTaskCommand}"
+                                    Style="{DynamicResource MaterialDesignRaisedButton}"
+                                    ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
+                                                      Path=Resources.Tooltip_AddTask,
+                                                      Mode=OneWay}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
+                                        <Path Width="{StaticResource IconPathSize}"
+                                              Height="{StaticResource IconPathSize}"
+                                              Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z"
+                                              Fill="{StaticResource IdealForegroundColorBrush}"
+                                              Stretch="Fill" />
+                                    </Viewbox>
+                                    <Label Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                                             Path=Resources.Word_AddTask,
+                                                             Mode=OneWay}"
+                                           FontSize="12"
+                                           Foreground="{StaticResource IdealForegroundColorBrush}" />
+                                </StackPanel>
+                            </Button>
+                            <Border Width="{Binding ElementName=_CreateTaskButton,
+                                                    Path=Width}"
+                                    Height="{StaticResource FooterBarHeight}"
+                                    Visibility="{Binding ElementName=_CreateTaskButton, Path=IsEnabled, Converter={StaticResource HiddenIfTrue}}"
+                                    BorderBrush="White"
+                                    BorderThickness="2"
+                                    IsHitTestVisible="False" />
+                            <Border Width="{Binding ElementName=_CreateTaskButton,
+                                                    Path=Width}"
+                                    Visibility="{Binding ElementName=_CreateTaskButton, Path=IsEnabled, Converter={StaticResource HiddenIfTrue}}"
+                                    Opacity="0.23"
+                                    Height="{StaticResource FooterBarHeight}"
+                                    BorderBrush="{Binding ElementName=_CreateTaskButton,
+                                                          Path=Background}"
+                                    BorderThickness="2"
+                                    IsHitTestVisible="False" />
+                            <Border Width="{Binding ElementName=_CreateTaskButton,
+                                                    Path=Width}"
+                                    Visibility="{Binding ElementName=_CreateTaskButton, Path=IsEnabled, Converter={StaticResource HiddenIfFalse}}"
+                                    Height="{StaticResource FooterBarHeight}"
+                                    BorderBrush="{Binding ElementName=_CreateTaskButton,
+                                                          Path=Background}"
+                                    BorderThickness="2"
+                                    IsHitTestVisible="False" />
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </Grid>

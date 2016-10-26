@@ -610,6 +610,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Last Run Time に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_LastRunTime {
+            get {
+                return ResourceManager.GetString("Word_LastRunTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Licence に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Licence {
@@ -660,6 +669,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_Name {
             get {
                 return ResourceManager.GetString("Word_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Next Run Time に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_NextRunTime {
+            get {
+                return ResourceManager.GetString("Word_NextRunTime", resourceCulture);
             }
         }
         
@@ -970,6 +988,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Status に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Status {
+            get {
+                return ResourceManager.GetString("Word_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Stop に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Stop {
@@ -1051,7 +1078,7 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
-        ///   Trigger に類似しているローカライズされた文字列を検索します。
+        ///   Triggers に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Trigger {
             get {

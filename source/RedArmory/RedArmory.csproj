@@ -166,6 +166,7 @@
     <Compile Include="Interfaces\RestoreEngine.cs" />
     <Compile Include="Interfaces\BackupEngine.cs" />
     <Compile Include="Interop\SafeNativeMethods.cs" />
+    <Compile Include="Models\TaskSchedulerItem.cs" />
     <Compile Include="Models\Helpers\Utility.cs" />
     <Compile Include="Models\BackupModel.cs" />
     <Compile Include="Models\BackupRestoreProgress.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Models\Services\TaskSetting.cs" />
     <Compile Include="Models\SingleValueWapperModel.cs" />
     <Compile Include="ViewModels\DailyTriggerViewModel.cs" />
+    <Compile Include="ViewModels\TaskSchedulerViewModel.cs" />
     <Compile Include="ViewModels\EnumerationViewModel.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Properties\Resources.ja-JP.Designer.cs">
@@ -257,6 +259,9 @@
     </Compile>
     <Compile Include="Views\Contents\Backup.xaml.cs">
       <DependentUpon>Backup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contents\Settings\TaskScheduler.xaml.cs">
+      <DependentUpon>TaskScheduler.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Contents\Settings\General.xaml.cs">
       <DependentUpon>General.xaml</DependentUpon>
@@ -444,6 +449,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Contents\Backup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Contents\Settings\TaskScheduler.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

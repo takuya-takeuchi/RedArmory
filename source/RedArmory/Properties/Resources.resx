@@ -373,7 +373,7 @@
     <value>Name</value>
   </data>
   <data name="Word_Trigger" xml:space="preserve">
-    <value>Trigger</value>
+    <value>Triggers</value>
   </data>
   <data name="Word_TriggerDaily" xml:space="preserve">
     <value>Daily</value>
@@ -482,5 +482,14 @@
   </data>
   <data name="Word_AddTask" xml:space="preserve">
     <value>Add new task</value>
+  </data>
+  <data name="Word_LastRunTime" xml:space="preserve">
+    <value>Last Run Time</value>
+  </data>
+  <data name="Word_NextRunTime" xml:space="preserve">
+    <value>Next Run Time</value>
+  </data>
+  <data name="Word_Status" xml:space="preserve">
+    <value>Status</value>
   </data>
 </root>

@@ -67,6 +67,11 @@
                         <settings:Enumerations />
                     </viewModels:SubNavigatorViewModel.Content>
                 </viewModels:SubNavigatorViewModel>
+                <viewModels:SubNavigatorViewModel Name="Task Scheduler">
+                    <viewModels:SubNavigatorViewModel.Content>
+                        <settings:TaskScheduler />
+                    </viewModels:SubNavigatorViewModel.Content>
+                </viewModels:SubNavigatorViewModel>
             </ListBox>
             <ContentControl HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"

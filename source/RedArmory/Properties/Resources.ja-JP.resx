@@ -483,4 +483,13 @@
   <data name="Word_AddTask" xml:space="preserve">
     <value>新しいタスクを追加します</value>
   </data>
+  <data name="Word_LastRunTime" xml:space="preserve">
+    <value>前回の実行時刻</value>
+  </data>
+  <data name="Word_NextRunTime" xml:space="preserve">
+    <value>次回の実行時刻</value>
+  </data>
+  <data name="Word_Status" xml:space="preserve">
+    <value>状態</value>
+  </data>
 </root>

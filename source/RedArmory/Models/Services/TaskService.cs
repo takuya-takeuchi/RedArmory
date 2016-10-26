@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Win32.TaskScheduler;
 
 namespace Ouranos.RedArmory.Models.Services
 {
+
     internal sealed class TaskService : ITaskService
     {
 
@@ -56,9 +58,14 @@ namespace Ouranos.RedArmory.Models.Services
             var tasks = new List<Task>();
             using (var ts = new Microsoft.Win32.TaskScheduler.TaskService())
             {
-                tasks.AddRange(EnumTasks(ts.RootFolder));
+                var list = (from task in EnumTasks(ts.RootFolder)
+                            let actions = task.Definition.Actions.
+                            Where(action => action is ExecAction).
+                            Cast<ExecAction>().
+                            Where(action => action.Path.Contains("RedArmory.exe"))
+                            where actions.Any() select task).ToList();
+                tasks.AddRange(list);
             }
-
 
             return tasks;
         }

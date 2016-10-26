@@ -157,7 +157,7 @@
                                                     CommandParameter="{Binding}"
                                                     Style="{DynamicResource MaterialDesignFloatingActionDarkButton}"
                                                     ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
-                                                                      Path=Resources.Tooltip_Up,
+                                                                      Path=Resources.Tooltip_Run,
                                                                       Mode=OneWay}">
                                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
                                                     <Path Width="{StaticResource IconPathSize}"
@@ -176,7 +176,7 @@
                                                     CommandParameter="{Binding}"
                                                     Style="{DynamicResource MaterialDesignFloatingActionDarkButton}"
                                                     ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
-                                                                      Path=Resources.Tooltip_Up,
+                                                                      Path=Resources.Tooltip_End,
                                                                       Mode=OneWay}">
                                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
                                                     <Path Width="{StaticResource IconPathSize}"
@@ -195,7 +195,7 @@
                                                     CommandParameter="{Binding}"
                                                     Style="{DynamicResource MaterialDesignFloatingActionDarkButton}"
                                                     ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
-                                                                      Path=Resources.Tooltip_Up,
+                                                                      Path=Resources.Tooltip_Delete,
                                                                       Mode=OneWay}">
                                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
                                                     <Path Width="{StaticResource IconPathSize}"

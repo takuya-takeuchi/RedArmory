@@ -241,11 +241,29 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Delete に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_Delete {
+            get {
+                return ResourceManager.GetString("Tooltip_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Move down に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Tooltip_Down {
             get {
                 return ResourceManager.GetString("Tooltip_Down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   End に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_End {
+            get {
+                return ResourceManager.GetString("Tooltip_End", resourceCulture);
             }
         }
         
@@ -273,6 +291,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Tooltip_FolderNameVersion {
             get {
                 return ResourceManager.GetString("Tooltip_FolderNameVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Run に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_Run {
+            get {
+                return ResourceManager.GetString("Tooltip_Run", resourceCulture);
             }
         }
         
@@ -347,18 +374,16 @@ namespace Ouranos.RedArmory.Properties {
                 return ResourceManager.GetString("Word_Acknowledgements", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Actions に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string Word_Actions
-        {
-            get
-            {
+        public static string Word_Actions {
+            get {
                 return ResourceManager.GetString("Word_Actions", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Active に類似しているローカライズされた文字列を検索します。
         /// </summary>

@@ -507,4 +507,13 @@
   <data name="Word_Status" xml:space="preserve">
     <value>状態</value>
   </data>
+  <data name="Tooltip_Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="Tooltip_End" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="Tooltip_Run" xml:space="preserve">
+    <value>実行</value>
+  </data>
 </root>

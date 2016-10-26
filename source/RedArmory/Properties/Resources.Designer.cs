@@ -241,11 +241,29 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Delete に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_Delete {
+            get {
+                return ResourceManager.GetString("Tooltip_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Move down に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Tooltip_Down {
             get {
                 return ResourceManager.GetString("Tooltip_Down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   End に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_End {
+            get {
+                return ResourceManager.GetString("Tooltip_End", resourceCulture);
             }
         }
         
@@ -273,6 +291,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Tooltip_FolderNameVersion {
             get {
                 return ResourceManager.GetString("Tooltip_FolderNameVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Run に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Tooltip_Run {
+            get {
+                return ResourceManager.GetString("Tooltip_Run", resourceCulture);
             }
         }
         
@@ -345,6 +372,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_Acknowledgements {
             get {
                 return ResourceManager.GetString("Word_Acknowledgements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Actions に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Actions {
+            get {
+                return ResourceManager.GetString("Word_Actions", resourceCulture);
             }
         }
         
@@ -484,6 +520,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Disabled に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Disabled {
+            get {
+                return ResourceManager.GetString("Word_Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Document categories に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_DocumentCategories {
@@ -610,6 +655,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Last Run Time に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_LastRunTime {
+            get {
+                return ResourceManager.GetString("Word_LastRunTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Licence に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Licence {
@@ -660,6 +714,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_Name {
             get {
                 return ResourceManager.GetString("Word_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Next Run Time に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_NextRunTime {
+            get {
+                return ResourceManager.GetString("Word_NextRunTime", resourceCulture);
             }
         }
         
@@ -799,6 +862,24 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Queued に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Queued {
+            get {
+                return ResourceManager.GetString("Word_Queued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ready に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Ready {
+            get {
+                return ResourceManager.GetString("Word_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recur every に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_RecurEvery {
@@ -822,6 +903,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_RecurEveryWeeks {
             get {
                 return ResourceManager.GetString("Word_RecurEveryWeeks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Running に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Running {
+            get {
+                return ResourceManager.GetString("Word_Running", resourceCulture);
             }
         }
         
@@ -970,6 +1060,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Status に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Status {
+            get {
+                return ResourceManager.GetString("Word_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Stop に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Stop {
@@ -1051,7 +1150,7 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
-        ///   Trigger に類似しているローカライズされた文字列を検索します。
+        ///   Triggers に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_Trigger {
             get {

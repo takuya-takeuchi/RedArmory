@@ -133,6 +133,7 @@
             <converters:CollectionCountToVisibilityConverter x:Key="CollectionCountToVisibilityConverter"
                                                              IsHidden="False"
                                                              TriggerCount="1" />
+            <converters:TaskStateToStringConverter x:Key="TaskStateToStringConverter"/>
 
             <!--  Chart  -->
             <Style x:Key="MinimalChartStyle" TargetType="metroChart:ChartBase">

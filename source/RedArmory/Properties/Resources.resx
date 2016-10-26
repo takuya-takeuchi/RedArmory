@@ -373,7 +373,7 @@
     <value>Name</value>
   </data>
   <data name="Word_Trigger" xml:space="preserve">
-    <value>Trigger</value>
+    <value>Triggers</value>
   </data>
   <data name="Word_TriggerDaily" xml:space="preserve">
     <value>Daily</value>
@@ -482,5 +482,38 @@
   </data>
   <data name="Word_AddTask" xml:space="preserve">
     <value>Add new task</value>
+  </data>
+  <data name="Word_Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Word_Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Word_LastRunTime" xml:space="preserve">
+    <value>Last Run Time</value>
+  </data>
+  <data name="Word_NextRunTime" xml:space="preserve">
+    <value>Next Run Time</value>
+  </data>
+  <data name="Word_Queued" xml:space="preserve">
+    <value>Queued</value>
+  </data>
+  <data name="Word_Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="Word_Running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="Word_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Tooltip_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Tooltip_End" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="Tooltip_Run" xml:space="preserve">
+    <value>Run</value>
   </data>
 </root>

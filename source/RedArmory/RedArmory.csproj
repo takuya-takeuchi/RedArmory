@@ -153,6 +153,7 @@
     </Compile>
     <Compile Include="Controls\TriggetTemplateSlector.cs" />
     <Compile Include="Converters\CollectionCountToVisibilityConverter.cs" />
+    <Compile Include="Converters\TaskStateToStringConverter.cs" />
     <Compile Include="Converters\TriggerViewModelToStringConverter.cs" />
     <Compile Include="Converters\ProjectItemNameToStringConverter.cs" />
     <Compile Include="Converters\ProgressStateToBrushConverter.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Interfaces\RestoreEngine.cs" />
     <Compile Include="Interfaces\BackupEngine.cs" />
     <Compile Include="Interop\SafeNativeMethods.cs" />
+    <Compile Include="Models\TaskSchedulerItem.cs" />
     <Compile Include="Models\Helpers\Utility.cs" />
     <Compile Include="Models\BackupModel.cs" />
     <Compile Include="Models\BackupRestoreProgress.cs" />
@@ -221,6 +223,7 @@
     <Compile Include="Models\Services\TaskSetting.cs" />
     <Compile Include="Models\SingleValueWapperModel.cs" />
     <Compile Include="ViewModels\DailyTriggerViewModel.cs" />
+    <Compile Include="ViewModels\TaskSchedulerViewModel.cs" />
     <Compile Include="ViewModels\EnumerationViewModel.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Properties\Resources.ja-JP.Designer.cs">
@@ -258,6 +261,9 @@
     <Compile Include="Views\Contents\Backup.xaml.cs">
       <DependentUpon>Backup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Contents\Settings\TaskScheduler.xaml.cs">
+      <DependentUpon>TaskScheduler.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Contents\Settings\General.xaml.cs">
       <DependentUpon>General.xaml</DependentUpon>
     </Compile>
@@ -292,6 +298,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Assets\appbar_changeHistory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\appbar_circlePlay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -359,6 +369,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Assets\appbar_outlinePlay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\appbar_people.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -375,11 +389,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Assets\appbar_play.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\appbar_plugin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Assets\appbar_remove.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\appbar_restore.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\appbar_schedule.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -447,6 +473,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Contents\Settings\TaskScheduler.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Contents\Settings\General.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -492,8 +522,8 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ja-JP.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

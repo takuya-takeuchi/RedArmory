@@ -70,6 +70,24 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   dd/MM/yyyy に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Format_BackupTaskStartDate {
+            get {
+                return ResourceManager.GetString("Format_BackupTaskStartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   h:mm:ss tt に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Format_BackupTaskStartTime {
+            get {
+                return ResourceManager.GetString("Format_BackupTaskStartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Failed to {0} service に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Format_FailedDoService {
@@ -102,6 +120,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Format_SucceedDoService {
             get {
                 return ResourceManager.GetString("Format_SucceedDoService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   dd/MM/yyyy h:mm:ss tt に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Format_TaskSchedulerDate {
+            get {
+                return ResourceManager.GetString("Format_TaskSchedulerDate", resourceCulture);
             }
         }
         
@@ -1110,6 +1137,24 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_TaskName {
             get {
                 return ResourceManager.GetString("Word_TaskName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Never に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TaskSchedulerLastRunTimeEmpty {
+            get {
+                return ResourceManager.GetString("Word_TaskSchedulerLastRunTimeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TaskSchedulerNextRunTimeEmpty {
+            get {
+                return ResourceManager.GetString("Word_TaskSchedulerNextRunTimeEmpty", resourceCulture);
             }
         }
         

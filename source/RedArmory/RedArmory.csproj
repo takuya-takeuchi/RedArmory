@@ -167,6 +167,7 @@
     <Compile Include="Interfaces\RestoreEngine.cs" />
     <Compile Include="Interfaces\BackupEngine.cs" />
     <Compile Include="Interop\SafeNativeMethods.cs" />
+    <Compile Include="Models\DateTimeType.cs" />
     <Compile Include="Models\TaskSchedulerItem.cs" />
     <Compile Include="Models\Helpers\Utility.cs" />
     <Compile Include="Models\BackupModel.cs" />

@@ -120,7 +120,7 @@
                                     <DataTemplate DataType="models:TaskSchedulerItem">
                                         <Label HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
-                                               Content="{Binding NextRunTime}" />
+                                               Content="{Binding NextRunTime, Converter={StaticResource GenericDateTimeToStringConverter}, ConverterParameter={x:Static models:DateTimeType.TaskSchedulerNextRunTime}, Mode=OneWay}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -129,7 +129,7 @@
                                     <DataTemplate DataType="models:TaskSchedulerItem">
                                         <Label HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
-                                               Content="{Binding LastRunTime}" />
+                                               Content="{Binding LastRunTime, Converter={StaticResource GenericDateTimeToStringConverter}, ConverterParameter={x:Static models:DateTimeType.TaskSchedulerLastRunTime}, Mode=OneWay}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

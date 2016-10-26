@@ -53,7 +53,7 @@
                     Margin="10 0 0 10"
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
-            <TextBlock VerticalAlignment="Center" Text="{Binding Date, StringFormat=d, Mode=OneWay}" />
+            <TextBlock VerticalAlignment="Center" Text="{Binding Date, Converter={StaticResource GenericDateTimeToStringConverter}, ConverterParameter={x:Static models:DateTimeType.BackupStartDate}, Mode=OneWay}" />
             <Button Margin="8 0 0 0"
                     materialDesign:DialogHost.DialogClosingAttached="CalendarDialogClosingEventHandler"
                     materialDesign:DialogHost.DialogOpenedAttached="CalendarDialogOpenedEventHandler"
@@ -86,9 +86,7 @@
             </Button>
             <TextBlock Margin="8 0 0 0"
                        VerticalAlignment="Center"
-                       Text="{Binding Time,
-                                      StringFormat=t,
-                                      Mode=OneWay}" />
+                       Text="{Binding Time, Converter={StaticResource GenericDateTimeToStringConverter}, ConverterParameter={x:Static models:DateTimeType.BackupStartTime}, Mode=OneWay}" />
             <Button Margin="8 0 0 0"
                     materialDesign:DialogHost.DialogClosingAttached="ClockDialogClosingEventHandler"
                     materialDesign:DialogHost.DialogOpenedAttached="ClockDialogOpenedEventHandler"

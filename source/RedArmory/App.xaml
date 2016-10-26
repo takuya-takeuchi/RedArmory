@@ -128,6 +128,7 @@
             <converters:BooleanReverseConverter x:Key="BooleanReverseConverter" />
             <converters:CultureNameToLocalizedStringConverter x:Key="CultureNameToLocalizedStringConverter" />
             <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" IsSourceUtc="True" />
+            <converters:DateTimeToStringConverter x:Key="GenericDateTimeToStringConverter" />
             <converters:ProgressStateToStringConverter x:Key="ProgressStateToStringConverter" />
             <converters:ProgressStateToBrushConverter x:Key="ProgressStateToBrushConverter" />
             <converters:CollectionCountToVisibilityConverter x:Key="CollectionCountToVisibilityConverter"

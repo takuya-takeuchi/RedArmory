@@ -8,9 +8,10 @@
              x:Name="_Root"
              d:DesignHeight="800"
              d:DesignWidth="1200"
+             x:ClassModifier="internal"
              DataContext="{Binding Source={StaticResource Locator},
                                    Path=Restore}"
-             mc:Ignorable="d" x:ClassModifier="internal">
+             mc:Ignorable="d">
     <UserControl.Resources>
         <DataTemplate x:Key="StackDataTemplate" DataType="{x:Type models:BackupRestoreModel}">
             <Grid>
@@ -144,7 +145,8 @@
                                                            Grid.Column="0"
                                                            HorizontalAlignment="Left"
                                                            Text="{Binding DateTime,
-                                                                          Converter={StaticResource DateTimeToStringConverter}}" />
+                                                                          Converter={StaticResource DateTimeToStringConverter},
+                                                                          ConverterParameter={x:Static models:DateTimeType.BackupDateTime}}" />
                                                 <TextBlock Grid.Row="0"
                                                            Grid.Column="1"
                                                            HorizontalAlignment="Left"

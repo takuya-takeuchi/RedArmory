@@ -516,4 +516,19 @@
   <data name="Tooltip_Run" xml:space="preserve">
     <value>実行</value>
   </data>
+  <data name="Format_BackupTaskStartDate" xml:space="preserve">
+    <value>yyyy/MM/dd</value>
+  </data>
+  <data name="Format_BackupTaskStartTime" xml:space="preserve">
+    <value>HH:mm:ss</value>
+  </data>
+  <data name="Format_TaskSchedulerDate" xml:space="preserve">
+    <value>yyyy/MM/dd HH:mm:ss</value>
+  </data>
+  <data name="Word_TaskSchedulerLastRunTimeEmpty" xml:space="preserve">
+    <value>なし</value>
+  </data>
+  <data name="Word_TaskSchedulerNextRunTimeEmpty" xml:space="preserve">
+    <value />
+  </data>
 </root>

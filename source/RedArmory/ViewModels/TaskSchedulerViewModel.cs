@@ -19,14 +19,6 @@ namespace Ouranos.RedArmory.ViewModels
 
         private readonly ITaskService _TaskService;
 
-        private readonly IDatabaseConnectorService _DatabaseConnectorService;
-
-        private readonly EnumerationType _EnumerationType;
-
-        private readonly ProjectItem _Project;
-
-        private bool _SuspendItemOnPropertyChanged;
-
         #endregion
 
         #region コンストラクタ
@@ -41,16 +33,21 @@ namespace Ouranos.RedArmory.ViewModels
             this._Stack = stack;
             this._TaskService = taskService;
 
-            this.ActiveCommand = new RelayCommand(this.ActiveExecute, this.CanActiveExecute);
-            this.DeleteCommand = new RelayCommand(this.DeleteExecute, this.CanDeleteExecute);
-            this.RefreshCommand = new RelayCommand(this.RefresExecute, () => true);
-
-            this.Items.CollectionChanged += this.ItemsOnCollectionChanged<TaskSchedulerItem>;
+            this.DeleteCommand = new RelayCommand<TaskSchedulerItem>(this.DeleteExecute, this.CanDeleteExecute);
+            this.RefreshCommand = new RelayCommand(this.RefresExecute, this.CanRefreshExecute);
+            this.RunCommand = new RelayCommand<TaskSchedulerItem>(this.RunExecute, this.CanRunExecute);
+            this.StopCommand = new RelayCommand<TaskSchedulerItem>(this.StopExecute, this.CanStopExecute);
         }
 
         #endregion
 
         #region プロパティ
+
+        public RelayCommand<TaskSchedulerItem> DeleteCommand
+        {
+            get;
+            protected set;
+        }
 
         private readonly ObservableCollection<TaskSchedulerItem> _Items = new ObservableCollection<TaskSchedulerItem>();
 
@@ -62,19 +59,19 @@ namespace Ouranos.RedArmory.ViewModels
             }
         }
 
-        public RelayCommand ActiveCommand
-        {
-            get;
-            protected set;
-        }
-
-        public RelayCommand DeleteCommand
+        public RelayCommand<TaskSchedulerItem> RunCommand
         {
             get;
             protected set;
         }
 
         public RelayCommand RefreshCommand
+        {
+            get;
+            protected set;
+        }
+
+        public RelayCommand<TaskSchedulerItem> StopCommand
         {
             get;
             protected set;
@@ -88,85 +85,41 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region イベントハンドラ
-
-        private void ItemsOnCollectionChanged<T>(object sender, NotifyCollectionChangedEventArgs e)
-            where T : INotifyPropertyChanged
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Replace:
-                    foreach (T item in e.OldItems)
-                    {
-                        if (item != null)
-                            item.PropertyChanged -= this.ItemOnPropertyChanged;
-                    }
-                    foreach (T item in e.NewItems)
-                    {
-                        if (item != null)
-                            item.PropertyChanged += this.ItemOnPropertyChanged;
-                    }
-                    break;
-                case NotifyCollectionChangedAction.Add:
-                    foreach (T item in e.NewItems)
-                    {
-                        if (item != null)
-                            item.PropertyChanged += this.ItemOnPropertyChanged;
-                    }
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    foreach (T item in e.OldItems)
-                    {
-                        if (item != null)
-                            item.PropertyChanged -= this.ItemOnPropertyChanged;
-                    }
-                    break;
-            }
-        }
-
-        private void ItemOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            var enumerationItem = sender as TaskSchedulerItem;
-            if (enumerationItem != null)
-            {
-                if (this._SuspendItemOnPropertyChanged)
-                {
-                    return;
-                }
-
-                //switch (propertyChangedEventArgs.PropertyName)
-                //{
-                //    case nameof(enumerationItem.IsDefault):
-                //        // 他の要素の変更で ItemOnPropertyChanged は無視したい
-                //        this._SuspendItemOnPropertyChanged = true;
-                //        foreach (var item in this.Items.Where(item => item != enumerationItem))
-                //            item.IsDefault = false;
-                //        this._SuspendItemOnPropertyChanged = false;
-                //        break;
-                //}
-            }
-        }
-
-        #endregion
-
         #region ヘルパーメソッド
 
-        private bool CanActiveExecute()
+        private bool CanDeleteExecute(TaskSchedulerItem item)
         {
             return true;
         }
 
-        private bool CanDeleteExecute()
+        private bool CanRefreshExecute()
         {
             return true;
         }
 
-        private void ActiveExecute()
+        private bool CanRunExecute(TaskSchedulerItem item)
         {
+            return true;
         }
 
-        private void DeleteExecute()
+        private bool CanStopExecute(TaskSchedulerItem item)
         {
+            return true;
+        }
+
+        private void DeleteExecute(TaskSchedulerItem item)
+        {
+            if (item != null)
+            {
+                if (this._TaskService.Delete(item))
+                {
+                    this.Items.Remove(item);
+                }
+                else
+                {
+                    // ToDo : ダイアログで警告
+                }
+            }
         }
 
         private void RefresExecute()
@@ -179,6 +132,22 @@ namespace Ouranos.RedArmory.ViewModels
 
             foreach (var task in tasks)
                 this.Items.Add(new TaskSchedulerItem(task));
+        }
+
+        private void RunExecute(TaskSchedulerItem item)
+        {
+            if (item != null)
+            {
+                item.Run();
+            }
+        }
+
+        private void StopExecute(TaskSchedulerItem item)
+        {
+            if (item != null)
+            {
+                item.Stop();
+            }
         }
 
         #endregion

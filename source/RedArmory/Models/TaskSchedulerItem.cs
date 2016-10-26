@@ -50,6 +50,15 @@ namespace Ouranos.RedArmory.Models
             {
                 this._Enabled = value;
                 this.RaisePropertyChanged();
+
+                if (!this._Disposed && this._Task.Enabled != value)
+                {
+                    this._Task.Enabled = value;
+
+                    // Vista 以降、Enabled は即座に変更されるため、
+                    // TaskState も更新する
+                    this.TaskState = this._Task.State;
+                }
             }
         }
 
@@ -110,6 +119,32 @@ namespace Ouranos.RedArmory.Models
             {
                 this._TaskState = value;
                 this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region メソッド
+
+        public void Run()
+        {
+            if (!this._Disposed)
+            {
+                this._Task.Run();
+
+                this.TaskState = this._Task.State;
+                this.LastRunTime = this._Task.LastRunTime;
+            }
+        }
+
+        public void Stop()
+        {
+            if (!this._Disposed)
+            {
+                this._Task.Stop();
+
+                this.TaskState = this._Task.State;
+                this.LastRunTime = this._Task.LastRunTime;
             }
         }
 

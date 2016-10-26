@@ -347,7 +347,18 @@ namespace Ouranos.RedArmory.Properties {
                 return ResourceManager.GetString("Word_Acknowledgements", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Actions に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Actions
+        {
+            get
+            {
+                return ResourceManager.GetString("Word_Actions", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Active に類似しているローカライズされた文字列を検索します。
         /// </summary>
@@ -480,6 +491,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_Destination {
             get {
                 return ResourceManager.GetString("Word_Destination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Disabled に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Disabled {
+            get {
+                return ResourceManager.GetString("Word_Disabled", resourceCulture);
             }
         }
         
@@ -817,6 +837,24 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Queued に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Queued {
+            get {
+                return ResourceManager.GetString("Word_Queued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ready に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Ready {
+            get {
+                return ResourceManager.GetString("Word_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recur every に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_RecurEvery {
@@ -840,6 +878,15 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_RecurEveryWeeks {
             get {
                 return ResourceManager.GetString("Word_RecurEveryWeeks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Running に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_Running {
+            get {
+                return ResourceManager.GetString("Word_Running", resourceCulture);
             }
         }
         

@@ -47,6 +47,10 @@
                 <Grid Grid.Row="0"
                       Height="52"
                       Background="{StaticResource SubHeaderBackgroundBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <Viewbox Width="24"
                                  Height="24"
@@ -64,6 +68,23 @@
                                FontWeight="Bold"
                                Foreground="{StaticResource IdealForegroundColorBrush}" />
                     </StackPanel>
+                    <Button Grid.Column="1"
+                            Width="{StaticResource IconPathSize}"
+                            Height="{StaticResource IconPathSize}"
+                            Margin="6 0 6 0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Command="{Binding SelectedSetting.SelectedTaskScheduler.RefreshCommand}"
+                            Foreground="{StaticResource IdealForegroundColorBrush}"
+                            Style="{DynamicResource MaterialDesignFloatingActionDarkButton}">
+                        <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
+                            <Path Width="{StaticResource IconPathSize}"
+                                  Height="{StaticResource IconPathSize}"
+                                  Data="M72.249903,16.14601 L87.915983,32.146067 76.249716,32.979412 C74.524256,61.351105 48.495424,70.90712 27.249985,59.480049 L32.499655,53.313236 C53.585453,60.915741 65.918699,53.806782 68.500223,33.062414 L56.416159,32.646412 z M43.615536,0.501091 C49.405912,0.54665947 55.416328,2.0205917 61.082994,5.1455288 L55.666002,10.978878 C39.166331,1.3953981 20.332998,12.728797 20.166214,32.311949 L31.915814,32.561954 15.915748,48.312008 0.5,32.561619 12.665534,32.645617 C10.853632,13.082975 26.244406,0.36438942 43.615536,0.501091 z"
+                                  Fill="{StaticResource IdealForegroundColorBrush}"
+                                  Stretch="Uniform" />
+                        </Viewbox>
+                    </Button>
                 </Grid>
                 <ScrollViewer Grid.Row="2"
                               Grid.Column="0"
@@ -89,7 +110,8 @@
                                     <DataTemplate DataType="models:TaskSchedulerItem">
                                         <Label HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
-                                               Content="{Binding TaskState}" />
+                                               Content="{Binding TaskState,
+                                                                 Converter={StaticResource TaskStateToStringConverter}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -122,7 +144,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Sort, Mode=OneWay}" IsReadOnly="True">
+                            <DataGridTemplateColumn Header="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Actions, Mode=OneWay}" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate DataType="models:EnumerationItem">
                                         <StackPanel Orientation="Horizontal">
@@ -130,11 +152,9 @@
                                                     Height="{StaticResource LargeIconSize}"
                                                     Margin="2"
                                                     VerticalAlignment="Center"
-                                                    Command="{Binding DataContext.SelectedSetting.SelectedTaskScheduler.DeleteCommand,
+                                                    Command="{Binding DataContext.SelectedSetting.SelectedTaskScheduler.RunCommand,
                                                                       ElementName=_Root}"
                                                     CommandParameter="{Binding}"
-                                                    IsEnabled="{Binding IsTop,
-                                                                        Converter={StaticResource BooleanReverseConverter}}"
                                                     Style="{DynamicResource MaterialDesignFloatingActionDarkButton}"
                                                     ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
                                                                       Path=Resources.Tooltip_Up,
@@ -142,7 +162,45 @@
                                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
                                                     <Path Width="{StaticResource IconPathSize}"
                                                           Height="{StaticResource IconPathSize}"
-                                                          Data="M31.469081,0 L62.93816,31.46908 57.063162,37.34408 35.219082,15.500001 35.219082,63.46908 27.469082,63.46908 27.469082,15.749998 5.875,37.34408 0,31.46908 z"
+                                                          Data="M32.416,22.25 L32.416,57.75 55.416008,40.162846 z M40,0 C62.091389,0 80,17.908609 80,40 80,62.091389 62.091389,80 40,80 17.908609,80 0,62.091389 0,40 0,17.908609 17.908609,0 40,0 z"
+                                                          Fill="{StaticResource IdealForegroundColorBrush}"
+                                                          Stretch="Fill" />
+                                                </Viewbox>
+                                            </Button>
+                                            <Button Width="{StaticResource LargeIconSize}"
+                                                    Height="{StaticResource LargeIconSize}"
+                                                    Margin="2"
+                                                    VerticalAlignment="Center"
+                                                    Command="{Binding DataContext.SelectedSetting.SelectedTaskScheduler.StopCommand,
+                                                                      ElementName=_Root}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{DynamicResource MaterialDesignFloatingActionDarkButton}"
+                                                    ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
+                                                                      Path=Resources.Tooltip_Up,
+                                                                      Mode=OneWay}">
+                                                <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
+                                                    <Path Width="{StaticResource IconPathSize}"
+                                                          Height="{StaticResource IconPathSize}"
+                                                          Data="M25.4375,19.640001 L20,25.577566 34.18763,39.765644 20,53.952717 25.750256,59.702751 39.938385,45.515175 54.438412,60.014999 59.812973,54.640434 45.562733,40.390007 60.124985,25.827568 59.749992,25.452572 54.249996,19.952505 39.999996,34.202679 z M40.0625,0 C62.188408,0 80.125,17.936592 80.125,40.0625 80.125,62.188408 62.188408,80.125 40.0625,80.125 17.936592,80.125 0,62.188408 0,40.0625 0,17.936592 17.936592,0 40.0625,0 z"
+                                                          Fill="{StaticResource IdealForegroundColorBrush}"
+                                                          Stretch="Fill" />
+                                                </Viewbox>
+                                            </Button>
+                                            <Button Width="{StaticResource LargeIconSize}"
+                                                    Height="{StaticResource LargeIconSize}"
+                                                    Margin="2"
+                                                    VerticalAlignment="Center"
+                                                    Command="{Binding DataContext.SelectedSetting.SelectedTaskScheduler.DeleteCommand,
+                                                                      ElementName=_Root}"
+                                                    CommandParameter="{Binding}"
+                                                    Style="{DynamicResource MaterialDesignFloatingActionDarkButton}"
+                                                    ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
+                                                                      Path=Resources.Tooltip_Up,
+                                                                      Mode=OneWay}">
+                                                <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
+                                                    <Path Width="{StaticResource IconPathSize}"
+                                                          Height="{StaticResource IconPathSize}"
+                                                          Data="M9.4099998,17.003 L9.4099998,21.128 28.595999,21.128 28.595999,17.003 z M19.003,0 C29.498066,0 38.006001,8.5079327 38.006001,19.003 38.006001,29.498066 29.498066,38.006001 19.003,38.006001 8.5079327,38.006001 0,29.498066 0,19.003 0,8.5079327 8.5079327,0 19.003,0 z"
                                                           Fill="{StaticResource IdealForegroundColorBrush}"
                                                           Stretch="Fill" />
                                                 </Viewbox>

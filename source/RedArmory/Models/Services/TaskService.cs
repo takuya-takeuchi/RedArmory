@@ -53,6 +53,23 @@ namespace Ouranos.RedArmory.Models.Services
             }
         }
 
+        public bool Delete(TaskSchedulerItem item)
+        {
+            try
+            {
+                using (var ts = new Microsoft.Win32.TaskScheduler.TaskService())
+                {
+                    ts.RootFolder.DeleteTask(item.Name, true);
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public IEnumerable<Task> GetTasks()
         {
             var tasks = new List<Task>();

@@ -94,6 +94,8 @@
             <SolidColorBrush x:Key="GitHubColorBrush" Color="{StaticResource GitHubColor}" />
             <Color x:Key="HomeColor">Black</Color>
             <SolidColorBrush x:Key="HomeColorBrush" Color="{StaticResource HomeColor}" />
+            <Color x:Key="EmptyStackBackgroundColor">#CC000000</Color>
+            <SolidColorBrush x:Key="EmptyStackBackgroundBrush" Color="{StaticResource EmptyStackBackgroundColor}"/>
 
             <!--  Size  -->
             <system:Double x:Key="ListBoxItemHeight">36</system:Double>

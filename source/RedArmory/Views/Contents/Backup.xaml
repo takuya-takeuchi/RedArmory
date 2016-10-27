@@ -357,7 +357,7 @@
                     <contents:BackupTask Grid.Column="1"
                                          HorizontalAlignment="Stretch"
                                          HorizontalContentAlignment="Stretch"
-                                         Background="#CC000000"
+                                         Background="{StaticResource EmptyStackBackgroundBrush}"
                                          DataContext="{Binding Task}"
                                          Foreground="{StaticResource IdealForegroundColorBrush}"
                                          Visibility="{Binding ElementName=_ToggleButton,
@@ -434,7 +434,7 @@
                 </Grid>
             </Grid>
         </DockPanel>
-        <UserControl Background="#CC000000" Visibility="{Binding IsEmptyStacks, Converter={StaticResource CollapsedIfFalse}}">
+        <UserControl Background="{StaticResource EmptyStackBackgroundBrush}" Visibility="{Binding IsEmptyStacks, Converter={StaticResource CollapsedIfFalse}}">
             <Label HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Content="{Binding Source={x:Static models:ResourceService.Instance},

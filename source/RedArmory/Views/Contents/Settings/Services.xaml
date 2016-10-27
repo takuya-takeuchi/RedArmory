@@ -7,10 +7,11 @@
              xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
              d:DesignHeight="500"
              d:DesignWidth="700"
+             x:ClassModifier="internal"
              Background="{StaticResource BackgroundBrush}"
              DataContext="{Binding Source={StaticResource Locator},
                                    Path=Setting}"
-             mc:Ignorable="d" x:ClassModifier="internal">
+             mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -44,15 +45,8 @@
                       Height="52"
                       Background="{StaticResource SubHeaderBackgroundBrush}">
                     <StackPanel Orientation="Horizontal">
-                        <Viewbox Width="24"
-                                 Height="24"
-                                 Margin="16 0 6 0"
-                                 VerticalAlignment="Center">
-                            <Path Width="40"
-                                  Height="40"
-                                  Data="M17.129,16.75 C20.588867,16.75 20.589001,16.75 20.589001,16.75 L20.589001,28.337 17.129066,28.337 z M17.129,9.7539997 L20.589001,9.7539997 20.589001,13.242 17.129032,13.242 z M18.921801,3.8392997 C10.683644,3.8392999 4.0053,10.517645 4.0053,18.7558 4.0053,26.993956 10.683644,33.672298 18.921801,33.672298 27.159956,33.672298 33.838299,26.993956 33.838299,18.7558 33.838299,10.517645 27.159956,3.8392999 18.921801,3.8392997 z M19.003,0 C29.498068,0 38.006001,8.5079327 38.006001,19.003 38.006001,29.498068 29.498068,38.006001 19.003,38.006001 8.5079327,38.006001 0,29.498068 0,19.003 0,8.5079327 8.5079327,0 19.003,0 z"
-                                  Fill="{StaticResource IdealForegroundColorBrush}"
-                                  Stretch="Uniform" />
+                        <Viewbox Margin="16 0 6 0" Style="{StaticResource ViewboxStyle}">
+                            <Path Style="{StaticResource InfoIconPathStyle}" />
                         </Viewbox>
                         <Label VerticalAlignment="Center"
                                Content="{Binding SelectedSetting.Stack.InstallLocation}"
@@ -85,14 +79,10 @@
                         <!--#region Destination-->
                         <Label Grid.Row="0"
                                Grid.Column="0"
-                               Margin="5,5,5,5"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                  Path=Resources.Word_ServiceStartupType,
                                                  Mode=OneWay}"
-                               FontSize="{StaticResource ItemHeadingFontSize}"
-                               FontWeight="Bold" />
+                               Style="{StaticResource PropertyLabelStyle}" />
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -104,13 +94,12 @@
                                         <Grid>
                                             <StackPanel Orientation="Horizontal">
                                                 <Label Width="150"
-                                                       Margin="5,5,5,5"
-                                                       HorizontalAlignment="Left"
-                                                       VerticalAlignment="Center"
-                                                       Content="{Binding ServiceName}" />
+                                                       Content="{Binding ServiceName}"
+                                                       Style="{StaticResource ComboBoxLabelStyle}" />
                                                 <ComboBox Width="200"
                                                           ItemsSource="{Binding Source={x:Static local:SettingViewModel.ServiceStartupTypes}}"
-                                                          SelectedValue="{Binding StartupType}">
+                                                          SelectedValue="{Binding StartupType}"
+                                                          Style="{StaticResource PropertyComboBoxStyle}">
                                                     <ComboBox.ItemTemplate>
                                                         <DataTemplate>
                                                             <TextBlock Text="{Binding Converter={StaticResource ServiceStartupTypeToStringConverter}}" />
@@ -127,7 +116,7 @@
                 </ScrollViewer>
             </Grid>
         </DockPanel>
-        <UserControl Background="#CC000000" Visibility="{Binding IsEmptyStacks, Converter={StaticResource CollapsedIfFalse}}">
+        <UserControl Background="{StaticResource EmptyStackBackgroundBrush}" Visibility="{Binding IsEmptyStacks, Converter={StaticResource CollapsedIfFalse}}">
             <Label HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Content="{Binding Source={x:Static models:ResourceService.Instance},

@@ -52,15 +52,8 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <Viewbox Width="24"
-                                 Height="24"
-                                 Margin="16 0 6 0"
-                                 VerticalAlignment="Center">
-                            <Path Width="40"
-                                  Height="40"
-                                  Data="M17.129,16.75 C20.588867,16.75 20.589001,16.75 20.589001,16.75 L20.589001,28.337 17.129066,28.337 z M17.129,9.7539997 L20.589001,9.7539997 20.589001,13.242 17.129032,13.242 z M18.921801,3.8392997 C10.683644,3.8392999 4.0053,10.517645 4.0053,18.7558 4.0053,26.993956 10.683644,33.672298 18.921801,33.672298 27.159956,33.672298 33.838299,26.993956 33.838299,18.7558 33.838299,10.517645 27.159956,3.8392999 18.921801,3.8392997 z M19.003,0 C29.498068,0 38.006001,8.5079327 38.006001,19.003 38.006001,29.498068 29.498068,38.006001 19.003,38.006001 8.5079327,38.006001 0,29.498068 0,19.003 0,8.5079327 8.5079327,0 19.003,0 z"
-                                  Fill="{StaticResource IdealForegroundColorBrush}"
-                                  Stretch="Uniform" />
+                        <Viewbox Margin="16 0 6 0" Style="{StaticResource ViewboxStyle}">
+                            <Path Style="{StaticResource InfoIconPathStyle}" />
                         </Viewbox>
                         <Label VerticalAlignment="Center"
                                Content="{Binding SelectedSetting.Stack.InstallLocation}"
@@ -77,12 +70,8 @@
                             Command="{Binding SelectedSetting.SelectedTaskScheduler.RefreshCommand}"
                             Foreground="{StaticResource IdealForegroundColorBrush}"
                             Style="{DynamicResource MaterialDesignFloatingActionDarkButton}">
-                        <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                            <Path Width="{StaticResource IconPathSize}"
-                                  Height="{StaticResource IconPathSize}"
-                                  Data="M72.249903,16.14601 L87.915983,32.146067 76.249716,32.979412 C74.524256,61.351105 48.495424,70.90712 27.249985,59.480049 L32.499655,53.313236 C53.585453,60.915741 65.918699,53.806782 68.500223,33.062414 L56.416159,32.646412 z M43.615536,0.501091 C49.405912,0.54665947 55.416328,2.0205917 61.082994,5.1455288 L55.666002,10.978878 C39.166331,1.3953981 20.332998,12.728797 20.166214,32.311949 L31.915814,32.561954 15.915748,48.312008 0.5,32.561619 12.665534,32.645617 C10.853632,13.082975 26.244406,0.36438942 43.615536,0.501091 z"
-                                  Fill="{StaticResource IdealForegroundColorBrush}"
-                                  Stretch="Uniform" />
+                        <Viewbox Style="{StaticResource ViewboxStyle}">
+                            <Path Data="M72.249903,16.14601 L87.915983,32.146067 76.249716,32.979412 C74.524256,61.351105 48.495424,70.90712 27.249985,59.480049 L32.499655,53.313236 C53.585453,60.915741 65.918699,53.806782 68.500223,33.062414 L56.416159,32.646412 z M43.615536,0.501091 C49.405912,0.54665947 55.416328,2.0205917 61.082994,5.1455288 L55.666002,10.978878 C39.166331,1.3953981 20.332998,12.728797 20.166214,32.311949 L31.915814,32.561954 15.915748,48.312008 0.5,32.561619 12.665534,32.645617 C10.853632,13.082975 26.244406,0.36438942 43.615536,0.501091 z" Style="{StaticResource IconPathStyle}" />
                         </Viewbox>
                     </Button>
                 </Grid>
@@ -120,7 +109,10 @@
                                     <DataTemplate DataType="models:TaskSchedulerItem">
                                         <Label HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
-                                               Content="{Binding NextRunTime, Converter={StaticResource GenericDateTimeToStringConverter}, ConverterParameter={x:Static models:DateTimeType.TaskSchedulerNextRunTime}, Mode=OneWay}" />
+                                               Content="{Binding NextRunTime,
+                                                                 Converter={StaticResource GenericDateTimeToStringConverter},
+                                                                 ConverterParameter={x:Static models:DateTimeType.TaskSchedulerNextRunTime},
+                                                                 Mode=OneWay}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -129,7 +121,10 @@
                                     <DataTemplate DataType="models:TaskSchedulerItem">
                                         <Label HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
-                                               Content="{Binding LastRunTime, Converter={StaticResource GenericDateTimeToStringConverter}, ConverterParameter={x:Static models:DateTimeType.TaskSchedulerLastRunTime}, Mode=OneWay}" />
+                                               Content="{Binding LastRunTime,
+                                                                 Converter={StaticResource GenericDateTimeToStringConverter},
+                                                                 ConverterParameter={x:Static models:DateTimeType.TaskSchedulerLastRunTime},
+                                                                 Mode=OneWay}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -148,61 +143,37 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate DataType="models:EnumerationItem">
                                         <StackPanel Orientation="Horizontal">
-                                            <Button Width="{StaticResource LargeIconSize}"
-                                                    Height="{StaticResource LargeIconSize}"
-                                                    Margin="2"
-                                                    VerticalAlignment="Center"
-                                                    Command="{Binding DataContext.SelectedSetting.SelectedTaskScheduler.RunCommand,
+                                            <Button Command="{Binding DataContext.SelectedSetting.SelectedTaskScheduler.RunCommand,
                                                                       ElementName=_Root}"
                                                     CommandParameter="{Binding}"
-                                                    Style="{DynamicResource MaterialDesignFloatingActionDarkButton}"
+                                                    Style="{DynamicResource DataGridButtonStyle}"
                                                     ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
                                                                       Path=Resources.Tooltip_Run,
                                                                       Mode=OneWay}">
                                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                                    <Path Width="{StaticResource IconPathSize}"
-                                                          Height="{StaticResource IconPathSize}"
-                                                          Data="M32.416,22.25 L32.416,57.75 55.416008,40.162846 z M40,0 C62.091389,0 80,17.908609 80,40 80,62.091389 62.091389,80 40,80 17.908609,80 0,62.091389 0,40 0,17.908609 17.908609,0 40,0 z"
-                                                          Fill="{StaticResource IdealForegroundColorBrush}"
-                                                          Stretch="Fill" />
+                                                    <Path Data="M32.416,22.25 L32.416,57.75 55.416008,40.162846 z M40,0 C62.091389,0 80,17.908609 80,40 80,62.091389 62.091389,80 40,80 17.908609,80 0,62.091389 0,40 0,17.908609 17.908609,0 40,0 z" Style="{StaticResource IconPathStyle}" />
                                                 </Viewbox>
                                             </Button>
-                                            <Button Width="{StaticResource LargeIconSize}"
-                                                    Height="{StaticResource LargeIconSize}"
-                                                    Margin="2"
-                                                    VerticalAlignment="Center"
-                                                    Command="{Binding DataContext.SelectedSetting.SelectedTaskScheduler.StopCommand,
+                                            <Button Command="{Binding DataContext.SelectedSetting.SelectedTaskScheduler.StopCommand,
                                                                       ElementName=_Root}"
                                                     CommandParameter="{Binding}"
-                                                    Style="{DynamicResource MaterialDesignFloatingActionDarkButton}"
+                                                    Style="{DynamicResource DataGridButtonStyle}"
                                                     ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
                                                                       Path=Resources.Tooltip_End,
                                                                       Mode=OneWay}">
                                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                                    <Path Width="{StaticResource IconPathSize}"
-                                                          Height="{StaticResource IconPathSize}"
-                                                          Data="M25.4375,19.640001 L20,25.577566 34.18763,39.765644 20,53.952717 25.750256,59.702751 39.938385,45.515175 54.438412,60.014999 59.812973,54.640434 45.562733,40.390007 60.124985,25.827568 59.749992,25.452572 54.249996,19.952505 39.999996,34.202679 z M40.0625,0 C62.188408,0 80.125,17.936592 80.125,40.0625 80.125,62.188408 62.188408,80.125 40.0625,80.125 17.936592,80.125 0,62.188408 0,40.0625 0,17.936592 17.936592,0 40.0625,0 z"
-                                                          Fill="{StaticResource IdealForegroundColorBrush}"
-                                                          Stretch="Fill" />
+                                                    <Path Data="M25.4375,19.640001 L20,25.577566 34.18763,39.765644 20,53.952717 25.750256,59.702751 39.938385,45.515175 54.438412,60.014999 59.812973,54.640434 45.562733,40.390007 60.124985,25.827568 59.749992,25.452572 54.249996,19.952505 39.999996,34.202679 z M40.0625,0 C62.188408,0 80.125,17.936592 80.125,40.0625 80.125,62.188408 62.188408,80.125 40.0625,80.125 17.936592,80.125 0,62.188408 0,40.0625 0,17.936592 17.936592,0 40.0625,0 z" Style="{StaticResource IconPathStyle}" />
                                                 </Viewbox>
                                             </Button>
-                                            <Button Width="{StaticResource LargeIconSize}"
-                                                    Height="{StaticResource LargeIconSize}"
-                                                    Margin="2"
-                                                    VerticalAlignment="Center"
-                                                    Command="{Binding DataContext.SelectedSetting.SelectedTaskScheduler.DeleteCommand,
+                                            <Button Command="{Binding DataContext.SelectedSetting.SelectedTaskScheduler.DeleteCommand,
                                                                       ElementName=_Root}"
                                                     CommandParameter="{Binding}"
-                                                    Style="{DynamicResource MaterialDesignFloatingActionDarkButton}"
+                                                    Style="{DynamicResource DataGridButtonStyle}"
                                                     ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
                                                                       Path=Resources.Tooltip_Delete,
                                                                       Mode=OneWay}">
                                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                                    <Path Width="{StaticResource IconPathSize}"
-                                                          Height="{StaticResource IconPathSize}"
-                                                          Data="M9.4099998,17.003 L9.4099998,21.128 28.595999,21.128 28.595999,17.003 z M19.003,0 C29.498066,0 38.006001,8.5079327 38.006001,19.003 38.006001,29.498066 29.498066,38.006001 19.003,38.006001 8.5079327,38.006001 0,29.498066 0,19.003 0,8.5079327 8.5079327,0 19.003,0 z"
-                                                          Fill="{StaticResource IdealForegroundColorBrush}"
-                                                          Stretch="Fill" />
+                                                    <Path Data="M9.4099998,17.003 L9.4099998,21.128 28.595999,21.128 28.595999,17.003 z M19.003,0 C29.498066,0 38.006001,8.5079327 38.006001,19.003 38.006001,29.498066 29.498066,38.006001 19.003,38.006001 8.5079327,38.006001 0,29.498066 0,19.003 0,8.5079327 8.5079327,0 19.003,0 z" Style="{StaticResource IconPathStyle}" />
                                                 </Viewbox>
                                             </Button>
                                         </StackPanel>
@@ -214,7 +185,7 @@
                 </ScrollViewer>
             </Grid>
         </DockPanel>
-        <UserControl Background="#CC000000" Visibility="{Binding IsEmptyStacks, Converter={StaticResource CollapsedIfFalse}}">
+        <UserControl Background="{StaticResource EmptyStackBackgroundBrush}" Visibility="{Binding IsEmptyStacks, Converter={StaticResource CollapsedIfFalse}}">
             <Label HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Content="{Binding Source={x:Static models:ResourceService.Instance},

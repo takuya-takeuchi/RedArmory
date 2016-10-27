@@ -48,15 +48,8 @@
                       Height="52"
                       Background="{StaticResource SubHeaderBackgroundBrush}">
                     <StackPanel Orientation="Horizontal">
-                        <Viewbox Width="24"
-                                 Height="24"
-                                 Margin="16 0 6 0"
-                                 VerticalAlignment="Center">
-                            <Path Width="40"
-                                  Height="40"
-                                  Data="M17.129,16.75 C20.588867,16.75 20.589001,16.75 20.589001,16.75 L20.589001,28.337 17.129066,28.337 z M17.129,9.7539997 L20.589001,9.7539997 20.589001,13.242 17.129032,13.242 z M18.921801,3.8392997 C10.683644,3.8392999 4.0053,10.517645 4.0053,18.7558 4.0053,26.993956 10.683644,33.672298 18.921801,33.672298 27.159956,33.672298 33.838299,26.993956 33.838299,18.7558 33.838299,10.517645 27.159956,3.8392999 18.921801,3.8392997 z M19.003,0 C29.498068,0 38.006001,8.5079327 38.006001,19.003 38.006001,29.498068 29.498068,38.006001 19.003,38.006001 8.5079327,38.006001 0,29.498068 0,19.003 0,8.5079327 8.5079327,0 19.003,0 z"
-                                  Fill="{StaticResource IdealForegroundColorBrush}"
-                                  Stretch="Uniform" />
+                        <Viewbox Margin="16 0 6 0" Style="{StaticResource ViewboxStyle}">
+                            <Path Style="{StaticResource InfoIconPathStyle}" />
                         </Viewbox>
                         <Label VerticalAlignment="Center"
                                Content="{Binding SelectedSetting.Stack.InstallLocation}"
@@ -65,7 +58,9 @@
                                Foreground="{StaticResource IdealForegroundColorBrush}" />
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="1" Grid.Column="0">
+                <Grid Grid.Row="1"
+                      Grid.Column="0"
+                      Margin="15,15,15,15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -76,49 +71,35 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0"
                            Grid.Column="0"
-                           Margin="5,5,5,5"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
                            Content="{Binding Source={x:Static models:ResourceService.Instance},
                                              Path=Resources.Word_EnumerationType,
                                              Mode=OneWay}"
-                           FontSize="{StaticResource ItemHeadingFontSize}"
-                           FontWeight="Bold" />
+                           Style="{StaticResource PropertyLabelStyle}" />
                     <ComboBox Grid.Row="0"
                               Grid.Column="1"
-                              Margin="5 10 5 5"
-                              VerticalAlignment="Center"
                               ItemsSource="{Binding Source={x:Static models:Setting.EnumerationTypes}}"
-                              SelectedItem="{Binding SelectedSetting.SelectedEnumerationType}">
+                              SelectedItem="{Binding SelectedSetting.SelectedEnumerationType}"
+                              Style="{StaticResource PropertyComboBoxStyle}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <Label Content="{Binding Converter={StaticResource EnumerationTypeToStringConverter}}" />
-                                </Grid>
+                                <TextBlock Text="{Binding Converter={StaticResource EnumerationTypeToStringConverter}}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Label Grid.Row="1"
                            Grid.Column="0"
-                           Margin="5,5,5,5"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
                            Content="{Binding Source={x:Static models:ResourceService.Instance},
                                              Path=Resources.Word_TargetProject,
                                              Mode=OneWay}"
-                           FontSize="{StaticResource ItemHeadingFontSize}"
-                           FontWeight="Bold" />
+                           Style="{StaticResource PropertyLabelStyle}" />
                     <ComboBox Grid.Row="1"
                               Grid.Column="1"
-                              Margin="5 5 5 10"
-                              VerticalAlignment="Center"
                               ItemsSource="{Binding SelectedSetting.Projects}"
-                              SelectedItem="{Binding SelectedSetting.SelectedProject}">
+                              SelectedItem="{Binding SelectedSetting.SelectedProject}"
+                              Style="{StaticResource PropertyComboBoxStyle}">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate DataType="models:ProjectItem">
-                                <Grid>
-                                    <Label Content="{Binding Converter={StaticResource ProjectItemNameToStringConverter}}" />
-                                </Grid>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource ProjectItemNameToStringConverter}}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -195,46 +176,30 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate DataType="models:EnumerationItem">
                                         <StackPanel Orientation="Horizontal">
-                                            <Button Width="{StaticResource LargeIconSize}"
-                                                    Height="{StaticResource LargeIconSize}"
-                                                    Margin="2"
-                                                    VerticalAlignment="Center"
-                                                    Command="{Binding DataContext.SelectedSetting.SelectedEnumeration.UpCommand,
+                                            <Button Command="{Binding DataContext.SelectedSetting.SelectedEnumeration.UpCommand,
                                                                       ElementName=_Root}"
                                                     CommandParameter="{Binding}"
                                                     IsEnabled="{Binding IsTop,
                                                                         Converter={StaticResource BooleanReverseConverter}}"
-                                                    Style="{DynamicResource MaterialDesignFloatingActionDarkButton}"
+                                                    Style="{DynamicResource DataGridButtonStyle}"
                                                     ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
                                                                       Path=Resources.Tooltip_Up,
                                                                       Mode=OneWay}">
                                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                                    <Path Width="{StaticResource IconPathSize}"
-                                                          Height="{StaticResource IconPathSize}"
-                                                          Data="M31.469081,0 L62.93816,31.46908 57.063162,37.34408 35.219082,15.500001 35.219082,63.46908 27.469082,63.46908 27.469082,15.749998 5.875,37.34408 0,31.46908 z"
-                                                          Fill="{StaticResource IdealForegroundColorBrush}"
-                                                          Stretch="Fill" />
+                                                    <Path Data="M31.469081,0 L62.93816,31.46908 57.063162,37.34408 35.219082,15.500001 35.219082,63.46908 27.469082,63.46908 27.469082,15.749998 5.875,37.34408 0,31.46908 z" Style="{StaticResource IconPathStyle}" />
                                                 </Viewbox>
                                             </Button>
-                                            <Button Width="{StaticResource LargeIconSize}"
-                                                    Height="{StaticResource LargeIconSize}"
-                                                    Margin="2"
-                                                    VerticalAlignment="Center"
-                                                    Command="{Binding DataContext.SelectedSetting.SelectedEnumeration.DownCommand,
+                                            <Button Command="{Binding DataContext.SelectedSetting.SelectedEnumeration.DownCommand,
                                                                       ElementName=_Root}"
                                                     CommandParameter="{Binding}"
                                                     IsEnabled="{Binding IsLast,
                                                                         Converter={StaticResource BooleanReverseConverter}}"
-                                                    Style="{DynamicResource MaterialDesignFloatingActionDarkButton}"
+                                                    Style="{DynamicResource DataGridButtonStyle}"
                                                     ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
                                                                       Path=Resources.Tooltip_Down,
                                                                       Mode=OneWay}">
                                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                                    <Path Width="{StaticResource IconPathSize}"
-                                                          Height="{StaticResource IconPathSize}"
-                                                          Data="M31.469081,0 L62.93816,31.46908 57.063162,37.34408 35.219082,15.500001 35.219082,63.46908 27.469082,63.46908 27.469082,15.749998 5.875,37.34408 0,31.46908 z"
-                                                          Fill="{StaticResource IdealForegroundColorBrush}"
-                                                          Stretch="Fill">
+                                                    <Path Data="M31.469081,0 L62.93816,31.46908 57.063162,37.34408 35.219082,15.500001 35.219082,63.46908 27.469082,63.46908 27.469082,15.749998 5.875,37.34408 0,31.46908 z" Style="{StaticResource IconPathStyle}">
                                                         <Path.LayoutTransform>
                                                             <RotateTransform Angle="180" />
                                                         </Path.LayoutTransform>
@@ -250,12 +215,7 @@
                 </ScrollViewer>
                 <Border Grid.Row="3"
                         Grid.Column="0"
-                        Width="Auto"
-                        Height="Auto"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch"
-                        BorderBrush="{DynamicResource PrimaryHueDarkBrush}"
-                        BorderThickness="1" />
+                        Style="{StaticResource SseparateBorderStyle}" />
                 <Grid Grid.Row="4"
                       Grid.Column="0"
                       Background="{StaticResource AppBarBackgroundBrush}">
@@ -294,7 +254,7 @@
                 </Grid>
             </Grid>
         </DockPanel>
-        <UserControl Background="#CC000000" Visibility="{Binding IsEmptyStacks, Converter={StaticResource CollapsedIfFalse}}">
+        <UserControl Background="{StaticResource EmptyStackBackgroundBrush}" Visibility="{Binding IsEmptyStacks, Converter={StaticResource CollapsedIfFalse}}">
             <Label HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Content="{Binding Source={x:Static models:ResourceService.Instance},

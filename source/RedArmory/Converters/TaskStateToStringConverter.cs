@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Data;
 using Microsoft.Win32.TaskScheduler;
-using Ouranos.RedArmory.Models;
 
 namespace Ouranos.RedArmory.Converters
 {

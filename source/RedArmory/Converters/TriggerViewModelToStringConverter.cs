@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Data;
-using Ouranos.RedArmory.Models;
 using Ouranos.RedArmory.ViewModels;
 
 namespace Ouranos.RedArmory.Converters

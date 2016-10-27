@@ -7,10 +7,11 @@
              xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
              d:DesignHeight="500"
              d:DesignWidth="700"
+             x:ClassModifier="internal"
              Background="{StaticResource BackgroundBrush}"
              DataContext="{Binding Source={StaticResource Locator},
                                    Path=Setting}"
-             mc:Ignorable="d" x:ClassModifier="internal">
+             mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -85,14 +86,10 @@
                         <!--#region Destination-->
                         <Label Grid.Row="0"
                                Grid.Column="0"
-                               Margin="{StaticResource PropertyLabelMargin}"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                  Path=Resources.Word_ServiceStartupType,
                                                  Mode=OneWay}"
-                               FontSize="{StaticResource ItemHeadingFontSize}"
-                               FontWeight="Bold" />
+                               Style="{StaticResource PropertyLabelStyle}" />
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -104,13 +101,12 @@
                                         <Grid>
                                             <StackPanel Orientation="Horizontal">
                                                 <Label Width="150"
-                                                       Margin="{StaticResource PropertyLabelMargin}"
-                                                       HorizontalAlignment="Left"
-                                                       VerticalAlignment="Center"
-                                                       Content="{Binding ServiceName}" />
+                                                       Content="{Binding ServiceName}"
+                                                       Style="{StaticResource ComboBoxLabelStyle}" />
                                                 <ComboBox Width="200"
                                                           ItemsSource="{Binding Source={x:Static local:SettingViewModel.ServiceStartupTypes}}"
-                                                          SelectedValue="{Binding StartupType}">
+                                                          SelectedValue="{Binding StartupType}"
+                                                          Style="{StaticResource PropertyComboBoxStyle}">
                                                     <ComboBox.ItemTemplate>
                                                         <DataTemplate>
                                                             <TextBlock Text="{Binding Converter={StaticResource ServiceStartupTypeToStringConverter}}" />

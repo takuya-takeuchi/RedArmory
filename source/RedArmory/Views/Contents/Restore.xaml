@@ -105,14 +105,10 @@
                         <!--#region Source-->
                         <Label Grid.Row="0"
                                Grid.Column="0"
-                               Margin="{StaticResource PropertyLabelMargin}"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                  Path=Resources.Word_Source,
                                                  Mode=OneWay}"
-                               FontSize="{StaticResource ItemHeadingFontSize}"
-                               FontWeight="Bold" />
+                               Style="{StaticResource PropertyLabelStyle}" />
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -121,11 +117,9 @@
                             <StackPanel Orientation="Horizontal">
                                 <ComboBox Name="_ComboBox"
                                           MinWidth="500"
-                                          Margin="{StaticResource PropertyComboBoxMargin}"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Center"
                                           IsEditable="True"
                                           ItemsSource="{Binding SelectedStack.BackupHistories.View}"
+                                          Style="{StaticResource PropertyComboBoxStyle}"
                                           Text="{Binding SelectedStack.Directory,
                                                          UpdateSourceTrigger=PropertyChanged}"
                                           TextSearch.TextPath="OutputDirectory">
@@ -198,14 +192,10 @@
                         <!--#region Options-->
                         <Label Grid.Row="1"
                                Grid.Column="0"
-                               Margin="{StaticResource PropertyLabelMargin}"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                  Path=Resources.Word_Options,
                                                  Mode=OneWay}"
-                               FontSize="{StaticResource ItemHeadingFontSize}"
-                               FontWeight="Bold" />
+                               Style="{StaticResource PropertyLabelStyle}" />
                         <Grid Grid.Row="1" Grid.Column="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -219,29 +209,21 @@
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0"
                                    Grid.Column="0"
-                                   Margin="{StaticResource PropertyLabelMargin}"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                      Path=Resources.Word_Database,
-                                                     Mode=OneWay}" />
+                                                     Mode=OneWay}"
+                                   Style="{StaticResource SubPropertyLabelStyle}" />
                             <StackPanel Grid.Row="0"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="{StaticResource PropertyLabelMargin}"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="OFF" />
+                                <Label Content="OFF" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <ToggleButton Name="_ToggleButtonIsDefault"
                                               Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Database}"
                                               IsEnabled="{Binding SelectedStack.HasDatabase}" />
-                                <Label Margin="{StaticResource PropertyLabelMargin}"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="ON" />
+                                <Label Content="ON" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <StackPanel Orientation="Horizontal" Visibility="{Binding SelectedStack.HasDatabase, Converter={StaticResource HiddenIfTrue}}">
                                     <Viewbox Width="24"
                                              Height="24"
@@ -258,29 +240,21 @@
                             </StackPanel>
                             <Label Grid.Row="1"
                                    Grid.Column="0"
-                                   Margin="{StaticResource PropertyLabelMargin}"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                      Path=Resources.Word_Plugin,
-                                                     Mode=OneWay}" />
+                                                     Mode=OneWay}"
+                                   Style="{StaticResource SubPropertyLabelStyle}" />
                             <StackPanel Grid.Row="1"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="{StaticResource PropertyLabelMargin}"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="OFF" />
+                                <Label Content="OFF" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <ToggleButton Name="_ToggleButtonPlugin"
                                               Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Plugins}"
                                               IsEnabled="{Binding SelectedStack.HasPlugin}" />
-                                <Label Margin="{StaticResource PropertyLabelMargin}"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="ON" />
+                                <Label Content="ON" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <StackPanel Orientation="Horizontal" Visibility="{Binding SelectedStack.HasPlugin, Converter={StaticResource HiddenIfTrue}}">
                                     <Viewbox Width="24"
                                              Height="24"
@@ -297,29 +271,21 @@
                             </StackPanel>
                             <Label Grid.Row="2"
                                    Grid.Column="0"
-                                   Margin="{StaticResource PropertyLabelMargin}"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                      Path=Resources.Word_Theme,
-                                                     Mode=OneWay}" />
+                                                     Mode=OneWay}"
+                                   Style="{StaticResource SubPropertyLabelStyle}" />
                             <StackPanel Grid.Row="2"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="{StaticResource PropertyLabelMargin}"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="OFF" />
+                                <Label Content="OFF" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <ToggleButton Name="_ToggleButtonTheme"
                                               Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Themes}"
                                               IsEnabled="{Binding SelectedStack.HasTheme}" />
-                                <Label Margin="{StaticResource PropertyLabelMargin}"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="ON" />
+                                <Label Content="ON" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <StackPanel Orientation="Horizontal" Visibility="{Binding SelectedStack.HasTheme, Converter={StaticResource HiddenIfTrue}}">
                                     <Viewbox Width="24"
                                              Height="24"
@@ -336,29 +302,21 @@
                             </StackPanel>
                             <Label Grid.Row="3"
                                    Grid.Column="0"
-                                   Margin="{StaticResource PropertyLabelMargin}"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                      Path=Resources.Word_AttachedFile,
-                                                     Mode=OneWay}" />
+                                                     Mode=OneWay}"
+                                   Style="{StaticResource SubPropertyLabelStyle}" />
                             <StackPanel Grid.Row="3"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="{StaticResource PropertyLabelMargin}"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="OFF" />
+                                <Label Content="OFF" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <ToggleButton Name="_ToggleButtonFile"
                                               Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Files}"
                                               IsEnabled="{Binding SelectedStack.HasFile}" />
-                                <Label Margin="{StaticResource PropertyLabelMargin}"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="ON" />
+                                <Label Content="ON" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <StackPanel Orientation="Horizontal" Visibility="{Binding SelectedStack.HasFile, Converter={StaticResource HiddenIfTrue}}">
                                     <Viewbox Width="24"
                                              Height="24"

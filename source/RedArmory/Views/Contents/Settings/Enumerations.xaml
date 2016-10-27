@@ -78,49 +78,35 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0"
                            Grid.Column="0"
-                           Margin="{StaticResource PropertyLabelMargin}"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
                            Content="{Binding Source={x:Static models:ResourceService.Instance},
                                              Path=Resources.Word_EnumerationType,
                                              Mode=OneWay}"
-                           FontSize="{StaticResource ItemHeadingFontSize}"
-                           FontWeight="Bold" />
+                           Style="{StaticResource PropertyLabelStyle}" />
                     <ComboBox Grid.Row="0"
                               Grid.Column="1"
-                              Margin="5 10 5 5"
-                              VerticalAlignment="Center"
+                              Style="{StaticResource PropertyComboBoxStyle}"
                               ItemsSource="{Binding Source={x:Static models:Setting.EnumerationTypes}}"
                               SelectedItem="{Binding SelectedSetting.SelectedEnumerationType}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <Label Content="{Binding Converter={StaticResource EnumerationTypeToStringConverter}}" />
-                                </Grid>
+                                <TextBlock Text="{Binding Converter={StaticResource EnumerationTypeToStringConverter}}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Label Grid.Row="1"
                            Grid.Column="0"
-                           Margin="{StaticResource PropertyLabelMargin}"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
+                           Style="{StaticResource PropertyLabelStyle}"
                            Content="{Binding Source={x:Static models:ResourceService.Instance},
                                              Path=Resources.Word_TargetProject,
-                                             Mode=OneWay}"
-                           FontSize="{StaticResource ItemHeadingFontSize}"
-                           FontWeight="Bold" />
+                                             Mode=OneWay}"/>
                     <ComboBox Grid.Row="1"
                               Grid.Column="1"
-                              Margin="5 5 5 10"
-                              VerticalAlignment="Center"
+                              Style="{StaticResource PropertyComboBoxStyle}"
                               ItemsSource="{Binding SelectedSetting.Projects}"
                               SelectedItem="{Binding SelectedSetting.SelectedProject}">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate DataType="models:ProjectItem">
-                                <Grid>
-                                    <Label Content="{Binding Converter={StaticResource ProjectItemNameToStringConverter}}" />
-                                </Grid>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource ProjectItemNameToStringConverter}}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>

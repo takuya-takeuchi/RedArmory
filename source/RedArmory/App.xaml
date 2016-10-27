@@ -115,6 +115,30 @@
             <Thickness x:Key="PropertyToggleButtonMargin">5, 5, 5, 5</Thickness>
             <Thickness x:Key="PropertyTextBoxMargin">5, 5, 5, 5</Thickness>
             <Thickness x:Key="PropertyComboBoxMargin">5, 5, 5, 5</Thickness>
+            
+            <!--  Style  -->
+            <Style x:Key="PropertyLabelStyle" TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="Margin" Value="{StaticResource PropertyLabelMargin}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="{StaticResource ItemHeadingFontSize}"/>
+            </Style>
+            <Style x:Key="SubPropertyLabelStyle" TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="Margin" Value="{StaticResource PropertyLabelMargin}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="ComboBoxLabelStyle" TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="Margin" Value="{StaticResource PropertyLabelMargin}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="PropertyComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+                <Setter Property="Margin" Value="{StaticResource PropertyComboBoxMargin}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
 
             <!--  Converter  -->
             <converters:BooleanToVisibilityConverter x:Key="HiddenIfFalse"

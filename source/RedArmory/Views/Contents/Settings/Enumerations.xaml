@@ -238,12 +238,7 @@
                 </ScrollViewer>
                 <Border Grid.Row="3"
                         Grid.Column="0"
-                        Width="Auto"
-                        Height="Auto"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch"
-                        BorderBrush="{DynamicResource PrimaryHueDarkBrush}"
-                        BorderThickness="1" />
+                        Style="{StaticResource SseparateBorderStyle}"/>
                 <Grid Grid.Row="4"
                       Grid.Column="0"
                       Background="{StaticResource AppBarBackgroundBrush}">

@@ -160,6 +160,13 @@
                 <Setter Property="Fill" Value="{StaticResource WarningColorBrush}"/>
                 <Setter Property="Data" Value="M40.188225,55.937001 L40.188301,64.001 48.188,64.001 48.188,55.937001 z M40.188,32.062001 L40.188152,48.062005 48.188,48.062005 48.188,32.062001 C48.188,32.062001 48.187698,32.062001 40.188,32.062001 z M44.374848,0 L87.875,76.000298 5.6843419E-14,76.125001 C1.1368684E-13,76.125001 -0.00029850105,76.124703 44.374848,0 z"/>
             </Style>
+            <Style x:Key="InfoIconPathStyle" TargetType="Path">
+                <Setter Property="Width" Value="40"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Stretch" Value="Uniform"/>
+                <Setter Property="Fill" Value="{StaticResource IdealForegroundColorBrush}"/>
+                <Setter Property="Data" Value="M17.129,16.75 C20.588867,16.75 20.589001,16.75 20.589001,16.75 L20.589001,28.337 17.129066,28.337 z M17.129,9.7539997 L20.589001,9.7539997 20.589001,13.242 17.129032,13.242 z M18.921801,3.8392997 C10.683644,3.8392999 4.0053,10.517645 4.0053,18.7558 4.0053,26.993956 10.683644,33.672298 18.921801,33.672298 27.159956,33.672298 33.838299,26.993956 33.838299,18.7558 33.838299,10.517645 27.159956,3.8392999 18.921801,3.8392997 z M19.003,0 C29.498068,0 38.006001,8.5079327 38.006001,19.003 38.006001,29.498068 29.498068,38.006001 19.003,38.006001 8.5079327,38.006001 0,29.498068 0,19.003 0,8.5079327 8.5079327,0 19.003,0 z"/>
+            </Style>
             <Style x:Key="LargeIconPathStyle" TargetType="Path">
                 <Setter Property="Width" Value="40"/>
                 <Setter Property="Height" Value="40"/>
@@ -171,6 +178,11 @@
                 <Setter Property="Height" Value="{StaticResource IconPathSize}"/>
                 <Setter Property="Stretch" Value="Uniform"/>
                 <Setter Property="Fill" Value="{StaticResource IdealForegroundColorBrush}"/>
+            </Style>
+            <Style x:Key="ViewboxStyle" TargetType="Viewbox">
+                <Setter Property="Width" Value="24"/>
+                <Setter Property="Height" Value="24"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
 
             <!--  Converter  -->

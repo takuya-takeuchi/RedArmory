@@ -67,7 +67,7 @@
                                              Height="24"
                                              Margin="6 0 6 0"
                                              VerticalAlignment="Center">
-                                        <Path Data="{Binding IconPath}" Style="{StaticResource LargeIconPathStyle}" />
+                                        <Path Data="{Binding IconPath}" Style="{StaticResource InfoIconPathStyle}" />
                                     </Viewbox>
                                     <TextBlock Grid.Row="0"
                                                Grid.Column="1"

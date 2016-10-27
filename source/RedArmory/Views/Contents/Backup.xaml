@@ -67,12 +67,8 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <Viewbox Width="24"
-                                 Height="24"
-                                 Margin="16 0 6 0"
-                                 VerticalAlignment="Center">
-                            <Path Style="{StaticResource LargeIconPathStyle}"
-                                  Data="M17.129,16.75 C20.588867,16.75 20.589001,16.75 20.589001,16.75 L20.589001,28.337 17.129066,28.337 z M17.129,9.7539997 L20.589001,9.7539997 20.589001,13.242 17.129032,13.242 z M18.921801,3.8392997 C10.683644,3.8392999 4.0053,10.517645 4.0053,18.7558 4.0053,26.993956 10.683644,33.672298 18.921801,33.672298 27.159956,33.672298 33.838299,26.993956 33.838299,18.7558 33.838299,10.517645 27.159956,3.8392999 18.921801,3.8392997 z M19.003,0 C29.498068,0 38.006001,8.5079327 38.006001,19.003 38.006001,29.498068 29.498068,38.006001 19.003,38.006001 8.5079327,38.006001 0,29.498068 0,19.003 0,8.5079327 8.5079327,0 19.003,0 z"/>
+                        <Viewbox Margin="16 0 6 0" Style="{StaticResource ViewboxStyle}">
+                            <Path Style="{StaticResource InfoIconPathStyle}" />
                         </Viewbox>
                         <Label VerticalAlignment="Center"
                                Content="{Binding SelectedStack.Stack.InstallLocation}"
@@ -87,12 +83,8 @@
                                   VerticalAlignment="Center"
                                   Foreground="{StaticResource IdealForegroundColorBrush}"
                                   Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}">
-                        <Viewbox Width="24"
-                                 Height="24"
-                                 HorizontalAlignment="Center"
-                                 VerticalAlignment="Center">
-                            <Path Style="{StaticResource LargeIconPathStyle}"
-                                  Data="M35.507702,19.875008 L41.508509,19.875008 41.508509,41.345671 59.250025,51.63102 56.640978,55.938007 35.312023,43.595245 z M40,7 C21.774603,7 7,21.774603 7,40 7,58.225395 21.774603,73 40,73 58.225395,73 73,58.225395 73,40 73,21.774603 58.225395,7 40,7 z M40,0 C62.091389,0 80,17.90861 80,40 80,62.091389 62.091389,80 40,80 17.908611,80 0,62.091389 0,40 0,17.90861 17.908611,0 40,0 z"/>
+                        <Viewbox HorizontalAlignment="Center" Style="{StaticResource ViewboxStyle}">
+                            <Path Data="M35.507702,19.875008 L41.508509,19.875008 41.508509,41.345671 59.250025,51.63102 56.640978,55.938007 35.312023,43.595245 z M40,7 C21.774603,7 7,21.774603 7,40 7,58.225395 21.774603,73 40,73 58.225395,73 73,58.225395 73,40 73,21.774603 58.225395,7 40,7 z M40,0 C62.091389,0 80,17.90861 80,40 80,62.091389 62.091389,80 40,80 17.908611,80 0,62.091389 0,40 0,17.90861 17.908611,0 40,0 z" Style="{StaticResource LargeIconPathStyle}" />
                         </Viewbox>
                     </ToggleButton>
                 </Grid>
@@ -316,7 +308,7 @@
                 </Grid>
                 <Border Grid.Row="2"
                         Grid.Column="0"
-                        Style="{StaticResource SseparateBorderStyle}"/>
+                        Style="{StaticResource SseparateBorderStyle}" />
                 <Grid Grid.Row="3"
                       Grid.Column="0"
                       Background="{StaticResource AppBarBackgroundBrush}">

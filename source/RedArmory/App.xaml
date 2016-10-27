@@ -147,6 +147,31 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueDarkBrush}"/>
                 <Setter Property="BorderThickness" Value="1"/>
             </Style>
+            <Style x:Key="DataGridButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionDarkButton}">
+                <Setter Property="Width" Value="{StaticResource LargeIconSize}"/>
+                <Setter Property="Height" Value="{StaticResource LargeIconSize}"/>
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="WarningIconPathStyle" TargetType="Path">
+                <Setter Property="Width" Value="40"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Stretch" Value="Uniform"/>
+                <Setter Property="Fill" Value="{StaticResource WarningColorBrush}"/>
+                <Setter Property="Data" Value="M40.188225,55.937001 L40.188301,64.001 48.188,64.001 48.188,55.937001 z M40.188,32.062001 L40.188152,48.062005 48.188,48.062005 48.188,32.062001 C48.188,32.062001 48.187698,32.062001 40.188,32.062001 z M44.374848,0 L87.875,76.000298 5.6843419E-14,76.125001 C1.1368684E-13,76.125001 -0.00029850105,76.124703 44.374848,0 z"/>
+            </Style>
+            <Style x:Key="LargeIconPathStyle" TargetType="Path">
+                <Setter Property="Width" Value="40"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Stretch" Value="Uniform"/>
+                <Setter Property="Fill" Value="{StaticResource IdealForegroundColorBrush}"/>
+            </Style>
+            <Style x:Key="IconPathStyle" TargetType="Path">
+                <Setter Property="Width" Value="{StaticResource IconPathSize}"/>
+                <Setter Property="Height" Value="{StaticResource IconPathSize}"/>
+                <Setter Property="Stretch" Value="Uniform"/>
+                <Setter Property="Fill" Value="{StaticResource IdealForegroundColorBrush}"/>
+            </Style>
 
             <!--  Converter  -->
             <converters:BooleanToVisibilityConverter x:Key="HiddenIfFalse"

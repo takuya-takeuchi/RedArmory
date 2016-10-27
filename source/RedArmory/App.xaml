@@ -110,6 +110,12 @@
             <system:Double x:Key="ItemHeadingFontSize">16</system:Double>
             <system:Double x:Key="ItemHeading2FontSize">14</system:Double>
 
+            <!--  Thickness  -->
+            <Thickness x:Key="PropertyLabelMargin">5, 5, 5, 5</Thickness>
+            <Thickness x:Key="PropertyToggleButtonMargin">5, 5, 5, 5</Thickness>
+            <Thickness x:Key="PropertyTextBoxMargin">5, 5, 5, 5</Thickness>
+            <Thickness x:Key="PropertyComboBoxMargin">5, 5, 5, 5</Thickness>
+
             <!--  Converter  -->
             <converters:BooleanToVisibilityConverter x:Key="HiddenIfFalse"
                                                      IsHidden="True"

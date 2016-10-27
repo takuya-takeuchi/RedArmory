@@ -51,7 +51,7 @@
                         <!--  #region Language  -->
                         <Label Grid.Row="0"
                                Grid.Column="0"
-                               Margin="5,5,5,5"
+                               Margin="{StaticResource PropertyLabelMargin}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},

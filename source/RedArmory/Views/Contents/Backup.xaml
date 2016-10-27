@@ -129,7 +129,7 @@
                         <!--#region Destination-->
                         <Label Grid.Row="0"
                                Grid.Column="0"
-                               Margin="5,5,5,5"
+                               Margin="{StaticResource PropertyLabelMargin}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},
@@ -144,7 +144,7 @@
                             </Grid.RowDefinitions>
                             <StackPanel Orientation="Horizontal">
                                 <TextBox MinWidth="300"
-                                         Margin="5,5,5,5"
+                                         Margin="{StaticResource PropertyTextBoxMargin}"
                                          HorizontalAlignment="Left"
                                          VerticalAlignment="Center"
                                          IsReadOnly="True"
@@ -191,7 +191,7 @@
                         <!--#region Format-->
                         <Label Grid.Row="1"
                                Grid.Column="0"
-                               Margin="5,5,5,5"
+                               Margin="{StaticResource PropertyLabelMargin}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},
@@ -203,7 +203,7 @@
                                     Grid.Column="1"
                                     Orientation="Vertical">
                             <TextBox MinWidth="300"
-                                     Margin="5,5,5,5"
+                                     Margin="{StaticResource PropertyTextBoxMargin}"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Center"
                                      Text="{Binding SelectedStack.DirectoryName,
@@ -226,7 +226,7 @@
                         <!--#region Options-->
                         <Label Grid.Row="2"
                                Grid.Column="0"
-                               Margin="5,5,5,5"
+                               Margin="{StaticResource PropertyLabelMargin}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},
@@ -247,7 +247,7 @@
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0"
                                    Grid.Column="0"
-                                   Margin="5,5,5,5"
+                                   Margin="{StaticResource PropertyLabelMargin}"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
@@ -256,23 +256,23 @@
                             <StackPanel Grid.Row="0"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="5,5,5,5"
+                                <Label Margin="{StaticResource PropertyLabelMargin}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
                                        Content="OFF" />
                                 <ToggleButton Name="_ToggleButtonIsDefault"
-                                              Margin="5,5,5,5"
+                                              Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Database}" />
-                                <Label Margin="5,5,5,5"
+                                <Label Margin="{StaticResource PropertyLabelMargin}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
                                        Content="ON" />
                             </StackPanel>
                             <Label Grid.Row="1"
                                    Grid.Column="0"
-                                   Margin="5,5,5,5"
+                                   Margin="{StaticResource PropertyLabelMargin}"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
@@ -281,23 +281,23 @@
                             <StackPanel Grid.Row="1"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="5,5,5,5"
+                                <Label Margin="{StaticResource PropertyLabelMargin}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
                                        Content="OFF" />
                                 <ToggleButton Name="_ToggleButtonPlugin"
-                                              Margin="5,5,5,5"
+                                              Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Plugins}" />
-                                <Label Margin="5,5,5,5"
+                                <Label Margin="{StaticResource PropertyLabelMargin}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
                                        Content="ON" />
                             </StackPanel>
                             <Label Grid.Row="2"
                                    Grid.Column="0"
-                                   Margin="5,5,5,5"
+                                   Margin="{StaticResource PropertyLabelMargin}"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
@@ -306,23 +306,23 @@
                             <StackPanel Grid.Row="2"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="5,5,5,5"
+                                <Label Margin="{StaticResource PropertyLabelMargin}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
                                        Content="OFF" />
                                 <ToggleButton Name="_ToggleButtonTheme"
-                                              Margin="5,5,5,5"
+                                              Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Themes}" />
-                                <Label Margin="5,5,5,5"
+                                <Label Margin="{StaticResource PropertyLabelMargin}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
                                        Content="ON" />
                             </StackPanel>
                             <Label Grid.Row="3"
                                    Grid.Column="0"
-                                   Margin="5,5,5,5"
+                                   Margin="{StaticResource PropertyLabelMargin}"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
@@ -331,16 +331,16 @@
                             <StackPanel Grid.Row="3"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="5,5,5,5"
+                                <Label Margin="{StaticResource PropertyLabelMargin}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
                                        Content="OFF" />
                                 <ToggleButton Name="_ToggleButtonFile"
-                                              Margin="5,5,5,5"
+                                              Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Files}" />
-                                <Label Margin="5,5,5,5"
+                                <Label Margin="{StaticResource PropertyLabelMargin}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
                                        Content="ON" />

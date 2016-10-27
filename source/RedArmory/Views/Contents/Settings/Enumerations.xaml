@@ -65,7 +65,9 @@
                                Foreground="{StaticResource IdealForegroundColorBrush}" />
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="1" Grid.Column="0">
+                <Grid Grid.Row="1"
+                      Grid.Column="0"
+                      Margin="15,15,15,15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -76,7 +78,7 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0"
                            Grid.Column="0"
-                           Margin="5,5,5,5"
+                           Margin="{StaticResource PropertyLabelMargin}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            Content="{Binding Source={x:Static models:ResourceService.Instance},
@@ -100,7 +102,7 @@
                     </ComboBox>
                     <Label Grid.Row="1"
                            Grid.Column="0"
-                           Margin="5,5,5,5"
+                           Margin="{StaticResource PropertyLabelMargin}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            Content="{Binding Source={x:Static models:ResourceService.Instance},

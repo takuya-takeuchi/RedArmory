@@ -85,7 +85,7 @@
                         <!--#region Destination-->
                         <Label Grid.Row="0"
                                Grid.Column="0"
-                               Margin="5,5,5,5"
+                               Margin="{StaticResource PropertyLabelMargin}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},
@@ -104,7 +104,7 @@
                                         <Grid>
                                             <StackPanel Orientation="Horizontal">
                                                 <Label Width="150"
-                                                       Margin="5,5,5,5"
+                                                       Margin="{StaticResource PropertyLabelMargin}"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Center"
                                                        Content="{Binding ServiceName}" />

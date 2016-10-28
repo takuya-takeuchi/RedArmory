@@ -4,7 +4,7 @@ using System.Windows.Data;
 namespace Ouranos.RedArmory.Converters
 {
 
-    public sealed class CultureNameToLocalizedStringConverter : IValueConverter
+    internal sealed class CultureNameToLocalizedStringConverter : IValueConverter
     {
 
         /// <summary>

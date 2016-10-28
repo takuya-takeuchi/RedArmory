@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Data;
+using Ouranos.RedArmory.Models;
 
 namespace Ouranos.RedArmory.Converters
 {
@@ -7,7 +9,7 @@ namespace Ouranos.RedArmory.Converters
     /// <summary>
     /// <see cref="DateTime"/>をカルチャに応じた文字列に変換します。このクラスは継承できません。
     /// </summary>
-    public sealed class DateTimeToStringConverter : IValueConverter
+    internal sealed class DateTimeToStringConverter : IValueConverter
     {
 
         public bool IsSourceUtc
@@ -30,7 +32,7 @@ namespace Ouranos.RedArmory.Converters
         /// <param name="parameter">使用するコンバーター パラメーター。</param>
         /// <param name="culture">コンバーターで使用するカルチャ。</param>
         /// <returns>変換された値。メソッドが null を返す場合は、有効な null 値が使用されています。</returns>
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is DateTime)
             {
@@ -51,8 +53,26 @@ namespace Ouranos.RedArmory.Converters
                     }
                 }
 
-                var formatBackupDate = Properties.Resources.Format_BackupDate;
-                return datetime.ToString(formatBackupDate);
+                if (parameter is DateTimeType)
+                {
+                    switch ((DateTimeType)parameter)
+                    {
+                        case DateTimeType.BackupDateTime:
+                            return datetime.ToString(Properties.Resources.Format_BackupDate, Properties.Resources.Culture);
+                        case DateTimeType.BackupStartTime:
+                            return datetime.ToString(Properties.Resources.Format_BackupTaskStartTime, Properties.Resources.Culture);
+                        case DateTimeType.BackupStartDate:
+                            return datetime.ToString(Properties.Resources.Format_BackupTaskStartDate, Properties.Resources.Culture);
+                        case DateTimeType.TaskSchedulerNextRunTime:
+                            return datetime != new DateTime() ? datetime.ToString(Properties.Resources.Format_TaskSchedulerDate, Properties.Resources.Culture) : Properties.Resources.Word_TaskSchedulerNextRunTimeEmpty;
+                        case DateTimeType.TaskSchedulerLastRunTime:
+                            return datetime != new DateTime() ? datetime.ToString(Properties.Resources.Format_TaskSchedulerDate, Properties.Resources.Culture) : Properties.Resources.Word_TaskSchedulerLastRunTimeEmpty;
+                    }
+                }
+                else
+                {
+                    return datetime.ToString(Properties.Resources.Culture);
+                }
             }
 
             throw new ArgumentException();
@@ -70,7 +90,5 @@ namespace Ouranos.RedArmory.Converters
         {
             throw new NotSupportedException();
         }
-
     }
-
 }

@@ -5,7 +5,7 @@ namespace Ouranos.RedArmory.Views.Contents
     /// <summary>
     /// About.xaml の相互作用ロジック
     /// </summary>
-    public partial class About : UserControl
+    internal partial class About : UserControl
     {
         public About()
         {

@@ -94,6 +94,8 @@
             <SolidColorBrush x:Key="GitHubColorBrush" Color="{StaticResource GitHubColor}" />
             <Color x:Key="HomeColor">Black</Color>
             <SolidColorBrush x:Key="HomeColorBrush" Color="{StaticResource HomeColor}" />
+            <Color x:Key="EmptyStackBackgroundColor">#CC000000</Color>
+            <SolidColorBrush x:Key="EmptyStackBackgroundBrush" Color="{StaticResource EmptyStackBackgroundColor}"/>
 
             <!--  Size  -->
             <system:Double x:Key="ListBoxItemHeight">36</system:Double>
@@ -101,12 +103,103 @@
             <system:Double x:Key="LargeIconSize">24</system:Double>
             <system:Double x:Key="IconPathSize">34</system:Double>
             <system:Double x:Key="HeaderBarHeight">50</system:Double>
+            <system:Double x:Key="SubHeaderBarHeight">52</system:Double>
             <system:Double x:Key="FooterBarHeight">50</system:Double>
             <system:Double x:Key="SocialIconSize">24</system:Double>
             <system:Double x:Key="SocialIconPathSize">50</system:Double>
             <system:Double x:Key="TitleFontSize">18</system:Double>
             <system:Double x:Key="ItemHeadingFontSize">16</system:Double>
             <system:Double x:Key="ItemHeading2FontSize">14</system:Double>
+            <system:Double x:Key="StackListLength">250</system:Double>
+
+            <!--  Thickness  -->
+            <Thickness x:Key="PropertyLabelMargin">5, 5, 5, 5</Thickness>
+            <Thickness x:Key="PropertyToggleButtonMargin">5, 5, 5, 5</Thickness>
+            <Thickness x:Key="PropertyTextBoxMargin">5, 5, 5, 5</Thickness>
+            <Thickness x:Key="PropertyComboBoxMargin">5, 5, 5, 5</Thickness>
+            <Thickness x:Key="ContentPadding">15,15,15,15</Thickness>
+            <Thickness x:Key="ViewBoxLabelMargin">16 0 6 0</Thickness>
+            
+            <!--  Style  -->
+            <Style x:Key="PropertyLabelStyle" TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="Margin" Value="{StaticResource PropertyLabelMargin}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="{StaticResource ItemHeadingFontSize}"/>
+            </Style>
+            <Style x:Key="SubPropertyLabelStyle" TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="Margin" Value="{StaticResource PropertyLabelMargin}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="ContentNameLabelStyle" TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="Margin" Value="{StaticResource PropertyLabelMargin}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="ComboBoxLabelStyle" TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}"/>
+            </Style>
+            <Style x:Key="PropertyComboBoxStyle" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+                <Setter Property="Margin" Value="{StaticResource PropertyComboBoxMargin}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="TitleTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="Margin" Value="24 0 6 0"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="{StaticResource TitleFontSize}"/>
+                <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}"/>
+            </Style>
+            <Style x:Key="SseparateBorderStyle" TargetType="Border">
+                <Setter Property="Width" Value="Auto"/>
+                <Setter Property="Height" Value="Auto"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+            <Style x:Key="DataGridButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionDarkButton}">
+                <Setter Property="Width" Value="{StaticResource LargeIconSize}"/>
+                <Setter Property="Height" Value="{StaticResource LargeIconSize}"/>
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="WarningIconPathStyle" TargetType="Path">
+                <Setter Property="Width" Value="40"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Stretch" Value="Uniform"/>
+                <Setter Property="Fill" Value="{StaticResource WarningColorBrush}"/>
+                <Setter Property="Data" Value="M40.188225,55.937001 L40.188301,64.001 48.188,64.001 48.188,55.937001 z M40.188,32.062001 L40.188152,48.062005 48.188,48.062005 48.188,32.062001 C48.188,32.062001 48.187698,32.062001 40.188,32.062001 z M44.374848,0 L87.875,76.000298 5.6843419E-14,76.125001 C1.1368684E-13,76.125001 -0.00029850105,76.124703 44.374848,0 z"/>
+            </Style>
+            <Style x:Key="InfoIconPathStyle" TargetType="Path">
+                <Setter Property="Width" Value="40"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Stretch" Value="Uniform"/>
+                <Setter Property="Fill" Value="{StaticResource IdealForegroundColorBrush}"/>
+                <Setter Property="Data" Value="M17.129,16.75 C20.588867,16.75 20.589001,16.75 20.589001,16.75 L20.589001,28.337 17.129066,28.337 z M17.129,9.7539997 L20.589001,9.7539997 20.589001,13.242 17.129032,13.242 z M18.921801,3.8392997 C10.683644,3.8392999 4.0053,10.517645 4.0053,18.7558 4.0053,26.993956 10.683644,33.672298 18.921801,33.672298 27.159956,33.672298 33.838299,26.993956 33.838299,18.7558 33.838299,10.517645 27.159956,3.8392999 18.921801,3.8392997 z M19.003,0 C29.498068,0 38.006001,8.5079327 38.006001,19.003 38.006001,29.498068 29.498068,38.006001 19.003,38.006001 8.5079327,38.006001 0,29.498068 0,19.003 0,8.5079327 8.5079327,0 19.003,0 z"/>
+            </Style>
+            <Style x:Key="LargeIconPathStyle" TargetType="Path">
+                <Setter Property="Width" Value="40"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="Stretch" Value="Uniform"/>
+                <Setter Property="Fill" Value="{StaticResource IdealForegroundColorBrush}"/>
+            </Style>
+            <Style x:Key="IconPathStyle" TargetType="Path">
+                <Setter Property="Width" Value="{StaticResource IconPathSize}"/>
+                <Setter Property="Height" Value="{StaticResource IconPathSize}"/>
+                <Setter Property="Stretch" Value="Uniform"/>
+                <Setter Property="Fill" Value="{StaticResource IdealForegroundColorBrush}"/>
+            </Style>
+            <Style x:Key="ViewboxStyle" TargetType="Viewbox">
+                <Setter Property="Width" Value="24"/>
+                <Setter Property="Height" Value="24"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
 
             <!--  Converter  -->
             <converters:BooleanToVisibilityConverter x:Key="HiddenIfFalse"
@@ -123,13 +216,18 @@
                                                      TriggerValue="True" />
             <converters:ServiceStartupTypeToStringConverter x:Key="ServiceStartupTypeToStringConverter" />
             <converters:EnumerationTypeToStringConverter x:Key="EnumerationTypeToStringConverter" />
+            <converters:TriggerViewModelToStringConverter x:Key="TriggerViewModelToStringConverter" />
             <converters:ProjectItemNameToStringConverter x:Key="ProjectItemNameToStringConverter" />
             <converters:BooleanReverseConverter x:Key="BooleanReverseConverter" />
             <converters:CultureNameToLocalizedStringConverter x:Key="CultureNameToLocalizedStringConverter" />
             <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" IsSourceUtc="True" />
+            <converters:DateTimeToStringConverter x:Key="GenericDateTimeToStringConverter" />
             <converters:ProgressStateToStringConverter x:Key="ProgressStateToStringConverter" />
             <converters:ProgressStateToBrushConverter x:Key="ProgressStateToBrushConverter" />
-            <converters:CollectionCountToVisibilityConverter x:Key="CollectionCountToVisibilityConverter" IsHidden="False" TriggerCount="1" />
+            <converters:CollectionCountToVisibilityConverter x:Key="CollectionCountToVisibilityConverter"
+                                                             IsHidden="False"
+                                                             TriggerCount="1" />
+            <converters:TaskStateToStringConverter x:Key="TaskStateToStringConverter"/>
 
             <!--  Chart  -->
             <Style x:Key="MinimalChartStyle" TargetType="metroChart:ChartBase">
@@ -146,6 +244,41 @@
                     <SolidColorBrush x:Key="Brush2" Color="#B71C1C" />
                 </ResourceDictionary>
             </metroChart:ResourceDictionaryCollection>
+
+            <!--  TriggerControl  -->
+            <Style x:Key="TriggerControlPropertyLabel" BasedOn="{StaticResource {x:Type Label}}" TargetType="Label">
+                <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
+                <Setter Property="FontSize" Value="{StaticResource ItemHeadingFontSize}" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="Margin" Value="0 0 10 0" />
+                <Setter Property="FontWeight" Value="Bold" />
+            </Style>
+            <Style x:Key="TriggerControlSubPropertyLabel" BasedOn="{StaticResource {x:Type Label}}" TargetType="Label">
+                <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
+                <Setter Property="Margin" Value="0 0 10 0" />
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+            </Style>
+            <Style x:Key="TriggerControlPropertyTextBlock" BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
+                <Setter Property="FontSize" Value="{StaticResource ItemHeading2FontSize}" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="TriggerControlPropertyCheckBox" BasedOn="{StaticResource {x:Type CheckBox}}" TargetType="CheckBox">
+                <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
+            </Style>
+            <Style x:Key="TriggerControlPropertyUniformGrid" TargetType="UniformGrid">
+                <Setter Property="MaxWidth" Value="400" />
+            </Style>
+            <Style x:Key="TriggerControlPropertyTextBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
+                <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
+                <Setter Property="Margin" Value="0 0 0 10" />
+                <Setter Property="MinWidth" Value="300" />
+                <Setter Property="MaxWidth" Value="400" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
 
             <!--  DataTemplate  -->
             <DataTemplate x:Key="BitnamiRedmineStackListBoxDataTemplate" DataType="services:BitnamiRedmineStack">

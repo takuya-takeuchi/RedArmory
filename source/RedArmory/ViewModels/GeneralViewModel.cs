@@ -8,7 +8,7 @@ using Ouranos.RedArmory.Models.Services;
 namespace Ouranos.RedArmory.ViewModels
 {
 
-    public sealed class GeneralViewModel : ViewModelBase
+    internal sealed class GeneralViewModel : ViewModelBase
     {
 
         #region フィールド

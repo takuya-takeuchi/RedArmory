@@ -1,12 +1,14 @@
 ﻿<UserControl x:Class="Ouranos.RedArmory.Views.Contents.Backup"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:contents="clr-namespace:Ouranos.RedArmory.Views.Contents"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
              xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
              d:DesignHeight="800"
              d:DesignWidth="1200"
+             x:ClassModifier="internal"
              DataContext="{Binding Source={StaticResource Locator},
                                    Path=Backups}"
              mc:Ignorable="d">
@@ -31,15 +33,10 @@
             <Grid Height="{StaticResource HeaderBarHeight}"
                   Background="{StaticResource PrimaryHueDarkBrush}"
                   DockPanel.Dock="Top">
-                <TextBlock Margin="24 0 6 0"
-                           VerticalAlignment="Center"
-                           FontSize="{StaticResource TitleFontSize}"
-                           Foreground="{StaticResource IdealForegroundColorBrush}"
-                           Text="Backup" />
+                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Backup" />
             </Grid>
             <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding Stacks, Converter={StaticResource CollectionCountToVisibilityConverter}}">
-                <ListBox Name="_StackListBox"
-                         Width="250"
+                <ListBox Width="{StaticResource StackListLength}"
                          Background="{StaticResource SecondaryAccentBrush}"
                          ItemTemplate="{StaticResource BitnamiRedmineStackListBoxDataTemplate}"
                          ItemsSource="{Binding Stacks}"
@@ -58,25 +55,29 @@
                 </Grid.RowDefinitions>
                 <!--  52 は 36 + ((40 - 24) / 2) * 2  -->
                 <Grid Grid.Row="0"
-                      Height="52"
+                      Height="{StaticResource SubHeaderBarHeight}"
                       Background="{StaticResource SubHeaderBackgroundBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <Viewbox Width="24"
-                                 Height="24"
-                                 Margin="16 0 6 0"
-                                 VerticalAlignment="Center">
-                            <Path Width="40"
-                                  Height="40"
-                                  Data="M17.129,16.75 C20.588867,16.75 20.589001,16.75 20.589001,16.75 L20.589001,28.337 17.129066,28.337 z M17.129,9.7539997 L20.589001,9.7539997 20.589001,13.242 17.129032,13.242 z M18.921801,3.8392997 C10.683644,3.8392999 4.0053,10.517645 4.0053,18.7558 4.0053,26.993956 10.683644,33.672298 18.921801,33.672298 27.159956,33.672298 33.838299,26.993956 33.838299,18.7558 33.838299,10.517645 27.159956,3.8392999 18.921801,3.8392997 z M19.003,0 C29.498068,0 38.006001,8.5079327 38.006001,19.003 38.006001,29.498068 29.498068,38.006001 19.003,38.006001 8.5079327,38.006001 0,29.498068 0,19.003 0,8.5079327 8.5079327,0 19.003,0 z"
-                                  Fill="{StaticResource IdealForegroundColorBrush}"
-                                  Stretch="Uniform" />
+                        <Viewbox Margin="{StaticResource ViewBoxLabelMargin}" Style="{StaticResource ViewboxStyle}">
+                            <Path Style="{StaticResource InfoIconPathStyle}" />
                         </Viewbox>
-                        <Label VerticalAlignment="Center"
-                               Content="{Binding SelectedStack.Stack.InstallLocation}"
-                               FontSize="16"
-                               FontWeight="Bold"
-                               Foreground="{StaticResource IdealForegroundColorBrush}" />
+                        <Label Content="{Binding SelectedStack.Stack.InstallLocation}" Style="{StaticResource ComboBoxLabelStyle}" />
                     </StackPanel>
+                    <ToggleButton Name="_ToggleButton"
+                                  Grid.Column="1"
+                                  Margin="6 0 6 0"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Foreground="{StaticResource IdealForegroundColorBrush}"
+                                  Style="{DynamicResource MaterialDesignFlatPrimaryToggleButton}">
+                        <Viewbox HorizontalAlignment="Center" Style="{StaticResource ViewboxStyle}">
+                            <Path Data="M35.507702,19.875008 L41.508509,19.875008 41.508509,41.345671 59.250025,51.63102 56.640978,55.938007 35.312023,43.595245 z M40,7 C21.774603,7 7,21.774603 7,40 7,58.225395 21.774603,73 40,73 58.225395,73 73,58.225395 73,40 73,21.774603 58.225395,7 40,7 z M40,0 C62.091389,0 80,17.90861 80,40 80,62.091389 62.091389,80 40,80 17.908611,80 0,62.091389 0,40 0,17.90861 17.908611,0 40,0 z" Style="{StaticResource LargeIconPathStyle}" />
+                        </Viewbox>
+                    </ToggleButton>
                 </Grid>
                 <ScrollViewer Grid.Row="1"
                               Grid.Column="0"
@@ -86,10 +87,11 @@
                               VerticalAlignment="Stretch"
                               HorizontalContentAlignment="Stretch"
                               VerticalContentAlignment="Stretch"
-                              Background="{StaticResource BackgroundBrush}">
+                              Background="{StaticResource BackgroundBrush}"
+                              VerticalScrollBarVisibility="Auto">
                     <Grid Width="Auto"
                           Height="Auto"
-                          Margin="15,15,15,15"
+                          Margin="{StaticResource ContentPadding}"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
@@ -104,14 +106,10 @@
                         <!--#region Destination-->
                         <Label Grid.Row="0"
                                Grid.Column="0"
-                               Margin="5,5,5,5"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                  Path=Resources.Word_Destination,
                                                  Mode=OneWay}"
-                               FontSize="{StaticResource ItemHeadingFontSize}"
-                               FontWeight="Bold" />
+                               Style="{StaticResource PropertyLabelStyle}" />
                         <Grid Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -119,7 +117,7 @@
                             </Grid.RowDefinitions>
                             <StackPanel Orientation="Horizontal">
                                 <TextBox MinWidth="300"
-                                         Margin="5,5,5,5"
+                                         Margin="{StaticResource PropertyTextBoxMargin}"
                                          HorizontalAlignment="Left"
                                          VerticalAlignment="Center"
                                          IsReadOnly="True"
@@ -133,11 +131,7 @@
                                                           Path=Resources.Tooltip_SelectBackupFolder,
                                                           Mode=OneWay}">
                                     <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                        <Path Width="{StaticResource IconPathSize}"
-                                              Height="{StaticResource IconPathSize}"
-                                              Data="M7.9999995,16.25 L7.9999995,56.077999 71.5,56.077999 71.5,16.25 z M6,0 L10.25,0 26.25,0 32.25,0 32.25,0.16600038 32.570782,0.48678137 C36.677647,4.5936498 38.763676,6.6796784 39.823246,7.7392492 L39.833996,7.75 73.5,7.75 C76.813705,7.75 79.5,10.436292 79.5,13.75 L79.5,58.25 C79.5,61.563709 76.813705,64.25 73.5,64.25 L6,64.25 C2.6862915,64.25 0,61.563709 0,58.25 L0,24.25 0,13.75 0,6 C0,2.6862917 2.6862915,-1.4901161E-08 6,0 z"
-                                              Fill="{StaticResource IdealForegroundColorBrush}"
-                                              Stretch="Fill" />
+                                        <Path Data="M7.9999995,16.25 L7.9999995,56.077999 71.5,56.077999 71.5,16.25 z M6,0 L10.25,0 26.25,0 32.25,0 32.25,0.16600038 32.570782,0.48678137 C36.677647,4.5936498 38.763676,6.6796784 39.823246,7.7392492 L39.833996,7.75 73.5,7.75 C76.813705,7.75 79.5,10.436292 79.5,13.75 L79.5,58.25 C79.5,61.563709 76.813705,64.25 73.5,64.25 L6,64.25 C2.6862915,64.25 0,61.563709 0,58.25 L0,24.25 0,13.75 0,6 C0,2.6862917 2.6862915,-1.4901161E-08 6,0 z" Style="{StaticResource IconPathStyle}" />
                                     </Viewbox>
                                 </Button>
                             </StackPanel>
@@ -166,19 +160,15 @@
                         <!--#region Format-->
                         <Label Grid.Row="1"
                                Grid.Column="0"
-                               Margin="5,5,5,5"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                  Path=Resources.Word_FolderName,
                                                  Mode=OneWay}"
-                               FontSize="{StaticResource ItemHeadingFontSize}"
-                               FontWeight="Bold" />
+                               Style="{StaticResource PropertyLabelStyle}" />
                         <StackPanel Grid.Row="1"
                                     Grid.Column="1"
                                     Orientation="Vertical">
                             <TextBox MinWidth="300"
-                                     Margin="5,5,5,5"
+                                     Margin="{StaticResource PropertyTextBoxMargin}"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Center"
                                      Text="{Binding SelectedStack.DirectoryName,
@@ -201,14 +191,10 @@
                         <!--#region Options-->
                         <Label Grid.Row="2"
                                Grid.Column="0"
-                               Margin="5,5,5,5"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
                                Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                  Path=Resources.Word_Options,
                                                  Mode=OneWay}"
-                               FontSize="{StaticResource ItemHeadingFontSize}"
-                               FontWeight="Bold" />
+                               Style="{StaticResource PropertyLabelStyle}" />
                         <Grid Grid.Row="2" Grid.Column="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -222,116 +208,94 @@
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0"
                                    Grid.Column="0"
-                                   Margin="5,5,5,5"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                      Path=Resources.Word_Database,
-                                                     Mode=OneWay}" />
+                                                     Mode=OneWay}"
+                                   Style="{StaticResource SubPropertyLabelStyle}" />
                             <StackPanel Grid.Row="0"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="5,5,5,5"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="OFF" />
+                                <Label Content="OFF" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <ToggleButton Name="_ToggleButtonIsDefault"
-                                              Margin="5,5,5,5"
+                                              Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Database}" />
-                                <Label Margin="5,5,5,5"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="ON" />
+                                <Label Content="ON" Style="{StaticResource SubPropertyLabelStyle}" />
                             </StackPanel>
                             <Label Grid.Row="1"
                                    Grid.Column="0"
-                                   Margin="5,5,5,5"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                      Path=Resources.Word_Plugin,
-                                                     Mode=OneWay}" />
+                                                     Mode=OneWay}"
+                                   Style="{StaticResource SubPropertyLabelStyle}" />
                             <StackPanel Grid.Row="1"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="5,5,5,5"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="OFF" />
+                                <Label Content="OFF" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <ToggleButton Name="_ToggleButtonPlugin"
-                                              Margin="5,5,5,5"
+                                              Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Plugins}" />
-                                <Label Margin="5,5,5,5"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="ON" />
+                                <Label Content="ON" Style="{StaticResource SubPropertyLabelStyle}" />
                             </StackPanel>
                             <Label Grid.Row="2"
                                    Grid.Column="0"
-                                   Margin="5,5,5,5"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                      Path=Resources.Word_Theme,
-                                                     Mode=OneWay}" />
+                                                     Mode=OneWay}"
+                                   Style="{StaticResource SubPropertyLabelStyle}" />
                             <StackPanel Grid.Row="2"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="5,5,5,5"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="OFF" />
+                                <Label Content="OFF" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <ToggleButton Name="_ToggleButtonTheme"
-                                              Margin="5,5,5,5"
+                                              Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Themes}" />
-                                <Label Margin="5,5,5,5"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="ON" />
+                                <Label Content="ON" Style="{StaticResource SubPropertyLabelStyle}" />
                             </StackPanel>
                             <Label Grid.Row="3"
                                    Grid.Column="0"
-                                   Margin="5,5,5,5"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
                                    Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                      Path=Resources.Word_AttachedFile,
-                                                     Mode=OneWay}" />
+                                                     Mode=OneWay}"
+                                   Style="{StaticResource SubPropertyLabelStyle}" />
                             <StackPanel Grid.Row="3"
                                         Grid.Column="1"
                                         Orientation="Horizontal">
-                                <Label Margin="5,5,5,5"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="OFF" />
+                                <Label Content="OFF" Style="{StaticResource SubPropertyLabelStyle}" />
                                 <ToggleButton Name="_ToggleButtonFile"
-                                              Margin="5,5,5,5"
+                                              Margin="{StaticResource PropertyToggleButtonMargin}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding SelectedStack.Files}" />
-                                <Label Margin="5,5,5,5"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="ON" />
+                                <Label Content="ON" Style="{StaticResource SubPropertyLabelStyle}" />
                             </StackPanel>
                         </Grid>
                         <!--#endregion-->
                     </Grid>
                 </ScrollViewer>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <contents:BackupTask Grid.Column="1"
+                                         HorizontalAlignment="Stretch"
+                                         HorizontalContentAlignment="Stretch"
+                                         Background="{StaticResource EmptyStackBackgroundBrush}"
+                                         DataContext="{Binding Task}"
+                                         Foreground="{StaticResource IdealForegroundColorBrush}"
+                                         Visibility="{Binding ElementName=_ToggleButton,
+                                                              Path=IsChecked,
+                                                              Converter={StaticResource HiddenIfFalse}}" />
+                </Grid>
                 <Border Grid.Row="2"
                         Grid.Column="0"
-                        Width="Auto"
-                        Height="Auto"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch"
-                        BorderBrush="{DynamicResource PrimaryHueDarkBrush}"
-                        BorderThickness="1" />
+                        Style="{StaticResource SseparateBorderStyle}" />
                 <Grid Grid.Row="3"
                       Grid.Column="0"
                       Background="{StaticResource AppBarBackgroundBrush}">
@@ -350,17 +314,37 @@
                                 Style="{DynamicResource MaterialDesignRaisedButton}"
                                 ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
                                                   Path=Resources.Tooltip_StartBackup,
-                                                  Mode=OneWay}">
+                                                  Mode=OneWay}"
+                                Visibility="{Binding ElementName=_ToggleButton,
+                                                     Path=IsChecked,
+                                                     Converter={StaticResource CollapsedIfTrue}}">
                             <StackPanel Orientation="Horizontal">
                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                    <Path Width="{StaticResource IconPathSize}"
-                                          Height="{StaticResource IconPathSize}"
-                                          Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z"
-                                          Fill="{StaticResource IdealForegroundColorBrush}"
-                                          Stretch="Fill" />
+                                    <Path Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z" Style="{StaticResource IconPathStyle}" />
                                 </Viewbox>
                                 <Label Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                          Path=Resources.Word_StartBackup,
+                                                         Mode=OneWay}"
+                                       FontSize="12"
+                                       Foreground="{StaticResource IdealForegroundColorBrush}" />
+                            </StackPanel>
+                        </Button>
+                        <Button Height="{StaticResource FooterBarHeight}"
+                                VerticalAlignment="Center"
+                                Command="{Binding CreateTaskCommand}"
+                                Style="{DynamicResource MaterialDesignRaisedButton}"
+                                ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
+                                                  Path=Resources.Tooltip_AddTask,
+                                                  Mode=OneWay}"
+                                Visibility="{Binding ElementName=_ToggleButton,
+                                                     Path=IsChecked,
+                                                     Converter={StaticResource CollapsedIfFalse}}">
+                            <StackPanel Orientation="Horizontal">
+                                <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
+                                    <Path Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z" Style="{StaticResource IconPathStyle}" />
+                                </Viewbox>
+                                <Label Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                                         Path=Resources.Word_AddTask,
                                                          Mode=OneWay}"
                                        FontSize="12"
                                        Foreground="{StaticResource IdealForegroundColorBrush}" />
@@ -370,7 +354,7 @@
                 </Grid>
             </Grid>
         </DockPanel>
-        <UserControl Background="#CC000000" Visibility="{Binding IsEmptyStacks, Converter={StaticResource CollapsedIfFalse}}">
+        <UserControl Background="{StaticResource EmptyStackBackgroundBrush}" Visibility="{Binding IsEmptyStacks, Converter={StaticResource CollapsedIfFalse}}">
             <Label HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Content="{Binding Source={x:Static models:ResourceService.Instance},

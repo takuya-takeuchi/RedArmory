@@ -1,0 +1,174 @@
+﻿<UserControl x:Class="Ouranos.RedArmory.Controls.MonthlyTriggerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Ouranos.RedArmory.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
+             xmlns:viewModels="clr-namespace:Ouranos.RedArmory.ViewModels"
+             d:DataContext="{d:DesignInstance {x:Type viewModels:MonthlyTriggerViewModel}}"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             x:ClassModifier="internal"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource TriggerControlPropertyCheckBox}" TargetType="CheckBox" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="30" />
+            <RowDefinition Height="Auto" MinHeight="30" />
+            <RowDefinition Height="Auto" MinHeight="30" />
+            <RowDefinition Height="Auto" MinHeight="30" />
+        </Grid.RowDefinitions>
+        <!--#region Start-->
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                 Path=Resources.Word_Start,
+                                 Mode=OneWay}"
+               Style="{StaticResource TriggerControlSubPropertyLabel}" />
+        <controls:DateTimeControl Grid.Row="0"
+                                  Grid.Column="1"
+                                  Margin="10 0 0 10"
+                                  VerticalAlignment="Center" />
+        <!--#endregion-->
+        <!--#region Month-->
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                 Path=Resources.Word_Months,
+                                 Mode=OneWay}"
+               Style="{StaticResource TriggerControlSubPropertyLabel}" />
+        <UniformGrid Grid.Row="1"
+                     Grid.Column="1"
+                     Margin="10 0 0 10"
+                     VerticalAlignment="Center"
+                     Columns="3"
+                     Style="{StaticResource TriggerControlPropertyUniformGrid}">
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_January, Mode=OneWay}" IsChecked="{Binding Months[0].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_February, Mode=OneWay}" IsChecked="{Binding Months[1].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_March, Mode=OneWay}" IsChecked="{Binding Months[2].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_April, Mode=OneWay}" IsChecked="{Binding Months[3].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_May, Mode=OneWay}" IsChecked="{Binding Months[4].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_June, Mode=OneWay}" IsChecked="{Binding Months[5].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_July, Mode=OneWay}" IsChecked="{Binding Months[6].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_August, Mode=OneWay}" IsChecked="{Binding Months[7].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_September, Mode=OneWay}" IsChecked="{Binding Months[8].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_October, Mode=OneWay}" IsChecked="{Binding Months[9].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_November, Mode=OneWay}" IsChecked="{Binding Months[10].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_December, Mode=OneWay}" IsChecked="{Binding Months[11].Value}" />
+        </UniformGrid>
+        <!--#endregion-->
+        <!--#region Days-->
+        <Grid Grid.Row="2"
+              Grid.Column="0"
+              Margin="0 0 10 0"
+              VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <RadioButton Grid.Column="0"
+                         Margin="0 0 10 0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Center"
+                         GroupName="Group"
+                         IsChecked="{Binding UseDay}" />
+            <Label Grid.Column="1"
+                   Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                     Path=Resources.Word_Days,
+                                     Mode=OneWay}"
+                   Style="{StaticResource TriggerControlSubPropertyLabel}" />
+        </Grid>
+        <UniformGrid Grid.Row="2"
+                     Grid.Column="1"
+                     Margin="10 0 0 10"
+                     VerticalAlignment="Top"
+                     Columns="6"
+                     IsEnabled="{Binding UseDay}">
+            <CheckBox Content="1" IsChecked="{Binding Days[0].Value}" />
+            <CheckBox Content="2" IsChecked="{Binding Days[1].Value}" />
+            <CheckBox Content="3" IsChecked="{Binding Days[2].Value}" />
+            <CheckBox Content="4" IsChecked="{Binding Days[3].Value}" />
+            <CheckBox Content="5" IsChecked="{Binding Days[4].Value}" />
+            <CheckBox Content="6" IsChecked="{Binding Days[5].Value}" />
+            <CheckBox Content="7" IsChecked="{Binding Days[6].Value}" />
+            <CheckBox Content="8" IsChecked="{Binding Days[7].Value}" />
+            <CheckBox Content="9" IsChecked="{Binding Days[8].Value}" />
+            <CheckBox Content="10" IsChecked="{Binding Days[9].Value}" />
+            <CheckBox Content="11" IsChecked="{Binding Days[10].Value}" />
+            <CheckBox Content="12" IsChecked="{Binding Days[11].Value}" />
+            <CheckBox Content="13" IsChecked="{Binding Days[12].Value}" />
+            <CheckBox Content="14" IsChecked="{Binding Days[13].Value}" />
+            <CheckBox Content="15" IsChecked="{Binding Days[14].Value}" />
+            <CheckBox Content="16" IsChecked="{Binding Days[15].Value}" />
+            <CheckBox Content="17" IsChecked="{Binding Days[16].Value}" />
+            <CheckBox Content="18" IsChecked="{Binding Days[17].Value}" />
+            <CheckBox Content="19" IsChecked="{Binding Days[18].Value}" />
+            <CheckBox Content="20" IsChecked="{Binding Days[19].Value}" />
+            <CheckBox Content="21" IsChecked="{Binding Days[20].Value}" />
+            <CheckBox Content="22" IsChecked="{Binding Days[21].Value}" />
+            <CheckBox Content="23" IsChecked="{Binding Days[22].Value}" />
+            <CheckBox Content="24" IsChecked="{Binding Days[23].Value}" />
+            <CheckBox Content="25" IsChecked="{Binding Days[24].Value}" />
+            <CheckBox Content="26" IsChecked="{Binding Days[25].Value}" />
+            <CheckBox Content="27" IsChecked="{Binding Days[26].Value}" />
+            <CheckBox Content="28" IsChecked="{Binding Days[27].Value}" />
+            <CheckBox Content="29" IsChecked="{Binding Days[28].Value}" />
+            <CheckBox Content="30" IsChecked="{Binding Days[29].Value}" />
+            <CheckBox Content="31" IsChecked="{Binding Days[30].Value}" />
+            <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Last, Mode=OneWay}" IsChecked="{Binding Days[31].Value}" />
+        </UniformGrid>
+        <!--#endregion-->
+        <!--#region Weeks-->
+        <Grid Grid.Row="3"
+              Grid.Column="0"
+              Margin="0 0 10 0"
+              VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <RadioButton Grid.Column="0"
+                         Margin="0 0 10 0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Center"
+                         GroupName="Group" />
+            <Label Grid.Column="1"
+                   Content="{Binding Source={x:Static models:ResourceService.Instance},
+                                     Path=Resources.Word_On,
+                                     Mode=OneWay}"
+                   Style="{StaticResource TriggerControlSubPropertyLabel}" />
+        </Grid>
+        <StackPanel Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="10 0 0 0"
+                    IsEnabled="{Binding UseDay,
+                                        Converter={StaticResource BooleanReverseConverter}}"
+                    Orientation="Horizontal">
+            <StackPanel>
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_First, Mode=OneWay}" IsChecked="{Binding Weeks[0].Value}" />
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Second, Mode=OneWay}" IsChecked="{Binding Weeks[1].Value}" />
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Third, Mode=OneWay}" IsChecked="{Binding Weeks[2].Value}" />
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Fourth, Mode=OneWay}" IsChecked="{Binding Weeks[3].Value}" />
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Last, Mode=OneWay}" IsChecked="{Binding Weeks[4].Value}" />
+            </StackPanel>
+            <StackPanel Margin="10 0 0 0">
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Sunday, Mode=OneWay}" IsChecked="{Binding Sunday}" />
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Monday, Mode=OneWay}" IsChecked="{Binding Monday}" />
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Tuesday, Mode=OneWay}" IsChecked="{Binding Tuesday}" />
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Wednesday, Mode=OneWay}" IsChecked="{Binding Wednesday}" />
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Thursday, Mode=OneWay}" IsChecked="{Binding Thursday}" />
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Friday, Mode=OneWay}" IsChecked="{Binding Friday}" />
+                <CheckBox Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Saturday, Mode=OneWay}" IsChecked="{Binding Saturday}" />
+            </StackPanel>
+        </StackPanel>
+        <!--#endregion-->
+    </Grid>
+</UserControl>

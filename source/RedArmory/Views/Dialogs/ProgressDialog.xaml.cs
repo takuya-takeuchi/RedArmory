@@ -5,7 +5,7 @@ namespace Ouranos.RedArmory.Views.Dialogs
     /// <summary>
     /// ProgressDialog.xaml の相互作用ロジック
     /// </summary>
-    public partial class ProgressDialog : UserControl
+    internal partial class ProgressDialog : UserControl
     {
         public ProgressDialog()
         {

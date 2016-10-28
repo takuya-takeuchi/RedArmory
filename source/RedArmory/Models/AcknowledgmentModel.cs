@@ -3,7 +3,7 @@
 namespace Ouranos.RedArmory.Models
 {
 
-    public sealed class AcknowledgmentModel : ViewModelBase
+    internal sealed class AcknowledgmentModel : ViewModelBase
     {
 
         #region プロパティ

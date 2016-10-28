@@ -11,7 +11,7 @@ using Ouranos.RedArmory.Models.Services;
 namespace Ouranos.RedArmory.ViewModels
 {
 
-    public class EnumerationViewModel : ViewModelBase
+    internal class EnumerationViewModel : ViewModelBase
     {
 
         #region フィールド
@@ -131,23 +131,27 @@ namespace Ouranos.RedArmory.ViewModels
                 case NotifyCollectionChangedAction.Replace:
                     foreach (T item in e.OldItems)
                     {
-                        item.PropertyChanged -= this.ItemOnPropertyChanged;
+                        if (item != null)
+                            item.PropertyChanged -= this.ItemOnPropertyChanged;
                     }
                     foreach (T item in e.NewItems)
                     {
-                        item.PropertyChanged += this.ItemOnPropertyChanged;
+                        if (item != null)
+                            item.PropertyChanged += this.ItemOnPropertyChanged;
                     }
                     break;
                 case NotifyCollectionChangedAction.Add:
                     foreach (T item in e.NewItems)
                     {
-                        item.PropertyChanged += this.ItemOnPropertyChanged;
+                        if (item != null)
+                            item.PropertyChanged += this.ItemOnPropertyChanged;
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (T item in e.OldItems)
                     {
-                        item.PropertyChanged -= this.ItemOnPropertyChanged;
+                        if (item != null)
+                            item.PropertyChanged -= this.ItemOnPropertyChanged;
                     }
                     break;
             }

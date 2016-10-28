@@ -360,4 +360,175 @@
   <data name="Tooltip_Up" xml:space="preserve">
     <value>上へ</value>
   </data>
+  <data name="Tooltip_CreateTaskSchedule" xml:space="preserve">
+    <value>この設定でタスクを作成しタスクスケジューラに追加します</value>
+  </data>
+  <data name="Word_CreateTaskSchedule" xml:space="preserve">
+    <value>タスクスケジュールを作成します</value>
+  </data>
+  <data name="Word_TaskDescription" xml:space="preserve">
+    <value>説明</value>
+  </data>
+  <data name="Word_TaskName" xml:space="preserve">
+    <value>名前</value>
+  </data>
+  <data name="Word_Trigger" xml:space="preserve">
+    <value>トリガー</value>
+  </data>
+  <data name="Word_TriggerDaily" xml:space="preserve">
+    <value>毎日</value>
+  </data>
+  <data name="Word_TriggerMonthly" xml:space="preserve">
+    <value>毎月</value>
+  </data>
+  <data name="Word_TriggerOneTime" xml:space="preserve">
+    <value>1回</value>
+  </data>
+  <data name="Word_TriggerWeekly" xml:space="preserve">
+    <value>毎週</value>
+  </data>
+  <data name="Word_April" xml:space="preserve">
+    <value>4月</value>
+  </data>
+  <data name="Word_August" xml:space="preserve">
+    <value>8月</value>
+  </data>
+  <data name="Word_Days" xml:space="preserve">
+    <value>日</value>
+  </data>
+  <data name="Word_December" xml:space="preserve">
+    <value>12月</value>
+  </data>
+  <data name="Word_February" xml:space="preserve">
+    <value>2月</value>
+  </data>
+  <data name="Word_First" xml:space="preserve">
+    <value>第 1</value>
+  </data>
+  <data name="Word_Fourth" xml:space="preserve">
+    <value>第 4</value>
+  </data>
+  <data name="Word_Friday" xml:space="preserve">
+    <value>金曜日</value>
+  </data>
+  <data name="Word_January" xml:space="preserve">
+    <value>1月</value>
+  </data>
+  <data name="Word_July" xml:space="preserve">
+    <value>7月</value>
+  </data>
+  <data name="Word_June" xml:space="preserve">
+    <value>6月</value>
+  </data>
+  <data name="Word_Last" xml:space="preserve">
+    <value>最終</value>
+  </data>
+  <data name="Word_March" xml:space="preserve">
+    <value>3月</value>
+  </data>
+  <data name="Word_May" xml:space="preserve">
+    <value>5月</value>
+  </data>
+  <data name="Word_Monday" xml:space="preserve">
+    <value>月曜日</value>
+  </data>
+  <data name="Word_Months" xml:space="preserve">
+    <value>月</value>
+  </data>
+  <data name="Word_November" xml:space="preserve">
+    <value>11月</value>
+  </data>
+  <data name="Word_October" xml:space="preserve">
+    <value>10月</value>
+  </data>
+  <data name="Word_On" xml:space="preserve">
+    <value>曜日</value>
+  </data>
+  <data name="Word_RecurEvery" xml:space="preserve">
+    <value>間隔</value>
+  </data>
+  <data name="Word_RecurEveryDays" xml:space="preserve">
+    <value>日</value>
+  </data>
+  <data name="Word_RecurEveryWeeks" xml:space="preserve">
+    <value>週間ごとの次の曜日</value>
+  </data>
+  <data name="Word_Saturday" xml:space="preserve">
+    <value>土曜日</value>
+  </data>
+  <data name="Word_Second" xml:space="preserve">
+    <value>第 2</value>
+  </data>
+  <data name="Word_September" xml:space="preserve">
+    <value>9月</value>
+  </data>
+  <data name="Word_Sunday" xml:space="preserve">
+    <value>日曜日</value>
+  </data>
+  <data name="Word_Third" xml:space="preserve">
+    <value>第 3</value>
+  </data>
+  <data name="Word_Thursday" xml:space="preserve">
+    <value>木曜日</value>
+  </data>
+  <data name="Word_Tuesday" xml:space="preserve">
+    <value>火曜日</value>
+  </data>
+  <data name="Word_Wednesday" xml:space="preserve">
+    <value>水曜日</value>
+  </data>
+  <data name="Tooltip_AddTask" xml:space="preserve">
+    <value>バックアップタスクをタスク スケジューラに追加します</value>
+  </data>
+  <data name="Word_AddTask" xml:space="preserve">
+    <value>新しいタスクを追加します</value>
+  </data>
+  <data name="Word_Actions" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="Word_Disabled" xml:space="preserve">
+    <value>無効</value>
+  </data>
+  <data name="Word_LastRunTime" xml:space="preserve">
+    <value>前回の実行時刻</value>
+  </data>
+  <data name="Word_NextRunTime" xml:space="preserve">
+    <value>次回の実行時刻</value>
+  </data>
+  <data name="Word_Queued" xml:space="preserve">
+    <value>キュー</value>
+  </data>
+  <data name="Word_Ready" xml:space="preserve">
+    <value>準備完了</value>
+  </data>
+  <data name="Word_Running" xml:space="preserve">
+    <value>実行中</value>
+  </data>
+  <data name="Word_Status" xml:space="preserve">
+    <value>状態</value>
+  </data>
+  <data name="Tooltip_Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="Tooltip_End" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="Tooltip_Run" xml:space="preserve">
+    <value>実行</value>
+  </data>
+  <data name="Format_BackupTaskStartDate" xml:space="preserve">
+    <value>yyyy/MM/dd</value>
+  </data>
+  <data name="Format_BackupTaskStartTime" xml:space="preserve">
+    <value>HH:mm:ss</value>
+  </data>
+  <data name="Format_TaskSchedulerDate" xml:space="preserve">
+    <value>yyyy/MM/dd HH:mm:ss</value>
+  </data>
+  <data name="Word_TaskSchedulerLastRunTimeEmpty" xml:space="preserve">
+    <value>なし</value>
+  </data>
+  <data name="Word_TaskSchedulerNextRunTimeEmpty" xml:space="preserve">
+    <value />
+  </data>
 </root>

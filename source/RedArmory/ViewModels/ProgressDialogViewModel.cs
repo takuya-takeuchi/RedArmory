@@ -4,7 +4,7 @@ using Ouranos.RedArmory.Models;
 namespace Ouranos.RedArmory.ViewModels
 {
 
-    public sealed class ProgressDialogViewModel : ViewModelBase
+    internal sealed class ProgressDialogViewModel : ViewModelBase
     {
 
         #region コンストラクタ

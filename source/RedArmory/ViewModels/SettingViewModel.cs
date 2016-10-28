@@ -8,7 +8,7 @@ using Ouranos.RedArmory.Models.Services;
 namespace Ouranos.RedArmory.ViewModels
 {
 
-    public sealed class SettingViewModel : ViewModelBase
+    internal sealed class SettingViewModel : ViewModelBase
     {
 
         #region フィールド
@@ -32,10 +32,16 @@ namespace Ouranos.RedArmory.ViewModels
             };
         }
 
-        public SettingViewModel(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ILoggerService loggerService)
+        public SettingViewModel(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ITaskService taskService, ILoggerService loggerService)
         {
             if (bitnamiRedmineService == null)
                 throw new ArgumentNullException(nameof(bitnamiRedmineService));
+
+            if (databaseConfigurationService == null)
+                throw new ArgumentNullException(nameof(databaseConfigurationService));
+
+            if (taskService == null)
+                throw new ArgumentNullException(nameof(taskService));
 
             if (loggerService == null)
                 throw new ArgumentNullException(nameof(loggerService));
@@ -43,7 +49,7 @@ namespace Ouranos.RedArmory.ViewModels
             this._LoggerService = loggerService;
             var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
 
-            this.Settings = new ObservableCollection<Setting>(bitNamiRedmineStacks.Select(stack => new Setting(bitnamiRedmineService, databaseConfigurationService, stack)));
+            this.Settings = new ObservableCollection<Setting>(bitNamiRedmineStacks.Select(stack => new Setting(bitnamiRedmineService, databaseConfigurationService, taskService, stack)));
             this.IsEmptyStacks = !this.Settings.Any();
         }
 

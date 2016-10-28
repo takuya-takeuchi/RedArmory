@@ -1,6 +1,7 @@
 namespace Ouranos.RedArmory.Models
 {
-    public sealed class LanguageModel
+
+    internal sealed class LanguageModel
     {
 
         #region プロパティ

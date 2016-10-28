@@ -7,6 +7,7 @@
              xmlns:viewModels="clr-namespace:Ouranos.RedArmory.ViewModels"
              d:DesignHeight="500"
              d:DesignWidth="700"
+             x:ClassModifier="internal"
              Background="{StaticResource BackgroundBrush}"
              mc:Ignorable="d">
     <Grid>
@@ -22,11 +23,7 @@
             <Grid Height="{StaticResource HeaderBarHeight}"
                   Background="{StaticResource PrimaryHueDarkBrush}"
                   DockPanel.Dock="Top">
-                <TextBlock Margin="24 0 6 0"
-                           VerticalAlignment="Center"
-                           FontSize="{StaticResource TitleFontSize}"
-                           Foreground="{StaticResource IdealForegroundColorBrush}"
-                           Text="Setting" />
+                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Setting" />
             </Grid>
             <ListBox Name="_SubNavigatorListBox"
                      Width="Auto"
@@ -64,6 +61,11 @@
                 <viewModels:SubNavigatorViewModel Name="Enumerations">
                     <viewModels:SubNavigatorViewModel.Content>
                         <settings:Enumerations />
+                    </viewModels:SubNavigatorViewModel.Content>
+                </viewModels:SubNavigatorViewModel>
+                <viewModels:SubNavigatorViewModel Name="Task Scheduler">
+                    <viewModels:SubNavigatorViewModel.Content>
+                        <settings:TaskScheduler />
                     </viewModels:SubNavigatorViewModel.Content>
                 </viewModels:SubNavigatorViewModel>
             </ListBox>

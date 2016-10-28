@@ -8,6 +8,7 @@
              d:DataContext="{d:DesignInstance {x:Type viewModels:ProgressDialogViewModel}}"
              d:DesignHeight="300"
              d:DesignWidth="300"
+             x:ClassModifier="internal"
              mc:Ignorable="d">
 
     <StackPanel Margin="16">

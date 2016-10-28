@@ -12,21 +12,6 @@
              x:ClassModifier="internal"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label">
-            <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Margin" Value="5,0,5,0" />
-            <Setter Property="FontSize" Value="{StaticResource ItemHeadingFontSize}" />
-            <Setter Property="FontWeight" Value="Bold" />
-        </Style>
-        <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox">
-            <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
-            <Setter Property="Margin" Value="5,0,5,0" />
-            <Setter Property="MinWidth" Value="300" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
         <DataTemplate x:Key="StackDataTemplate" DataType="{x:Type models:BackupRestoreModel}">
             <Grid>
                 <TextBlock Text="{Binding Stack.DisplayVersion}" />
@@ -54,7 +39,7 @@
                   VerticalScrollBarVisibility="Auto">
         <Grid Width="Auto"
               Height="Auto"
-              Margin="15,15,15,15"
+              Margin="{StaticResource ContentPadding}"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
@@ -69,18 +54,13 @@
             <!--#region Name-->
             <Label Grid.Row="0"
                    Grid.Column="0"
-                   Margin="5 0 5 0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
                    Content="{Binding Source={x:Static models:ResourceService.Instance},
                                      Path=Resources.Word_TaskName,
                                      Mode=OneWay}"
-                   FontSize="{StaticResource ItemHeadingFontSize}"
-                   FontWeight="Bold" />
+                   Style="{StaticResource TriggerControlPropertyLabel}" />
             <TextBox Grid.Row="0"
                      Grid.Column="1"
-                     MaxWidth="400"
-                     Margin="0 0 0 10"
+                     Style="{StaticResource TriggerControlPropertyTextBox}"
                      Text="{Binding Name}" />
             <!--#endregion-->
             <!--#region Description-->
@@ -88,29 +68,27 @@
                    Grid.Column="0"
                    Content="{Binding Source={x:Static models:ResourceService.Instance},
                                      Path=Resources.Word_TaskDescription,
-                                     Mode=OneWay}" />
+                                     Mode=OneWay}"
+                   Style="{StaticResource TriggerControlPropertyLabel}" />
             <TextBox Grid.Row="1"
                      Grid.Column="1"
-                     MinHeight="100"
-                     MaxHeight="100"
-                     MaxWidth="400"
-                     Margin="0 0 0 10"
-                     AcceptsReturn="True"
+                     Height="100"
                      VerticalContentAlignment="Top"
-                     VerticalScrollBarVisibility="Auto"
+                     AcceptsReturn="True"
+                     Style="{StaticResource TriggerControlPropertyTextBox}"
                      Text="{Binding Description}"
-                     TextWrapping="Wrap" />
+                     TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto" />
             <!--#endregion-->
             <!--#region Trigger-->
             <Label Grid.Row="2"
                    Grid.Column="0"
                    Content="{Binding Source={x:Static models:ResourceService.Instance},
                                      Path=Resources.Word_Trigger,
-                                     Mode=OneWay}" />
+                                     Mode=OneWay}"
+                   Style="{StaticResource TriggerControlPropertyLabel}" />
             <Grid Grid.Row="2" Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
@@ -124,7 +102,8 @@
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <Label Content="{Binding Converter={StaticResource TriggerViewModelToStringConverter}}" FontSize="{StaticResource ItemHeading2FontSize}" />
+                                <TextBlock Foreground="{StaticResource IdealForegroundColorBrush}"
+                                           Text="{Binding Converter={StaticResource TriggerViewModelToStringConverter}}" />
                             </Grid>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>

@@ -23,11 +23,7 @@
             <Grid Height="{StaticResource HeaderBarHeight}"
                   Background="{StaticResource PrimaryHueDarkBrush}"
                   DockPanel.Dock="Top">
-                <TextBlock Margin="24 0 6 0"
-                           VerticalAlignment="Center"
-                           FontSize="{StaticResource TitleFontSize}"
-                           Foreground="{StaticResource IdealForegroundColorBrush}"
-                           Text="Setting" />
+                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Setting" />
             </Grid>
             <ListBox Name="_SubNavigatorListBox"
                      Width="Auto"

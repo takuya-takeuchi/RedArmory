@@ -6,25 +6,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
              xmlns:viewModels="clr-namespace:Ouranos.RedArmory.ViewModels"
+             xmlns:controls="clr-namespace:Ouranos.RedArmory.Controls"
              d:DataContext="{d:DesignInstance {x:Type viewModels:OneTimeTriggerViewModel}}"
              d:DesignHeight="300"
              d:DesignWidth="300"
              x:ClassModifier="internal"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <Style BasedOn="{StaticResource {x:Type Label}}" TargetType="Label">
-            <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
-            <Setter Property="FontSize" Value="{StaticResource ItemHeading2FontSize}" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Margin" Value="0 0 10 0" />
-            <Setter Property="FontWeight" Value="Bold" />
-        </Style>
-        <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{StaticResource IdealForegroundColorBrush}" />
-            <Setter Property="FontSize" Value="{StaticResource ItemHeading2FontSize}" />
-        </Style>
-    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -39,80 +26,9 @@
                Grid.Column="0"
                Content="{Binding Source={x:Static models:ResourceService.Instance},
                                  Path=Resources.Word_Start,
-                                 Mode=OneWay}" />
-        <StackPanel Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="10 0 0 10"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-            <TextBlock VerticalAlignment="Center" Text="{Binding Date, Converter={StaticResource GenericDateTimeToStringConverter}, ConverterParameter={x:Static models:DateTimeType.BackupStartDate}, Mode=OneWay}" />
-            <Button Margin="8 0 0 0"
-                    materialDesign:DialogHost.DialogClosingAttached="CalendarDialogClosingEventHandler"
-                    materialDesign:DialogHost.DialogOpenedAttached="CalendarDialogOpenedEventHandler"
-                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                    Content="...">
-                <Button.CommandParameter>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Calendar x:Name="_Calendar" Margin="-1 -4 -1 0" />
-                        <StackPanel Grid.Row="1"
-                                    Margin="8"
-                                    HorizontalAlignment="Right"
-                                    Orientation="Horizontal">
-                            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                    CommandParameter="1"
-                                    Style="{DynamicResource MaterialDesignFlatButton}">
-                                OK
-                            </Button>
-                            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                    CommandParameter="0"
-                                    Style="{DynamicResource MaterialDesignFlatButton}">
-                                CANCEL
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                </Button.CommandParameter>
-            </Button>
-            <TextBlock Margin="8 0 0 0"
-                       VerticalAlignment="Center"
-                       Text="{Binding Time,
-                                      Converter={StaticResource GenericDateTimeToStringConverter},
-                                      ConverterParameter={x:Static models:DateTimeType.BackupStartTime},
-                                      Mode=OneWay}" />
-            <Button Margin="8 0 0 0"
-                    materialDesign:DialogHost.DialogClosingAttached="ClockDialogClosingEventHandler"
-                    materialDesign:DialogHost.DialogOpenedAttached="ClockDialogOpenedEventHandler"
-                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                    Content="...">
-                <Button.CommandParameter>
-                    <Grid Margin="-1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <materialDesign:Clock x:Name="_Clock" DisplayAutomation="Cycle" />
-                        <StackPanel Grid.Row="1"
-                                    Margin="8"
-                                    HorizontalAlignment="Right"
-                                    Orientation="Horizontal">
-                            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                    CommandParameter="1"
-                                    Style="{DynamicResource MaterialDesignFlatButton}">
-                                OK
-                            </Button>
-                            <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                    CommandParameter="0"
-                                    Style="{DynamicResource MaterialDesignFlatButton}">
-                                CANCEL
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                </Button.CommandParameter>
-            </Button>
-        </StackPanel>
+                                 Mode=OneWay}"
+               Style="{StaticResource TriggerControlSubPropertyLabel}" />
+        <controls:DateTimeControl Grid.Row="0" Grid.Column="1"  Margin="10 0 0 10" VerticalAlignment="Center"/>
         <!--#endregion-->
     </Grid>
 </UserControl>

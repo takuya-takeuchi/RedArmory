@@ -20,6 +20,9 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 * Backup and Restore plugins, themes and attached files.
 * Change start up type for each Windows services.
 * Support multi Bitnami Redmine Stack in system
+* Reorder enumerations items
+  * It is easy to reorder for before Redmine 3.3
+* Add/Remove backup task for task scheduler
 * Support Multi Languages
   * For now, only Japanese and English  
 
@@ -30,8 +33,17 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 * プラグイン、テーマ、添付ファイルのバックアップ、復元
 * Windows サービスのスタートアップの種類変更
 * システム内の複数の Bitnami Redmine Stack のサポート
+* 列挙項目のソート
+** Redmine 3.3 以前でもソートが簡単に実行可能
+* タスクスケジューラへのバックアップタスクの登録、削除
 * 多言語対応
   * 現在、日本語と英語のみ対応
+
+## Screenshots (スクリーンショット)
+
+![Edit backup task](/web/images/task.png "Edit backup task")
+
+![Edit enumeration items](/web/images/enumerations.png "Edit enumeration items")
 
 ## System requirements (システム要件)
 
@@ -70,6 +82,14 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 
 ## Dependencies Libraries and Products (依存ライブラリとプロダクト)
 
+#### [Dapper](https://github.com/StackExchange/dapper-dot-net/)
+
+> **License:** Apache License 2.0
+>
+> **Author:** Marc Gravell; Nick Craver
+> 
+> **Principal Use:** Object-relational mapping (ORM) product for the Microsoft .NET platform
+
 #### [MahApps.Metro](http://mahapps.com/)
 
 > **License:** The Microsoft Public License (Ms-PL)
@@ -102,6 +122,14 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 > 
 > **Principal Use:** Donut Chart to display storage space
 
+#### [Mono.Options](https://www.nuget.org/packages/Mono.Options/)
+
+> **License:** Xamarin License
+> 
+> **Author:** Xamarin
+> 
+> **Principal Use:** Command line parsing library
+
 #### [MVVM Light Toolkit](http://www.mvvmlight.net/)
 
 > **License:** The MIT License (MIT)
@@ -125,6 +153,14 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 > **Author:** Julian Verdurmen (304NotModified); Daniel Gómez Didier (dnlgmzddr); Sreenath (Page-Not-Found); Uğur Aldanmaz
 > 
 > **Principal Use:** Logging application log
+
+#### [Task Scheduler Managed Wrapper](http://taskscheduler.codeplex.com/)
+
+> **License:** The Microsoft Public License (Ms-PL)
+> 
+> **Author:** David Hall
+> 
+> **Principal Use:** Wrapper library to manage task scheduler
 
 #### [YamlSerializer for .NET](https://yamlserializer.codeplex.com/)
 

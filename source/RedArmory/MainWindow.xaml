@@ -63,16 +63,13 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Viewbox Width="24"
-                                             Height="24"
-                                             Margin="6 0 6 0"
-                                             VerticalAlignment="Center">
+                                    <Viewbox Margin="6 0 6 0" Style="{StaticResource ViewboxStyle}">
                                         <Path Data="{Binding IconPath}" Style="{StaticResource InfoIconPathStyle}" />
                                     </Viewbox>
                                     <TextBlock Grid.Row="0"
                                                Grid.Column="1"
                                                Width="80"
-                                               Margin="16 0 6 0"
+                                               Margin="{StaticResource ViewBoxLabelMargin}"
                                                VerticalAlignment="Center"
                                                Foreground="{StaticResource IdealForegroundColorBrush}"
                                                Text="{Binding Name}"

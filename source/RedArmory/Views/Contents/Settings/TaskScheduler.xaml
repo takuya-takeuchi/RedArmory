@@ -24,8 +24,7 @@
                    IsEnabled="{Binding HasStacks}"
                    LastChildFill="True">
             <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding Settings, Converter={StaticResource CollectionCountToVisibilityConverter}}">
-                <ListBox Name="_OperatingSystemListBox"
-                         Width="250"
+                <ListBox Width="{StaticResource StackListLength}"
                          Background="{StaticResource SecondaryAccentBrush}"
                          ItemTemplate="{StaticResource BitnamiRedmineStackListBoxDataTemplate}"
                          ItemsSource="{Binding Settings}"
@@ -45,21 +44,17 @@
                 </Grid.RowDefinitions>
                 <!--  52 は 36 + ((40 - 24) / 2) * 2  -->
                 <Grid Grid.Row="0"
-                      Height="52"
+                      Height="{StaticResource SubHeaderBarHeight}"
                       Background="{StaticResource SubHeaderBackgroundBrush}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <Viewbox Margin="16 0 6 0" Style="{StaticResource ViewboxStyle}">
+                        <Viewbox Margin="{StaticResource ViewBoxLabelMargin}" Style="{StaticResource ViewboxStyle}">
                             <Path Style="{StaticResource InfoIconPathStyle}" />
                         </Viewbox>
-                        <Label VerticalAlignment="Center"
-                               Content="{Binding SelectedSetting.Stack.InstallLocation}"
-                               FontSize="16"
-                               FontWeight="Bold"
-                               Foreground="{StaticResource IdealForegroundColorBrush}" />
+                        <Label Content="{Binding SelectedSetting.Stack.InstallLocation}" Style="{StaticResource ComboBoxLabelStyle}" />
                     </StackPanel>
                     <Button Grid.Column="1"
                             Width="{StaticResource IconPathSize}"

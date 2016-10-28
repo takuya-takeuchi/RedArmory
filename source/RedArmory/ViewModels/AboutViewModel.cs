@@ -40,6 +40,14 @@ namespace Ouranos.RedArmory.ViewModels
             {
                 new AcknowledgmentModel
                 {
+                    Name = "Dapper",
+                    Author = "Marc Gravell; Nick Craver",
+                    Description = "Object-relational mapping (ORM) product for the Microsoft .NET platform.",
+                    Licence = "Dapper is distributed under the Apache License 2.0.",
+                    Url = "https://github.com/StackExchange/dapper-dot-net/"
+                },
+                new AcknowledgmentModel
+                {
                     Name = "MahApps.Metro",
                     Author = "Paul Jenkins; Jake Ginnivan; Brendan Forster (shiftkey); Alex Mitchell (Amrykid); Dennis Daume (flagbug); Jan Karger (punker76)",
                     Description = "A toolkit for creating metro-style WPF applications. Lots of goodness out-of-the box.",
@@ -72,6 +80,14 @@ namespace Ouranos.RedArmory.ViewModels
                 },
                 new AcknowledgmentModel
                 {
+                    Name = "Mono.Options",
+                    Author = "Xamarin",
+                    Description = "Command line parsing library.",
+                    Licence = "Mono.Options is distributed under the Xamarin License.",
+                    Url = "https://www.nuget.org/packages/Mono.Options/"
+                },
+                new AcknowledgmentModel
+                {
                     Name = "MVVM Light Toolkit",
                     Author = "Laurent Bugnion",
                     Description = "The MVVM Light Toolkit helps you to separate your View from your Model which creates applications that are cleaner and easier to maintain and extend.",
@@ -85,6 +101,14 @@ namespace Ouranos.RedArmory.ViewModels
                     Description = "This Modern UI Icons project was started back in October 2011 with the goal of allowing developers a single solution for icons.",
                     Licence = "NLog is distributed under the Berkeley Software Distribution License (BSD).",
                     Url = "http://nlog-project.org/"
+                },
+                new AcknowledgmentModel
+                {
+                    Name = "Task Scheduler Managed Wrapper",
+                    Author = "David Hall",
+                    Description = "Wrapper library to manage task scheduler.",
+                    Licence = "Task Scheduler Managed Wrapper is distributed under the Microsoft Public License(Ms-PL).",
+                    Url = "https://yamlserializer.codeplex.com/"
                 },
                 new AcknowledgmentModel
                 {

@@ -38,7 +38,7 @@
                               VerticalContentAlignment="Stretch">
                     <Grid Width="Auto"
                           Height="Auto"
-                          Margin="15,15,15,15"
+                          Margin="{StaticResource ContentPadding}"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>

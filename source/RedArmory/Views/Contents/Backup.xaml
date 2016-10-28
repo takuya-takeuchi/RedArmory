@@ -33,15 +33,10 @@
             <Grid Height="{StaticResource HeaderBarHeight}"
                   Background="{StaticResource PrimaryHueDarkBrush}"
                   DockPanel.Dock="Top">
-                <TextBlock Margin="24 0 6 0"
-                           VerticalAlignment="Center"
-                           FontSize="{StaticResource TitleFontSize}"
-                           Foreground="{StaticResource IdealForegroundColorBrush}"
-                           Text="Backup" />
+                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Backup" />
             </Grid>
             <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding Stacks, Converter={StaticResource CollectionCountToVisibilityConverter}}">
-                <ListBox Name="_StackListBox"
-                         Width="250"
+                <ListBox Width="{StaticResource StackListLength}"
                          Background="{StaticResource SecondaryAccentBrush}"
                          ItemTemplate="{StaticResource BitnamiRedmineStackListBoxDataTemplate}"
                          ItemsSource="{Binding Stacks}"
@@ -60,21 +55,17 @@
                 </Grid.RowDefinitions>
                 <!--  52 は 36 + ((40 - 24) / 2) * 2  -->
                 <Grid Grid.Row="0"
-                      Height="52"
+                      Height="{StaticResource SubHeaderBarHeight}"
                       Background="{StaticResource SubHeaderBackgroundBrush}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <Viewbox Margin="16 0 6 0" Style="{StaticResource ViewboxStyle}">
+                        <Viewbox Margin="{StaticResource ViewBoxLabelMargin}" Style="{StaticResource ViewboxStyle}">
                             <Path Style="{StaticResource InfoIconPathStyle}" />
                         </Viewbox>
-                        <Label VerticalAlignment="Center"
-                               Content="{Binding SelectedStack.Stack.InstallLocation}"
-                               FontSize="16"
-                               FontWeight="Bold"
-                               Foreground="{StaticResource IdealForegroundColorBrush}" />
+                        <Label Content="{Binding SelectedStack.Stack.InstallLocation}" Style="{StaticResource ComboBoxLabelStyle}" />
                     </StackPanel>
                     <ToggleButton Name="_ToggleButton"
                                   Grid.Column="1"
@@ -100,7 +91,7 @@
                               VerticalScrollBarVisibility="Auto">
                     <Grid Width="Auto"
                           Height="Auto"
-                          Margin="15,15,15,15"
+                          Margin="{StaticResource ContentPadding}"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
@@ -140,11 +131,7 @@
                                                           Path=Resources.Tooltip_SelectBackupFolder,
                                                           Mode=OneWay}">
                                     <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                        <Path Width="{StaticResource IconPathSize}"
-                                              Height="{StaticResource IconPathSize}"
-                                              Data="M7.9999995,16.25 L7.9999995,56.077999 71.5,56.077999 71.5,16.25 z M6,0 L10.25,0 26.25,0 32.25,0 32.25,0.16600038 32.570782,0.48678137 C36.677647,4.5936498 38.763676,6.6796784 39.823246,7.7392492 L39.833996,7.75 73.5,7.75 C76.813705,7.75 79.5,10.436292 79.5,13.75 L79.5,58.25 C79.5,61.563709 76.813705,64.25 73.5,64.25 L6,64.25 C2.6862915,64.25 0,61.563709 0,58.25 L0,24.25 0,13.75 0,6 C0,2.6862917 2.6862915,-1.4901161E-08 6,0 z"
-                                              Fill="{StaticResource IdealForegroundColorBrush}"
-                                              Stretch="Fill" />
+                                        <Path Data="M7.9999995,16.25 L7.9999995,56.077999 71.5,56.077999 71.5,16.25 z M6,0 L10.25,0 26.25,0 32.25,0 32.25,0.16600038 32.570782,0.48678137 C36.677647,4.5936498 38.763676,6.6796784 39.823246,7.7392492 L39.833996,7.75 73.5,7.75 C76.813705,7.75 79.5,10.436292 79.5,13.75 L79.5,58.25 C79.5,61.563709 76.813705,64.25 73.5,64.25 L6,64.25 C2.6862915,64.25 0,61.563709 0,58.25 L0,24.25 0,13.75 0,6 C0,2.6862917 2.6862915,-1.4901161E-08 6,0 z" Style="{StaticResource IconPathStyle}" />
                                     </Viewbox>
                                 </Button>
                             </StackPanel>
@@ -333,11 +320,7 @@
                                                      Converter={StaticResource CollapsedIfTrue}}">
                             <StackPanel Orientation="Horizontal">
                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                    <Path Width="{StaticResource IconPathSize}"
-                                          Height="{StaticResource IconPathSize}"
-                                          Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z"
-                                          Fill="{StaticResource IdealForegroundColorBrush}"
-                                          Stretch="Fill" />
+                                    <Path Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z" Style="{StaticResource IconPathStyle}" />
                                 </Viewbox>
                                 <Label Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                          Path=Resources.Word_StartBackup,
@@ -358,11 +341,7 @@
                                                      Converter={StaticResource CollapsedIfFalse}}">
                             <StackPanel Orientation="Horizontal">
                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                    <Path Width="{StaticResource IconPathSize}"
-                                          Height="{StaticResource IconPathSize}"
-                                          Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z"
-                                          Fill="{StaticResource IdealForegroundColorBrush}"
-                                          Stretch="Fill" />
+                                    <Path Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z" Style="{StaticResource IconPathStyle}" />
                                 </Viewbox>
                                 <Label Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                          Path=Resources.Word_AddTask,

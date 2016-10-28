@@ -80,15 +80,11 @@
         <Grid Height="{StaticResource HeaderBarHeight}"
               Background="{StaticResource PrimaryHueDarkBrush}"
               DockPanel.Dock="Top">
-            <TextBlock Margin="24 0 6 0"
-                       VerticalAlignment="Center"
-                       FontSize="{StaticResource TitleFontSize}"
-                       Foreground="{StaticResource IdealForegroundColorBrush}"
-                       Text="About" />
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="About" />
         </Grid>
         <Grid>
             <ScrollViewer>
-                <StackPanel Margin="15,15,15,15">
+                <StackPanel Margin="{StaticResource ContentPadding}">
                     <TextBlock FontSize="{StaticResource ItemHeadingFontSize}"
                                FontWeight="Bold"
                                Text="{Binding Source={x:Static models:ResourceService.Instance},

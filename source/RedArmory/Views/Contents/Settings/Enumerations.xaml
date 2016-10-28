@@ -24,8 +24,7 @@
                    IsEnabled="{Binding HasStacks}"
                    LastChildFill="True">
             <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding Settings, Converter={StaticResource CollectionCountToVisibilityConverter}}">
-                <ListBox Name="_OperatingSystemListBox"
-                         Width="250"
+                <ListBox Width="{StaticResource StackListLength}"
                          Background="{StaticResource SecondaryAccentBrush}"
                          ItemTemplate="{StaticResource BitnamiRedmineStackListBoxDataTemplate}"
                          ItemsSource="{Binding Settings}"
@@ -45,22 +44,18 @@
                 </Grid.RowDefinitions>
                 <!--  52 は 36 + ((40 - 24) / 2) * 2  -->
                 <Grid Grid.Row="0"
-                      Height="52"
+                      Height="{StaticResource SubHeaderBarHeight}"
                       Background="{StaticResource SubHeaderBackgroundBrush}">
                     <StackPanel Orientation="Horizontal">
-                        <Viewbox Margin="16 0 6 0" Style="{StaticResource ViewboxStyle}">
+                        <Viewbox Margin="{StaticResource ViewBoxLabelMargin}" Style="{StaticResource ViewboxStyle}">
                             <Path Style="{StaticResource InfoIconPathStyle}" />
                         </Viewbox>
-                        <Label VerticalAlignment="Center"
-                               Content="{Binding SelectedSetting.Stack.InstallLocation}"
-                               FontSize="16"
-                               FontWeight="Bold"
-                               Foreground="{StaticResource IdealForegroundColorBrush}" />
+                        <Label Content="{Binding SelectedSetting.Stack.InstallLocation}" Style="{StaticResource ComboBoxLabelStyle}" />
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="1"
                       Grid.Column="0"
-                      Margin="15,15,15,15">
+                      Margin="{StaticResource ContentPadding}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -237,11 +232,7 @@
                                                   Mode=OneWay}">
                             <StackPanel Orientation="Horizontal">
                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                    <Path Width="{StaticResource IconPathSize}"
-                                          Height="{StaticResource IconPathSize}"
-                                          Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z"
-                                          Fill="{StaticResource IdealForegroundColorBrush}"
-                                          Stretch="Fill" />
+                                    <Path Data="M62.791832,19.296999 L32.541748,49.547085 18.041666,35.047001 12.666995,40.921989 C32.584221,60.839161 32.584057,60.838997 32.584057,60.838997 L68.459007,24.964148 z M40.335999,0 C62.612957,0 80.671997,18.059042 80.671997,40.335999 80.671997,62.612957 62.612957,80.671997 40.335999,80.671997 18.059042,80.671997 0,62.612957 0,40.335999 0,18.059042 18.059042,0 40.335999,0 z" Style="{StaticResource IconPathStyle}" />
                                 </Viewbox>
                                 <Label Content="{Binding Source={x:Static models:ResourceService.Instance},
                                                          Path=Resources.Word_Save,

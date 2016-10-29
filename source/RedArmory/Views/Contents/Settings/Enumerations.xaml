@@ -4,6 +4,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:behaviors="clr-namespace:Ouranos.RedArmory.Behaviors"
              Name="_Root"
              d:DesignHeight="500"
              d:DesignWidth="700"
@@ -134,7 +136,10 @@
                             </GridView>
                         </ListView.View>
                     </ListView>-->
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding SelectedSetting.SelectedEnumeration.Items}">
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding SelectedSetting.SelectedEnumeration.Items}" AllowDrop="True" >
+                        <i:Interaction.Behaviors>
+                            <behaviors:ItemsControlDragAndDropBehavior Items="{Binding SelectedSetting.SelectedEnumeration.Items, Mode=OneWay}" />
+                        </i:Interaction.Behaviors>
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Name, Mode=OneWay}" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>

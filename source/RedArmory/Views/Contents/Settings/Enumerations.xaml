@@ -199,11 +199,7 @@
                                                                       Path=Resources.Tooltip_Down,
                                                                       Mode=OneWay}">
                                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                                    <Path Data="M31.469081,0 L62.93816,31.46908 57.063162,37.34408 35.219082,15.500001 35.219082,63.46908 27.469082,63.46908 27.469082,15.749998 5.875,37.34408 0,31.46908 z" Style="{StaticResource IconPathStyle}">
-                                                        <Path.LayoutTransform>
-                                                            <RotateTransform Angle="180" />
-                                                        </Path.LayoutTransform>
-                                                    </Path>
+                                                    <Path Data="M170,221.5 L193.1875,244.6875 193.1875,196.12555 201.12433,196.12555 201.12433,244.99949 224.87381,221.25001 230.1237,226.49989 196.74942,259.87417 164.43762,227.56237 z" Style="{StaticResource IconPathStyle}"/>
                                                 </Viewbox>
                                             </Button>
                                         </StackPanel>

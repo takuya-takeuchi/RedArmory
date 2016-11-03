@@ -85,19 +85,35 @@
         <Grid>
             <ScrollViewer>
                 <StackPanel Margin="{StaticResource ContentPadding}">
-                    <TextBlock FontSize="{StaticResource ItemHeadingFontSize}"
-                               FontWeight="Bold"
-                               Text="{Binding Source={x:Static models:ResourceService.Instance},
-                                              Path=Resources.Word_VersionInfo,
-                                              Mode=OneWay}" />
-                    <TextBlock Margin="0,0,0,8"
-                               Text="{Binding Source={x:Static models:ResourceService.Instance},
-                                              Path=Resources.Word_AboutThisApplication,
-                                              Mode=OneWay}"
-                               TextWrapping="Wrap" />
-                    <TextBlock Text="{Binding Product}" TextWrapping="Wrap" />
-                    <TextBlock Text="{Binding Version, StringFormat=Version {0}}" TextWrapping="Wrap" />
-                    <TextBlock Text="{Binding Copyright}" TextWrapping="Wrap" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Width="100"
+                                 Height="100"
+                                 HorizontalAlignment="Right"
+                                 VerticalAlignment="Top">
+                            <Image Source="../../Assets/About.png" />
+                        </Viewbox>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock FontSize="{StaticResource ItemHeadingFontSize}"
+                                       FontWeight="Bold"
+                                       Text="{Binding Source={x:Static models:ResourceService.Instance},
+                                                      Path=Resources.Word_VersionInfo,
+                                                      Mode=OneWay}" />
+                            <TextBlock Margin="0,0,0,8"
+                                       Text="{Binding Source={x:Static models:ResourceService.Instance},
+                                                      Path=Resources.Word_AboutThisApplication,
+                                                      Mode=OneWay}"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Text="{Binding Product}" TextWrapping="Wrap" />
+                            <TextBlock Text="{Binding Version, StringFormat=Version {0}}" TextWrapping="Wrap" />
+                            <TextBlock Text="{Binding Copyright}" TextWrapping="Wrap" />
+
+                        </StackPanel>
+                    </Grid>
                     <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
                         <Button Command="{Binding WebSiteCommand}">
                             <Viewbox Width="{StaticResource SocialIconSize}" Height="{StaticResource SocialIconSize}">

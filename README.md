@@ -162,6 +162,14 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 > 
 > **Principal Use:** Wrapper library to manage task scheduler
 
+#### [XAML to Image](https://github.com/sakapon/XAML-to-Image/)
+
+> **License:** The MIT License (MIT)
+> 
+> **Author:** Keiho Sakapon
+> 
+> **Principal Use:** Create icon and logo image from xaml
+
 #### [YamlSerializer for .NET](https://yamlserializer.codeplex.com/)
 
 > **License:** The MIT License (MIT)

@@ -112,6 +112,14 @@ namespace Ouranos.RedArmory.ViewModels
                 },
                 new AcknowledgmentModel
                 {
+                    Name = "XAML to Image",
+                    Author = "sakapon",
+                    Description = "XAML to Image\" is a set of project templates for Blend for Visual Studio and / or Visual Studio.By using the templates, you can design images or icons as XAML, and export image files such as PNG, GIF, etc.",
+                    Licence = "XAML to Image is distributed under the Massachusetts Institute of Technology License (MIT).",
+                    Url = "https://github.com/sakapon/XAML-to-Image/"
+                },
+                new AcknowledgmentModel
+                {
                     Name = "YamlSerializer for .NET",
                     Author = "Osamu TAKEUCHI",
                     Description = "This class library supports YAML file manipulation in two different contexts.\nOne is to serialize / deserialize C# native objects into / from YAML 1.2 text files.\nThe other is to manipulate generic YAML 1.2 documents that does not represent C# object but does some unknown logical data.",

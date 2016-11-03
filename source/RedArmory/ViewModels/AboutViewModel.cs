@@ -113,7 +113,7 @@ namespace Ouranos.RedArmory.ViewModels
                 new AcknowledgmentModel
                 {
                     Name = "XAML to Image",
-                    Author = "sakapon",
+                    Author = "Keiho Sakapon",
                     Description = "XAML to Image\" is a set of project templates for Blend for Visual Studio and / or Visual Studio.By using the templates, you can design images or icons as XAML, and export image files such as PNG, GIF, etc.",
                     Licence = "XAML to Image is distributed under the Massachusetts Institute of Technology License (MIT).",
                     Url = "https://github.com/sakapon/XAML-to-Image/"

@@ -1,9 +1,12 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Ouranos.RedArmory.Models;
 using Ouranos.RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services.Dialog;
+using Ouranos.RedArmory.Properties;
 
 namespace Ouranos.RedArmory.ViewModels
 {
@@ -12,8 +15,6 @@ namespace Ouranos.RedArmory.ViewModels
     {
 
         #region フィールド
-
-        private readonly BitnamiRedmineStack _Stack;
 
         private readonly ITaskService _TaskService;
 
@@ -27,8 +28,7 @@ namespace Ouranos.RedArmory.ViewModels
                 throw new ArgumentNullException(nameof(stack));
             if (taskService == null)
                 throw new ArgumentNullException(nameof(taskService));
-
-            this._Stack = stack;
+            
             this._TaskService = taskService;
 
             this.DeleteCommand = new RelayCommand<TaskSchedulerItem>(this.DeleteExecute, this.CanDeleteExecute);
@@ -105,18 +105,27 @@ namespace Ouranos.RedArmory.ViewModels
             return true;
         }
 
-        private void DeleteExecute(TaskSchedulerItem item)
+        private async void DeleteExecute(TaskSchedulerItem item)
         {
-            if (item != null)
+            if (item == null)
             {
-                if (this._TaskService.Delete(item))
-                {
-                    this.Items.Remove(item);
-                }
-                else
-                {
-                    // ToDo : ダイアログで警告
-                }
+                return;
+            }
+
+            var dialog = new YesNoDialogService();
+            await dialog.ShowMessage(Resources.Msg_DeleteTask, null);
+            if (dialog.Result == MessageBoxResult.No)
+            {
+                return;
+            }
+
+            if (this._TaskService.Delete(item))
+            {
+                this.Items.Remove(item);
+            }
+            else
+            {
+                // ToDo : ダイアログで警告
             }
         }
 

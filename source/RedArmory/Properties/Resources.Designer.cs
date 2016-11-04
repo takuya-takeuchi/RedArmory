@@ -205,6 +205,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Are you sure you want to delete this task? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_DeleteTask {
+            get {
+                return ResourceManager.GetString("Msg_DeleteTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   The output directory is not empty. Do you want to continue? に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Msg_DirectoryIsNotEmpty {

@@ -535,4 +535,7 @@
     <value>指定した名前のタスクは既に存在します。
 タスクを置き換えますか?</value>
   </data>
+  <data name="Msg_DeleteTask" xml:space="preserve">
+    <value>このタスクを削除しますか?</value>
+  </data>
 </root>

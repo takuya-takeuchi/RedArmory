@@ -250,6 +250,16 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Speficied task name already exists.
+        ///Do you want to replace it? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_TaskOverwrite {
+            get {
+                return ResourceManager.GetString("Msg_TaskOverwrite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Create backup task to Task Scheduler に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Tooltip_AddTask {

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using GalaSoft.MvvmLight.Command;
 using Ouranos.RedArmory.Models;
 using Ouranos.RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services.Dialog;
+using Ouranos.RedArmory.Properties;
 
 namespace Ouranos.RedArmory.ViewModels
 {
@@ -134,11 +137,20 @@ namespace Ouranos.RedArmory.ViewModels
             return string.Join(" ", args);
         }
 
-        private void ExecuteCreateTask()
+        private async void ExecuteCreateTask()
         {
             var stack = this.SelectedStack;
             var task = this.Task;
 
+            if (this._TaskService.IsExist(task.Name))
+            {
+                var dialog = new YesNoDialogService();
+                await dialog.ShowMessage(Resources.Msg_TaskOverwrite, null);
+                if (dialog.Result == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
 
             this._TaskService.Create(new TaskSetting
             {

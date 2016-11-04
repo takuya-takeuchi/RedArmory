@@ -531,4 +531,8 @@
   <data name="Word_TaskSchedulerNextRunTimeEmpty" xml:space="preserve">
     <value />
   </data>
+  <data name="Msg_TaskOverwrite" xml:space="preserve">
+    <value>Speficied task name already exists.
+Do you want to replace it?</value>
+  </data>
 </root>

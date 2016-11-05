@@ -538,4 +538,10 @@ Do you want to replace it?</value>
   <data name="Msg_DeleteTask" xml:space="preserve">
     <value>Are you sure you want to delete this task?</value>
   </data>
+  <data name="Msg_TaskCreateFailed" xml:space="preserve">
+    <value>Failed to create task.</value>
+  </data>
+  <data name="Msg_TaskCreateSuccess" xml:space="preserve">
+    <value>Task has successfully been created.</value>
+  </data>
 </root>

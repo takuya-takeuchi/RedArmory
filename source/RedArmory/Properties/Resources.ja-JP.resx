@@ -538,4 +538,10 @@
   <data name="Msg_DeleteTask" xml:space="preserve">
     <value>このタスクを削除しますか?</value>
   </data>
+  <data name="Msg_TaskCreateFailed" xml:space="preserve">
+    <value>タスクの作成に失敗しました。</value>
+  </data>
+  <data name="Msg_TaskCreateSuccess" xml:space="preserve">
+    <value>タスクの作成に成功しました。</value>
+  </data>
 </root>

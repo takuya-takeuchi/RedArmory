@@ -152,13 +152,28 @@ namespace Ouranos.RedArmory.ViewModels
                 }
             }
 
-            this._TaskService.Create(new TaskSetting
+            string message;
+
+            try
             {
-                Name = task.Name,
-                Description = task.Description,
-                Argument = this.CreateArguments(stack),
-                Trigger = task.SelectedTrigger.GetTrigger()
-            });
+                this._TaskService.Create(new TaskSetting
+                {
+                    Name = task.Name,
+                    Description = task.Description,
+                    Argument = this.CreateArguments(stack),
+                    Trigger = task.SelectedTrigger.GetTrigger()
+                });
+
+                message = Resources.Msg_TaskCreateSuccess;
+            }
+            catch (Exception ex)
+            {
+                this._LoggerService.Error($"Failed to create task. Exception is {ex}");
+                message = Resources.Msg_TaskCreateFailed;
+            }
+
+            var okDialog = new OKDialogService();
+            await okDialog.ShowMessage(message, null);
         }
 
         #endregion

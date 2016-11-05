@@ -259,6 +259,24 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Failed to create task. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_TaskCreateFailed {
+            get {
+                return ResourceManager.GetString("Msg_TaskCreateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Task has successfully been created. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_TaskCreateSuccess {
+            get {
+                return ResourceManager.GetString("Msg_TaskCreateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Speficied task name already exists.
         ///Do you want to replace it? に類似しているローカライズされた文字列を検索します。
         /// </summary>

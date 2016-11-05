@@ -20,6 +20,8 @@ namespace Ouranos.RedArmory.Models
 
         private readonly IDatabaseConnectorService _DatabaseConnectorService;
 
+        private readonly IDialogService _DialogService;
+
         private readonly DatabaseConfiguration _DatabaseConfiguration;
 
         private readonly BitnamiRedmineStack _Stack;
@@ -56,6 +58,7 @@ namespace Ouranos.RedArmory.Models
                 throw new ArgumentNullException(nameof(stack));
 
             this._Stack = stack;
+            this._DialogService = dialogService;
 
             var configuration = new ServiceConfiguration
             {
@@ -206,7 +209,10 @@ namespace Ouranos.RedArmory.Models
 
         private void UpdateSelectedEnumeration()
         {
-            this.SelectedEnumeration = new EnumerationViewModel(this._DatabaseConfiguration, this._SelectedProject, this._SelectedEnumerationType);
+            this.SelectedEnumeration = new EnumerationViewModel(this._DatabaseConfiguration,
+                                                                this._SelectedProject,
+                                                                this._SelectedEnumerationType, 
+                                                                this._DialogService);
         }
 
         #endregion

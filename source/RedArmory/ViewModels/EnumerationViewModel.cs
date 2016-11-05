@@ -3,10 +3,12 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Ouranos.RedArmory.Models;
 using Ouranos.RedArmory.Models.Services;
+using Ouranos.RedArmory.Properties;
 
 namespace Ouranos.RedArmory.ViewModels
 {
@@ -18,6 +20,8 @@ namespace Ouranos.RedArmory.ViewModels
 
         private readonly IDatabaseConnectorService _DatabaseConnectorService;
 
+        private readonly IDialogService _DialogService;
+
         private readonly EnumerationType _EnumerationType;
 
         private readonly ProjectItem _Project;
@@ -28,7 +32,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #region コンストラクタ
 
-        internal EnumerationViewModel(DatabaseConfiguration databaseConfiguration, ProjectItem project, EnumerationType enumerationType)
+        internal EnumerationViewModel(DatabaseConfiguration databaseConfiguration, ProjectItem project, EnumerationType enumerationType, IDialogService dialogService)
         {
             if (databaseConfiguration == null)
                 throw new ArgumentNullException(nameof(databaseConfiguration));
@@ -36,8 +40,12 @@ namespace Ouranos.RedArmory.ViewModels
             if (project == null)
                 throw new ArgumentNullException(nameof(project));
 
+            if (dialogService == null)
+                throw new ArgumentNullException(nameof(dialogService));
+
             this._Project = project;
             this._EnumerationType = enumerationType;
+            this._DialogService = dialogService;
 
             this._DatabaseConnectorService = new MySqlConnectorService(databaseConfiguration);
 
@@ -221,8 +229,14 @@ namespace Ouranos.RedArmory.ViewModels
             this.UpdateOrderState();
         }
 
-        private void UpdateExecute()
+        private async void UpdateExecute()
         {
+            var result = await this._DialogService.ShowMessage(MessageBoxButton.YesNo, Resources.Msg_UpdateEnumeration, null);
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+
             // Position を整理 (1から始まるはずだが一応)
             var minPosition = this.Items.Min(item => item.Position);
             foreach (var item in this.Items)

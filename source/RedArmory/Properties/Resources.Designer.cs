@@ -287,6 +287,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Are you sure you want to save? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_UpdateEnumeration {
+            get {
+                return ResourceManager.GetString("Msg_UpdateEnumeration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Create backup task to Task Scheduler に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Tooltip_AddTask {

@@ -29,8 +29,9 @@ namespace Ouranos.RedArmory.ViewModels
             IBackupService backupService,
             ITaskService taskService,
             IDispatcherService dispatcherService,
+            IDialogService dialogService,
             ILoggerService loggerService)
-            : base(loggerService)
+            : base(dialogService, loggerService)
         {
             if (applicationSettingService == null)
                 throw new ArgumentNullException(nameof(applicationSettingService));
@@ -47,13 +48,10 @@ namespace Ouranos.RedArmory.ViewModels
             if (dispatcherService == null)
                 throw new ArgumentNullException(nameof(dispatcherService));
 
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
-
             var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
 
             this.Stacks = new ObservableCollection<BackupModel>(bitNamiRedmineStacks.Select(
-                stack => new BackupModel(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, loggerService, stack)));
+                stack => new BackupModel(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, dialogService, loggerService, stack)));
             
             this._TaskService = taskService;
             this.CreateTaskCommand = new RelayCommand(this.ExecuteCreateTask, this.CanCreateTaskExecute);
@@ -144,9 +142,8 @@ namespace Ouranos.RedArmory.ViewModels
 
             if (this._TaskService.IsExist(task.Name))
             {
-                var dialog = new YesNoDialogService();
-                await dialog.ShowMessage(Resources.Msg_TaskOverwrite, null);
-                if (dialog.Result == MessageBoxResult.No)
+                var result = await this._DialogService.ShowMessage(MessageBoxButton.YesNo, Resources.Msg_TaskOverwrite, null);
+                if (result == MessageBoxResult.No)
                 {
                     return;
                 }
@@ -171,9 +168,8 @@ namespace Ouranos.RedArmory.ViewModels
                 this._LoggerService.Error($"Failed to create task. Exception is {ex}");
                 message = Resources.Msg_TaskCreateFailed;
             }
-
-            var okDialog = new OKDialogService();
-            await okDialog.ShowMessage(message, null);
+            
+            await this._DialogService.ShowMessage(MessageBoxButton.OK, message, null);
         }
 
         #endregion

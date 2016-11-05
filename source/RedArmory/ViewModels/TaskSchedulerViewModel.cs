@@ -16,20 +16,27 @@ namespace Ouranos.RedArmory.ViewModels
 
         #region フィールド
 
+        private readonly IDialogService _DialogService;
+
         private readonly ITaskService _TaskService;
 
         #endregion
 
         #region コンストラクタ
 
-        internal TaskSchedulerViewModel(BitnamiRedmineStack stack, ITaskService taskService)
+        internal TaskSchedulerViewModel(BitnamiRedmineStack stack, ITaskService taskService, IDialogService dialogService)
         {
             if (stack == null)
                 throw new ArgumentNullException(nameof(stack));
+
             if (taskService == null)
                 throw new ArgumentNullException(nameof(taskService));
-            
+
+            if (dialogService == null)
+                throw new ArgumentNullException(nameof(dialogService));
+
             this._TaskService = taskService;
+            this._DialogService = dialogService;
 
             this.DeleteCommand = new RelayCommand<TaskSchedulerItem>(this.DeleteExecute, this.CanDeleteExecute);
             this.RefreshCommand = new RelayCommand(this.RefresExecute, this.CanRefreshExecute);
@@ -112,9 +119,8 @@ namespace Ouranos.RedArmory.ViewModels
                 return;
             }
 
-            var dialog = new YesNoDialogService();
-            await dialog.ShowMessage(Resources.Msg_DeleteTask, null);
-            if (dialog.Result == MessageBoxResult.No)
+            var result = await this._DialogService.ShowMessage(MessageBoxButton.YesNo, Resources.Msg_DeleteTask, null);
+            if (result == MessageBoxResult.No)
             {
                 return;
             }

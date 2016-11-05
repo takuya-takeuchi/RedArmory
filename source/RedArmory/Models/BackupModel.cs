@@ -21,9 +21,10 @@ namespace Ouranos.RedArmory.Models
             IBitnamiRedmineService bitnamiRedmineService,
             IBackupService backupService,
             IDispatcherService dispatcherService,
+            IDialogService dialogService,
             ILoggerService loggerService,
             BitnamiRedmineStack stack)
-            : base(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, loggerService, stack)
+            : base(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, dialogService, loggerService, stack)
         {
             // Apply Setting
             RedmineSetting redmineSetting;
@@ -136,19 +137,15 @@ namespace Ouranos.RedArmory.Models
             }
             catch (Exception)
             {
-                message = Resources.Msg_BackupFailed;
-                await new OKDialogService().ShowMessage(message, null);
+                await this._DialogService.ShowMessage(MessageBoxButton.OK, Resources.Msg_BackupFailed, null);
                 return;
             }
 
             // 空かどうか検証
             if (!this.IsOutputDirectoryEmpty(directory.FullName))
             {
-                message = Resources.Msg_DirectoryIsNotEmpty;
-                var yesNoDialogService = new YesNoDialogService();
-                await yesNoDialogService.ShowMessage(message, null);
-
-                if (yesNoDialogService.Result == MessageBoxResult.No)
+                var result = await this._DialogService.ShowMessage(MessageBoxButton.YesNo, Resources.Msg_DirectoryIsNotEmpty, null);
+                if (result == MessageBoxResult.No)
                 {
                     return;
                 }
@@ -185,7 +182,7 @@ namespace Ouranos.RedArmory.Models
                 if (progressDialogService.Result == MessageBoxResult.Cancel)
                 {
                     message = Resources.Msg_BackupCancel;
-                    await new OKDialogService().ShowMessage(message, null);
+                    await this._DialogService.ShowMessage(MessageBoxButton.OK, message, null);
 
                     return;
                 }
@@ -203,7 +200,7 @@ namespace Ouranos.RedArmory.Models
                 this._LoggerService.Error(message);
 
                 message = Resources.Msg_BackupFailed;
-                await new OKDialogService().ShowMessage(message, null);
+                await this._DialogService.ShowMessage(MessageBoxButton.OK, message, null);
 
                 return;
             }
@@ -229,7 +226,7 @@ namespace Ouranos.RedArmory.Models
 
             this._ApplicationSettingService.UpdateApplicationSetting(applicationSetting);
 
-            await new OKDialogService().ShowMessage(message, null);
+            await this._DialogService.ShowMessage(MessageBoxButton.OK, message, null);
         }
 
         protected override void ExecuteSelectDirectory()

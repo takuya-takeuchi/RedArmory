@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using GalaSoft.MvvmLight;
@@ -13,14 +14,24 @@ namespace Ouranos.RedArmory.ViewModels
 
         #region フィールド
 
+        protected readonly IDialogService _DialogService;
+
         protected readonly ILoggerService _LoggerService;
 
         #endregion
 
         #region コンストラクタ
 
-        protected BitnamiStackCommonViewModel(ILoggerService loggerService)
+        protected BitnamiStackCommonViewModel(IDialogService dialogService, ILoggerService loggerService)
         {
+
+            if (dialogService == null)
+                throw new ArgumentNullException(nameof(dialogService));
+
+            if (loggerService == null)
+                throw new ArgumentNullException(nameof(loggerService));
+
+            this._DialogService = dialogService;
             this._LoggerService = loggerService;
         }
 

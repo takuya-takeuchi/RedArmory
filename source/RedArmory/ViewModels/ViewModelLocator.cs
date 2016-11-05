@@ -46,6 +46,7 @@ namespace Ouranos.RedArmory.ViewModels
                 SimpleIoc.Default.Register(() => System.Windows.Application.Current.Dispatcher);
 
             Register<ILoggerService, LoggerService>();
+            Register<IDialogService, DialogService>();
             Register<IDispatcherService, DispatcherService>();
             Register<IApplicationSettingService, ApplicationSettingService>();
             Register<IRedmineDatabaseConfigurationService, RedmineDatabaseConfigurationService>();

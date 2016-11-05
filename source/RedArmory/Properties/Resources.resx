@@ -544,4 +544,7 @@ Do you want to replace it?</value>
   <data name="Msg_TaskCreateSuccess" xml:space="preserve">
     <value>Task has successfully been created.</value>
   </data>
+  <data name="Msg_UpdateEnumeration" xml:space="preserve">
+    <value>Are you sure you want to save?</value>
+  </data>
 </root>

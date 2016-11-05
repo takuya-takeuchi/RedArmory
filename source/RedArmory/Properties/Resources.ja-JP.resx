@@ -544,4 +544,7 @@
   <data name="Msg_TaskCreateSuccess" xml:space="preserve">
     <value>タスクの作成に成功しました。</value>
   </data>
+  <data name="Msg_UpdateEnumeration" xml:space="preserve">
+    <value>保存しますか?</value>
+  </data>
 </root>

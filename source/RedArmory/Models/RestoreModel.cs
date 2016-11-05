@@ -25,10 +25,11 @@ namespace Ouranos.RedArmory.Models
             IApplicationSettingService applicationSettingService,
             IBitnamiRedmineService bitnamiRedmineService,
             IBackupService backupService,
-            IDispatcherService dispatcherService, 
+            IDispatcherService dispatcherService,
+            IDialogService dialogService,
             ILoggerService loggerService, 
             BitnamiRedmineStack stack)
-            : base(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, loggerService, stack)
+            : base(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, dialogService, loggerService, stack)
         {
             this.PropertyChanged += (sender, args) =>
             {

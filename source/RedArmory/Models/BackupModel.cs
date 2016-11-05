@@ -21,9 +21,10 @@ namespace Ouranos.RedArmory.Models
             IBitnamiRedmineService bitnamiRedmineService,
             IBackupService backupService,
             IDispatcherService dispatcherService,
+            IDialogService dialogService,
             ILoggerService loggerService,
             BitnamiRedmineStack stack)
-            : base(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, loggerService, stack)
+            : base(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, dialogService, loggerService, stack)
         {
             // Apply Setting
             RedmineSetting redmineSetting;

@@ -38,7 +38,7 @@ namespace Ouranos.RedArmory.Models
             };
         }
 
-        public Setting(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ITaskService taskService, BitnamiRedmineStack stack)
+        public Setting(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ITaskService taskService, IDialogService dialogService, BitnamiRedmineStack stack)
         {
             if (bitnamiRedmineService == null)
                 throw new ArgumentNullException(nameof(bitnamiRedmineService));
@@ -48,6 +48,9 @@ namespace Ouranos.RedArmory.Models
 
             if (taskService == null)
                 throw new ArgumentNullException(nameof(taskService));
+
+            if (dialogService == null)
+                throw new ArgumentNullException(nameof(dialogService));
 
             if (stack == null)
                 throw new ArgumentNullException(nameof(stack));
@@ -76,7 +79,7 @@ namespace Ouranos.RedArmory.Models
             this._SelectedEnumerationType = EnumerationTypes.First();
 
             this.UpdateSelectedEnumeration();
-            this.SelectedTaskScheduler = new TaskSchedulerViewModel(stack, taskService);
+            this.SelectedTaskScheduler = new TaskSchedulerViewModel(stack, taskService, dialogService);
         }
 
         #endregion

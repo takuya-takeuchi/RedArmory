@@ -11,20 +11,18 @@ namespace Ouranos.RedArmory.Models.Services
 
         #region IDialogService メンバー
 
-        public async Task ShowMessage(MessageBoxButton button, string message, string title)
+        public async Task<MessageBoxResult> ShowMessage(MessageBoxButton button, string message, string title)
         {
             switch (button)
             {
                 case MessageBoxButton.OK:
-                    await new OKDialogService().ShowMessage(message, title);
-                    break;
-                case MessageBoxButton.OKCancel:
-                    break;
-                case MessageBoxButton.YesNoCancel:
-                    break;
+                    var okDialogService = new OKDialogService();
+                    await okDialogService.ShowMessage(message, title);
+                    return okDialogService.Result;
                 case MessageBoxButton.YesNo:
-                    await new YesNoDialogService().ShowMessage(message, title);
-                    break;
+                    var yesNoDialogService = new YesNoDialogService();
+                    await yesNoDialogService.ShowMessage(message, title);
+                    return yesNoDialogService.Result;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(button), button, null);
             }

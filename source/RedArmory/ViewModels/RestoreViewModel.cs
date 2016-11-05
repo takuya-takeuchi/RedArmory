@@ -19,7 +19,7 @@ namespace Ouranos.RedArmory.ViewModels
             IDispatcherService dispatcherService,
             IDialogService dialogService,
             ILoggerService loggerService)
-            : base(loggerService)
+            : base(dialogService, loggerService)
         {
             if (applicationSettingService == null)
                 throw new ArgumentNullException(nameof(applicationSettingService));
@@ -32,12 +32,6 @@ namespace Ouranos.RedArmory.ViewModels
 
             if (dispatcherService == null)
                 throw new ArgumentNullException(nameof(dispatcherService));
-
-            if (dialogService == null)
-                throw new ArgumentNullException(nameof(dialogService));
-
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
 
             var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
 

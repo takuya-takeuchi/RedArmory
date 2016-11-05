@@ -7,7 +7,7 @@ namespace Ouranos.RedArmory.Models.Services
     public interface IDialogService
     {
 
-        Task ShowMessage(MessageBoxButton button, string message, string title);
+        Task<MessageBoxResult> ShowMessage(MessageBoxButton button, string message, string title);
 
     }
 

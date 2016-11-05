@@ -114,10 +114,9 @@ namespace Ouranos.RedArmory.Models
         {
             if (historySetting == null)
                 return;
-
-            var yesNoDialogService = new YesNoDialogService();
-            await yesNoDialogService.ShowMessage(Resources.Msg_DeleteHistory, null);
-            if (yesNoDialogService.Result == MessageBoxResult.No)
+            
+            var result = await this._DialogService.ShowMessage(MessageBoxButton.YesNo, Resources.Msg_DeleteHistory, null);
+            if (result == MessageBoxResult.No)
             {
                 return;
             }
@@ -192,8 +191,7 @@ namespace Ouranos.RedArmory.Models
             }
             finally
             {
-                var dialogService = new OKDialogService();
-                await dialogService.ShowMessage(message, null);
+                await this._DialogService.ShowMessage(MessageBoxButton.OK, message, null);
             }
         }
 

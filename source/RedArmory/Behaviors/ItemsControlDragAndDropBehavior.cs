@@ -124,6 +124,22 @@ namespace Ouranos.RedArmory.Behaviors
             //   return;
             //}
 
+            // ドロップ先のアイテムをチェック
+            var draggedItem = e.OriginalSource as FrameworkElement;
+            if (draggedItem == null)
+            {
+                return;
+            }
+
+            // ドロップ元と同じならキャンセル
+            // キャンセルしないと、アイテム上のボタンなどが反応しない
+            // (先の DragDrop.DoDragDrop が発動するため)
+            var current = this.GetItemData(itemsControl, draggedItem);
+            if (this._DraggedData == current)
+            {
+                return;
+            }
+
             DragDrop.DoDragDrop(itemsControl, this._DraggedData, DragDropEffects.Move);
             this.CleanUpData();
         }
@@ -142,22 +158,47 @@ namespace Ouranos.RedArmory.Behaviors
             }
 
             var dropTargetData = this.GetItemData(itemsControl, e.OriginalSource as DependencyObject);
-            this.DropItemAt(this.GetItemIndex(itemsControl, dropTargetData));
+            if (dropTargetData == null)
+            {
+                return;
+            }
+
+            var index = this.GetItemIndex(itemsControl, dropTargetData);
+            if (index == null)
+            {
+                return;
+            }
+
+            this.DropItemAt(index);
         }
 
         private void DropItemAt(int? droppedItemIndex)
         {
+            if (this._Items == null)
+            {
+                return;
+            }
+
             var data = this._DraggedData;
-            this._Items?.Remove(data);
+            this._Items.Remove(data);
+
+            // アイテムが 2 個だけで、 0 から 1 にドロップすると、ドロップ先の一つ前に
+            // 挿入されるため、移動できないように見える
+            // そのため、この時だけは、末尾に追加する
+            if (this._Items.Count == 1 && droppedItemIndex != null && droppedItemIndex == 1)
+            {
+                this._Items.Add(data);
+                return;
+            }
 
             if (droppedItemIndex != null)
             {
                 droppedItemIndex -= droppedItemIndex > this._DraggedItemIndex ? 1 : 0;
-                this._Items?.Insert((int)droppedItemIndex, data);
+                this._Items.Insert((int)droppedItemIndex, data);
             }
             else
             {
-                this._Items?.Add(data);
+                this._Items.Add(data);
             }
         }
 
@@ -192,6 +233,13 @@ namespace Ouranos.RedArmory.Behaviors
         {
             var items = itemsControl.ItemsSource as IList;
             if (items == null)
+            {
+                return null;
+            }
+
+            // NOTE
+            // ここがないとタイミングによってクラッシュする
+            if (item == null)
             {
                 return null;
             }

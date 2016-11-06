@@ -10,6 +10,24 @@ namespace Ouranos.RedArmory.Models
 
         #region コンストラクタ
 
+        internal EnumerationItem(EnumerationItem item)
+        {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            this.Id = item.Id;
+            this.IsActive = item.IsActive;
+            this.IsDefault = item.IsDefault;
+            this.Name = item.Name;
+            this.ParentId = item.ParentId;
+            this.Position = item.Position;
+            this.PositionName = item.PositionName;
+            this.ProjectId = item.ProjectId;
+            this.Type = item.Type;
+            this.IsLast = item.IsLast;
+            this.IsTop = item.IsTop;
+        }
+
         internal EnumerationItem(EnumerationObject item)
         {
             if (item == null)
@@ -192,6 +210,51 @@ namespace Ouranos.RedArmory.Models
             {
                 this._ProjectId = value;
                 this.RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Equals メンバー
+
+        private bool Equals(EnumerationItem other)
+        {
+            return this._Id == other._Id &&
+                   this._IsDefault == other._IsDefault &&
+                   this._IsLast == other._IsLast &&
+                   this._IsTop == other._IsTop &&
+                   this._IsActive == other._IsActive &&
+                   string.Equals(this._Name, other._Name) && 
+                   string.Equals(this._Type, other._Type) &&
+                   this._Position == other._Position &&
+                   this._ParentId == other._ParentId &&
+                   string.Equals(this._PositionName, other._PositionName) &&
+                   this._ProjectId == other._ProjectId;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj is EnumerationItem && Equals((EnumerationItem)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = this._Id;
+                hashCode = (hashCode * 397) ^ this._IsDefault.GetHashCode();
+                hashCode = (hashCode * 397) ^ this._IsLast.GetHashCode();
+                hashCode = (hashCode * 397) ^ this._IsTop.GetHashCode();
+                hashCode = (hashCode * 397) ^ this._IsActive.GetHashCode();
+                hashCode = (hashCode * 397) ^ (this._Name != null ? this._Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (this._Type != null ? this._Type.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ this._Position;
+                hashCode = (hashCode * 397) ^ this._ParentId.GetHashCode();
+                hashCode = (hashCode * 397) ^ (this._PositionName != null ? this._PositionName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ this._ProjectId.GetHashCode();
+                return hashCode;
             }
         }
 

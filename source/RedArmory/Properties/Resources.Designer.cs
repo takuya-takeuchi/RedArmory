@@ -602,6 +602,25 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Are you sure you want to refresh?
+        ///Discard your unsaved changeds. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_DiscardUnsavedChanges {
+            get {
+                return ResourceManager.GetString("Word_DiscardUnsavedChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Discard your unsaved changeds if changes に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_DiscardUnsavedChangesIfChange {
+            get {
+                return ResourceManager.GetString("Word_DiscardUnsavedChangesIfChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Document categories に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_DocumentCategories {

@@ -547,4 +547,11 @@
   <data name="Msg_UpdateEnumeration" xml:space="preserve">
     <value>保存しますか?</value>
   </data>
+  <data name="Word_DiscardUnsavedChanges" xml:space="preserve">
+    <value>再読み込みしますか?
+未保存の変更は破棄されます。</value>
+  </data>
+  <data name="Word_DiscardUnsavedChangesIfChange" xml:space="preserve">
+    <value>変更すると未保存の変更が破棄されます</value>
+  </data>
 </root>

@@ -547,4 +547,11 @@ Do you want to replace it?</value>
   <data name="Msg_UpdateEnumeration" xml:space="preserve">
     <value>Are you sure you want to save?</value>
   </data>
+  <data name="Word_DiscardUnsavedChanges" xml:space="preserve">
+    <value>Are you sure you want to refresh?
+Discard your unsaved changeds.</value>
+  </data>
+  <data name="Word_DiscardUnsavedChangesIfChange" xml:space="preserve">
+    <value>Discard your unsaved changeds if changes</value>
+  </data>
 </root>

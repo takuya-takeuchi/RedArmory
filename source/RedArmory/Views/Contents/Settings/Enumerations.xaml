@@ -1,11 +1,11 @@
 ﻿<UserControl x:Class="Ouranos.RedArmory.Views.Contents.Settings.Enumerations"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:behaviors="clr-namespace:Ouranos.RedArmory.Behaviors"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:behaviors="clr-namespace:Ouranos.RedArmory.Behaviors"
              Name="_Root"
              d:DesignHeight="500"
              d:DesignWidth="700"
@@ -77,6 +77,7 @@
                       Margin="{StaticResource ContentPadding}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -100,6 +101,16 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+                    <StackPanel Grid.Row="0"
+                                Grid.Column="2"
+                                Orientation="Horizontal"
+                                Visibility="{Binding SelectedSetting.SelectedEnumeration.Modified,
+                                                     Converter={StaticResource HiddenIfFalse}}">
+                        <Viewbox Margin="{StaticResource ViewBoxLabelMargin}" Style="{StaticResource ViewboxStyle}">
+                            <Path Style="{StaticResource WarningIconPathStyle}" />
+                        </Viewbox>
+                        <Label VerticalAlignment="Center" Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_DiscardUnsavedChangesIfChange, Mode=OneWay}" />
+                    </StackPanel>
                     <Label Grid.Row="1"
                            Grid.Column="0"
                            Content="{Binding Source={x:Static models:ResourceService.Instance},
@@ -117,6 +128,16 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="2"
+                                Orientation="Horizontal"
+                                Visibility="{Binding SelectedSetting.SelectedEnumeration.Modified,
+                                                     Converter={StaticResource HiddenIfFalse}}">
+                        <Viewbox Margin="{StaticResource ViewBoxLabelMargin}" Style="{StaticResource ViewboxStyle}">
+                            <Path Style="{StaticResource WarningIconPathStyle}" />
+                        </Viewbox>
+                        <Label VerticalAlignment="Center" Content="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_DiscardUnsavedChangesIfChange, Mode=OneWay}" />
+                    </StackPanel>
                 </Grid>
                 <ScrollViewer Grid.Row="2"
                               Grid.Column="0"
@@ -126,34 +147,9 @@
                               VerticalAlignment="Stretch"
                               HorizontalContentAlignment="Stretch"
                               VerticalContentAlignment="Stretch">
-                    <!--<ListView ItemsSource="{Binding SelectedSetting.SelectedEnumeration.Items}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="名称">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate DataType="models:EnumerationItem">
-                                            <Label Content="{Binding Name}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="デフォルト">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate DataType="models:EnumerationItem">
-                                            <CheckBox IsChecked="{Binding IsDefault}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="有効">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate DataType="models:EnumerationItem">
-                                            <CheckBox IsChecked="{Binding IsActive}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>-->
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding SelectedSetting.SelectedEnumeration.Items}" AllowDrop="True" >
+                    <DataGrid AllowDrop="True"
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding SelectedSetting.SelectedEnumeration.Items}">
                         <i:Interaction.Behaviors>
                             <behaviors:ItemsControlDragAndDropBehavior Items="{Binding SelectedSetting.SelectedEnumeration.Items, Mode=OneWay}" />
                         </i:Interaction.Behaviors>
@@ -216,7 +212,7 @@
                                                                       Path=Resources.Tooltip_Down,
                                                                       Mode=OneWay}">
                                                 <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}">
-                                                    <Path Data="M170,221.5 L193.1875,244.6875 193.1875,196.12555 201.12433,196.12555 201.12433,244.99949 224.87381,221.25001 230.1237,226.49989 196.74942,259.87417 164.43762,227.56237 z" Style="{StaticResource IconPathStyle}"/>
+                                                    <Path Data="M170,221.5 L193.1875,244.6875 193.1875,196.12555 201.12433,196.12555 201.12433,244.99949 224.87381,221.25001 230.1237,226.49989 196.74942,259.87417 164.43762,227.56237 z" Style="{StaticResource IconPathStyle}" />
                                                 </Viewbox>
                                             </Button>
                                         </StackPanel>

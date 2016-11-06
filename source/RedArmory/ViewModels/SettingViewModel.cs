@@ -32,7 +32,7 @@ namespace Ouranos.RedArmory.ViewModels
             };
         }
 
-        public SettingViewModel(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ITaskService taskService, ILoggerService loggerService)
+        public SettingViewModel(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ITaskService taskService, IDialogService dialogService, ILoggerService loggerService)
         {
             if (bitnamiRedmineService == null)
                 throw new ArgumentNullException(nameof(bitnamiRedmineService));
@@ -43,13 +43,16 @@ namespace Ouranos.RedArmory.ViewModels
             if (taskService == null)
                 throw new ArgumentNullException(nameof(taskService));
 
+            if (dialogService == null)
+                throw new ArgumentNullException(nameof(dialogService));
+
             if (loggerService == null)
                 throw new ArgumentNullException(nameof(loggerService));
 
             this._LoggerService = loggerService;
             var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
 
-            this.Settings = new ObservableCollection<Setting>(bitNamiRedmineStacks.Select(stack => new Setting(bitnamiRedmineService, databaseConfigurationService, taskService, stack)));
+            this.Settings = new ObservableCollection<Setting>(bitNamiRedmineStacks.Select(stack => new Setting(bitnamiRedmineService, databaseConfigurationService, taskService, dialogService, stack)));
             this.IsEmptyStacks = !this.Settings.Any();
         }
 

@@ -1,12 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Ouranos.RedArmory.Models;
 using Ouranos.RedArmory.Models.Services;
+using Ouranos.RedArmory.Properties;
 
 namespace Ouranos.RedArmory.ViewModels
 {
@@ -18,7 +21,11 @@ namespace Ouranos.RedArmory.ViewModels
 
         private readonly IDatabaseConnectorService _DatabaseConnectorService;
 
+        private readonly IDialogService _DialogService;
+
         private readonly EnumerationType _EnumerationType;
+
+        private readonly List<EnumerationItem> _UneditedItems = new List<EnumerationItem>();
 
         private readonly ProjectItem _Project;
 
@@ -28,7 +35,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #region コンストラクタ
 
-        internal EnumerationViewModel(DatabaseConfiguration databaseConfiguration, ProjectItem project, EnumerationType enumerationType)
+        internal EnumerationViewModel(DatabaseConfiguration databaseConfiguration, ProjectItem project, EnumerationType enumerationType, IDialogService dialogService)
         {
             if (databaseConfiguration == null)
                 throw new ArgumentNullException(nameof(databaseConfiguration));
@@ -36,12 +43,16 @@ namespace Ouranos.RedArmory.ViewModels
             if (project == null)
                 throw new ArgumentNullException(nameof(project));
 
+            if (dialogService == null)
+                throw new ArgumentNullException(nameof(dialogService));
+
             this._Project = project;
             this._EnumerationType = enumerationType;
+            this._DialogService = dialogService;
 
             this._DatabaseConnectorService = new MySqlConnectorService(databaseConfiguration);
 
-            this.RefreshCommand = new RelayCommand(this.RefresExecute, this.CanRefreshExecute);
+            this.RefreshCommand = new RelayCommand(this.RefreshExecute, this.CanRefreshExecute);
             this.UpdateCommand = new RelayCommand(this.UpdateExecute, this.CanUpdateExecute);
 
             this.Items.CollectionChanged += this.ItemsOnCollectionChanged<EnumerationItem>;
@@ -77,7 +88,25 @@ namespace Ouranos.RedArmory.ViewModels
 
                     this.Items.Move(index, index + 1);
                     this.UpdateOrderState();
+                    this.CheckModified();
                 }));
+            }
+        }
+        
+        private bool _Modified;
+
+        public bool Modified
+        {
+            get
+            {
+                return this._Modified;
+            }
+            set
+            {
+                this._Modified = value;
+                this.RaisePropertyChanged();
+
+                this.UpdateCommand?.RaiseCanExecuteChanged();
             }
         }
 
@@ -103,6 +132,7 @@ namespace Ouranos.RedArmory.ViewModels
 
                     this.Items.Move(index, index - 1);
                     this.UpdateOrderState();
+                    this.CheckModified();
                 }));
             }
         }
@@ -177,7 +207,22 @@ namespace Ouranos.RedArmory.ViewModels
                         this._SuspendItemOnPropertyChanged = false;
                         break;
                 }
+
+                switch (propertyChangedEventArgs.PropertyName)
+                {
+                    case nameof(enumerationItem.Id):
+                    case nameof(enumerationItem.IsActive):
+                    case nameof(enumerationItem.IsDefault):
+                    case nameof(enumerationItem.Name):
+                    case nameof(enumerationItem.ParentId):
+                    case nameof(enumerationItem.Position):
+                    case nameof(enumerationItem.PositionName):
+                    case nameof(enumerationItem.ProjectId):
+                    case nameof(enumerationItem.Type):
+                        this.CheckModified();
+                        break;
             }
+        }
         }
 
         #endregion
@@ -191,7 +236,26 @@ namespace Ouranos.RedArmory.ViewModels
 
         private bool CanUpdateExecute()
         {
-            return true;
+            return this._Modified;
+        }
+
+        private void CheckModified()
+        {
+            var items = this._Items;
+            var uneditedItems = this._UneditedItems;
+            if (items.Count != uneditedItems.Count)
+            {
+                this.Modified = true;
+                return;
+            }
+
+            if (items.Where((t, index) => !t.Equals(uneditedItems[index])).Any())
+            {
+                this.Modified = true;
+                return;
+            }
+
+            this.Modified = false;
         }
 
         private int GetIndex(EnumerationItem parameter)
@@ -206,8 +270,10 @@ namespace Ouranos.RedArmory.ViewModels
             return index;
         }
 
-        private void RefresExecute()
+        private void Refresh()
         {
+            this.Items.Clear();
+
             var projectId = this._Project.Id == 0 ? (int?)null : this._Project.Id;
             var type = this._EnumerationType.ToString();
             var items = this._DatabaseConnectorService.GetEnumerations().
@@ -219,16 +285,45 @@ namespace Ouranos.RedArmory.ViewModels
                 this.Items.Add(item);
 
             this.UpdateOrderState();
+
+            // 未編集状態を複製
+            this._UneditedItems.Clear();
+            this._UneditedItems.AddRange(this._Items.Select(item => new EnumerationItem(item)));
+
+            this.CheckModified();
         }
 
-        private void UpdateExecute()
+        private async void RefreshExecute()
         {
+            if (this._Modified)
+            {
+                var result = await this._DialogService.ShowMessage(MessageBoxButton.YesNo, Resources.Word_DiscardUnsavedChanges, null);
+                if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
+
+            this.Refresh();
+        }
+
+        private async void UpdateExecute()
+        {
+            var result = await this._DialogService.ShowMessage(MessageBoxButton.YesNo, Resources.Msg_UpdateEnumeration, null);
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+
             // Position を整理 (1から始まるはずだが一応)
             var minPosition = this.Items.Min(item => item.Position);
             foreach (var item in this.Items)
                 item.Position = (minPosition++);
 
             this._DatabaseConnectorService.UpdateEnumerations(this.Items);
+
+            // 再読込 (_UneditedItems の更新が必要なため)
+            this.Refresh();
         }
 
         private void UpdateOrderState()

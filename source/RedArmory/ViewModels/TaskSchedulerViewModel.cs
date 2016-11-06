@@ -1,9 +1,12 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Ouranos.RedArmory.Models;
 using Ouranos.RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services.Dialog;
+using Ouranos.RedArmory.Properties;
 
 namespace Ouranos.RedArmory.ViewModels
 {
@@ -13,7 +16,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #region フィールド
 
-        private readonly BitnamiRedmineStack _Stack;
+        private readonly IDialogService _DialogService;
 
         private readonly ITaskService _TaskService;
 
@@ -21,15 +24,19 @@ namespace Ouranos.RedArmory.ViewModels
 
         #region コンストラクタ
 
-        internal TaskSchedulerViewModel(BitnamiRedmineStack stack, ITaskService taskService)
+        internal TaskSchedulerViewModel(BitnamiRedmineStack stack, ITaskService taskService, IDialogService dialogService)
         {
             if (stack == null)
                 throw new ArgumentNullException(nameof(stack));
+
             if (taskService == null)
                 throw new ArgumentNullException(nameof(taskService));
 
-            this._Stack = stack;
+            if (dialogService == null)
+                throw new ArgumentNullException(nameof(dialogService));
+
             this._TaskService = taskService;
+            this._DialogService = dialogService;
 
             this.DeleteCommand = new RelayCommand<TaskSchedulerItem>(this.DeleteExecute, this.CanDeleteExecute);
             this.RefreshCommand = new RelayCommand(this.RefresExecute, this.CanRefreshExecute);
@@ -105,18 +112,26 @@ namespace Ouranos.RedArmory.ViewModels
             return true;
         }
 
-        private void DeleteExecute(TaskSchedulerItem item)
+        private async void DeleteExecute(TaskSchedulerItem item)
         {
-            if (item != null)
+            if (item == null)
             {
-                if (this._TaskService.Delete(item))
-                {
-                    this.Items.Remove(item);
-                }
-                else
-                {
-                    // ToDo : ダイアログで警告
-                }
+                return;
+            }
+
+            var result = await this._DialogService.ShowMessage(MessageBoxButton.YesNo, Resources.Msg_DeleteTask, null);
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+
+            if (this._TaskService.Delete(item))
+            {
+                this.Items.Remove(item);
+            }
+            else
+            {
+                // ToDo : ダイアログで警告
             }
         }
 

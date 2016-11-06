@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using GalaSoft.MvvmLight.Command;
 using Ouranos.RedArmory.Models;
 using Ouranos.RedArmory.Models.Services;
+using Ouranos.RedArmory.Models.Services.Dialog;
+using Ouranos.RedArmory.Properties;
 
 namespace Ouranos.RedArmory.ViewModels
 {
@@ -26,8 +29,9 @@ namespace Ouranos.RedArmory.ViewModels
             IBackupService backupService,
             ITaskService taskService,
             IDispatcherService dispatcherService,
+            IDialogService dialogService,
             ILoggerService loggerService)
-            : base(loggerService)
+            : base(dialogService, loggerService)
         {
             if (applicationSettingService == null)
                 throw new ArgumentNullException(nameof(applicationSettingService));
@@ -44,13 +48,10 @@ namespace Ouranos.RedArmory.ViewModels
             if (dispatcherService == null)
                 throw new ArgumentNullException(nameof(dispatcherService));
 
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
-
             var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
 
             this.Stacks = new ObservableCollection<BackupModel>(bitNamiRedmineStacks.Select(
-                stack => new BackupModel(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, loggerService, stack)));
+                stack => new BackupModel(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, dialogService, loggerService, stack)));
             
             this._TaskService = taskService;
             this.CreateTaskCommand = new RelayCommand(this.ExecuteCreateTask, this.CanCreateTaskExecute);
@@ -134,19 +135,41 @@ namespace Ouranos.RedArmory.ViewModels
             return string.Join(" ", args);
         }
 
-        private void ExecuteCreateTask()
+        private async void ExecuteCreateTask()
         {
             var stack = this.SelectedStack;
             var task = this.Task;
 
-
-            this._TaskService.Create(new TaskSetting
+            if (this._TaskService.IsExist(task.Name))
             {
-                Name = task.Name,
-                Description = task.Description,
-                Argument = this.CreateArguments(stack),
-                Trigger = task.SelectedTrigger.GetTrigger()
-            });
+                var result = await this._DialogService.ShowMessage(MessageBoxButton.YesNo, Resources.Msg_TaskOverwrite, null);
+                if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
+
+            string message;
+
+            try
+            {
+                this._TaskService.Create(new TaskSetting
+                {
+                    Name = task.Name,
+                    Description = task.Description,
+                    Argument = this.CreateArguments(stack),
+                    Trigger = task.SelectedTrigger.GetTrigger()
+                });
+
+                message = Resources.Msg_TaskCreateSuccess;
+            }
+            catch (Exception ex)
+            {
+                this._LoggerService.Error($"Failed to create task. Exception is {ex}");
+                message = Resources.Msg_TaskCreateFailed;
+            }
+            
+            await this._DialogService.ShowMessage(MessageBoxButton.OK, message, null);
         }
 
         #endregion

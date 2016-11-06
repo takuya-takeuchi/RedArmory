@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
-using GalaSoft.MvvmLight.Views;
 using MaterialDesignThemes.Wpf;
 using Ouranos.RedArmory.ViewModels;
 
@@ -11,7 +10,7 @@ namespace Ouranos.RedArmory.Models.Services.Dialog
     /// <summary>
     /// ダイアログの表示機能を提供します。このクラスは抽象クラスです。
     /// </summary>
-    internal abstract class DialogServiceBase<T> : IDialogService
+    internal abstract class DialogServiceBase<T> : GalaSoft.MvvmLight.Views.IDialogService
         where T : FrameworkElement, new()
     {
 

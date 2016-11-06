@@ -205,6 +205,15 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   Are you sure you want to delete this task? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_DeleteTask {
+            get {
+                return ResourceManager.GetString("Msg_DeleteTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   The output directory is not empty. Do you want to continue? に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Msg_DirectoryIsNotEmpty {
@@ -246,6 +255,43 @@ namespace Ouranos.RedArmory.Properties {
         public static string Msg_RestoreSkip {
             get {
                 return ResourceManager.GetString("Msg_RestoreSkip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Failed to create task. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_TaskCreateFailed {
+            get {
+                return ResourceManager.GetString("Msg_TaskCreateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Task has successfully been created. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_TaskCreateSuccess {
+            get {
+                return ResourceManager.GetString("Msg_TaskCreateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Speficied task name already exists.
+        ///Do you want to replace it? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_TaskOverwrite {
+            get {
+                return ResourceManager.GetString("Msg_TaskOverwrite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Are you sure you want to save? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Msg_UpdateEnumeration {
+            get {
+                return ResourceManager.GetString("Msg_UpdateEnumeration", resourceCulture);
             }
         }
         
@@ -552,6 +598,25 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_Disabled {
             get {
                 return ResourceManager.GetString("Word_Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Are you sure you want to refresh?
+        ///Discard your unsaved changeds. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_DiscardUnsavedChanges {
+            get {
+                return ResourceManager.GetString("Word_DiscardUnsavedChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Discard your unsaved changeds if changes に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_DiscardUnsavedChangesIfChange {
+            get {
+                return ResourceManager.GetString("Word_DiscardUnsavedChangesIfChange", resourceCulture);
             }
         }
         

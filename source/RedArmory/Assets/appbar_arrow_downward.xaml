@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="appbar_arrow_downward" Width="76.0106" Height="76.0106" Margin="129.162,15.317,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Path Data="M170,221.5 L193.1875,244.6875 193.1875,196.12555 201.12433,196.12555 201.12433,244.99949 224.87381,221.25001 230.1237,226.49989 196.74942,259.87417 164.43762,227.56237 z" 
+              Fill="Black" 
+              Height="36.88458713"
+              Width="38.0053"
+              Canvas.Left="19.00265" Canvas.Top="19.56300643" 
+              Stretch="Fill"/>
+</Canvas>

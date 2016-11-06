@@ -20,6 +20,8 @@ namespace Ouranos.RedArmory.Models
 
         private readonly IDatabaseConnectorService _DatabaseConnectorService;
 
+        private readonly IDialogService _DialogService;
+
         private readonly DatabaseConfiguration _DatabaseConfiguration;
 
         private readonly BitnamiRedmineStack _Stack;
@@ -38,7 +40,7 @@ namespace Ouranos.RedArmory.Models
             };
         }
 
-        public Setting(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ITaskService taskService, BitnamiRedmineStack stack)
+        public Setting(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ITaskService taskService, IDialogService dialogService, BitnamiRedmineStack stack)
         {
             if (bitnamiRedmineService == null)
                 throw new ArgumentNullException(nameof(bitnamiRedmineService));
@@ -49,10 +51,14 @@ namespace Ouranos.RedArmory.Models
             if (taskService == null)
                 throw new ArgumentNullException(nameof(taskService));
 
+            if (dialogService == null)
+                throw new ArgumentNullException(nameof(dialogService));
+
             if (stack == null)
                 throw new ArgumentNullException(nameof(stack));
 
             this._Stack = stack;
+            this._DialogService = dialogService;
 
             var configuration = new ServiceConfiguration
             {
@@ -76,7 +82,7 @@ namespace Ouranos.RedArmory.Models
             this._SelectedEnumerationType = EnumerationTypes.First();
 
             this.UpdateSelectedEnumeration();
-            this.SelectedTaskScheduler = new TaskSchedulerViewModel(stack, taskService);
+            this.SelectedTaskScheduler = new TaskSchedulerViewModel(stack, taskService, dialogService);
         }
 
         #endregion
@@ -203,7 +209,10 @@ namespace Ouranos.RedArmory.Models
 
         private void UpdateSelectedEnumeration()
         {
-            this.SelectedEnumeration = new EnumerationViewModel(this._DatabaseConfiguration, this._SelectedProject, this._SelectedEnumerationType);
+            this.SelectedEnumeration = new EnumerationViewModel(this._DatabaseConfiguration,
+                                                                this._SelectedProject,
+                                                                this._SelectedEnumerationType, 
+                                                                this._DialogService);
         }
 
         #endregion

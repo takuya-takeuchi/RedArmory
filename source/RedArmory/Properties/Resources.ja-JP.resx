@@ -531,4 +531,27 @@
   <data name="Word_TaskSchedulerNextRunTimeEmpty" xml:space="preserve">
     <value />
   </data>
+  <data name="Msg_TaskOverwrite" xml:space="preserve">
+    <value>指定した名前のタスクは既に存在します。
+タスクを置き換えますか?</value>
+  </data>
+  <data name="Msg_DeleteTask" xml:space="preserve">
+    <value>このタスクを削除しますか?</value>
+  </data>
+  <data name="Msg_TaskCreateFailed" xml:space="preserve">
+    <value>タスクの作成に失敗しました。</value>
+  </data>
+  <data name="Msg_TaskCreateSuccess" xml:space="preserve">
+    <value>タスクの作成に成功しました。</value>
+  </data>
+  <data name="Msg_UpdateEnumeration" xml:space="preserve">
+    <value>保存しますか?</value>
+  </data>
+  <data name="Word_DiscardUnsavedChanges" xml:space="preserve">
+    <value>再読み込みしますか?
+未保存の変更は破棄されます。</value>
+  </data>
+  <data name="Word_DiscardUnsavedChangesIfChange" xml:space="preserve">
+    <value>変更すると未保存の変更が破棄されます</value>
+  </data>
 </root>

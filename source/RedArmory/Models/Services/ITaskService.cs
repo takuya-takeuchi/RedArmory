@@ -10,6 +10,8 @@ namespace Ouranos.RedArmory.Models.Services
 
         bool Delete(TaskSchedulerItem item);
 
+        bool IsExist(string name);
+
         IEnumerable<Microsoft.Win32.TaskScheduler.Task> GetTasks();
 
     }

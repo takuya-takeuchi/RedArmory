@@ -87,6 +87,15 @@ namespace Ouranos.RedArmory.Models.Services
             return tasks;
         }
 
+        public bool IsExist(string name)
+        {
+            using (var ts = new Microsoft.Win32.TaskScheduler.TaskService())
+            {
+                return EnumTasks(ts.RootFolder).
+                    FirstOrDefault(task => task.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)) != null;
+            }
+        }
+
         #endregion
 
     }

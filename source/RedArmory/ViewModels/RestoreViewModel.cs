@@ -17,8 +17,9 @@ namespace Ouranos.RedArmory.ViewModels
             IBitnamiRedmineService bitnamiRedmineService,
             IBackupService backupService,
             IDispatcherService dispatcherService,
+            IDialogService dialogService,
             ILoggerService loggerService)
-            : base(loggerService)
+            : base(dialogService, loggerService)
         {
             if (applicationSettingService == null)
                 throw new ArgumentNullException(nameof(applicationSettingService));
@@ -32,13 +33,10 @@ namespace Ouranos.RedArmory.ViewModels
             if (dispatcherService == null)
                 throw new ArgumentNullException(nameof(dispatcherService));
 
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
-
             var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
 
             this.Stacks = new ObservableCollection<RestoreModel>(bitNamiRedmineStacks.Select(
-                stack => new RestoreModel(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, loggerService, stack)));
+                stack => new RestoreModel(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, dialogService, loggerService, stack)));
         }
 
         #endregion

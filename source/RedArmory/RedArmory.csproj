@@ -39,6 +39,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
@@ -139,6 +142,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AssemblyProperty.cs" />
+    <Compile Include="Behaviors\ItemsControlDragAndDropBehavior.cs" />
     <Compile Include="Controls\DateTimeControl.xaml.cs">
       <DependentUpon>DateTimeControl.xaml</DependentUpon>
     </Compile>
@@ -171,6 +175,8 @@
     <Compile Include="Interfaces\BackupEngine.cs" />
     <Compile Include="Interop\SafeNativeMethods.cs" />
     <Compile Include="Models\DateTimeType.cs" />
+    <Compile Include="Models\Services\DialogService.cs" />
+    <Compile Include="Models\Services\IDialogService.cs" />
     <Compile Include="Models\TaskSchedulerItem.cs" />
     <Compile Include="Models\Helpers\Utility.cs" />
     <Compile Include="Models\BackupModel.cs" />
@@ -289,6 +295,10 @@
     <Compile Include="Views\Dialogs\YesNoDialog.xaml.cs">
       <DependentUpon>YesNoDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="Assets\appbar_arrow_downward.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\appbar_arrow_upward.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -558,10 +568,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Logo.png" />
+    <Compile Include="Models\Helpers\InteropHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Helpers\InteropHelper.cs" />
+    <Resource Include="logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\About.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

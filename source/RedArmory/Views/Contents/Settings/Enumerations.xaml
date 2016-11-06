@@ -48,12 +48,29 @@
                 <Grid Grid.Row="0"
                       Height="{StaticResource SubHeaderBarHeight}"
                       Background="{StaticResource SubHeaderBackgroundBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <Viewbox Margin="{StaticResource ViewBoxLabelMargin}" Style="{StaticResource ViewboxStyle}">
                             <Path Style="{StaticResource InfoIconPathStyle}" />
                         </Viewbox>
                         <Label Content="{Binding SelectedSetting.Stack.InstallLocation}" Style="{StaticResource ComboBoxLabelStyle}" />
                     </StackPanel>
+                    <Button Grid.Column="1"
+                            Width="{StaticResource IconPathSize}"
+                            Height="{StaticResource IconPathSize}"
+                            Margin="6 0 6 0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Command="{Binding SelectedSetting.SelectedEnumeration.RefreshCommand}"
+                            Foreground="{StaticResource IdealForegroundColorBrush}"
+                            Style="{DynamicResource MaterialDesignFloatingActionDarkButton}">
+                        <Viewbox Style="{StaticResource ViewboxStyle}">
+                            <Path Data="M72.249903,16.14601 L87.915983,32.146067 76.249716,32.979412 C74.524256,61.351105 48.495424,70.90712 27.249985,59.480049 L32.499655,53.313236 C53.585453,60.915741 65.918699,53.806782 68.500223,33.062414 L56.416159,32.646412 z M43.615536,0.501091 C49.405912,0.54665947 55.416328,2.0205917 61.082994,5.1455288 L55.666002,10.978878 C39.166331,1.3953981 20.332998,12.728797 20.166214,32.311949 L31.915814,32.561954 15.915748,48.312008 0.5,32.561619 12.665534,32.645617 C10.853632,13.082975 26.244406,0.36438942 43.615536,0.501091 z" Style="{StaticResource IconPathStyle}" />
+                        </Viewbox>
+                    </Button>
                 </Grid>
                 <Grid Grid.Row="1"
                       Grid.Column="0"

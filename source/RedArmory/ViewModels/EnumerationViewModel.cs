@@ -216,6 +216,8 @@ namespace Ouranos.RedArmory.ViewModels
 
         private void RefresExecute()
         {
+            this.Items.Clear();
+
             var projectId = this._Project.Id == 0 ? (int?)null : this._Project.Id;
             var type = this._EnumerationType.ToString();
             var items = this._DatabaseConnectorService.GetEnumerations().

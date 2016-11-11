@@ -143,6 +143,7 @@
     </ApplicationDefinition>
     <Compile Include="AssemblyProperty.cs" />
     <Compile Include="Behaviors\ItemsControlDragAndDropBehavior.cs" />
+    <Compile Include="Behaviors\NumericOnlyTextBoxBehaviors.cs" />
     <Compile Include="Controls\DateTimeControl.xaml.cs">
       <DependentUpon>DateTimeControl.xaml</DependentUpon>
     </Compile>
@@ -160,6 +161,7 @@
     </Compile>
     <Compile Include="Controls\TriggetTemplateSlector.cs" />
     <Compile Include="Converters\CollectionCountToVisibilityConverter.cs" />
+    <Compile Include="Converters\TaskToTriggerStringConverter.cs" />
     <Compile Include="Converters\TaskStateToStringConverter.cs" />
     <Compile Include="Converters\TriggerViewModelToStringConverter.cs" />
     <Compile Include="Converters\ProjectItemNameToStringConverter.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="Converters\CultureNameToLocalizedStringConverter.cs" />
     <Compile Include="Converters\EnumerationTypeToStringConverter.cs" />
     <Compile Include="Extensions\ServiceStatusExtension.cs" />
+    <Compile Include="Extensions\TriggerExtension.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Interfaces\RestoreEngine.cs" />
     <Compile Include="Interfaces\BackupEngine.cs" />

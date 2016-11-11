@@ -554,4 +554,22 @@
   <data name="Word_DiscardUnsavedChangesIfChange" xml:space="preserve">
     <value>変更すると未保存の変更が破棄されます</value>
   </data>
+  <data name="Word_TriggerDailyEveryday" xml:space="preserve">
+    <value>毎日 {0} に起動</value>
+  </data>
+  <data name="Word_TriggerDailyRecurday" xml:space="preserve">
+    <value>{0} 日に 1 回、{1} に起動</value>
+  </data>
+  <data name="Word_TriggerMonthlyDay" xml:space="preserve">
+    <value>{0} 以降の {1}の{3}、{2} に起動</value>
+  </data>
+  <data name="Word_TriggerMonthlyWeek" xml:space="preserve">
+    <value>月: {3}、週: {2}、日: {1} に起動、開始日: {0}</value>
+  </data>
+  <data name="Word_TriggerWeeklyEveryweek" xml:space="preserve">
+    <value>{0} 以降毎週{1}、{2} に起動</value>
+  </data>
+  <data name="Word_TriggerWeeklyRecurweek" xml:space="preserve">
+    <value>{0} 以降 {3} 週間に 1 回、{1}、{2} に起動</value>
+  </data>
 </root>

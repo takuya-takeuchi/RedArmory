@@ -332,6 +332,7 @@
                         <Button Height="{StaticResource FooterBarHeight}"
                                 VerticalAlignment="Center"
                                 Command="{Binding CreateTaskCommand}"
+                                IsEnabled="{Binding Task.SelectedTrigger.CanCreateTask}"
                                 Style="{DynamicResource MaterialDesignRaisedButton}"
                                 ToolTip="{Binding Source={x:Static models:ResourceService.Instance},
                                                   Path=Resources.Tooltip_AddTask,

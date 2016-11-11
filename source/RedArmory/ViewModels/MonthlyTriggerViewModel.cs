@@ -8,14 +8,28 @@ namespace Ouranos.RedArmory.ViewModels
 
     internal sealed class MonthlyTriggerViewModel : TriggerViewModel
     {
+ 
+        #region フィールド
+ 
+        private const int RunOnLastDayOfMonthIndex = 31; 
+ 
+        private const int RunOnLastWeekOfMonthIndex = 4; 
+ 
+        private const int DaysCount = 32; 
+ 
+        private const int WeekCount = 5; 
+ 
+        private const int MonthCount = 12; 
+ 
+        #endregion 
 
         #region コンストラクタ
 
         public MonthlyTriggerViewModel()
         {
-            this._Days = Enumerable.Repeat(0, 32).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 31, 最終
-            this._Weeks = Enumerable.Repeat(0, 5).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 4, 最終
-            this._Months = Enumerable.Repeat(0, 12).Select(i => new SingleValueWapperModel<bool>()).ToArray();
+            this._Days = Enumerable.Repeat(0, DaysCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 31, 最終
+            this._Weeks = Enumerable.Repeat(0, WeekCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 4, 最終
+            this._Months = Enumerable.Repeat(0, MonthCount).Select(i => new SingleValueWapperModel<bool>()).ToArray();
         }
 
         #endregion
@@ -223,7 +237,8 @@ namespace Ouranos.RedArmory.ViewModels
             {
                 var monthlyTrigger = new MonthlyTrigger();
                 monthlyTrigger.MonthsOfYear = monthsOfTheYear;
-                monthlyTrigger.RunOnLastDayOfMonth = this.Days[31].Value;
+                monthlyTrigger.DaysOfMonth = this.GetDaysOfMonth(); 
+                monthlyTrigger.RunOnLastDayOfMonth = this.Days[RunOnLastDayOfMonthIndex].Value; 
 
                 var d = this.Date;
                 var t = this.Time;
@@ -263,7 +278,7 @@ namespace Ouranos.RedArmory.ViewModels
                 monthlyTrigger.MonthsOfYear = monthsOfTheYear;
                 monthlyTrigger.DaysOfWeek = daysOfTheWeek;
                 monthlyTrigger.WeeksOfMonth = whichWeek;
-                monthlyTrigger.RunOnLastWeekOfMonth = this.Weeks[4].Value;
+                monthlyTrigger.RunOnLastWeekOfMonth = this.Weeks[RunOnLastWeekOfMonthIndex].Value; 
 
                 var d = this.Date;
                 var t = this.Time;
@@ -272,6 +287,15 @@ namespace Ouranos.RedArmory.ViewModels
                 return monthlyTrigger;
             }
         }
+ 
+        #region ヘルパーメソッド
+ 
+        private int[] GetDaysOfMonth() 
+        { 
+            return this.Days.Select((model, i) => model.Value && (i != RunOnLastDayOfMonthIndex) ? i + 1 : 0).Where(i => i != 0).ToArray(); 
+        } 
+ 
+        #endregion 
 
         #endregion
 

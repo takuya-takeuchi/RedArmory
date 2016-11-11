@@ -21,11 +21,11 @@ namespace Ouranos.RedArmory.Controls
 
         #region プロパティ
 
-        public WeeklyTriggerViewModel ViewModel
+        public TriggerViewModel ViewModel
         {
             get
             {
-                return this.DataContext as WeeklyTriggerViewModel;
+                return this.DataContext as TriggerViewModel;
             }
         }
 

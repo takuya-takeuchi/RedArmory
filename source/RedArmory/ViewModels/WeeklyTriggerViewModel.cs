@@ -135,6 +135,42 @@ namespace Ouranos.RedArmory.ViewModels
 
         public override Trigger GetTrigger()
         {
+            var daysOfTheWeek = this.GetDaysOfTheWeek();
+            var weeklyTrigger = new WeeklyTrigger();
+            weeklyTrigger.WeeksInterval = (short)this.Interval;
+            weeklyTrigger.DaysOfWeek = daysOfTheWeek;
+
+            var d = this.Date;
+            var t = this.Time;
+            weeklyTrigger.StartBoundary = new DateTime(d.Year, d.Month, d.Day, t.Hour, t.Minute, t.Second);
+
+            return weeklyTrigger;
+        }
+
+        #region オーバーライド
+
+        protected override bool ValidateCondition()
+        {
+            if(this._Interval <= 0 )
+            {
+                return false;
+            }
+
+            var daysOfTheWeek = this.GetDaysOfTheWeek();
+            if (daysOfTheWeek == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion
+
+        #region ヘルパーメソッド
+
+        private DaysOfTheWeek GetDaysOfTheWeek()
+        {
             var daysOfTheWeek = DaysOfTheWeek.AllDays;
             if (!this.Sunday)
                 daysOfTheWeek ^= DaysOfTheWeek.Sunday;
@@ -151,16 +187,10 @@ namespace Ouranos.RedArmory.ViewModels
             if (!this.Saturday)
                 daysOfTheWeek ^= DaysOfTheWeek.Saturday;
 
-            var weeklyTrigger = new WeeklyTrigger();
-            weeklyTrigger.WeeksInterval = (short)this.Interval;
-            weeklyTrigger.DaysOfWeek = daysOfTheWeek;
-
-            var d = this.Date;
-            var t = this.Time;
-            weeklyTrigger.StartBoundary = new DateTime(d.Year, d.Month, d.Day, t.Hour, t.Minute, t.Second);
-
-            return weeklyTrigger;
+            return daysOfTheWeek;
         }
+
+        #endregion
 
         #endregion
 

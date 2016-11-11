@@ -38,6 +38,15 @@ namespace Ouranos.RedArmory.ViewModels
             return dailyTrigger;
         }
 
+        #region オーバーライド
+
+        protected override bool ValidateCondition()
+        {
+            return this._Interval > 0;
+        }
+
+        #endregion
+
         #endregion
 
     }

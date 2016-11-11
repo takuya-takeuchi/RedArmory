@@ -554,4 +554,22 @@ Discard your unsaved changeds.</value>
   <data name="Word_DiscardUnsavedChangesIfChange" xml:space="preserve">
     <value>Discard your unsaved changeds if changes</value>
   </data>
+  <data name="Word_TriggerDailyEveryday" xml:space="preserve">
+    <value>At {0} everyday</value>
+  </data>
+  <data name="Word_TriggerDailyRecurday" xml:space="preserve">
+    <value>At {1} every {0} days</value>
+  </data>
+  <data name="Word_TriggerMonthlyDay" xml:space="preserve">
+    <value>At {2} on day {1} of {3}, starting {0}</value>
+  </data>
+  <data name="Word_TriggerMonthlyWeek" xml:space="preserve">
+    <value>Runs on the {2} {1} each {3} starting {0}</value>
+  </data>
+  <data name="Word_TriggerWeeklyEveryweek" xml:space="preserve">
+    <value>At {2} every {1} of every weeks, starting {0}</value>
+  </data>
+  <data name="Word_TriggerWeeklyRecurweek" xml:space="preserve">
+    <value>At {2} every {1} every {3} weeks, starting {0}</value>
+  </data>
 </root>

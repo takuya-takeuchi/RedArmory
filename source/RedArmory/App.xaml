@@ -228,6 +228,7 @@
                                                              IsHidden="False"
                                                              TriggerCount="1" />
             <converters:TaskStateToStringConverter x:Key="TaskStateToStringConverter"/>
+            <converters:TaskToTriggerStringConverter x:Key="TaskToTriggerStringConverter"/>
 
             <!--  Chart  -->
             <Style x:Key="MinimalChartStyle" TargetType="metroChart:ChartBase">

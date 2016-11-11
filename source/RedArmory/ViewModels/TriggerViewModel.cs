@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using GalaSoft.MvvmLight;
 using Microsoft.Win32.TaskScheduler;
 
@@ -12,6 +13,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         protected TriggerViewModel()
         {
+            this.PropertyChanged += this.OnPropertyChanged;
             this.Date = DateTime.Now;
             this.Time = this.Date;
         }
@@ -19,6 +21,21 @@ namespace Ouranos.RedArmory.ViewModels
         #endregion
 
         #region プロパティ
+
+        private bool _CanCreateTask;
+
+        public bool CanCreateTask
+        {
+            get
+            {
+                return this._CanCreateTask;
+            }
+            private set
+            {
+                this._CanCreateTask = value;
+                this.RaisePropertyChanged();
+            }
+        }
 
         private DateTime _Date;
 
@@ -55,6 +72,18 @@ namespace Ouranos.RedArmory.ViewModels
         #region メソッド
 
         public abstract Trigger GetTrigger();
+
+        protected abstract bool ValidateCondition();
+
+        #region イベントハンドラ
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            if (propertyChangedEventArgs.PropertyName != nameof(this.CanCreateTask))
+                this.CanCreateTask = this.ValidateCondition();
+        }
+
+        #endregion
 
         #endregion
 

@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Linq;
 using Microsoft.Win32.TaskScheduler;
 using Ouranos.RedArmory.Models;
@@ -8,20 +9,20 @@ namespace Ouranos.RedArmory.ViewModels
 
     internal sealed class MonthlyTriggerViewModel : TriggerViewModel
     {
- 
+
         #region フィールド
- 
-        private const int RunOnLastDayOfMonthIndex = 31; 
- 
-        private const int RunOnLastWeekOfMonthIndex = 4; 
- 
-        private const int DaysCount = 32; 
- 
-        private const int WeekCount = 5; 
- 
-        private const int MonthCount = 12; 
- 
-        #endregion 
+
+        private const int RunOnLastDayOfMonthIndex = 31;
+
+        private const int RunOnLastWeekOfMonthIndex = 4;
+
+        private const int DaysCount = 32;
+
+        private const int WeekCount = 5;
+
+        private const int MonthCount = 12;
+
+        #endregion
 
         #region コンストラクタ
 
@@ -30,6 +31,13 @@ namespace Ouranos.RedArmory.ViewModels
             this._Days = Enumerable.Repeat(0, DaysCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 31, 最終
             this._Weeks = Enumerable.Repeat(0, WeekCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 4, 最終
             this._Months = Enumerable.Repeat(0, MonthCount).Select(i => new SingleValueWapperModel<bool>()).ToArray();
+
+            foreach (var model in this._Days)
+                model.PropertyChanged += this.OnPropertyChanged;
+            foreach (var model in this._Weeks)
+                model.PropertyChanged += this.OnPropertyChanged;
+            foreach (var model in this._Months)
+                model.PropertyChanged += this.OnPropertyChanged;
         }
 
         #endregion
@@ -207,6 +215,122 @@ namespace Ouranos.RedArmory.ViewModels
 
         public override Trigger GetTrigger()
         {
+            var monthsOfTheYear = this.GetMonthsOfTheYear();
+
+            if (this.UseDay)
+            {
+                var monthlyTrigger = new MonthlyTrigger();
+                monthlyTrigger.MonthsOfYear = monthsOfTheYear;
+                monthlyTrigger.DaysOfMonth = this.GetDaysOfMonth();
+                monthlyTrigger.RunOnLastDayOfMonth = this.Days[RunOnLastDayOfMonthIndex].Value;
+
+                var d = this.Date;
+                var t = this.Time;
+                monthlyTrigger.StartBoundary = new DateTime(d.Year, d.Month, d.Day, t.Hour, t.Minute, t.Second);
+
+                return monthlyTrigger;
+            }
+            else
+            {
+                var daysOfTheWeek = this.GetDaysOfTheWeek();
+                var whichWeek = this.GetWhichWeek();
+
+                var monthlyTrigger = new MonthlyDOWTrigger();
+                monthlyTrigger.MonthsOfYear = monthsOfTheYear;
+                monthlyTrigger.DaysOfWeek = daysOfTheWeek;
+                monthlyTrigger.WeeksOfMonth = whichWeek;
+                monthlyTrigger.RunOnLastWeekOfMonth = this.Weeks[RunOnLastWeekOfMonthIndex].Value;
+
+                var d = this.Date;
+                var t = this.Time;
+                monthlyTrigger.StartBoundary = new DateTime(d.Year, d.Month, d.Day, t.Hour, t.Minute, t.Second);
+
+                return monthlyTrigger;
+            }
+        }
+
+        #region オーバーライド
+
+        protected override bool ValidateCondition()
+        {
+            var monthsOfTheYear = this.GetMonthsOfTheYear();
+            if (monthsOfTheYear == 0)
+            {
+                return false;
+            }
+
+            if (!this.UseDay)
+            {
+                var daysOfTheWeek = this.GetDaysOfTheWeek();
+                if (daysOfTheWeek == 0)
+                {
+                    return false;
+                }
+
+                var whichWeek = this.GetWhichWeek();
+                if (whichWeek == 0 && !this.Weeks[RunOnLastWeekOfMonthIndex].Value)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                var daysOfMonth = this.GetDaysOfMonth();
+                if (!daysOfMonth.Any() && !this.Days[RunOnLastDayOfMonthIndex].Value)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        #endregion
+
+        #region イベントハンドラ
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            this.RaisePropertyChanged();
+        }
+
+        #endregion
+
+        #region ヘルパーメソッド
+
+        private int[] GetDaysOfMonth()
+        {
+            return this.Days.Select((model, i) => model.Value && (i != RunOnLastDayOfMonthIndex) ? i + 1 : 0).Where(i => i != 0).ToArray();
+        }
+
+        private DaysOfTheWeek GetDaysOfTheWeek()
+        {
+            var daysOfTheWeek = DaysOfTheWeek.AllDays;
+            if (!this.Sunday)
+                daysOfTheWeek ^= DaysOfTheWeek.Sunday;
+            if (!this.Monday)
+                daysOfTheWeek ^= DaysOfTheWeek.Monday;
+            if (!this.Tuesday)
+                daysOfTheWeek ^= DaysOfTheWeek.Tuesday;
+            if (!this.Wednesday)
+                daysOfTheWeek ^= DaysOfTheWeek.Wednesday;
+            if (!this.Thursday)
+                daysOfTheWeek ^= DaysOfTheWeek.Thursday;
+            if (!this.Friday)
+                daysOfTheWeek ^= DaysOfTheWeek.Friday;
+            if (!this.Saturday)
+                daysOfTheWeek ^= DaysOfTheWeek.Saturday;
+
+            return daysOfTheWeek;
+        }
+
+        private MonthsOfTheYear GetMonthsOfTheYear()
+        {
+            if (this.Months == null)
+            {
+                return 0;
+            }
+
             var monthsOfTheYear = MonthsOfTheYear.AllMonths;
             if (!this.Months[0].Value)
                 monthsOfTheYear ^= MonthsOfTheYear.January;
@@ -233,69 +357,30 @@ namespace Ouranos.RedArmory.ViewModels
             if (!this.Months[11].Value)
                 monthsOfTheYear ^= MonthsOfTheYear.December;
 
-            if (this.UseDay)
-            {
-                var monthlyTrigger = new MonthlyTrigger();
-                monthlyTrigger.MonthsOfYear = monthsOfTheYear;
-                monthlyTrigger.DaysOfMonth = this.GetDaysOfMonth(); 
-                monthlyTrigger.RunOnLastDayOfMonth = this.Days[RunOnLastDayOfMonthIndex].Value; 
-
-                var d = this.Date;
-                var t = this.Time;
-                monthlyTrigger.StartBoundary = new DateTime(d.Year, d.Month, d.Day, t.Hour, t.Minute, t.Second);
-
-                return monthlyTrigger;
-            }
-            else
-            {
-                var daysOfTheWeek = DaysOfTheWeek.AllDays;
-                if (!this.Sunday)
-                    daysOfTheWeek ^= DaysOfTheWeek.Sunday;
-                if (!this.Monday)
-                    daysOfTheWeek ^= DaysOfTheWeek.Monday;
-                if (!this.Tuesday)
-                    daysOfTheWeek ^= DaysOfTheWeek.Tuesday;
-                if (!this.Wednesday)
-                    daysOfTheWeek ^= DaysOfTheWeek.Wednesday;
-                if (!this.Thursday)
-                    daysOfTheWeek ^= DaysOfTheWeek.Thursday;
-                if (!this.Friday)
-                    daysOfTheWeek ^= DaysOfTheWeek.Friday;
-                if (!this.Saturday)
-                    daysOfTheWeek ^= DaysOfTheWeek.Saturday;
-
-                var whichWeek = WhichWeek.AllWeeks;
-                if (!this.Weeks[0].Value)
-                    whichWeek ^= WhichWeek.FirstWeek;
-                if (!this.Weeks[1].Value)
-                    whichWeek ^= WhichWeek.SecondWeek;
-                if (!this.Weeks[2].Value)
-                    whichWeek ^= WhichWeek.ThirdWeek;
-                if (!this.Weeks[3].Value)
-                    whichWeek ^= WhichWeek.FourthWeek;
-
-                var monthlyTrigger = new MonthlyDOWTrigger();
-                monthlyTrigger.MonthsOfYear = monthsOfTheYear;
-                monthlyTrigger.DaysOfWeek = daysOfTheWeek;
-                monthlyTrigger.WeeksOfMonth = whichWeek;
-                monthlyTrigger.RunOnLastWeekOfMonth = this.Weeks[RunOnLastWeekOfMonthIndex].Value; 
-
-                var d = this.Date;
-                var t = this.Time;
-                monthlyTrigger.StartBoundary = new DateTime(d.Year, d.Month, d.Day, t.Hour, t.Minute, t.Second);
-
-                return monthlyTrigger;
-            }
+            return monthsOfTheYear;
         }
- 
-        #region ヘルパーメソッド
- 
-        private int[] GetDaysOfMonth() 
-        { 
-            return this.Days.Select((model, i) => model.Value && (i != RunOnLastDayOfMonthIndex) ? i + 1 : 0).Where(i => i != 0).ToArray(); 
-        } 
- 
-        #endregion 
+
+        private WhichWeek GetWhichWeek()
+        {
+            if (this.Weeks == null)
+            {
+                return 0;
+            }
+
+            var whichWeek = WhichWeek.AllWeeks;
+            if (!this.Weeks[0].Value)
+                whichWeek ^= WhichWeek.FirstWeek;
+            if (!this.Weeks[1].Value)
+                whichWeek ^= WhichWeek.SecondWeek;
+            if (!this.Weeks[2].Value)
+                whichWeek ^= WhichWeek.ThirdWeek;
+            if (!this.Weeks[3].Value)
+                whichWeek ^= WhichWeek.FourthWeek;
+
+            return whichWeek;
+        }
+
+        #endregion
 
         #endregion
 

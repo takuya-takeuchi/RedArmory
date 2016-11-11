@@ -7,6 +7,8 @@
              xmlns:models="clr-namespace:Ouranos.RedArmory.Models"
              xmlns:viewModels="clr-namespace:Ouranos.RedArmory.ViewModels"
              xmlns:controls="clr-namespace:Ouranos.RedArmory.Controls"
+             xmlns:behaviors="clr-namespace:Ouranos.RedArmory.Behaviors"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DataContext="{d:DesignInstance {x:Type viewModels:WeeklyTriggerViewModel}}"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -49,7 +51,11 @@
             <TextBox MinWidth="20"
                      VerticalAlignment="Center"
                      Text="{Binding Interval,
-                                    StringFormat=d}" />
+                                    StringFormat=d, UpdateSourceTrigger=PropertyChanged}">
+                <i:Interaction.Behaviors>
+                    <behaviors:NumericOnlyTextBoxBehaviors IsNumeric="True" DefaultNumeric="1" />
+                </i:Interaction.Behaviors>
+            </TextBox>
             <TextBlock Style="{StaticResource TriggerControlPropertyTextBlock}" Text="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_RecurEveryWeeks, Mode=OneWay}" />
         </StackPanel>
         <!--#region Days-->

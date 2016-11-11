@@ -107,6 +107,14 @@ namespace Ouranos.RedArmory.Models
             }
         }
 
+        public Task Task
+        {
+            get
+            {
+                return this._Task;
+            }
+        }
+
         private TaskState _TaskState;
 
         public TaskState TaskState

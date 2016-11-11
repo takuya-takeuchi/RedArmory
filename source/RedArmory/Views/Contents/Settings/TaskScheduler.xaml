@@ -99,6 +99,16 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_Trigger, Mode=OneWay}" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate DataType="models:TaskSchedulerItem">
+                                        <Label HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Content="{Binding Task,
+                                                                 Converter={StaticResource TaskToTriggerStringConverter}}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn Header="{Binding Source={x:Static models:ResourceService.Instance}, Path=Resources.Word_NextRunTime, Mode=OneWay}" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate DataType="models:TaskSchedulerItem">

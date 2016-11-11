@@ -1278,11 +1278,47 @@ namespace Ouranos.RedArmory.Properties {
         }
         
         /// <summary>
+        ///   At {0} everyday に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TriggerDailyEveryday {
+            get {
+                return ResourceManager.GetString("Word_TriggerDailyEveryday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   At {1} every {0} days に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TriggerDailyRecurday {
+            get {
+                return ResourceManager.GetString("Word_TriggerDailyRecurday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Monthly に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Word_TriggerMonthly {
             get {
                 return ResourceManager.GetString("Word_TriggerMonthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   At {2} on day {1} of {3}, starting {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TriggerMonthlyDay {
+            get {
+                return ResourceManager.GetString("Word_TriggerMonthlyDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Runs on the {2} {1} each {3} starting {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TriggerMonthlyWeek {
+            get {
+                return ResourceManager.GetString("Word_TriggerMonthlyWeek", resourceCulture);
             }
         }
         
@@ -1301,6 +1337,24 @@ namespace Ouranos.RedArmory.Properties {
         public static string Word_TriggerWeekly {
             get {
                 return ResourceManager.GetString("Word_TriggerWeekly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   At {2} every {1} of every weeks, starting {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TriggerWeeklyEveryweek {
+            get {
+                return ResourceManager.GetString("Word_TriggerWeeklyEveryweek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   At {2} every {1} every {3} weeks, starting {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Word_TriggerWeeklyRecurweek {
+            get {
+                return ResourceManager.GetString("Word_TriggerWeeklyRecurweek", resourceCulture);
             }
         }
         

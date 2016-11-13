@@ -26,12 +26,12 @@
         /// <summary>
         /// アセンブリ マニフェストに含める、ファイル バージョンを定義します。
         /// </summary>
-        public const string FileVersion = "1.6.0.0";
+        public const string FileVersion = "1.7.0.0";
 
         /// <summary>
         /// アセンブリ マニフェストに含める、アセンブリ バージョンを定義します。
         /// </summary>
-        public const string Version = "1.6.0.0";
+        public const string Version = "1.7.0.1";
 
     }
 

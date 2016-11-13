@@ -34,7 +34,7 @@ Red Armory は、Bitnami が配布している Bitnami Redmine Stack のデー�
 * Windows サービスのスタートアップの種類変更
 * システム内の複数の Bitnami Redmine Stack のサポート
 * 列挙項目のソート
-** Redmine 3.3 以前でもソートが簡単に実行可能
+  * Redmine 3.3 以前でもソートが簡単に実行可能
 * タスクスケジューラへのバックアップタスクの登録、削除
 * 多言語対応
   * 現在、日本語と英語のみ対応

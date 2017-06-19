@@ -76,12 +76,6 @@ namespace Ouranos.RedArmory.Models
             this.Command = new RelayCommand(this.Execute, this.CanExecute);
             this.SelectDirectoryCommand = new RelayCommand(this.ExecuteSelectDirectory, this.CanExecuteSelectDirectory);
 
-
-#if DEBUG
-            var dest = @"f:\RedArmony\Test";
-            System.IO.Directory.CreateDirectory(dest);
-            this.Directory = dest;
-#endif
             //var bitNamiRedmineStackConfiguration = ConfigurationService.Instance.GetBitnamiRedmineStackConfiguration(stack.DisplayVersion);
             //bitNamiRedmineStackConfiguration.
         }

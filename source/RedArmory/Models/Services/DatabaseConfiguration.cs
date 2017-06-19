@@ -6,11 +6,12 @@
 
         #region コンストラクタ
 
-        public DatabaseConfiguration(string mode, string name, string username, string password, string encoding,
+        public DatabaseConfiguration(string mode, string name, string host, string username, string password, string encoding,
             int port)
         {
             this.Mode = mode;
             this.Name = name;
+            this.Host = host;
             this.Username = username;
             this.Password = password;
             this.Encoding = encoding;
@@ -22,6 +23,12 @@
         #region プロパティ
 
         public string Encoding
+        {
+            get;
+            set;
+        }
+
+        public string Host
         {
             get;
             set;

@@ -103,8 +103,9 @@ namespace Ouranos.RedArmory.Models.Services
                     var username = values["username"] as string;
                     var password = values["password"] as string;
                     var encoding = values["encoding"] as string;
+                    var host = values["host"] as string;
 
-                    yield return new DatabaseConfiguration(mode, database, username, password, encoding, port);
+                    yield return new DatabaseConfiguration(mode, database, host, username, password, encoding, port);
                 }
             }
         }

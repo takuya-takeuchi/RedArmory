@@ -43,7 +43,7 @@ namespace Ouranos.RedArmory.Models.Services
             var configuration = this._DatabaseConfiguration;
             var builder = new MySqlConnectionStringBuilder
             {
-                Server = "localhost",
+                Server = configuration.Host,
                 Port = (uint)configuration.Port,
                 UserID = configuration.Username,
                 Password = configuration.Password,

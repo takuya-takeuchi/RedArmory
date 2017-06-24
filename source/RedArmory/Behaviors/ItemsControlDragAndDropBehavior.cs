@@ -25,7 +25,7 @@ namespace Ouranos.RedArmory.Behaviors
         #region 依存関係プロパティ
 
         public static readonly DependencyProperty ItemsProperty = DependencyProperty.RegisterAttached(
-                "Items", 
+                "Items",
                 typeof(IList),
                 typeof(ItemsControlDragAndDropBehavior),
                 new UIPropertyMetadata(null, OnItemsChanged));
@@ -47,8 +47,24 @@ namespace Ouranos.RedArmory.Behaviors
             {
                 return;
             }
-            
+
             behavior._Items = e.NewValue as IList;
+        }
+
+        public static readonly DependencyProperty IsDraggingProperty = DependencyProperty.RegisterAttached(
+                "IsDragging",
+                typeof(bool),
+                typeof(ItemsControlDragAndDropBehavior),
+                new UIPropertyMetadata(null));
+
+        public static bool GetIsDragging(ItemsControl itemsControl)
+        {
+            return (bool)itemsControl.GetValue(IsDraggingProperty);
+        }
+
+        public static void SetIsDragging(ItemsControl itemsControl, bool value)
+        {
+            itemsControl.SetValue(IsDraggingProperty, value);
         }
 
         #endregion
@@ -81,6 +97,14 @@ namespace Ouranos.RedArmory.Behaviors
 
         private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            // ダブルクリックによって、ItemsControl 内のアイテムの高さが変化し、
+            // スクロールが発生するなどで、位置がずれることによって、意図せぬ
+            // ドラッグアンドドロップの発生を防ぐ
+            if (e.ClickCount > 1)
+            {
+                return;
+            }
+
             var itemsControl = sender as ItemsControl;
             if (itemsControl == null)
             {
@@ -140,12 +164,15 @@ namespace Ouranos.RedArmory.Behaviors
                 return;
             }
 
+            SetIsDragging(this.AssociatedObject, true);
+
             DragDrop.DoDragDrop(itemsControl, this._DraggedData, DragDropEffects.Move);
             this.CleanUpData();
         }
 
         private void OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
+            SetIsDragging(this.AssociatedObject, false);
             this.CleanUpData();
         }
 
@@ -157,11 +184,16 @@ namespace Ouranos.RedArmory.Behaviors
                 return;
             }
 
-            var dropTargetData = this.GetItemData(itemsControl, e.OriginalSource as DependencyObject);
+            FrameworkElement container;
+            var dropTargetData = this.GetItemData(itemsControl, e.OriginalSource as DependencyObject, out container);
             if (dropTargetData == null)
             {
                 return;
             }
+
+            // ドラッグ先の上半分にドロップしようとしているか
+            var point = e.GetPosition(container);
+            var next = container.ActualHeight / 2 < point.Y;
 
             var index = this.GetItemIndex(itemsControl, dropTargetData);
             if (index == null)
@@ -169,7 +201,7 @@ namespace Ouranos.RedArmory.Behaviors
                 return;
             }
 
-            this.DropItemAt(index);
+            this.DropItemAt(index + (next ? 1 : 0));
         }
 
         private void DropItemAt(int? droppedItemIndex)
@@ -226,6 +258,12 @@ namespace Ouranos.RedArmory.Behaviors
         private object GetItemData(ItemsControl itemsControl, DependencyObject item)
         {
             var container = this.GetItemContainer(itemsControl, item);
+            return container?.DataContext;
+        }
+
+        private object GetItemData(ItemsControl itemsControl, DependencyObject item, out FrameworkElement container)
+        {
+            container = this.GetItemContainer(itemsControl, item);
             return container?.DataContext;
         }
 

@@ -30,8 +30,8 @@ namespace Ouranos.RedArmory.ViewModels
             ITaskService taskService,
             IDispatcherService dispatcherService,
             IDialogService dialogService,
-            ILoggerService loggerService)
-            : base(dialogService, loggerService)
+            ILogService logService)
+            : base(dialogService, logService)
         {
             if (applicationSettingService == null)
                 throw new ArgumentNullException(nameof(applicationSettingService));
@@ -51,7 +51,7 @@ namespace Ouranos.RedArmory.ViewModels
             var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
 
             this.Stacks = new ObservableCollection<BackupModel>(bitNamiRedmineStacks.Select(
-                stack => new BackupModel(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, dialogService, loggerService, stack)));
+                stack => new BackupModel(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, dialogService, logService, stack)));
             
             this._TaskService = taskService;
             this.CreateTaskCommand = new RelayCommand(this.ExecuteCreateTask, this.CanCreateTaskExecute);
@@ -165,7 +165,7 @@ namespace Ouranos.RedArmory.ViewModels
             }
             catch (Exception ex)
             {
-                this._LoggerService.Error($"Failed to create task. Exception is {ex}");
+                this._LogService.Error($"Failed to create task. Exception is {ex}");
                 message = Resources.Msg_TaskCreateFailed;
             }
             

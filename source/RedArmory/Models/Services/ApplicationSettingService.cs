@@ -18,18 +18,18 @@ namespace Ouranos.RedArmory.Models.Services
 
         private ApplicationSetting _ApplicationSetting;
 
-        private readonly ILoggerService _LoggerService;
+        private readonly ILogService _LogService;
 
         #endregion
 
         #region コンストラクタ
 
-        public ApplicationSettingService(ILoggerService loggerService)
+        public ApplicationSettingService(ILogService logService)
         {
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
+            if (logService == null)
+                throw new ArgumentNullException(nameof(logService));
 
-            this._LoggerService = loggerService;
+            this._LogService = logService;
 
             var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             this._ApplicationSettingDirectory = Path.Combine(path, AssemblyProperty.Product);

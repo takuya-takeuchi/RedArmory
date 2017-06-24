@@ -16,15 +16,15 @@ namespace Ouranos.RedArmory.ViewModels
 
         #region フィールド
 
-        private readonly ILoggerService _LoggerService;
+        private readonly ILogService _LogService;
 
         #endregion
 
         #region コンストラクタ
 
-        public MainViewModel(ILoggerService loggerService)
+        public MainViewModel(ILogService logService)
         {
-            this._LoggerService = loggerService;
+            this._LogService = logService;
 
             this.Title = AssemblyProperty.Title;
 
@@ -61,7 +61,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         private void CurrentOnStartup(object sender, StartupEventArgs startupEventArgs)
         {
-            this._LoggerService.Info($"CurrentOnStartup. startupEventArgs.Args is {string.Join(", ", startupEventArgs.Args)}");
+            this._LogService.Info($"CurrentOnStartup. startupEventArgs.Args is {string.Join(", ", startupEventArgs.Args)}");
 
             //FrameworkElement.LanguageProperty.OverrideMetadata(
             //  typeof(FrameworkElement),
@@ -72,17 +72,17 @@ namespace Ouranos.RedArmory.ViewModels
 
         private void CurrentOnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs dispatcherUnhandledExceptionEventArgs)
         {
-            this._LoggerService.Error($"CurrentOnDispatcherUnhandledException. dispatcherUnhandledExceptionEventArgs.Exception is {dispatcherUnhandledExceptionEventArgs.Exception}");
+            this._LogService.Error($"CurrentOnDispatcherUnhandledException. dispatcherUnhandledExceptionEventArgs.Exception is {dispatcherUnhandledExceptionEventArgs.Exception}");
         }
 
         private void CurrentOnExit(object sender, ExitEventArgs exitEventArgs)
         {
-            this._LoggerService.Info($"CurrentOnExit. exitEventArgs.ApplicationExitCode is {exitEventArgs.ApplicationExitCode}");
+            this._LogService.Info($"CurrentOnExit. exitEventArgs.ApplicationExitCode is {exitEventArgs.ApplicationExitCode}");
         }
 
         private void CurrentOnLoadCompleted(object sender, NavigationEventArgs navigationEventArgs)
         {
-            this._LoggerService.Info("CurrentOnLoadCompleted");
+            this._LogService.Info("CurrentOnLoadCompleted");
         }
 
         #endregion

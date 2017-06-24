@@ -12,6 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using System;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Ouranos.RedArmory.Models.Services;
@@ -24,6 +25,9 @@ namespace Ouranos.RedArmory.ViewModels
     /// </summary>
     internal class ViewModelLocator
     {
+
+        private readonly ILogService _LogService;
+
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
@@ -41,11 +45,15 @@ namespace Ouranos.RedArmory.ViewModels
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
-            
+
             if (!SimpleIoc.Default.IsRegistered<System.Windows.Threading.Dispatcher>())
                 SimpleIoc.Default.Register(() => System.Windows.Application.Current.Dispatcher);
 
-            Register<ILoggerService, LoggerService>();
+            // ロガーサービス
+            SimpleIoc.Default.Register<ILogFactoryService, NLogLogFactoryService>();
+            var logFactoryService = SimpleIoc.Default.GetInstance<ILogFactoryService>();
+
+            Register(() => logFactoryService.Create("Main"));
             Register<IDialogService, DialogService>();
             Register<IDispatcherService, DispatcherService>();
             Register<IApplicationSettingService, ApplicationSettingService>();
@@ -61,12 +69,15 @@ namespace Ouranos.RedArmory.ViewModels
             Register<GeneralViewModel>();
             Register<RestoreViewModel>();
             Register<SettingViewModel>();
+
+            this._LogService = SimpleIoc.Default.GetInstance<ILogService>();
         }
 
         private static void Register<T>(System.Func<T> factory)
+            where T : class
         {
             if (!SimpleIoc.Default.IsRegistered<T>())
-                SimpleIoc.Default.Register(() => factory);
+                SimpleIoc.Default.Register(factory.Invoke);
         }
 
         private static void Register<T>()
@@ -88,7 +99,15 @@ namespace Ouranos.RedArmory.ViewModels
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<AboutViewModel>();
+                try
+                {
+                    return ServiceLocator.Current.GetInstance<AboutViewModel>();
+                }
+                catch (Exception e)
+                {
+                    this._LogService.Error(e.Message);
+                    throw;
+                }
             }
         }
 
@@ -96,7 +115,15 @@ namespace Ouranos.RedArmory.ViewModels
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<BackupViewModel>();
+                try
+                {
+                    return ServiceLocator.Current.GetInstance<BackupViewModel>();
+                }
+                catch (Exception e)
+                {
+                    this._LogService.Error(e.Message);
+                    throw;
+                }
             }
         }
 
@@ -104,7 +131,15 @@ namespace Ouranos.RedArmory.ViewModels
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<GeneralViewModel>();
+                try
+                {
+                    return ServiceLocator.Current.GetInstance<GeneralViewModel>();
+                }
+                catch (Exception e)
+                {
+                    this._LogService.Error(e.Message);
+                    throw;
+                }
             }
         }
 
@@ -112,15 +147,30 @@ namespace Ouranos.RedArmory.ViewModels
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
+                try
+                {
+                    return ServiceLocator.Current.GetInstance<MainViewModel>();
+                }
+                catch (Exception e)
+                {
+                    this._LogService.Error(e.Message);
+                    throw;
+                }
             }
         }
-
         public RestoreViewModel Restore
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<RestoreViewModel>();
+                try
+                {
+                    return ServiceLocator.Current.GetInstance<RestoreViewModel>();
+                }
+                catch (Exception e)
+                {
+                    this._LogService.Error(e.Message);
+                    throw;
+                }
             }
         }
 
@@ -128,7 +178,15 @@ namespace Ouranos.RedArmory.ViewModels
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SettingViewModel>();
+                try
+                {
+                    return ServiceLocator.Current.GetInstance<SettingViewModel>();
+                }
+                catch (Exception e)
+                {
+                    this._LogService.Error(e.Message);
+                    throw;
+                }
             }
         }
 

@@ -40,7 +40,7 @@ namespace RedArmory.Test.Models
         [TestInitialize]
         public void Initialize()
         {
-            SimpleIoc.Default.Register<ILoggerService, LoggerService>();
+            SimpleIoc.Default.Register<ILogService, NLogLogService>();
             SimpleIoc.Default.Register<IDatabaseService, MySqlService>();
             SimpleIoc.Default.Register<IBackupService, BackupService>();
             SimpleIoc.Default.Register<IBitnamiRedmineService, BitnamiRedmineService>();

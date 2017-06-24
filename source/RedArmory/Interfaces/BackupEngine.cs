@@ -22,7 +22,7 @@ namespace Ouranos.RedArmory.Interfaces
 
         private readonly IDispatcherService _DispatcherService;
 
-        private readonly ILoggerService _LoggerService;
+        private readonly ILogService _LogService;
 
         private readonly BitnamiRedmineStack _Stack;
 
@@ -50,7 +50,7 @@ namespace Ouranos.RedArmory.Interfaces
             IBitnamiRedmineService bitnamiRedmineService,
             IBackupService backupService,
             IDispatcherService dispatcherService,
-            ILoggerService loggerService,
+            ILogService logService,
             BackupConfiguration configuration,
             BitnamiRedmineStack stack,
             string outputPath)
@@ -61,8 +61,8 @@ namespace Ouranos.RedArmory.Interfaces
             if (backupService == null)
                 throw new ArgumentNullException(nameof(backupService));
 
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
+            if (logService == null)
+                throw new ArgumentNullException(nameof(logService));
 
             if (configuration == null)
                 throw new ArgumentNullException(nameof(configuration));
@@ -73,7 +73,7 @@ namespace Ouranos.RedArmory.Interfaces
             this._BitnamiRedmineService = bitnamiRedmineService;
             this._BackupService = backupService;
             this._DispatcherService = dispatcherService;
-            this._LoggerService = loggerService;
+            this._LogService = logService;
             this._Configuration = configuration;
             this._Stack = stack;
             this._OutputPath = outputPath;

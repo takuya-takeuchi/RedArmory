@@ -20,18 +20,18 @@ namespace Ouranos.RedArmory.Models.Services
 
         private const string MySqlPath = @"mysql\bin\mysql.exe";
 
-        private readonly ILoggerService _LoggerService;
+        private readonly ILogService _LogService;
 
         #endregion
 
         #region コンストラクタ
 
-        public MySqlService(ILoggerService loggerService)
+        public MySqlService(ILogService logService)
         {
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
+            if (logService == null)
+                throw new ArgumentNullException(nameof(logService));
 
-            this._LoggerService = loggerService;
+            this._LogService = logService;
         }
 
         #endregion
@@ -72,50 +72,58 @@ namespace Ouranos.RedArmory.Models.Services
             if (configuration == null)
                 throw new ArgumentNullException(nameof(configuration));
 
-            var apppath = CreateMySqlDumpLocation(stack);
-            if (!File.Exists(apppath))
-                throw new FileNotFoundException("mysqldump.exe が存在しません。", apppath);
-
-            // サポートしている文字コードは
-            // mysql> show character set; を実行
-            Encoding encoding;
-            switch (configuration.Encoding)
+            try
             {
-                case "utf8":
-                    encoding = Encoding.UTF8;
-                    break;
-                default:
-                    throw new NotSupportedException($"{configuration.Encoding} はサポートしていません。");
+                var apppath = CreateMySqlDumpLocation(stack);
+                if (!File.Exists(apppath))
+                    throw new FileNotFoundException("mysqldump.exe が存在しません。", apppath);
+
+                // サポートしている文字コードは
+                // mysql> show character set; を実行
+                Encoding encoding;
+                switch (configuration.Encoding)
+                {
+                    case "utf8":
+                        encoding = Encoding.UTF8;
+                        break;
+                    default:
+                        throw new NotSupportedException($"{configuration.Encoding} はサポートしていません。");
+                }
+
+                const string format =
+                    "--default-character-set={0} --user={1} --password={2} --port={3} --databases {4}";
+                var arguments = string.Format(
+                        format,
+                        configuration.Encoding,
+                        configuration.Username,
+                        configuration.Password,
+                        configuration.Port,
+                        configuration.Name);
+
+                var psInfo = new ProcessStartInfo();
+                psInfo.FileName = apppath;
+                psInfo.Arguments = arguments;
+                psInfo.CreateNoWindow = true;
+                psInfo.UseShellExecute = false;
+                psInfo.RedirectStandardOutput = true;
+                psInfo.StandardOutputEncoding = encoding;
+
+                this._LogService.Info("Create mysqldump.exe process");
+                using (var process = Process.Start(psInfo))
+                {
+                    var contents = process.StandardOutput.ReadToEnd();
+
+                    this._LogService.Info("Start mysqldump.exe");
+                    process.WaitForExit();
+
+                    this._LogService.Info("End mysqldump.exe");
+                    File.WriteAllText(path, contents, encoding);
+                }
             }
-
-            const string format =
-                "--default-character-set={0} --user={1} --password={2} --port={3} --databases {4}";
-            var arguments = string.Format(
-                    format,
-                    configuration.Encoding,
-                    configuration.Username,
-                    configuration.Password,
-                    configuration.Port,
-                    configuration.Name);
-
-            var psInfo = new ProcessStartInfo();
-            psInfo.FileName = apppath;
-            psInfo.Arguments = arguments;
-            psInfo.CreateNoWindow = true;
-            psInfo.UseShellExecute = false;
-            psInfo.RedirectStandardOutput = true;
-            psInfo.StandardOutputEncoding = encoding;
-
-            this._LoggerService.Info("Create mysqldump.exe process");
-            using (var process = Process.Start(psInfo))
+            catch (Exception e)
             {
-                var contents = process.StandardOutput.ReadToEnd();
-
-                this._LoggerService.Info("Start mysqldump.exe");
-                process.WaitForExit();
-
-                this._LoggerService.Info("End mysqldump.exe");
-                File.WriteAllText(path, contents, encoding);
+                this._LogService.Error(e.Message);
+                throw;
             }
         }
 
@@ -127,53 +135,62 @@ namespace Ouranos.RedArmory.Models.Services
             if (configuration == null)
                 throw new ArgumentNullException(nameof(configuration));
 
-            var apppath = CreateMySqlLocation(stack);
-            if (!File.Exists(apppath))
-                throw new FileNotFoundException("mysql.exe が存在しません。", apppath);
-
-            // サポートしている文字コードは
-            // mysql> show character set; を実行
-            Encoding encoding;
-            switch (configuration.Encoding)
+            try
             {
-                case "utf8":
-                    encoding = Encoding.UTF8;
-                    break;
-                default:
-                    throw new NotSupportedException($"{configuration.Encoding} はサポートしていません。");
+                var apppath = CreateMySqlLocation(stack);
+                if (!File.Exists(apppath))
+                    throw new FileNotFoundException("mysql.exe が存在しません。", apppath);
+
+                // サポートしている文字コードは
+                // mysql> show character set; を実行
+                Encoding encoding;
+                switch (configuration.Encoding)
+                {
+                    case "utf8":
+                        encoding = Encoding.UTF8;
+                        break;
+                    default:
+                        throw new NotSupportedException($"{configuration.Encoding} はサポートしていません。");
+                }
+
+                const string format =
+                    "--default-character-set={0} --user={1} --password={2} --port={3} --databases {4}";
+                var arguments = string.Format(
+                        format,
+                        configuration.Encoding,
+                        configuration.Username,
+                        configuration.Password,
+                        configuration.Port,
+                        configuration.Name);
+
+                var psInfo = new ProcessStartInfo();
+                psInfo.FileName = apppath;
+                psInfo.Arguments = arguments;
+                psInfo.CreateNoWindow = true;
+                psInfo.UseShellExecute = false;
+                psInfo.RedirectStandardOutput = true;
+                psInfo.StandardOutputEncoding = encoding;
+
+                this._LogService.Info("Create mysqldump.exe process");
+                using (var process = Process.Start(psInfo))
+                {
+                    var contents = process.StandardOutput.ReadToEnd();
+
+                    this._LogService.Info("Start mysqldump.exe");
+                    process.WaitForExit();
+
+                    this._LogService.Info("End mysqldump.exe");
+                    //File.WriteAllText(path, contents, encoding);
+                }
+
+                return null;
+
             }
-
-            const string format =
-                "--default-character-set={0} --user={1} --password={2} --port={3} --databases {4}";
-            var arguments = string.Format(
-                    format,
-                    configuration.Encoding,
-                    configuration.Username,
-                    configuration.Password,
-                    configuration.Port,
-                    configuration.Name);
-
-            var psInfo = new ProcessStartInfo();
-            psInfo.FileName = apppath;
-            psInfo.Arguments = arguments;
-            psInfo.CreateNoWindow = true;
-            psInfo.UseShellExecute = false;
-            psInfo.RedirectStandardOutput = true;
-            psInfo.StandardOutputEncoding = encoding;
-
-            this._LoggerService.Info("Create mysqldump.exe process");
-            using (var process = Process.Start(psInfo))
+            catch (Exception e)
             {
-                var contents = process.StandardOutput.ReadToEnd();
-
-                this._LoggerService.Info("Start mysqldump.exe");
-                process.WaitForExit();
-
-                this._LoggerService.Info("End mysqldump.exe");
-                //File.WriteAllText(path, contents, encoding);
+                this._LogService.Error(e.Message);
+                throw;
             }
-
-            return null;
         }
 
         public void Restore(BitnamiRedmineStack stack, DatabaseConfiguration configuration, string path)
@@ -181,21 +198,30 @@ namespace Ouranos.RedArmory.Models.Services
             if (configuration == null)
                 throw new ArgumentNullException(nameof(configuration));
 
-            if (!File.Exists(path))
-                throw new FileNotFoundException("インポートする sql ファイルが存在しません。", path);
-
-            var connectionString = CreateConnectionString(configuration);
-
-            this._LoggerService.Info("Create MySqlConnection");
-            using (var con = new MySqlConnection(connectionString))
+            try
             {
-                var text = File.ReadAllText(path);
-                var script = new MySqlScript(con, text);
 
-                this._LoggerService.Info("Execute MySqlScript");
-                var result = script.Execute();
+                if (!File.Exists(path))
+                    throw new FileNotFoundException("インポートする sql ファイルが存在しません。", path);
 
-                this._LoggerService.Info("MySqlScript,Execute returns {0}", result);
+                var connectionString = CreateConnectionString(configuration);
+
+                this._LogService.Info("Create MySqlConnection");
+                using (var con = new MySqlConnection(connectionString))
+                {
+                    var text = File.ReadAllText(path);
+                    var script = new MySqlScript(con, text);
+
+                    this._LogService.Info("Execute MySqlScript");
+                    var result = script.Execute();
+
+                    this._LogService.Info($"MySqlScript,Execute returns {result}");
+                }
+            }
+            catch (Exception e)
+            {
+                this._LogService.Error(e.Message);
+                throw;
             }
         }
 

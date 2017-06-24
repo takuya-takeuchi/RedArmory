@@ -22,9 +22,9 @@ namespace Ouranos.RedArmory.Models
             IBackupService backupService,
             IDispatcherService dispatcherService,
             IDialogService dialogService,
-            ILoggerService loggerService,
+            ILogService logService,
             BitnamiRedmineStack stack)
-            : base(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, dialogService, loggerService, stack)
+            : base(applicationSettingService, bitnamiRedmineService, backupService, dispatcherService, dialogService, logService, stack)
         {
             // Apply Setting
             RedmineSetting redmineSetting;
@@ -166,7 +166,7 @@ namespace Ouranos.RedArmory.Models
                 var engine = new BackupEngine(this._BitnamiRedmineService,
                                         this._BackupService,
                                         this._DispatcherService,
-                                        this._LoggerService,
+                                        this._LogService,
                                         configuration,
                                         this.Stack,
                                         this._OutputDirectory);
@@ -194,10 +194,10 @@ namespace Ouranos.RedArmory.Models
             catch (Exception ex)
             {
                 message = $"Exception is thown. Reason is {ex.Message}";
-                this._LoggerService.Error(message);
+                this._LogService.Error(message);
 
                 message = $"StackTrace is {ex.StackTrace}";
-                this._LoggerService.Error(message);
+                this._LogService.Error(message);
 
                 message = Resources.Msg_BackupFailed;
                 await this._DialogService.ShowMessage(MessageBoxButton.OK, message, null);

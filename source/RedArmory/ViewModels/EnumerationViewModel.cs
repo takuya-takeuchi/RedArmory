@@ -35,7 +35,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #region コンストラクタ
 
-        internal EnumerationViewModel(DatabaseConfiguration databaseConfiguration, ProjectItem project, EnumerationType enumerationType, IDialogService dialogService)
+        internal EnumerationViewModel(DatabaseConfiguration databaseConfiguration, ProjectItem project, EnumerationType enumerationType, IDialogService dialogService, ILogService logService)
         {
             if (databaseConfiguration == null)
                 throw new ArgumentNullException(nameof(databaseConfiguration));
@@ -50,7 +50,7 @@ namespace Ouranos.RedArmory.ViewModels
             this._EnumerationType = enumerationType;
             this._DialogService = dialogService;
 
-            this._DatabaseConnectorService = new MySqlConnectorService(databaseConfiguration);
+            this._DatabaseConnectorService = new MySqlConnectorService(databaseConfiguration, logService);
 
             this.RefreshCommand = new RelayCommand(this.RefreshExecute, this.CanRefreshExecute);
             this.UpdateCommand = new RelayCommand(this.UpdateExecute, this.CanUpdateExecute);

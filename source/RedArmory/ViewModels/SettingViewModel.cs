@@ -13,7 +13,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #region フィールド
 
-        private readonly ILoggerService _LoggerService;
+        private readonly ILogService _LogService;
 
         public static ServiceStartupType[] ServiceStartupTypes;
 
@@ -32,7 +32,7 @@ namespace Ouranos.RedArmory.ViewModels
             };
         }
 
-        public SettingViewModel(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ITaskService taskService, IDialogService dialogService, ILoggerService loggerService)
+        public SettingViewModel(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ITaskService taskService, IDialogService dialogService, ILogService logService)
         {
             if (bitnamiRedmineService == null)
                 throw new ArgumentNullException(nameof(bitnamiRedmineService));
@@ -46,13 +46,13 @@ namespace Ouranos.RedArmory.ViewModels
             if (dialogService == null)
                 throw new ArgumentNullException(nameof(dialogService));
 
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
+            if (logService == null)
+                throw new ArgumentNullException(nameof(logService));
 
-            this._LoggerService = loggerService;
+            this._LogService = logService;
             var bitNamiRedmineStacks = bitnamiRedmineService.GetBitnamiRedmineStacks();
 
-            this.Settings = new ObservableCollection<Setting>(bitNamiRedmineStacks.Select(stack => new Setting(bitnamiRedmineService, databaseConfigurationService, taskService, dialogService, stack)));
+            this.Settings = new ObservableCollection<Setting>(bitNamiRedmineStacks.Select(stack => new Setting(bitnamiRedmineService, databaseConfigurationService, taskService, dialogService, logService, stack)));
             this.IsEmptyStacks = !this.Settings.Any();
         }
 

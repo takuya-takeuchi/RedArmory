@@ -14,13 +14,19 @@ namespace Ouranos.RedArmory.Models.Services
 
         private readonly DatabaseConfiguration _DatabaseConfiguration;
 
+        private readonly ILogService _LogService;
+
         #endregion
 
         #region コンストラクタ
 
-        public MySqlConnectorService(DatabaseConfiguration coniConfiguration)
+        public MySqlConnectorService(DatabaseConfiguration coniConfiguration, ILogService logService)
         {
+            if (logService == null)
+                throw new ArgumentNullException(nameof(logService));
+
             this._DatabaseConfiguration = coniConfiguration;
+            this._LogService = logService;
         }
 
         #endregion
@@ -77,6 +83,7 @@ namespace Ouranos.RedArmory.Models.Services
                     }
                     catch (Exception ex)
                     {
+                        this._LogService.Error(ex.Message);
                         tran.Rollback();
                     }
                 }

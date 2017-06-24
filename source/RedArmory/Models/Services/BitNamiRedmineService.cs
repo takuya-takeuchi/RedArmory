@@ -25,18 +25,18 @@ namespace Ouranos.RedArmory.Models.Services
 
         private const string SubversionPath = @"subversion\scripts\winserv.exe";
 
-        private readonly ILoggerService _LoggerService;
+        private readonly ILogService _LogService;
 
         #endregion
 
         #region コンストラクタ
 
-        public BitnamiRedmineService(ILoggerService loggerService)
+        public BitnamiRedmineService(ILogService logService)
         {
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
+            if (logService == null)
+                throw new ArgumentNullException(nameof(logService));
 
-            this._LoggerService = loggerService;
+            this._LogService = logService;
         }
 
         #endregion
@@ -75,6 +75,15 @@ namespace Ouranos.RedArmory.Models.Services
 
         public IEnumerable<BitnamiRedmineStack> GetBitnamiRedmineStacks()
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                this._LogService.Error(e.Message);
+                throw;
+            }
             //const string registryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
             const string registryKey = @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall";
             using (var key = Registry.LocalMachine.OpenSubKey(registryKey))
@@ -110,6 +119,15 @@ namespace Ouranos.RedArmory.Models.Services
 
         public IEnumerable<ServiceStatus> GetServiceDisplayNames(BitnamiRedmineStack stack, ServiceConfiguration configuration)
         {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                this._LogService.Error(e.Message);
+                throw;
+            }
             var services = new[]
             {
                 new
@@ -196,147 +214,182 @@ namespace Ouranos.RedArmory.Models.Services
 
         public ServiceStartupType GetStartupType(string displayName)
         {
-            //const string registryKey = @"SYSTEM\CurrentControlSet\services\{0}";
-            const string registryKey = @"SYSTEM\Wow6432Node\CurrentControlSet\services\{0}";
-            using (var key = Registry.LocalMachine.OpenSubKey(string.Format(registryKey, displayName)))
+            try
             {
-                if (key == null)
-                    throw new KeyNotFoundException($"サブキー 'HKEY_LOCAL_MACHINE\\{registryKey}' が存在しません。");
+                //const string registryKey = @"SYSTEM\CurrentControlSet\services\{0}";
+                const string registryKey = @"SYSTEM\Wow6432Node\CurrentControlSet\services\{0}";
+                using (var key = Registry.LocalMachine.OpenSubKey(string.Format(registryKey, displayName)))
+                {
+                    if (key == null)
+                        throw new KeyNotFoundException($"サブキー 'HKEY_LOCAL_MACHINE\\{registryKey}' が存在しません。");
 
-                return GetStartupType(key);
+                    return GetStartupType(key);
+                }
+            }
+            catch (Exception e)
+            {
+                this._LogService.Error(e.Message);
+                throw;
             }
         }
 
         public void SetStartupType(string displayName, ServiceStartupType startupType)
         {
-            //const string registryKey = @"SYSTEM\CurrentControlSet\services\{0}";
-            const string registryKey = @"SYSTEM\CurrentControlSet\services\{0}";
-            using (var key = Registry.LocalMachine.OpenSubKey(string.Format(registryKey, displayName), true))
+            try
             {
-                if (key == null)
-                    throw new KeyNotFoundException($"サブキー 'HKEY_LOCAL_MACHINE\\{registryKey}' が存在しません。");
-
-                switch (startupType)
+                //const string registryKey = @"SYSTEM\CurrentControlSet\services\{0}";
+                const string registryKey = @"SYSTEM\CurrentControlSet\services\{0}";
+                using (var key = Registry.LocalMachine.OpenSubKey(string.Format(registryKey, displayName), true))
                 {
-                    case ServiceStartupType.Disabled:
-                        key.SetValue("Start", 4, RegistryValueKind.DWord);
-                        return;
-                    case ServiceStartupType.Manual:
-                        key.SetValue("Start", 3, RegistryValueKind.DWord);
-                        return;
-                    case ServiceStartupType.Automatic:
-                        key.SetValue("Start", 2, RegistryValueKind.DWord);
-                        key.SetValue("DelayedAutostart", 0, RegistryValueKind.DWord);
-                        return;
-                    case ServiceStartupType.DelayStart:
-                        key.SetValue("Start", 2, RegistryValueKind.DWord);
-                        key.SetValue("DelayedAutostart", 1, RegistryValueKind.DWord);
-                        return;
+                    if (key == null)
+                        throw new KeyNotFoundException($"サブキー 'HKEY_LOCAL_MACHINE\\{registryKey}' が存在しません。");
+
+                    switch (startupType)
+                    {
+                        case ServiceStartupType.Disabled:
+                            key.SetValue("Start", 4, RegistryValueKind.DWord);
+                            return;
+                        case ServiceStartupType.Manual:
+                            key.SetValue("Start", 3, RegistryValueKind.DWord);
+                            return;
+                        case ServiceStartupType.Automatic:
+                            key.SetValue("Start", 2, RegistryValueKind.DWord);
+                            key.SetValue("DelayedAutostart", 0, RegistryValueKind.DWord);
+                            return;
+                        case ServiceStartupType.DelayStart:
+                            key.SetValue("Start", 2, RegistryValueKind.DWord);
+                            key.SetValue("DelayedAutostart", 1, RegistryValueKind.DWord);
+                            return;
+                    }
                 }
+
+            }
+            catch (Exception e)
+            {
+                this._LogService.Error(e.Message);
+                throw;
             }
         }
 
         public void StartService(ServiceStatus serviceStatus, ProgressReportsModel report, IProgress<ProgressReportsModel> progress = null)
         {
-            var serviceName = serviceStatus.ServiceName;
-            using (var sc = new ServiceController(serviceName))
+            try
             {
-                try
+                var serviceName = serviceStatus.ServiceName;
+                using (var sc = new ServiceController(serviceName))
                 {
-                    report.UpdateProgress(serviceName, ProgressState.InProgress);
-                    progress?.Report(report);
-
-                    var svcStatus = sc.Status;
-                    while (svcStatus != ServiceControllerStatus.Running)
+                    try
                     {
-                        sc.Refresh();
+                        report.UpdateProgress(serviceName, ProgressState.InProgress);
+                        progress?.Report(report);
 
-                        svcStatus = sc.Status;
-
-                        this._LoggerService.Info($"Sercive status of {serviceStatus.ServiceName} is {svcStatus}");
-
-                        switch (svcStatus)
+                        var svcStatus = sc.Status;
+                        while (svcStatus != ServiceControllerStatus.Running)
                         {
-                            case ServiceControllerStatus.Paused:
-                                sc.Continue();
-                                break;
-                            case ServiceControllerStatus.Stopped:
-                                sc.Start();
-                                break;
-                            case ServiceControllerStatus.ContinuePending:
-                            case ServiceControllerStatus.PausePending:
-                            case ServiceControllerStatus.StartPending:
-                            case ServiceControllerStatus.StopPending:
-                                break;
+                            sc.Refresh();
+
+                            svcStatus = sc.Status;
+
+                            this._LogService.Info($"Sercive status of {serviceStatus.ServiceName} is {svcStatus}");
+
+                            switch (svcStatus)
+                            {
+                                case ServiceControllerStatus.Paused:
+                                    sc.Continue();
+                                    break;
+                                case ServiceControllerStatus.Stopped:
+                                    sc.Start();
+                                    break;
+                                case ServiceControllerStatus.ContinuePending:
+                                case ServiceControllerStatus.PausePending:
+                                case ServiceControllerStatus.StartPending:
+                                case ServiceControllerStatus.StopPending:
+                                    break;
+                            }
+
+                            svcStatus = sc.Status;
                         }
 
-                        svcStatus = sc.Status;
+                        report.UpdateProgress(serviceName, ProgressState.Complete);
+                        report.AddErrorMessage(serviceName, string.Format(Properties.Resources.Format_SucceedDoService, Properties.Resources.Word_Start));
+                    }
+                    catch (Exception ex)
+                    {
+                        report.UpdateProgress(serviceName, ProgressState.Failed);
+                        report.AddErrorMessage(serviceName, string.Format(Properties.Resources.Format_FailedDoService, Properties.Resources.Word_Start));
+
+                        this._LogService.Error($"Failed to start '{serviceName}'. Exception is {ex.Message}");
                     }
 
-                    report.UpdateProgress(serviceName, ProgressState.Complete);
-                    report.AddErrorMessage(serviceName, string.Format(Properties.Resources.Format_SucceedDoService, Properties.Resources.Word_Start));
+                    progress?.Report(report);
                 }
-                catch (Exception ex)
-                {
-                    report.UpdateProgress(serviceName, ProgressState.Failed);
-                    report.AddErrorMessage(serviceName, string.Format(Properties.Resources.Format_FailedDoService, Properties.Resources.Word_Start));
-
-                    this._LoggerService.Error($"Failed to start '{serviceName}'. Exception is {ex.Message}");
-                }
-
-                progress?.Report(report);
+            }
+            catch (Exception e)
+            {
+                this._LogService.Error(e.Message);
+                throw;
             }
         }
 
         public void StopService(ServiceStatus serviceStatus, ProgressReportsModel report, IProgress<ProgressReportsModel> progress = null)
         {
-            var serviceName = serviceStatus.ServiceName;
-            using (var sc = new ServiceController(serviceName))
+            try
             {
-                try
+                var serviceName = serviceStatus.ServiceName;
+                using (var sc = new ServiceController(serviceName))
                 {
-                    report.UpdateProgress(serviceName, ProgressState.InProgress);
-                    progress?.Report(report);
-
-                    var svcStatus = sc.Status;
-                    while (svcStatus != ServiceControllerStatus.Stopped)
+                    try
                     {
-                        sc.Refresh();
+                        report.UpdateProgress(serviceName, ProgressState.InProgress);
+                        progress?.Report(report);
 
-                        svcStatus = sc.Status;
-
-                        this._LoggerService.Info($"Sercive status of {serviceStatus.ServiceName} is {svcStatus}");
-
-                        switch (svcStatus)
+                        var svcStatus = sc.Status;
+                        while (svcStatus != ServiceControllerStatus.Stopped)
                         {
-                            case ServiceControllerStatus.Paused:
-                                sc.Continue();
-                                break;
-                            case ServiceControllerStatus.Running:
-                                sc.Stop();
-                                break;
-                            case ServiceControllerStatus.ContinuePending:
-                            case ServiceControllerStatus.PausePending:
-                            case ServiceControllerStatus.StartPending:
-                            case ServiceControllerStatus.StopPending:
-                                break;
+                            sc.Refresh();
+
+                            svcStatus = sc.Status;
+
+                            this._LogService.Info($"Sercive status of {serviceStatus.ServiceName} is {svcStatus}");
+
+                            switch (svcStatus)
+                            {
+                                case ServiceControllerStatus.Paused:
+                                    sc.Continue();
+                                    break;
+                                case ServiceControllerStatus.Running:
+                                    sc.Stop();
+                                    break;
+                                case ServiceControllerStatus.ContinuePending:
+                                case ServiceControllerStatus.PausePending:
+                                case ServiceControllerStatus.StartPending:
+                                case ServiceControllerStatus.StopPending:
+                                    break;
+                            }
+
+                            svcStatus = sc.Status;
                         }
 
-                        svcStatus = sc.Status;
+                        report.UpdateProgress(serviceName, ProgressState.Complete);
+                        report.AddErrorMessage(serviceName,
+                            string.Format(Properties.Resources.Format_SucceedDoService, Properties.Resources.Word_Stop));
+                    }
+                    catch (Exception ex)
+                    {
+                        report.UpdateProgress(serviceName, ProgressState.Failed);
+                        report.AddErrorMessage(serviceName,
+                            string.Format(Properties.Resources.Format_FailedDoService, Properties.Resources.Word_Stop));
+
+                        this._LogService.Error($"Failed to stop '{serviceName}'. Exception is {ex.Message}");
                     }
 
-                    report.UpdateProgress(serviceName, ProgressState.Complete);
-                    report.AddErrorMessage(serviceName, string.Format(Properties.Resources.Format_SucceedDoService, Properties.Resources.Word_Stop));
+                    progress?.Report(report);
                 }
-                catch (Exception ex)
-                {
-                    report.UpdateProgress(serviceName, ProgressState.Failed);
-                    report.AddErrorMessage(serviceName, string.Format(Properties.Resources.Format_FailedDoService, Properties.Resources.Word_Stop));
-
-                    this._LoggerService.Error($"Failed to stop '{serviceName}'. Exception is {ex.Message}");
-                }
-
-                progress?.Report(report);
+            }
+            catch (Exception e)
+            {
+                this._LogService.Error(e.Message);
+                throw;
             }
         }
 

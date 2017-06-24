@@ -43,6 +43,7 @@ namespace RedArmory.Test.Models
         {
             var bitnamiRedmineService = SimpleIoc.Default.GetInstance<IBitnamiRedmineService>();
             var redmineDatabaseConfigurationService = SimpleIoc.Default.GetInstance<IRedmineDatabaseConfigurationService>();
+            var logService = SimpleIoc.Default.GetInstance<ILogService>();
 
             var values = bitnamiRedmineService.GetBitnamiRedmineStacks().ToArray();
             Assert.IsTrue(values.Length != 0);
@@ -50,13 +51,13 @@ namespace RedArmory.Test.Models
             var databaseConfigurations = redmineDatabaseConfigurationService.GetDatabaseConfiguration(values.FirstOrDefault()).ToArray();
             Assert.IsTrue(databaseConfigurations.Length != 0);
 
-            return new Ouranos.RedArmory.Models.Services.MySqlConnectorService(databaseConfigurations.FirstOrDefault());
+            return new Ouranos.RedArmory.Models.Services.MySqlConnectorService(databaseConfigurations.FirstOrDefault(), logService);
         }
 
         [TestInitialize]
         public void Initialize()
         {
-            SimpleIoc.Default.Register<ILoggerService, LoggerService>();
+            SimpleIoc.Default.Register<ILogService, NLogLogService>();
             SimpleIoc.Default.Register<IDatabaseService, Ouranos.RedArmory.Models.Services.MySqlService>();
             SimpleIoc.Default.Register<IBackupService, Ouranos.RedArmory.Models.Services.BackupService>();
             SimpleIoc.Default.Register<IBitnamiRedmineService, Ouranos.RedArmory.Models.Services.BitnamiRedmineService>();

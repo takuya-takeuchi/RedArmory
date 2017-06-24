@@ -21,6 +21,7 @@ namespace Ouranos.RedArmory.Models
         private readonly IDatabaseConnectorService _DatabaseConnectorService;
 
         private readonly IDialogService _DialogService;
+        private readonly ILogService _LogService;
 
         private readonly DatabaseConfiguration _DatabaseConfiguration;
 
@@ -40,7 +41,7 @@ namespace Ouranos.RedArmory.Models
             };
         }
 
-        public Setting(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ITaskService taskService, IDialogService dialogService, BitnamiRedmineStack stack)
+        public Setting(IBitnamiRedmineService bitnamiRedmineService, IRedmineDatabaseConfigurationService databaseConfigurationService, ITaskService taskService, IDialogService dialogService, ILogService logService, BitnamiRedmineStack stack)
         {
             if (bitnamiRedmineService == null)
                 throw new ArgumentNullException(nameof(bitnamiRedmineService));
@@ -54,11 +55,15 @@ namespace Ouranos.RedArmory.Models
             if (dialogService == null)
                 throw new ArgumentNullException(nameof(dialogService));
 
+            if (logService == null)
+                throw new ArgumentNullException(nameof(logService));
+
             if (stack == null)
                 throw new ArgumentNullException(nameof(stack));
 
             this._Stack = stack;
             this._DialogService = dialogService;
+            this._LogService = logService;
 
             var configuration = new ServiceConfiguration
             {
@@ -72,7 +77,7 @@ namespace Ouranos.RedArmory.Models
             this._ServiceStatuses = new ObservableCollection<ServiceStatus>(serviceStatuses);
 
             this._DatabaseConfiguration = databaseConfigurationService.GetDatabaseConfiguration(stack).FirstOrDefault();
-            this._DatabaseConnectorService = new MySqlConnectorService(this._DatabaseConfiguration);
+            this._DatabaseConnectorService = new MySqlConnectorService(this._DatabaseConfiguration, logService);
 
             var projects = this._DatabaseConnectorService.GetProjects().ToList();
             projects.Insert(0, new ProjectItem(new ProjectObject { Id = 0, Name = "[‘S‘Ì]" }));
@@ -212,7 +217,8 @@ namespace Ouranos.RedArmory.Models
             this.SelectedEnumeration = new EnumerationViewModel(this._DatabaseConfiguration,
                                                                 this._SelectedProject,
                                                                 this._SelectedEnumerationType, 
-                                                                this._DialogService);
+                                                                this._DialogService,
+                                                                this._LogService);
         }
 
         #endregion

@@ -23,13 +23,13 @@ namespace Ouranos.RedArmory.Models.Services
 
         private readonly IDispatcherService _DispatcherService;
 
-        private readonly ILoggerService _LoggerService;
+        private readonly ILogService _LogService;
 
         #endregion
 
         #region コンストラクタ
 
-        public BackupService(IDatabaseService databaseService, IRedmineDatabaseConfigurationService databaseConfigurationService, IDispatcherService dispatcherService, ILoggerService loggerService)
+        public BackupService(IDatabaseService databaseService, IRedmineDatabaseConfigurationService databaseConfigurationService, IDispatcherService dispatcherService, ILogService logService)
         {
             if (databaseService == null)
                 throw new ArgumentNullException(nameof(databaseService));
@@ -40,13 +40,13 @@ namespace Ouranos.RedArmory.Models.Services
             if (dispatcherService == null)
                 throw new ArgumentNullException(nameof(dispatcherService));
 
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
+            if (logService == null)
+                throw new ArgumentNullException(nameof(logService));
 
             this._DatabaseService = databaseService;
             this._DatabaseConfigurationService = databaseConfigurationService;
             this._DispatcherService = dispatcherService;
-            this._LoggerService = loggerService;
+            this._LogService = logService;
         }
 
         #endregion
@@ -94,7 +94,7 @@ namespace Ouranos.RedArmory.Models.Services
             if (exception != null)
             {
                 var message = $"Failed to copy '{sourceFileName}' to '{destFileName}'";
-                this._LoggerService.Error(message);
+                this._LogService.Error(message);
             }
 
             // コピー元のディレクトリにあるディレクトリについて、再帰的に呼び出す
@@ -156,7 +156,7 @@ namespace Ouranos.RedArmory.Models.Services
                 report.UpdateProgress(databaseName, ProgressState.NotRequire);
                 report.AddErrorMessage(databaseName, Resources.Msg_BackupSkip);
 
-                this._LoggerService.Info("Database is skipped");
+                this._LogService.Info("Database is skipped");
             }
 
             // プラグイン、テーマ、添付ファイルのバックアップ
@@ -245,7 +245,7 @@ namespace Ouranos.RedArmory.Models.Services
                 {
                     rule.ReportAction(ProgressState.NotRequire);
 
-                    this._LoggerService.Info($"{rule.Name} is skipped");
+                    this._LogService.Info($"{rule.Name} is skipped");
                     continue;
                 }
 
@@ -254,9 +254,9 @@ namespace Ouranos.RedArmory.Models.Services
 
                 rule.ReportAction(ProgressState.InProgress);
 
-                this._LoggerService.Info($"Start copy {rule.Name}");
+                this._LogService.Info($"Start copy {rule.Name}");
                 this.CopyDirectory(sourceDir, targetDir);
-                this._LoggerService.Info($"End copy {rule.Name}");
+                this._LogService.Info($"End copy {rule.Name}");
 
                 rule.ReportAction(ProgressState.Complete);
             }
@@ -374,7 +374,7 @@ namespace Ouranos.RedArmory.Models.Services
                 report.UpdateProgress(databaseName, ProgressState.NotRequire);
                 report.AddErrorMessage(databaseName, Resources.Msg_RestoreSkip);
 
-                this._LoggerService.Info("Database is skipped");
+                this._LogService.Info("Database is skipped");
             }
 
             // プラグイン、テーマ、添付ファイルの復元
@@ -480,5 +480,7 @@ namespace Ouranos.RedArmory.Models.Services
         }
 
         #endregion
+
     }
+
 }

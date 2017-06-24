@@ -62,10 +62,6 @@
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\TaskScheduler.2.5.27\lib\net452\JetBrains.Annotations.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MahApps.Metro, Version=1.3.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.3.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
@@ -184,6 +180,8 @@
     <Compile Include="Models\DateTimeType.cs" />
     <Compile Include="Models\Services\DialogService.cs" />
     <Compile Include="Models\Services\IDialogService.cs" />
+    <Compile Include="Models\Services\ILogFactoryService.cs" />
+    <Compile Include="Models\Services\NLogLogFactoryService.cs" />
     <Compile Include="Models\TaskSchedulerItem.cs" />
     <Compile Include="Models\Helpers\Utility.cs" />
     <Compile Include="Models\BackupModel.cs" />
@@ -225,9 +223,9 @@
     <Compile Include="Models\Services\IDatabaseConnectorService.cs" />
     <Compile Include="Models\Services\IDatabaseService.cs" />
     <Compile Include="Models\Services\IDispatcherService.cs" />
-    <Compile Include="Models\Services\ILoggerService.cs" />
+    <Compile Include="Models\Services\ILogService.cs" />
     <Compile Include="Models\Services\IRedmineDatabaseConfigurationService.cs" />
-    <Compile Include="Models\Services\LoggerService.cs" />
+    <Compile Include="Models\Services\NLogLogService.cs" />
     <Compile Include="Models\Services\MySqlConnectorService.cs" />
     <Compile Include="Models\Services\MySqlService.cs" />
     <Compile Include="Models\Services\RedmineDatabaseConfigurationService.cs" />

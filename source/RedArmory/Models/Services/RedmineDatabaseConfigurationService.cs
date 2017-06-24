@@ -15,18 +15,18 @@ namespace Ouranos.RedArmory.Models.Services
 
         #region フィールド
 
-        private readonly ILoggerService _LoggerService;
+        private readonly ILogService _LogService;
 
         #endregion
 
         #region コンストラクタ
 
-        public RedmineDatabaseConfigurationService(ILoggerService loggerService)
+        public RedmineDatabaseConfigurationService(ILogService logService)
         {
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
+            if (logService == null)
+                throw new ArgumentNullException(nameof(logService));
 
-            this._LoggerService = loggerService;
+            this._LogService = logService;
         }
 
         #endregion
@@ -51,62 +51,59 @@ namespace Ouranos.RedArmory.Models.Services
             if (info == null)
                 throw new ArgumentNullException(nameof(info));
 
-            const string databaseYmlPath = @"apps\redmine\htdocs\config\database.yml";
-            var path = Path.Combine(info.InstallLocation, databaseYmlPath);
-            if (!File.Exists(path))
+            try
             {
-                throw new FileNotFoundException("database.yml が存在しません。", path);
-            }
-
-            object[] deserialized;
-
-            var serializer = new YamlSerializer();
-            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
-            {
-                deserialized = serializer.Deserialize(fs);
-            }
-
-            foreach (var obj in deserialized)
-            {
-                var dictionary = obj as Dictionary<object, object>;
-                if (dictionary == null)
+                const string databaseYmlPath = @"apps\redmine\htdocs\config\database.yml";
+                var path = Path.Combine(info.InstallLocation, databaseYmlPath);
+                if (!File.Exists(path))
                 {
-                    continue;
+                    throw new FileNotFoundException("database.yml が存在しません。", path);
                 }
 
-                // ポート番号は 1 つしか存在しない
-                var port = 0;
-                foreach (var values in (from kvp in dictionary
-                                        let mode = kvp.Key as string
-                                        where mode != null
-                                        select kvp.Value).OfType<Dictionary<object, object>>().Where(values => values.ContainsKey("port")))
+                object[] deserialized;
+
+                var serializer = new YamlSerializer();
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    port = (int)values["port"];
+                    deserialized = serializer.Deserialize(fs);
                 }
 
-
-                foreach (var kvp in dictionary)
+                var configurations = new List<DatabaseConfiguration>();
+                foreach (var obj in deserialized)
                 {
-                    var mode = kvp.Key as string;
-                    if (mode == null)
+                    var dictionary = obj as Dictionary<object, object>;
+                    if (dictionary == null)
                     {
                         continue;
                     }
 
-                    var values = kvp.Value as Dictionary<object, object>;
-                    if (values == null)
+                    // ポート番号は 1 つしか存在しない
+                    var port = 0;
+                    foreach (var values in (from kvp in dictionary
+                                            let mode = kvp.Key as string
+                                            where mode != null
+                                            select kvp.Value).OfType<Dictionary<object, object>>().Where(values => values.ContainsKey("port")))
                     {
-                        continue;
+                        port = (int)values["port"];
                     }
 
-                    var database = values["database"] as string;
-                    var username = values["username"] as string;
-                    var password = values["password"] as string;
-                    var encoding = values["encoding"] as string;
-                    var host = values["host"] as string;
-
-                    yield return new DatabaseConfiguration(mode, database, host, username, password, encoding, port);
+                    configurations.AddRange(from kvp in dictionary let mode = kvp.Key as string
+                                            where mode != null let values = kvp.Value as Dictionary<object, object>
+                                            where values != null
+                                            let database = values["database"] as string
+                                            let username = values["username"] as string
+                                            let password = values["password"] as string
+                                            let encoding = values["encoding"] as string
+                                            let host = values["host"] as string
+                                            select new DatabaseConfiguration(mode, database, host, username, password, encoding, port));
                 }
+
+                return configurations;
+            }
+            catch (Exception e)
+            {
+                this._LogService.Error(e.Message);
+                throw;
             }
         }
 

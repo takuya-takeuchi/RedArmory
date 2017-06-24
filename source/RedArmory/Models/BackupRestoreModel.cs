@@ -22,7 +22,7 @@ namespace Ouranos.RedArmory.Models
 
         protected readonly IDialogService _DialogService;
 
-        protected readonly ILoggerService _LoggerService;
+        protected readonly ILogService _LogService;
 
         private readonly BitnamiRedmineStack _Stack;
 
@@ -36,7 +36,7 @@ namespace Ouranos.RedArmory.Models
             IBackupService backupService,
             IDispatcherService dispatcherService,
             IDialogService dialogService,
-            ILoggerService loggerService, 
+            ILogService logService, 
             BitnamiRedmineStack stack)
         {
             if (applicationSettingService == null)
@@ -54,8 +54,8 @@ namespace Ouranos.RedArmory.Models
             if (dialogService == null)
                 throw new ArgumentNullException(nameof(dialogService));
 
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
+            if (logService == null)
+                throw new ArgumentNullException(nameof(logService));
 
             if (stack == null)
                 throw new ArgumentNullException(nameof(stack));
@@ -65,7 +65,7 @@ namespace Ouranos.RedArmory.Models
             this._BackupService = backupService;
             this._DispatcherService = dispatcherService;
             this._DialogService = dialogService;
-            this._LoggerService = loggerService;
+            this._LogService = logService;
             this._Stack = stack;
 
             this.Database = true;

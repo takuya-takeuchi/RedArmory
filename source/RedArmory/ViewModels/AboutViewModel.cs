@@ -12,15 +12,15 @@ namespace Ouranos.RedArmory.ViewModels
 
         #region フィールド
 
-        private readonly ILoggerService _LoggerService;
+        private readonly ILogService _LogService;
 
         #endregion
 
         #region コンストラクタ
 
-        public AboutViewModel(ILoggerService loggerService)
+        public AboutViewModel(ILogService logService)
         {
-            this._LoggerService = loggerService;
+            this._LogService = logService;
 
             this.Copyright = AssemblyProperty.Copyright;
             this.Product = AssemblyProperty.Product;

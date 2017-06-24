@@ -16,23 +16,23 @@ namespace Ouranos.RedArmory.ViewModels
 
         protected readonly IDialogService _DialogService;
 
-        protected readonly ILoggerService _LoggerService;
+        protected readonly ILogService _LogService;
 
         #endregion
 
         #region コンストラクタ
 
-        protected BitnamiStackCommonViewModel(IDialogService dialogService, ILoggerService loggerService)
+        protected BitnamiStackCommonViewModel(IDialogService dialogService, ILogService logService)
         {
 
             if (dialogService == null)
                 throw new ArgumentNullException(nameof(dialogService));
 
-            if (loggerService == null)
-                throw new ArgumentNullException(nameof(loggerService));
+            if (logService == null)
+                throw new ArgumentNullException(nameof(logService));
 
             this._DialogService = dialogService;
-            this._LoggerService = loggerService;
+            this._LogService = logService;
         }
 
         #endregion

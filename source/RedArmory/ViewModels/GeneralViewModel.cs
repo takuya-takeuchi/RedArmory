@@ -13,15 +13,15 @@ namespace Ouranos.RedArmory.ViewModels
 
         #region フィールド
 
-        private readonly ILoggerService _LoggerService;
+        private readonly ILogService _LogService;
 
         #endregion
 
         #region コンストラクタ
 
-        public GeneralViewModel(ILoggerService loggerService)
+        public GeneralViewModel(ILogService logService)
         {
-            this._LoggerService = loggerService;
+            this._LogService = logService;
 
             var languageModels = new[]
             {

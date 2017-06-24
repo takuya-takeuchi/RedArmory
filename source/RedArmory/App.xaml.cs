@@ -156,7 +156,7 @@ namespace Ouranos.RedArmory
                             var engine = new BackupEngine(bitnamiRedmineService,
                                                           SimpleIoc.Default.GetInstance<IBackupService>(),
                                                           null,
-                                                          SimpleIoc.Default.GetInstance<ILoggerService>(),
+                                                          SimpleIoc.Default.GetInstance<ILogService>(),
                                                           configuration,
                                                           redmineStack,
                                                           output);
@@ -177,7 +177,7 @@ namespace Ouranos.RedArmory
                             var engine = new RestoreEngine(SimpleIoc.Default.GetInstance<IBitnamiRedmineService>(),
                                                            SimpleIoc.Default.GetInstance<IBackupService>(),
                                                            null,
-                                                           SimpleIoc.Default.GetInstance<ILoggerService>(),
+                                                           SimpleIoc.Default.GetInstance<ILogService>(),
                                                            configuration,
                                                            redmineStack,
                                                            output);

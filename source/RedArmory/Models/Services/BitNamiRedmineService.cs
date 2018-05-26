@@ -84,8 +84,10 @@ namespace Ouranos.RedArmory.Models.Services
                 this._LogService.Error(e.Message);
                 throw;
             }
-            //const string registryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
-            const string registryKey = @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall";
+            
+            var registryKey = System.Environment.Is64BitOperatingSystem ? 
+                @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall" :
+                @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
             using (var key = Registry.LocalMachine.OpenSubKey(registryKey))
             {
                 if (key == null)
@@ -216,8 +218,9 @@ namespace Ouranos.RedArmory.Models.Services
         {
             try
             {
-                //const string registryKey = @"SYSTEM\CurrentControlSet\services\{0}";
-                const string registryKey = @"SYSTEM\Wow6432Node\CurrentControlSet\services\{0}";
+                var registryKey = System.Environment.Is64BitOperatingSystem ?
+                    @"SYSTEM\Wow6432Node\CurrentControlSet\services\{0}" :
+                    @"SYSTEM\CurrentControlSet\services\{0}";
                 using (var key = Registry.LocalMachine.OpenSubKey(string.Format(registryKey, displayName)))
                 {
                     if (key == null)

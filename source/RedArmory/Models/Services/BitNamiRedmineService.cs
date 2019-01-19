@@ -111,6 +111,10 @@ namespace Ouranos.RedArmory.Models.Services
                         }
 
                         var installLocation = subkey.GetValue("InstallLocation") as string;
+
+                        // Include '"' from 4.0.0
+                        installLocation = installLocation?.Trim('"');
+
                         var displayVersion = subkey.GetValue("DisplayVersion") as string;
 
                         yield return new BitnamiRedmineStack(installLocation, displayVersion);

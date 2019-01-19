@@ -291,7 +291,7 @@ namespace Ouranos.RedArmory.Models.Services
 
                             svcStatus = sc.Status;
 
-                            this._LogService.Info($"Sercive status of {serviceStatus.ServiceName} is {svcStatus}");
+                            this._LogService.Info($"Service status of {serviceStatus.ServiceName} is {svcStatus}");
 
                             switch (svcStatus)
                             {
@@ -351,7 +351,7 @@ namespace Ouranos.RedArmory.Models.Services
 
                             svcStatus = sc.Status;
 
-                            this._LogService.Info($"Sercive status of {serviceStatus.ServiceName} is {svcStatus}");
+                            this._LogService.Info($"Service status of {serviceStatus.ServiceName} is {svcStatus}");
 
                             switch (svcStatus)
                             {

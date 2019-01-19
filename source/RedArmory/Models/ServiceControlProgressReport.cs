@@ -23,9 +23,9 @@ namespace Ouranos.RedArmory.Models
         private ProgressState _Apache;
 
         /// <summary>
-        /// Apache �̑���̐i���󋵂�擾�܂��͐ݒ肵�܂��B
+        /// Apache に対する作業の進捗状況を取得または設定します。
         /// </summary>
-        /// <returns>Apache �̑���̐i���� <see cref="ProgressState"/>�B</returns>
+        /// <returns>Apache に対する作業の進捗状況である <see cref="ProgressState"/>。</returns>
         public ProgressState Apache
         {
             get
@@ -42,9 +42,9 @@ namespace Ouranos.RedArmory.Models
         private ProgressState _Redmine;
 
         /// <summary>
-        /// Redmine �̑���̐i���󋵂�擾�܂��͐ݒ肵�܂��B
+        /// Redmine に対する作業の進捗状況を取得または設定します。
         /// </summary>
-        /// <returns>Redmine �̑���̐i���� <see cref="ProgressState"/>�B</returns>
+        /// <returns>Redmine に対する作業の進捗状況である <see cref="ProgressState"/>。</returns>
         public ProgressState Redmine
         {
             get
@@ -61,9 +61,9 @@ namespace Ouranos.RedArmory.Models
         private ProgressState _MySql;
 
         /// <summary>
-        /// MySql �̑���̐i���󋵂�擾�܂��͐ݒ肵�܂��B
+        /// MySql に対する作業の進捗状況を取得または設定します。
         /// </summary>
-        /// <returns>MySql �̑���̐i���� <see cref="ProgressState"/>�B</returns>
+        /// <returns>MySql に対する作業の進捗状況である <see cref="ProgressState"/>。</returns>
         public ProgressState MySql
         {
             get
@@ -80,9 +80,9 @@ namespace Ouranos.RedArmory.Models
         private ProgressState _Subversion;
 
         /// <summary>
-        /// Subversion �̑���̐i���󋵂�擾�܂��͐ݒ肵�܂��B
+        /// Subversion に対する作業の進捗状況を取得または設定します。
         /// </summary>
-        /// <returns>Subversion �̑���̐i���� <see cref="ProgressState"/>�B</returns>
+        /// <returns>Subversion に対する作業の進捗状況である <see cref="ProgressState"/>。</returns>
         public ProgressState Subversion
         {
             get

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.ServiceProcess;
+using System.Threading;
 using Microsoft.Win32;
 using Ouranos.RedArmory.Models.Helpers;
 
@@ -26,6 +27,8 @@ namespace Ouranos.RedArmory.Models.Services
         private const string SubversionPath = @"subversion\scripts\winserv.exe";
 
         private readonly ILogService _LogService;
+
+        private readonly int _ServiceStatusCheckTimeWait = 250;
 
         #endregion
 
@@ -309,6 +312,8 @@ namespace Ouranos.RedArmory.Models.Services
                             }
 
                             svcStatus = sc.Status;
+
+                            Thread.Sleep(this._ServiceStatusCheckTimeWait);
                         }
 
                         report.UpdateProgress(serviceName, ProgressState.Complete);
@@ -369,6 +374,8 @@ namespace Ouranos.RedArmory.Models.Services
                             }
 
                             svcStatus = sc.Status;
+
+                            Thread.Sleep(this._ServiceStatusCheckTimeWait);
                         }
 
                         report.UpdateProgress(serviceName, ProgressState.Complete);

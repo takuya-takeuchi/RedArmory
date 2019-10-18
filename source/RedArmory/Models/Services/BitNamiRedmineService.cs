@@ -82,40 +82,44 @@ namespace Ouranos.RedArmory.Models.Services
 
             try
             {
-                var registryKey = System.Environment.Is64BitOperatingSystem ?
-                    @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall" :
-                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
-                using (var key = Registry.LocalMachine.OpenSubKey(registryKey))
+                var registryKeys = new[]
                 {
-                    if (key == null)
-                    {
-                        throw new KeyNotFoundException($"サブキー 'HKEY_LOCAL_MACHINE\\{registryKey}' が存在しません。");
-                    }
+                    @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall", 
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
+                };
 
-                    foreach (var subkeyName in key.GetSubKeyNames())
+                foreach (var registryKey in registryKeys)
+                {
+                    using (var key = Registry.LocalMachine.OpenSubKey(registryKey))
                     {
-                        using (var subkey = key.OpenSubKey(subkeyName))
+                        if (key == null)
+                            continue;
+
+                        foreach (var subkeyName in key.GetSubKeyNames())
                         {
-                            var value = subkey?.GetValue("DisplayName") as string;
-                            if (value == null)
+                            using (var subkey = key.OpenSubKey(subkeyName))
                             {
-                                continue;
+                                var value = subkey?.GetValue("DisplayName") as string;
+                                if (value == null)
+                                {
+                                    continue;
+                                }
+
+                                if (!value.Equals("Bitnami Redmine Stack", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    continue;
+                                }
+
+                                var installLocation = subkey.GetValue("InstallLocation") as string;
+
+                                // Include '"' from 4.0.0
+                                installLocation = installLocation?.Trim('"');
+
+                                var displayVersion = subkey.GetValue("DisplayVersion") as string;
+
+                                var stack = new BitnamiRedmineStack(installLocation, displayVersion);
+                                stacks.Add(stack);
                             }
-
-                            if (!value.Equals("Bitnami Redmine Stack", StringComparison.InvariantCultureIgnoreCase))
-                            {
-                                continue;
-                            }
-
-                            var installLocation = subkey.GetValue("InstallLocation") as string;
-
-                            // Include '"' from 4.0.0
-                            installLocation = installLocation?.Trim('"');
-
-                            var displayVersion = subkey.GetValue("DisplayVersion") as string;
-
-                            var stack = new BitnamiRedmineStack(installLocation, displayVersion);
-                            stacks.Add(stack);
                         }
                     }
                 }

@@ -5,7 +5,6 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Ouranos.RedArmory.Models;
 using Ouranos.RedArmory.Models.Services;
-using Ouranos.RedArmory.Models.Services.Dialog;
 using Ouranos.RedArmory.Properties;
 
 namespace Ouranos.RedArmory.ViewModels

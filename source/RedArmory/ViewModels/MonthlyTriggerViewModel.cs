@@ -28,8 +28,8 @@ namespace Ouranos.RedArmory.ViewModels
 
         public MonthlyTriggerViewModel()
         {
-            this._Days = Enumerable.Repeat(0, DaysCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 31, �ŏI
-            this._Weeks = Enumerable.Repeat(0, WeekCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 4, �ŏI
+            this._Days = Enumerable.Repeat(0, DaysCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 31, �ŏI
+            this._Weeks = Enumerable.Repeat(0, WeekCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 4, �ŏI
             this._Months = Enumerable.Repeat(0, MonthCount).Select(i => new SingleValueWapperModel<bool>()).ToArray();
 
             foreach (var model in this._Days)

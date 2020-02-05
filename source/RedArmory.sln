@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "source", "source", "{3D44BAFF-251F-4D41-9E29-330768E64B11}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedArmory", "RedArmory\RedArmory.csproj", "{B473D048-EF35-431F-9A26-452750B6BB3A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{41B3FC4E-B355-4AC3-AAA3-444B74AC5F90}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{77A2EBCF-729E-49CE-908D-B3028659E739}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedArmory.Test", "Test\RedArmory.Test\RedArmory.Test.csproj", "{79E6EA20-82DD-4770-B556-65AAA7B2973E}"
 EndProject
@@ -28,6 +30,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{79E6EA20-82DD-4770-B556-65AAA7B2973E} = {41B3FC4E-B355-4AC3-AAA3-444B74AC5F90}
+		{B473D048-EF35-431F-9A26-452750B6BB3A} = {3D44BAFF-251F-4D41-9E29-330768E64B11}
+		{79E6EA20-82DD-4770-B556-65AAA7B2973E} = {77A2EBCF-729E-49CE-908D-B3028659E739}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {48C84948-FD45-4992-ABFD-C69F75C72E87}
 	EndGlobalSection
 EndGlobal

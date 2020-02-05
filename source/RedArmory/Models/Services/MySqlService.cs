@@ -84,6 +84,7 @@ namespace Ouranos.RedArmory.Models.Services
                 switch (configuration.Encoding)
                 {
                     case "utf8":
+                    case "utf8mb4":
                         encoding = Encoding.UTF8;
                         break;
                     default:

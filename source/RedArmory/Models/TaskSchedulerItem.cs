@@ -11,7 +11,7 @@ namespace Ouranos.RedArmory.Models
         #region Fields
 
         /// <summary>
-        /// <see cref="System.IDisposable.Dispose"/> メソッドが呼ばれたかどうかを示す値を表します。
+        /// Indicate value whether <see cref="M:System.IDisposable.Dispose"/> method was called.
         /// </summary>
         private bool _Disposed = false;
 
@@ -161,7 +161,7 @@ namespace Ouranos.RedArmory.Models
         #region IDisposable Members
 
         /// <summary>
-        /// <see cref="TaskSchedulerItem"/> によって使用されているすべてのリソースを解放します。
+        /// Releases all resources used by this <see cref="TaskSchedulerItem"/>.
         /// </summary>
         public void Dispose()
         {
@@ -170,9 +170,9 @@ namespace Ouranos.RedArmory.Models
         }
 
         /// <summary>
-        /// <see cref="TaskSchedulerItem"/> によって使用されているすべてのリソースを解放します。
+        /// Releases all resources used by this <see cref="TaskSchedulerItem"/>.
         /// </summary>
-        /// <param name="disposing"><see cref="System.IDisposable.Dispose"/> メソッドが呼ばれたかどうかを示す値。</param>
+        /// <param name="disposing">Indicate value whether <see cref="M:System.IDisposable.Dispose"/> method was called.</param>
         private void Dispose(bool disposing)
         {
             if (this._Disposed)

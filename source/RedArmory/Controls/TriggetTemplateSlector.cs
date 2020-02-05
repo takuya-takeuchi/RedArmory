@@ -41,11 +41,11 @@ namespace Ouranos.RedArmory.Controls
         #region Overrides
 
         /// <summary>
-        /// 派生クラスでオーバーライドされると、カスタム ロジックに基づいて DataTemplate を返します。
+        /// When overridden in a derived class, returns a <see cref="DataTemplate"/> based on custom logic.
         /// </summary>
-        /// <param name="item">テンプレートを選択する対象のデータ オブジェクト。</param>
-        /// <param name="container">データ バインドされたオブジェクト。</param>
-        /// <returns><see cref="DataTemplate"/> または null を返します。既定値は null です。</returns>
+        /// <param name="item">The data object for which to select the template.</param>
+        /// <param name="container">The data-bound object.</param>
+        /// <returns>Returns a <see cref="DataTemplate"/> or null. The default value is null.</returns>
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             var oneTime = item as OneTimeTriggerViewModel;

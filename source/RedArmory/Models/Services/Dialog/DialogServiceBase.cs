@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Models.Services.Dialog
 {
 
     /// <summary>
-    /// ダイアログの表示機能を提供します。このクラスは抽象クラスです。
+    /// Provides the function to show dialog. This class is abstract.
     /// </summary>
     internal abstract class DialogServiceBase<T> : GalaSoft.MvvmLight.Views.IDialogService
         where T : FrameworkElement, new()

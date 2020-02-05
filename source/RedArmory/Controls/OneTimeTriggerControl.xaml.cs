@@ -9,7 +9,7 @@ namespace Ouranos.RedArmory.Controls
     internal partial class OneTimeTriggerControl : UserControl
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public OneTimeTriggerControl()
         {

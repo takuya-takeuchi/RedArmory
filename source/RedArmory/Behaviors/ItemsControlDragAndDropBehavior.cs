@@ -10,7 +10,7 @@ namespace Ouranos.RedArmory.Behaviors
     internal sealed class ItemsControlDragAndDropBehavior : Behavior<ItemsControl>
     {
 
-        #region フィールド
+        #region Fields
 
         private object _DraggedData;
 
@@ -22,7 +22,7 @@ namespace Ouranos.RedArmory.Behaviors
 
         #endregion
 
-        #region 依存関係プロパティ
+        #region Dependency Properties
 
         public static readonly DependencyProperty ItemsProperty = DependencyProperty.RegisterAttached(
                 "Items",
@@ -69,9 +69,9 @@ namespace Ouranos.RedArmory.Behaviors
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
 
         protected override void OnAttached()
         {
@@ -93,7 +93,7 @@ namespace Ouranos.RedArmory.Behaviors
 
         #endregion
 
-        #region イベントハンドラ
+        #region Event Handlers
 
         private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -236,7 +236,7 @@ namespace Ouranos.RedArmory.Behaviors
 
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private void CleanUpData()
         {

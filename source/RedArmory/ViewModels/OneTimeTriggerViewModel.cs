@@ -7,7 +7,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class OneTimeTriggerViewModel : TriggerViewModel
     {
 
-        #region メソッド
+        #region Methods
 
         public override Trigger GetTrigger()
         {
@@ -19,7 +19,7 @@ namespace Ouranos.RedArmory.ViewModels
             return dailyTrigger;
         }
 
-        #region オーバーライド
+        #region Overrides
 
         protected override bool ValidateCondition()
         {

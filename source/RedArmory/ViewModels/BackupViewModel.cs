@@ -15,13 +15,13 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class BackupViewModel : BitnamiStackCommonViewModel<BackupModel>
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly ITaskService _TaskService;
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public BackupViewModel(
             IApplicationSettingService applicationSettingService,
@@ -59,7 +59,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public RelayCommand CreateTaskCommand
         {
@@ -79,9 +79,9 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private bool CanCreateTaskExecute()
         {

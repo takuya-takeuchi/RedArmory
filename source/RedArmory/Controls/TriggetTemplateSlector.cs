@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Controls
     internal sealed class TriggetTemplateSlector: DataTemplateSelector
     {
 
-        #region プロパティ
+        #region Properties
 
         public DataTemplate Date
         {
@@ -36,9 +36,9 @@ namespace Ouranos.RedArmory.Controls
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
 
         /// <summary>
         /// 派生クラスでオーバーライドされると、カスタム ロジックに基づいて DataTemplate を返します。

@@ -4,7 +4,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class BitnamiRedmineStack
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public BitnamiRedmineStack(string installLocation, string displayVersion)
         {
@@ -14,7 +14,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public string DisplayVersion
         {

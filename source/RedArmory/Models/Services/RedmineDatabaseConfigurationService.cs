@@ -10,16 +10,13 @@ namespace Ouranos.RedArmory.Models.Services
     internal sealed class RedmineDatabaseConfigurationService : IRedmineDatabaseConfigurationService
     {
 
-        #region イベント
-        #endregion
-
-        #region フィールド
+        #region Fields
 
         private readonly ILogService _LogService;
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public RedmineDatabaseConfigurationService(ILogService logService)
         {
@@ -31,20 +28,20 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
         #endregion
 
-        #region イベントハンドラ
+        #region Event Handlers
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
         #endregion
 
         #endregion
 
-        #region IRedmineDatabaseConfigurationService メンバー
+        #region IRedmineDatabaseConfigurationService Members
 
         public IEnumerable<DatabaseConfiguration> GetDatabaseConfiguration(BitnamiRedmineStack info)
         {

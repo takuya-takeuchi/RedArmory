@@ -14,16 +14,16 @@ namespace Ouranos.RedArmory.Models.Services.Dialog
         where T : FrameworkElement, new()
     {
 
-        #region イベント
+        #region Events
         #endregion
 
-        #region フィールド
+        #region Fields
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public DialogClosingEventHandler DialogClosing
         {
@@ -39,20 +39,20 @@ namespace Ouranos.RedArmory.Models.Services.Dialog
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
         #endregion
 
-        #region イベントハンドラ
+        #region Event Handlers
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
         #endregion
 
         #endregion
 
-        #region IDialogService メンバ
+        #region IDialogService Members
 
         public virtual Task ShowError(string message, string title, string buttonText, Action afterHideCallback)
         {

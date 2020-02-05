@@ -7,7 +7,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class RestoreSetting : IExtensibleDataObject
     {
 
-        #region プロパティ
+        #region Properties
 
         [DataMember]
         public string Directory
@@ -18,7 +18,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region IExtensibleDataObject メンバー
+        #region IExtensibleDataObject Members
 
         public ExtensionDataObject ExtensionData
         {

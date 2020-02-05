@@ -10,7 +10,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class ApplicationSettingService : IApplicationSettingService
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly string _ApplicationSettingDirectory;
 
@@ -22,7 +22,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public ApplicationSettingService(ILogService logService)
         {
@@ -40,7 +40,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region IApplicationSettingService メンバー
+        #region IApplicationSettingService Members
 
         private readonly ObservableCollection<BackupHistorySetting> _BackupHistories;
 

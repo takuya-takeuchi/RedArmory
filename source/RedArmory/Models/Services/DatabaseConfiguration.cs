@@ -4,7 +4,7 @@
     public sealed class DatabaseConfiguration
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public DatabaseConfiguration(string mode, string name, string host, string username, string password, string encoding,
             int port)
@@ -20,7 +20,7 @@
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public string Encoding
         {

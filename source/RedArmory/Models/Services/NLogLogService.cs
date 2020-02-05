@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class NLogLogService : ILogService
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly Logger _Logger;
 
@@ -16,7 +16,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         internal NLogLogService(Logger logger)
         {
@@ -36,9 +36,9 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private void Write(LogLevel logLevel, string message)
         {
@@ -54,7 +54,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region ILogService メンバー
+        #region ILogService Members
 
         public void Debug(string message)
         {

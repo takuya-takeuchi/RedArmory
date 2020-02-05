@@ -12,7 +12,7 @@ namespace Ouranos.RedArmory.ViewModels
         where T : BackupRestoreModel
     {
 
-        #region フィールド
+        #region Fields
 
         protected readonly IDialogService _DialogService;
 
@@ -20,7 +20,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         protected BitnamiStackCommonViewModel(IDialogService dialogService, ILogService logService)
         {
@@ -37,7 +37,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private bool _IsEmptyStacks;
 
@@ -101,9 +101,9 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region ヘルパーメソッド
+        #region Helpers
         #endregion
 
         #endregion

@@ -10,7 +10,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class MonthlyTriggerViewModel : TriggerViewModel
     {
 
-        #region フィールド
+        #region Fields
 
         private const int RunOnLastDayOfMonthIndex = 31;
 
@@ -24,7 +24,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public MonthlyTriggerViewModel()
         {
@@ -42,7 +42,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private SingleValueWapperModel<bool>[] _Days;
 
@@ -211,7 +211,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
         public override Trigger GetTrigger()
         {
@@ -249,7 +249,7 @@ namespace Ouranos.RedArmory.ViewModels
             }
         }
 
-        #region オーバーライド
+        #region Overrides
 
         protected override bool ValidateCondition()
         {
@@ -287,7 +287,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region イベントハンドラ
+        #region Event Handlers
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
@@ -296,7 +296,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private int[] GetDaysOfMonth()
         {

@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class BackupHistorySetting : IExtensibleDataObject
     {
 
-        #region プロパティ
+        #region Properties
 
         [DataMember]
         public string DisplayVersion
@@ -33,7 +33,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region IExtensibleDataObject メンバー
+        #region IExtensibleDataObject Members
 
         public ExtensionDataObject ExtensionData
         {

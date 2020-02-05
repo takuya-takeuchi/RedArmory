@@ -7,7 +7,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class RedmineSetting : IExtensibleDataObject
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public RedmineSetting()
         {
@@ -17,7 +17,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         [DataMember]
         public string DisplayVersion
@@ -42,7 +42,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region IExtensibleDataObject メンバー
+        #region IExtensibleDataObject Members
 
         public ExtensionDataObject ExtensionData
         {

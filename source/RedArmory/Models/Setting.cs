@@ -13,10 +13,7 @@ namespace Ouranos.RedArmory.Models
     internal sealed class Setting : ViewModelBase
     {
 
-        #region イベント
-        #endregion
-
-        #region フィールド
+         #region Fields
 
         private readonly IDatabaseConnectorService _DatabaseConnectorService;
 
@@ -29,7 +26,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         static Setting()
         {
@@ -92,7 +89,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private static IEnumerable<EnumerationType> _EnumerationTypes;
 
@@ -200,23 +197,23 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
-
-        #endregion
-
-        #region イベントハンドラ
+        #region Overrides
 
         #endregion
 
-        #region ヘルパーメソッド
+        #region Event Handlers
+
+        #endregion
+
+        #region Helpers
 
         private void UpdateSelectedEnumeration()
         {
             this.SelectedEnumeration = new EnumerationViewModel(this._DatabaseConfiguration,
                                                                 this._SelectedProject,
-                                                                this._SelectedEnumerationType, 
+                                                                this._SelectedEnumerationType,
                                                                 this._DialogService,
                                                                 this._LogService);
         }

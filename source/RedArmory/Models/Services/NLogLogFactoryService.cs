@@ -7,7 +7,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class NLogLogFactoryService : ILogFactoryService
     {
 
-        #region ILogFactoryService メンバー
+        #region ILogFactoryService Members
 
         public ILogService Create()
         {

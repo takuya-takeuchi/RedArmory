@@ -14,7 +14,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal class TaskSchedulerViewModel : ViewModelBase
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly IDialogService _DialogService;
 
@@ -22,7 +22,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         internal TaskSchedulerViewModel(BitnamiRedmineStack stack, ITaskService taskService, IDialogService dialogService)
         {
@@ -46,7 +46,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public RelayCommand<TaskSchedulerItem> DeleteCommand
         {
@@ -84,13 +84,13 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
 
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private bool CanDeleteExecute(TaskSchedulerItem item)
         {

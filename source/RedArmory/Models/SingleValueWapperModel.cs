@@ -6,7 +6,7 @@ namespace Ouranos.RedArmory.Models
     internal sealed class SingleValueWapperModel<T> : ViewModelBase
     {
 
-        #region プロパティ
+        #region Properties
 
         private T _Value;
 

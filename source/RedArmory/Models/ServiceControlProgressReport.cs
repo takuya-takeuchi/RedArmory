@@ -6,7 +6,7 @@ namespace Ouranos.RedArmory.Models
     internal sealed class ServiceControlProgressReport : ViewModelBase
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public ServiceControlProgressReport()
         {
@@ -18,7 +18,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private ProgressState _Apache;
 

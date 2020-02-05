@@ -10,7 +10,7 @@ namespace Ouranos.RedArmory.Models
     internal abstract class BackupRestoreModel : ViewModelBase
     {
 
-        #region フィールド
+        #region Fields
 
         protected readonly IApplicationSettingService _ApplicationSettingService;
 
@@ -28,7 +28,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         protected BackupRestoreModel(
             IApplicationSettingService applicationSettingService,
@@ -82,7 +82,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public RelayCommand Command
         {
@@ -257,7 +257,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
         protected abstract bool CanExecute();
 
@@ -298,7 +298,7 @@ namespace Ouranos.RedArmory.Models
             this._ApplicationSettingService.UpdateApplicationSetting(applicationSetting);
         }
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         protected void RaiseCanExecuteBackupRestoreChanged()
         {

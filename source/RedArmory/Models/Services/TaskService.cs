@@ -10,13 +10,13 @@ namespace Ouranos.RedArmory.Models.Services
     internal sealed class TaskService : ITaskService
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         private readonly ILogService _LogService;
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public TaskService(ILogService logService)
         {
@@ -28,9 +28,9 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private static IEnumerable<Task> EnumTasks(TaskFolder fld)
         {
@@ -46,7 +46,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region TaskService メンバー
+        #region TaskService Members
 
         public void Create(TaskSetting taskSetting)
         {

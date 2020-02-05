@@ -17,7 +17,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal class EnumerationViewModel : ViewModelBase
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly IDatabaseConnectorService _DatabaseConnectorService;
 
@@ -33,7 +33,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         internal EnumerationViewModel(DatabaseConfiguration databaseConfiguration, ProjectItem project, EnumerationType enumerationType, IDialogService dialogService, ILogService logService)
         {
@@ -60,7 +60,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private readonly ObservableCollection<EnumerationItem> _Items = new ObservableCollection<EnumerationItem>();
 
@@ -145,13 +145,13 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
 
         #endregion
 
-        #region イベントハンドラ
+        #region Event Handlers
 
         private void ItemsOnCollectionChanged<T>(object sender, NotifyCollectionChangedEventArgs e)
             where T : INotifyPropertyChanged
@@ -227,7 +227,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private bool CanRefreshExecute()
         {

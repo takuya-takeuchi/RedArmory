@@ -65,7 +65,7 @@ namespace Ouranos.RedArmory.Converters
             throw new NotImplementedException();
         }
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private object GetVisibility(object value)
         {

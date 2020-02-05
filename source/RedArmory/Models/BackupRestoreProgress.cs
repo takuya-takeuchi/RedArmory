@@ -6,30 +6,30 @@ namespace Ouranos.RedArmory.Models
     internal sealed class BackupRestoreProgress : Progress<ProgressReportsModel>
     {
 
-        #region イベント
+        #region Events
         #endregion
 
-        #region フィールド
+        #region Fields
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
 
 
         #endregion
 
-        #region プロパティ
+        #region Properties
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
         #endregion
 
-        #region イベントハンドラ
+        #region Event Handlers
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
         #endregion
 
         #endregion

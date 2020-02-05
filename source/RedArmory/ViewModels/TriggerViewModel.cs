@@ -9,7 +9,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal abstract class TriggerViewModel : ViewModelBase
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         protected TriggerViewModel()
         {
@@ -20,7 +20,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private bool _CanCreateTask;
 
@@ -69,13 +69,13 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
         public abstract Trigger GetTrigger();
 
         protected abstract bool ValidateCondition();
 
-        #region イベントハンドラ
+        #region Event Handlers
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {

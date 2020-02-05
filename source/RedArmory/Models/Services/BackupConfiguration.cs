@@ -4,7 +4,7 @@
     public sealed class BackupConfiguration
     {
 
-        #region フィールド
+        #region Fields
 
         public static readonly string FilesPath = @"apps\redmine\htdocs\files";
 
@@ -14,7 +14,7 @@
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public BackupConfiguration()
         {
@@ -22,7 +22,7 @@
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public bool Database
         {

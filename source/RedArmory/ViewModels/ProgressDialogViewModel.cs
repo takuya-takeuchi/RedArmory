@@ -7,10 +7,10 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class ProgressDialogViewModel : ViewModelBase
     {
 
-        #region コンストラクタ
+        #region Constructors
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private ProgressReportsModel _Report;
 
@@ -44,7 +44,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
         public void Close()
         {

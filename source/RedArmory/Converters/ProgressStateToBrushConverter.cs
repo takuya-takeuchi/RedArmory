@@ -13,13 +13,13 @@ namespace Ouranos.RedArmory.Converters
     {
 
         /// <summary>
-        /// 値を変換します。
+        /// Converts a value.
         /// </summary>
-        /// <param name="value">バインディング ソースによって生成された値。</param>
-        /// <param name="targetType">バインディング ターゲット プロパティの型。</param>
-        /// <param name="parameter">使用するコンバーター パラメーター。</param>
-        /// <param name="culture">コンバーターで使用するカルチャ。</param>
-        /// <returns>変換された値。メソッドが null を返す場合は、有効な null 値が使用されています。</returns>
+        /// <param name="value">The value produced by the binding source.</param>
+        /// <param name="targetType">The type of the binding target property.</param>
+        /// <param name="parameter">The converter parameter to use.</param>
+        /// <param name="culture">The culture to use in the converter.</param>
+        /// <returns>A converted value. If the method returns null, the valid null value is used.</returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value is ProgressState)
@@ -46,13 +46,13 @@ namespace Ouranos.RedArmory.Converters
         }
 
         /// <summary>
-        /// 値を変換します。
+        /// Converts a value.
         /// </summary>
-        /// <param name="value">バインディング ターゲットによって生成される値。</param>
-        /// <param name="targetType">変換後の型。</param>
-        /// <param name="parameter">使用するコンバーター パラメーター。</param>
-        /// <param name="culture">コンバーターで使用するカルチャ。</param>
-        /// <returns>変換された値。 メソッドが null を返す場合は、有効な null 値が使用されています。</returns>
+        /// <param name="value">The value that is produced by the binding target.</param>
+        /// <param name="targetType">The type to convert to.</param>
+        /// <param name="parameter">The converter parameter to use.</param>
+        /// <param name="culture">The culture to use in the converter.</param>
+        /// <returns>A converted value. If the method returns null, the valid null value is used.</returns>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotSupportedException();

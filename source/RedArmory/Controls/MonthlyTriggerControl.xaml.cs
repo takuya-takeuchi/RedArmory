@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Controls
     internal partial class MonthlyTriggerControl : UserControl
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public MonthlyTriggerControl()
         {

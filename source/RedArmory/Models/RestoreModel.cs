@@ -16,10 +16,10 @@ namespace Ouranos.RedArmory.Models
     internal sealed class RestoreModel : BackupRestoreModel
     {
 
-        #region フィールド
+        #region Fields
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public RestoreModel(
             IApplicationSettingService applicationSettingService,
@@ -66,7 +66,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private CollectionViewSource _BackupHistories;
 
@@ -91,7 +91,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
         protected override bool CanExecute()
         {
@@ -219,7 +219,7 @@ namespace Ouranos.RedArmory.Models
             }
         }
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private void UpdateState()
         {

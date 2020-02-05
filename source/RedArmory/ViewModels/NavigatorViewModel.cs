@@ -6,7 +6,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class NavigatorViewModel : ViewModelBase
     {
 
-        #region プロパティ
+        #region Properties
 
         private object _Content;
 

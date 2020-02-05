@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Models
     public sealed class EnumerationItem : ViewModelBase
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         internal EnumerationItem(EnumerationItem item)
         {
@@ -46,7 +46,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private int _Id;
 
@@ -215,7 +215,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region Equals メンバー
+        #region Equals Members
 
         private bool Equals(EnumerationItem other)
         {

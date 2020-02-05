@@ -14,7 +14,7 @@ namespace Ouranos.RedArmory.Models
     internal sealed class BackupModel : BackupRestoreModel
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public BackupModel(
             IApplicationSettingService applicationSettingService,
@@ -52,7 +52,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private string _DirectoryName;
 
@@ -104,7 +104,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
         protected override bool CanExecute()
         {
@@ -256,7 +256,7 @@ namespace Ouranos.RedArmory.Models
             }
         }
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private bool IsOutputDirectoryEmpty(string path)
         {

@@ -10,13 +10,13 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class AboutViewModel : ViewModelBase
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly ILogService _LogService;
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public AboutViewModel(ILogService logService)
         {
@@ -133,7 +133,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public RelayCommand TwitterCommand
         {

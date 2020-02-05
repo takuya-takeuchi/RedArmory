@@ -12,7 +12,7 @@ namespace Ouranos.RedArmory.Interfaces
     public sealed class BackupEngine
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly BackupConfiguration _Configuration;
 
@@ -44,7 +44,7 @@ namespace Ouranos.RedArmory.Interfaces
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public BackupEngine(
             IBitnamiRedmineService bitnamiRedmineService,
@@ -81,10 +81,10 @@ namespace Ouranos.RedArmory.Interfaces
 
         #endregion
 
-        #region プロパティ
+        #region Properties
         #endregion
 
-        #region メソッド
+        #region Methods
 
         public ProgressReportsModel PrepareBackup()
         {
@@ -167,7 +167,7 @@ namespace Ouranos.RedArmory.Interfaces
                 this._AfterServiceReports);
         }
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private void ExecuteBackup(
             IEnumerable<KeyValuePair<ServiceStatus, ProgressItemModel>> apacheServices,

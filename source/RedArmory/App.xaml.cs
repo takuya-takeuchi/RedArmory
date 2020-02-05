@@ -18,7 +18,7 @@ namespace Ouranos.RedArmory
     public partial class App : Application
     {
 
-        #region フィールド
+        #region Fields
 
         private const int Success = 0;
 
@@ -26,9 +26,9 @@ namespace Ouranos.RedArmory
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -101,7 +101,7 @@ namespace Ouranos.RedArmory
 
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private int ExecuteCommandLine(string mode, string version, BackupConfiguration configuration, string output, string name)
         {

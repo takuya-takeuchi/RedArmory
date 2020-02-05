@@ -9,7 +9,7 @@ namespace Ouranos.RedArmory.Models.DatabaseObjects
     internal sealed class ProjectObject
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         internal ProjectObject()
         {
@@ -24,7 +24,7 @@ namespace Ouranos.RedArmory.Models.DatabaseObjects
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
 
         public int Id

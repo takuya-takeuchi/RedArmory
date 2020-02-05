@@ -12,11 +12,11 @@ namespace Ouranos.RedArmory.Models.Services
     internal sealed class BitnamiRedmineService : IBitnamiRedmineService
     {
 
-        #region イベント
+        #region Events
 
         #endregion
 
-        #region フィールド
+        #region Fields
 
         private const string ApachePath = @"apache2\bin\httpd.exe";
 
@@ -32,7 +32,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public BitnamiRedmineService(ILogService logService)
         {
@@ -44,9 +44,9 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private static ServiceStartupType GetStartupType(RegistryKey subKey)
         {
@@ -74,7 +74,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region IBitnamiRedmineService メンバー
+        #region IBitnamiRedmineService Members
 
         public IEnumerable<BitnamiRedmineStack> GetBitnamiRedmineStacks()
         {

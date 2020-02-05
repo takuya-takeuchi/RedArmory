@@ -9,7 +9,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class DialogService : IDialogService
     {
 
-        #region IDialogService メンバー
+        #region IDialogService Members
 
         public async Task<MessageBoxResult> ShowMessage(MessageBoxButton button, string message, string title)
         {

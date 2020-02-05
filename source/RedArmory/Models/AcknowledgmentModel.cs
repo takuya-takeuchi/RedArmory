@@ -6,7 +6,7 @@ namespace Ouranos.RedArmory.Models
     internal sealed class AcknowledgmentModel : ViewModelBase
     {
 
-        #region プロパティ
+        #region Properties
 
         private string _Author;
 
@@ -85,12 +85,12 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region イベントハンドラ
+        #region Event Handlers
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
         #endregion
 
         #endregion

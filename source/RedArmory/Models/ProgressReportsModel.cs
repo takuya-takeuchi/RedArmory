@@ -10,13 +10,13 @@ namespace Ouranos.RedArmory.Models
     public sealed class ProgressReportsModel : ViewModelBase
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly IDispatcherService _DispatcherService;
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public ProgressReportsModel(IEnumerable<ProgressItemModel> progressItem)
             :this(null, progressItem)
@@ -31,7 +31,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private ObservableCollection<ProgressItemModel> _Progresses;
 
@@ -50,7 +50,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
         public void AddErrorMessage(string name, string message)
         {
@@ -74,15 +74,6 @@ namespace Ouranos.RedArmory.Models
                 target.Progress = state;
             }
         }
-
-        #region オーバーライド
-        #endregion
-
-        #region イベントハンドラ
-        #endregion
-
-        #region ヘルパーメソッド
-        #endregion
 
         #endregion
 

@@ -6,13 +6,13 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class MessageDialogViewModel : ViewModelBase
     {
 
-        #region イベント
+        #region Events
         #endregion
 
-        #region フィールド
+        #region Fields
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public MessageDialogViewModel()
         {
@@ -20,7 +20,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private string _Message;
 
@@ -62,16 +62,16 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
         #endregion
 
-        #region イベントハンドラ
+        #region Event Handlers
 
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
         #endregion
 
         #endregion

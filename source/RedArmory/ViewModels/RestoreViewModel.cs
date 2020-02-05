@@ -10,7 +10,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class RestoreViewModel : BitnamiStackCommonViewModel<RestoreModel>
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public RestoreViewModel(
             IApplicationSettingService applicationSettingService,

@@ -8,10 +8,10 @@ namespace Ouranos.RedArmory.Models
     public sealed class TaskSchedulerItem : ViewModelBase, IDisposable
     {
 
-        #region フィールド
+        #region Fields
 
         /// <summary>
-        /// <see cref="System.IDisposable.Dispose"/> メソッドが呼ばれたかどうかを示す値を表します。
+        /// Indicate value whether <see cref="M:System.IDisposable.Dispose"/> method was called.
         /// </summary>
         private bool _Disposed = false;
 
@@ -19,7 +19,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         internal TaskSchedulerItem(Task task)
         {
@@ -36,7 +36,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private bool _Enabled;
 
@@ -132,7 +132,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
         public void Run()
         {
@@ -158,10 +158,10 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region IDisposable メンバ
+        #region IDisposable Members
 
         /// <summary>
-        /// <see cref="TaskSchedulerItem"/> によって使用されているすべてのリソースを解放します。
+        /// Releases all resources used by this <see cref="TaskSchedulerItem"/>.
         /// </summary>
         public void Dispose()
         {
@@ -170,9 +170,9 @@ namespace Ouranos.RedArmory.Models
         }
 
         /// <summary>
-        /// <see cref="TaskSchedulerItem"/> によって使用されているすべてのリソースを解放します。
+        /// Releases all resources used by this <see cref="TaskSchedulerItem"/>.
         /// </summary>
-        /// <param name="disposing"><see cref="System.IDisposable.Dispose"/> メソッドが呼ばれたかどうかを示す値。</param>
+        /// <param name="disposing">Indicate value whether <see cref="M:System.IDisposable.Dispose"/> method was called.</param>
         private void Dispose(bool disposing)
         {
             if (this._Disposed)

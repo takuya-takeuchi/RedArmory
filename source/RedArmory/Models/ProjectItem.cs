@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Models
     public sealed class ProjectItem : ViewModelBase
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         internal ProjectItem(ProjectObject item)
         {
@@ -33,7 +33,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
 
         private int _Id;

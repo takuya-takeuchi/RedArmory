@@ -10,7 +10,7 @@ namespace Ouranos.RedArmory.Controls
     internal partial class DateTimeControl : UserControl
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public DateTimeControl()
         {
@@ -19,7 +19,7 @@ namespace Ouranos.RedArmory.Controls
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public TriggerViewModel ViewModel
         {
@@ -31,9 +31,9 @@ namespace Ouranos.RedArmory.Controls
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region イベントハンドラ
+        #region Event Handlers
 
         public void CalendarDialogOpenedEventHandler(object sender, DialogOpenedEventArgs eventArgs)
         {

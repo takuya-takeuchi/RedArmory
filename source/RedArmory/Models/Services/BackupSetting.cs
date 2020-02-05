@@ -7,7 +7,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class BackupSetting : IExtensibleDataObject
     {
 
-        #region プロパティ
+        #region Properties
 
         [DataMember]
         public string BaseDirectory
@@ -53,7 +53,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region IExtensibleDataObject メンバー
+        #region IExtensibleDataObject Members
 
         public ExtensionDataObject ExtensionData
         {

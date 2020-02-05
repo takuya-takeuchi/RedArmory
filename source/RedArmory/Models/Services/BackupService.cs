@@ -9,7 +9,7 @@ namespace Ouranos.RedArmory.Models.Services
     internal sealed class BackupService : IBackupService
     {
 
-        #region フィールド
+        #region Fields
 
         private static readonly string FilesDirectoryName = "files";
 
@@ -27,7 +27,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public BackupService(IDatabaseService databaseService, IRedmineDatabaseConfigurationService databaseConfigurationService, IDispatcherService dispatcherService, ILogService logService)
         {
@@ -51,9 +51,9 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private void CopyDirectory(string sourceDir, string targetDir)
         {
@@ -109,7 +109,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region IBackupService メンバー
+        #region IBackupService Members
 
         public void Backup(BitnamiRedmineStack stack, BackupConfiguration configuration, string path, IProgress<ProgressReportsModel> progress = null)
         {

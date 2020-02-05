@@ -9,7 +9,7 @@ namespace Ouranos.RedArmory.Models.DatabaseObjects
     internal sealed class EnumerationObject
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         internal EnumerationObject()
         {
@@ -34,7 +34,7 @@ namespace Ouranos.RedArmory.Models.DatabaseObjects
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public int Id
         {

@@ -11,7 +11,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class SettingViewModel : ViewModelBase
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly ILogService _LogService;
 
@@ -19,7 +19,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         static SettingViewModel()
         {
@@ -58,7 +58,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private bool _IsEmptyStacks;
 
@@ -120,12 +120,12 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region イベントハンドラ
+        #region Event Handlers
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         #endregion
 

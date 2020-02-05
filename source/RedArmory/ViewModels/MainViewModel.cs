@@ -11,16 +11,16 @@ namespace Ouranos.RedArmory.ViewModels
     internal class MainViewModel : ViewModelBase
     {
 
-        #region イベント
+        #region Events
         #endregion
 
-        #region フィールド
+        #region Fields
 
         private readonly ILogService _LogService;
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public MainViewModel(ILogService logService)
         {
@@ -36,7 +36,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private string _Title;
 
@@ -55,9 +55,9 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region イベントハンドラ
+        #region Event Handlers
 
         private void CurrentOnStartup(object sender, StartupEventArgs startupEventArgs)
         {
@@ -87,7 +87,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
         #endregion
 
         #endregion

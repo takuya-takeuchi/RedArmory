@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Controls
     internal partial class DailyTriggerControl : UserControl
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public DailyTriggerControl()
         {

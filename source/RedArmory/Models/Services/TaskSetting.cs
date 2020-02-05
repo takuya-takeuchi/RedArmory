@@ -6,7 +6,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class TaskSetting
     {
 
-        #region プロパティ
+        #region Properties
 
         public string Argument
         {

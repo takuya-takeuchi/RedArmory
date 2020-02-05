@@ -7,7 +7,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class DailyTriggerViewModel : TriggerViewModel
     {
 
-        #region プロパティ
+        #region Properties
 
         private ushort _Interval = 1;
 
@@ -26,7 +26,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
         public override Trigger GetTrigger()
         {
@@ -38,7 +38,7 @@ namespace Ouranos.RedArmory.ViewModels
             return dailyTrigger;
         }
 
-        #region オーバーライド
+        #region Overrides
 
         protected override bool ValidateCondition()
         {

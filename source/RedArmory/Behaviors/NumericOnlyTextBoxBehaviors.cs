@@ -10,7 +10,7 @@ namespace Ouranos.RedArmory.Behaviors
     internal sealed class NumericOnlyTextBoxBehaviors : Behavior<TextBox>
     {
 
-        #region 依存関係プロパティ
+        #region Dependency Properties
 
         public static readonly DependencyProperty DefaultNumericProperty = DependencyProperty.RegisterAttached(
             "DefaultNumeric",
@@ -50,9 +50,9 @@ namespace Ouranos.RedArmory.Behaviors
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
 
         protected override void OnAttached()
         {
@@ -72,7 +72,7 @@ namespace Ouranos.RedArmory.Behaviors
 
         #endregion
 
-        #region イベントハンドラ
+        #region Event Handlers
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
@@ -139,7 +139,7 @@ namespace Ouranos.RedArmory.Behaviors
 
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private static string ValidateValue(string text)
         {

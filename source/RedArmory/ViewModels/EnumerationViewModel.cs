@@ -17,7 +17,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal class EnumerationViewModel : ViewModelBase
     {
 
-        #region ƒtƒB[ƒ‹ƒh
+        #region Fields
 
         private readonly IDatabaseConnectorService _DatabaseConnectorService;
 
@@ -33,7 +33,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region Constructors
 
         internal EnumerationViewModel(DatabaseConfiguration databaseConfiguration, ProjectItem project, EnumerationType enumerationType, IDialogService dialogService, ILogService logService)
         {
@@ -60,7 +60,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ƒvƒƒpƒeƒB
+        #region Properties
 
         private readonly ObservableCollection<EnumerationItem> _Items = new ObservableCollection<EnumerationItem>();
 
@@ -145,13 +145,13 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ƒƒ\ƒbƒh
+        #region Methods
 
-        #region ƒI[ƒo[ƒ‰ƒCƒh
+        #region Overrides
 
         #endregion
 
-        #region ƒCƒxƒ“ƒgƒnƒ“ƒhƒ‰
+        #region Event Handlers
 
         private void ItemsOnCollectionChanged<T>(object sender, NotifyCollectionChangedEventArgs e)
             where T : INotifyPropertyChanged
@@ -200,7 +200,7 @@ namespace Ouranos.RedArmory.ViewModels
                 switch (propertyChangedEventArgs.PropertyName)
                 {
                     case nameof(enumerationItem.IsDefault):
-                        // ‘¼‚Ì—v‘f‚Ì•ÏX‚Å ItemOnPropertyChanged ‚Í–³‹‚µ‚½‚¢
+                        // ï¿½ï¿½ï¿½Ì—vï¿½fï¿½Ì•ÏXï¿½ï¿½ ItemOnPropertyChanged ï¿½Í–ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                         this._SuspendItemOnPropertyChanged = true;
                         foreach (var item in this.Items.Where(item => item != enumerationItem))
                             item.IsDefault = false;
@@ -227,7 +227,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ƒwƒ‹ƒp[ƒƒ\ƒbƒh
+        #region Helpers
 
         private bool CanRefreshExecute()
         {
@@ -286,7 +286,7 @@ namespace Ouranos.RedArmory.ViewModels
 
             this.UpdateOrderState();
 
-            // –¢•ÒWó‘Ô‚ğ•¡»
+            // ï¿½ï¿½ï¿½ÒWï¿½ï¿½Ô‚ğ•¡ï¿½
             this._UneditedItems.Clear();
             this._UneditedItems.AddRange(this._Items.Select(item => new EnumerationItem(item)));
 
@@ -315,14 +315,14 @@ namespace Ouranos.RedArmory.ViewModels
                 return;
             }
 
-            // Position ‚ğ®— (1‚©‚çn‚Ü‚é‚Í‚¸‚¾‚ªˆê‰)
+            // Position ï¿½ğ®—ï¿½ (1ï¿½ï¿½ï¿½ï¿½nï¿½Ü‚ï¿½Í‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‰)
             var minPosition = this.Items.Min(item => item.Position);
             foreach (var item in this.Items)
                 item.Position = (minPosition++);
 
             this._DatabaseConnectorService.UpdateEnumerations(this.Items);
 
-            // Ä“Ç (_UneditedItems ‚ÌXV‚ª•K—v‚È‚½‚ß)
+            // ï¿½Ä“Çï¿½ (_UneditedItems ï¿½ÌXï¿½Vï¿½ï¿½ï¿½Kï¿½vï¿½È‚ï¿½ï¿½ï¿½)
             this.Refresh();
         }
 

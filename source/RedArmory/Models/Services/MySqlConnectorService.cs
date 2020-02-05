@@ -10,7 +10,7 @@ namespace Ouranos.RedArmory.Models.Services
     internal sealed class MySqlConnectorService : IDatabaseConnectorService
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly DatabaseConfiguration _DatabaseConfiguration;
 
@@ -18,7 +18,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public MySqlConnectorService(DatabaseConfiguration coniConfiguration, ILogService logService)
         {
@@ -31,18 +31,18 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region プロパティ
+        #region Properties
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
         #endregion
 
-        #region イベントハンドラ
+        #region Event Handlers
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private string CreateConnectionString()
         {
@@ -94,7 +94,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region IDatabaseConnectorService メンバー
+        #region IDatabaseConnectorService Members
 
         public IEnumerable<EnumerationItem> GetEnumerations()
         {

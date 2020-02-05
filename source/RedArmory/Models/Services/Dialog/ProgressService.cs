@@ -9,21 +9,21 @@ namespace Ouranos.RedArmory.Models.Services.Dialog
 {
 
     /// <summary>
-    /// ダイアログの表示機能を提供します。このクラスは継承できません。
+    /// Provides the function to show dialog. This class is sealed.
     /// </summary>
     internal sealed class ProgressDialogService : DialogServiceBase<ProgressDialog>
     {
 
-        #region イベント
+        #region Events
         #endregion
 
-        #region フィールド
+        #region Fields
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public Action Action
         {
@@ -45,20 +45,20 @@ namespace Ouranos.RedArmory.Models.Services.Dialog
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
         #endregion
 
-        #region イベントハンドラ
+        #region Event Handlers
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
         #endregion
 
         #endregion
 
-        #region IDialogService メンバ
+        #region IDialogService Members
 
         public override async Task ShowMessage(string message, string title)
         {

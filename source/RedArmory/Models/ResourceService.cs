@@ -9,7 +9,7 @@ namespace Ouranos.RedArmory.Models
     internal sealed class ResourceService : ViewModelBase
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         static ResourceService()
         { }
@@ -20,7 +20,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private static ResourceService _Instance;
 
@@ -47,7 +47,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
         public void ChangeCulture(string name)
         {

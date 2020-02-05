@@ -11,10 +11,10 @@ namespace Ouranos.RedArmory.Models.Services
     internal sealed class MySqlService : IDatabaseService
     {
 
-        #region イベント
+        #region Events
         #endregion
 
-        #region フィールド
+        #region Fields
 
         private const string MySqlDumpPath = @"mysql\bin\mysqldump.exe";
 
@@ -24,7 +24,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public MySqlService(ILogService logService)
         {
@@ -36,15 +36,15 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region オーバーライド
+        #region Overrides
         #endregion
 
-        #region イベントハンドラ
+        #region Event Handlers
         #endregion
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private static string CreateConnectionString(DatabaseConfiguration configuration)
         {
@@ -65,7 +65,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region IDatabaseService メンバー
+        #region IDatabaseService Members
 
         public void Backup(BitnamiRedmineStack stack, DatabaseConfiguration configuration, string path)
         {

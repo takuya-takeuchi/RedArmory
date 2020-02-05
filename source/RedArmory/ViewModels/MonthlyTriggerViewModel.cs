@@ -10,7 +10,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class MonthlyTriggerViewModel : TriggerViewModel
     {
 
-        #region ƒtƒB[ƒ‹ƒh
+        #region Fields
 
         private const int RunOnLastDayOfMonthIndex = 31;
 
@@ -24,12 +24,12 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region Constructors
 
         public MonthlyTriggerViewModel()
         {
-            this._Days = Enumerable.Repeat(0, DaysCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 31, ÅI
-            this._Weeks = Enumerable.Repeat(0, WeekCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 4, ÅI
+            this._Days = Enumerable.Repeat(0, DaysCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 31, ï¿½ÅI
+            this._Weeks = Enumerable.Repeat(0, WeekCount).Select(i => new SingleValueWapperModel<bool>()).ToArray(); // 1 - 4, ï¿½ÅI
             this._Months = Enumerable.Repeat(0, MonthCount).Select(i => new SingleValueWapperModel<bool>()).ToArray();
 
             foreach (var model in this._Days)
@@ -42,7 +42,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ƒvƒƒpƒeƒB
+        #region Properties
 
         private SingleValueWapperModel<bool>[] _Days;
 
@@ -211,7 +211,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ƒƒ\ƒbƒh
+        #region Methods
 
         public override Trigger GetTrigger()
         {
@@ -249,7 +249,7 @@ namespace Ouranos.RedArmory.ViewModels
             }
         }
 
-        #region ƒI[ƒo[ƒ‰ƒCƒh
+        #region Overrides
 
         protected override bool ValidateCondition()
         {
@@ -287,7 +287,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ƒCƒxƒ“ƒgƒnƒ“ƒhƒ‰
+        #region Event Handlers
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
@@ -296,7 +296,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region ƒwƒ‹ƒp[ƒƒ\ƒbƒh
+        #region Helpers
 
         private int[] GetDaysOfMonth()
         {

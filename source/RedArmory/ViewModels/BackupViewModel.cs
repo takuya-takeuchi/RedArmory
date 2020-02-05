@@ -6,7 +6,6 @@ using System.Windows;
 using GalaSoft.MvvmLight.Command;
 using Ouranos.RedArmory.Models;
 using Ouranos.RedArmory.Models.Services;
-using Ouranos.RedArmory.Models.Services.Dialog;
 using Ouranos.RedArmory.Properties;
 
 namespace Ouranos.RedArmory.ViewModels
@@ -15,13 +14,13 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class BackupViewModel : BitnamiStackCommonViewModel<BackupModel>
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly ITaskService _TaskService;
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public BackupViewModel(
             IApplicationSettingService applicationSettingService,
@@ -59,7 +58,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         public RelayCommand CreateTaskCommand
         {
@@ -79,9 +78,9 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
-        #region ヘルパーメソッド
+        #region Helpers
 
         private bool CanCreateTaskExecute()
         {

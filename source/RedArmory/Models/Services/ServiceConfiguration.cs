@@ -4,7 +4,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class ServiceConfiguration
     {
 
-        #region プロパティ
+        #region Properties
 
         public bool Apache
         {

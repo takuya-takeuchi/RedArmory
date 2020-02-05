@@ -8,13 +8,13 @@ namespace Ouranos.RedArmory.Models
     public sealed class ServiceStatus : ViewModelBase
     {
 
-        #region フィールド
+        #region Fields
 
         private readonly IBitnamiRedmineService _BitnamiRedmineService;
 
         #endregion
 
-        #region コンストラクタ
+        #region Constructors
 
         public ServiceStatus(IBitnamiRedmineService bitnamiRedmineService, string serviceName, ServiceStartupType startupType)
         {
@@ -28,7 +28,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private bool _StopRequire;
 

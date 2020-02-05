@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.ViewModels
     internal sealed class TaskViewModel : ViewModelBase
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public TaskViewModel()
         {
@@ -24,7 +24,7 @@ namespace Ouranos.RedArmory.ViewModels
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private string _Description;
 

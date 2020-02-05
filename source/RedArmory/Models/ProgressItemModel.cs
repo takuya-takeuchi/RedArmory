@@ -7,7 +7,7 @@ namespace Ouranos.RedArmory.Models
     public sealed class ProgressItemModel : ViewModelBase
     {
 
-        #region コンストラクタ
+        #region Constructors
 
         public ProgressItemModel()
         {
@@ -16,7 +16,7 @@ namespace Ouranos.RedArmory.Models
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         private ObservableCollection<string> _ErrorMessages;
 

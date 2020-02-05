@@ -8,7 +8,7 @@ namespace Ouranos.RedArmory.Models.Services
     public sealed class ApplicationSetting : IExtensibleDataObject
     {
 
-        #region コンストラクタ
+        #region Constructors
         public ApplicationSetting()
         {
             this.BackupHistories = new List<BackupHistorySetting>();
@@ -17,7 +17,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region プロパティ
+        #region Properties
 
         [DataMember]
         public List<BackupHistorySetting> BackupHistories
@@ -35,7 +35,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region メソッド
+        #region Methods
 
         [OnDeserializing]
         public void OnDeserializing(StreamingContext sc)
@@ -46,7 +46,7 @@ namespace Ouranos.RedArmory.Models.Services
 
         #endregion
 
-        #region IExtensibleDataObject メンバー
+        #region IExtensibleDataObject Members
 
         public ExtensionDataObject ExtensionData
         {

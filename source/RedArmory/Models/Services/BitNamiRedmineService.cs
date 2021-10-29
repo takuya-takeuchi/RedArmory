@@ -105,7 +105,8 @@ namespace Ouranos.RedArmory.Models.Services
                                     continue;
                                 }
 
-                                if (!value.Equals("Bitnami Redmine Stack", StringComparison.InvariantCultureIgnoreCase))
+                                if (!value.Equals("Bitnami Redmine Stack", StringComparison.InvariantCultureIgnoreCase) &&
+                                    !value.Equals("Redmine Packaged by Bitnami", StringComparison.InvariantCultureIgnoreCase))
                                 {
                                     continue;
                                 }
